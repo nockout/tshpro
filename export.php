@@ -7,4 +7,4 @@ $data = base64_decode($img);
 $file = 'uploads/design/templates/' . uniqid() . '.png';
 $success = file_put_contents($file, $data);
 echo $success;
-return 1;
+return 12;
