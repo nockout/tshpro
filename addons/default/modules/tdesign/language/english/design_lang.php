@@ -53,6 +53,7 @@ $lang['design:archive_title']                 = 'Archive';
 $lang['design:designs_title']					= 'Designs';
 $lang['design:rss_Designs_title']				= 'design Designs for %s';
 $lang['design:design_title']					= 'Designs';
+$lang['design:description_title']					= 'Desciption';
 $lang['design:text_options']					= 'Text Options';
 $lang['design:enter_text']					= 'Enter text below';
 $lang['design:new_text']					= 'New Text';

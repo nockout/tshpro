@@ -6,6 +6,13 @@ function get_image_path_temp($file_name){
 	$CI->load->config("tdesign");
 	return sprintf("%s/%s",$CI->config->item("tdesign_upload_path_temp"),$file_name);
 }
+function get_design_image_path($folder=null,$file=""){
+	if(!$folder&&$file)
+		return ;
+	$CI=&get_instance();
+	$CI->load->config("tdesign");
+	return sprintf("%s%s/%s",$CI->config->item("tdesign_image_url"),$folder,$file);
+}
 function resize_image($sourcePath, $desPath,$width=480,$height=480){
 	if(empty($sourcePath) || empty($desPath) )
 		return false;

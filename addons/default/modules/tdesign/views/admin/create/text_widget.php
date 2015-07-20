@@ -1,6 +1,4 @@
 
-<div class="span3">
-	<!-- widget  -->
 	<div class="widget">
 		<div class="widget-header">
 			<i class="icon-star"></i>
@@ -73,4 +71,3 @@
 			</div>
 		</div>
 	</div>
-</div>

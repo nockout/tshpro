@@ -1,4 +1,4 @@
-<div class="span3">
+
 	<div class="widget">
 		<div class="widget-header">
 			<i class="icon-star"></i>
@@ -60,8 +60,13 @@
 					</p>
 		</div>
 	</div>
-</div>
+
 <script>
+
+
+
+
+
 	$("#add_template").click(function(){
 		document.getElementById("img_uploadTemplate").click();
 		});

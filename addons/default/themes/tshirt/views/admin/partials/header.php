@@ -35,7 +35,7 @@
 				<?php echo $module_details['description'] ? $module_details['description'] : '' ?>
 				<?php if ( $this->uri->segment(2) ) { echo '<span class="divider">&nbsp; | &nbsp;</span>'; } ?>
 				<?php if($module_details['slug']): ?>
-				<?php echo anchor('admin/help/'.$module_details['slug'], lang('help_label'), array('title' => $module_details['name'].'&nbsp;'.lang('help_label'), 'class' => 'modal')); ?>
+				<?php echo anchor('admin/help/'.$module_details['slug'], lang('help_label'), array('title' => $module_details['name'].'&nbsp;'.lang('help_label'), 'class' => 'sm-modal')); ?>
 				<?php endif; ?>
 			</small>
 			

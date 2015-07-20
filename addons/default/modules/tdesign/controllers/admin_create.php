@@ -75,30 +75,7 @@ class Admin_Create extends Admin_Controller {
 		$this->template->build ( 'admin/create/index' );
 	}
 	
-	public function form($id=null,$status="null"){
-		
-		$this->load->library('product');
-		if($status=="D"){
-			$design=$this->product->get_draft($id);
-		}else{
-			$design=$this->product->get_product($id);
-		}
-		
-		if(empty($design))
-		{
-			die("no design found");
-		}
-		$this->template
-		->set('hours', array_combine($hours = range(0, 23), $hours))
-		->set('minutes', array_combine($minutes = range(0, 59), $minutes));
-		$this->template->set("design",$design);
-		$this->template
-			->title($this->module_details['name'], lang('design:create_title'))
-			->append_metadata($this->load->view('fragments/wysiwyg', array(), true))	
-			->set('categories',array("1"=>2))
-			//->set('post', $post)
-			->build('admin/form');
-	}
+	
 	public function export(){
 		
 		if(!isset($_REQUEST['canvasData'])){
@@ -129,8 +106,9 @@ class Admin_Create extends Admin_Controller {
 			show_error("Service Currently Unvaiable");
 			return;
 		}
-
-		$this->form($product->product_id,"D");
+		
+		redirect("admin/tdesign/form/".$product->product_id."/D");
+		//$this->form($product->product_id,"D");
 	}
 	public function upload_template() {
 		if (empty ( $_FILES )) {

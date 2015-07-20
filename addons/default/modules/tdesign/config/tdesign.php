@@ -8,3 +8,6 @@ $config ['tdesign_upload_path_temp']=BASE_URL.'/uploads/design/temp';
 $config ['tdesign_image_url']=BASE_URL.'uploads/design/';
 $config ['tdesign_template_img_resize_width']=480;
 $config ['tdesign_template_img_resize_height']=480;
+
+$config ['admin_folder']='admin';
+$config ['DEFAULT_LANG']='en';

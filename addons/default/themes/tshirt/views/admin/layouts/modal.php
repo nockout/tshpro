@@ -7,7 +7,7 @@
 
 	<?php 
 		Asset::js('jquery/jquery.js');
-		Asset::js('jquery/jquery.js');
+	//	Asset::js('jquery/jquery.js');
 		Asset::css('admin/basic_layout.css'); 
 		echo Asset::render();
 	?>

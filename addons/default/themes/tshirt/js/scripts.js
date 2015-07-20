@@ -279,7 +279,7 @@ jQuery(function($) {
 
 		var current_module = $('#page-header h1 a').text();
 		// Colorbox modal window
-		$('a[rel=modal], a.modal').livequery(function() {
+		$('a[rel=modal], a.sm-modal').livequery(function() {
 			$(this).colorbox({
 				width: "60%",
 				maxHeight: "90%",
