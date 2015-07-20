@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
+/** VN test 
  * The basic Ajax controller class.
  * 
  * @author      PyroCMS Dev Team
