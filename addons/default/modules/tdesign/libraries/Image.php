@@ -6,7 +6,10 @@ class Image{
 		$this->CI=&get_instance();
 			
 	}
-	public function resize_image(){
+	public function resize_image($sourcePath,$desPath,$width=0,$height=0,$type="jpg"){
+		if(!$width&&$heght)
+			return;
+		
 		if(empty($sourcePath) || empty($desPath) )
 			return false;
 		$this->CI=&get_instance();
@@ -18,17 +21,18 @@ class Image{
 		$config ['new_image'] =$desPath;
 		$config ['create_thumb'] = TRUE;
 		$config ['maintain_ratio'] = TRUE;
+	
 		$config ['quality'] = 100;
 		$config ['width'] =$width;
 		$config ['height'] =$height;
-		$CI->load->library ( 'image_lib', $config );
-		$CI->image_lib->initialize ( $config );
+		$this->CI->load->library ( 'image_lib', $config );
+		$this->CI->image_lib->initialize ( $config );
 		$config ['create_thumb'] = TRUE;
 		$config ['thumb_marker'] = '';
 		
 		$this->CI->image_lib->initialize ( $config );
 		
-		if ($CI->image_lib->image_process_gd ("resize")) {
+		if ($this->CI->image_lib->image_process_gd ("resize")) {
 			return true;
 		}
 		return false;

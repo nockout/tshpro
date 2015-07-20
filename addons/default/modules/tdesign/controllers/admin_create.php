@@ -100,7 +100,7 @@ class Admin_Create extends Admin_Controller {
 		$this->load->library('product');
 		$this->load->helper("tdesign");	
 		// create draft design
-		$product=$this->product->create_draft(array("image"=>get_design_image_path("templates",$name)));
+		$product=$this->product->create_draft(array("raw_url"=>$file,"image"=>get_design_image_path("templates",$name)));
 		//redirect("admin/tdesign/create");
 		if(empty($product)){
 			show_error("Service Currently Unvaiable");
@@ -108,7 +108,7 @@ class Admin_Create extends Admin_Controller {
 		}
 		
 		redirect("admin/tdesign/form/".$product->product_id."/D");
-		//$this->form($product->product_id,"D");
+	
 	}
 	public function upload_template() {
 		if (empty ( $_FILES )) {

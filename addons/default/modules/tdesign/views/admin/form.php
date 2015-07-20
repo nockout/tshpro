@@ -31,7 +31,7 @@
 			<ul>
 				<li>
 					<label for="title"><?php echo lang('global:title') ?> <span>*</span></label>
-					<div class="input"><?php echo form_input('title', isset($shortname)?htmlspecialchars_decode($shortname):"", 'maxlength="100" id="title"') ?></div>
+					<div class="input"><?php echo form_input('title', isset($product)?htmlspecialchars_decode($product):"", 'maxlength="100" id="title"') ?></div>
 				</li>
 	
 				
@@ -39,7 +39,7 @@
 
 					<label for="category_id"><?php echo lang('design:category_label') ?></label>
 					<div class="input">
-					<?php echo form_dropdown('category_id', array(lang('design:no_category_select_label')) + $categories, @category_id) ?>
+					<?php echo form_dropdown('category_id', array(lang('design:no_category_select_label')) + $categories, @cate_id) ?>
 	
 					</div>
 				</li>
@@ -48,6 +48,7 @@
 				<li>
 					<label for="status"><?php echo lang('design:status_label') ?></label>
 					<?php if(isset($status)&&$status=="D"):?>
+						<?php echo form_hidden("status",$status)?>
 						<div class="input"><?php echo lang('design:draft_label')?></div>
 						
 					<?php else:?>
@@ -85,14 +86,12 @@
 					</div>
 				</li>
 			
-				<?php if ( ! module_enabled('keywords')): ?>
-					<?php echo form_hidden('keywords'); ?>
-				<?php else: ?>
+				
 					<li>
 						<label for="keywords"><?php echo lang('global:keywords') ?></label>
 						<div class="input"><?php echo form_input('keywords', isset($keyword)?htmlspecialchars_decode($keyword):"", 'id="keywords"') ?></div>
 					</li>
-				<?php endif; ?>
+				
 			</ul>
 			</fieldset>
 		</div>

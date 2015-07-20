@@ -17,7 +17,7 @@ class Base_m extends MY_Model {
 		if (empty ( $id ) or empty ( $lang ) or empty ( $data ))
 			return;
 		if ($row = $this->db->get_where ( $this->lang_table, array (
-				'id' => $id,
+				$this->_primary => $id,
 				'lang_code' => $lang 
 		) )->row ()) {
 			
@@ -39,7 +39,7 @@ class Base_m extends MY_Model {
 				}
 			} else {
 				
-				$data ['id'] = $id;
+				$data [$this->_primary] = $id;
 				$data ['lang_code'] = $lang;
 				$this->db->insert ( $this->lang_table, $data );
 			}
@@ -49,17 +49,17 @@ class Base_m extends MY_Model {
 		if (empty ( $id ) or empty ( $lang ) or empty ( $data ))
 			return;
 		if ($row = $this->db->get_where ( $this->lang_table, array (
-				'id' => $id,
+				$this->_primary => $id,
 				'lang_code' => $lang 
 		) )->row ()) {
 			
 			$this->db->where ( array (
-					'id' => $id,
+					$this->_primary => $id,
 					'lang_code' => $lang 
 			) )->update ( $this->lang_table, $data );
 		} else {
 			// should save all lang
-			$data ['id'] = $id;
+			$data [$this->_primary] = $id;
 			$data ['lang_code'] = $lang;
 			$this->db->insert ( $this->lang_table, $data );
 		}

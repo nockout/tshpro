@@ -29,10 +29,9 @@
 					<td><?php echo lang('design:'.$design->status.'_label') ?></td>
 					<td style="padding-top:10px;">
                        
-							<a href="<?php echo site_url('design/'.date('Y/m', $design->avail_since).'/'.$design->slug) ?>" title="<?php echo lang('global:view')?>" class="button" target="_blank"><?php echo lang('global:view')?></a>
                       
-						<a href="<?php echo site_url('admin/design/edit/' . $design->product_id) ?>" title="<?php echo lang('global:edit')?>" class="button"><?php echo lang('global:edit')?></a>
-						<a href="<?php echo site_url('admin/design/delete/' . $design->product_id) ?>" title="<?php echo lang('global:delete')?>" class="button confirm"><?php echo lang('global:delete')?></a>
+						<a href="<?php echo site_url('admin/tdesign/form/' . $design->product_id) ?>" title="<?php echo lang('global:edit')?>" class="button"><?php echo lang('global:edit')?></a>
+						<a href="<?php echo site_url('admin/tdesign/delete/' . $design->product_id) ?>" title="<?php echo lang('global:delete')?>" class="button confirm"><?php echo lang('global:delete')?></a>
 					</td>
 				</tr>
 			<?php endforeach ?>

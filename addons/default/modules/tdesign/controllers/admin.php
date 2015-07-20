@@ -75,27 +75,22 @@ class Admin extends Admin_Controller
 	 */
 	public function index()
 	{
+		$this->load->library('product');
+			$designs=$this->product->get_products(array());
 		
-		$this->load->library('image_lib');
-		$config['image_library'] = 'gd2';
-		$config['source_image']	= APPPATH.'upload/design/temp/SF-Art-Template.png';
-		$config['new_image']= APPPATH.'upload/design/temp/SF-Art-Template.png';
-		$config['create_thumb'] = FALSE;
-		$config['maintain_ratio'] = TRUE;
-		$config['width']	= $this->config->item("tdesign_template_img_resize_width");
-		$config['height']	= $this->config->item("tdesign_template_img_resize_height");
-		
-		$this->load->library('image_lib', $config);
-		
-		$this->image_lib->resize();
-			
-			echo "aaa";
-			die;
+		$categories =array();
+		$this->template->set('categories',$categories);
+ 		$this->template->
+ 			set('designs',$designs)
+ 			->title($this->module_details['name'])
+			->build('admin/index');;
 
 	}
 	public function form($id=null,$status="null"){
 		$id or redirect('admin/index');
+	
 		$this->load->library('product');
+	
 		$this->load->library('form_validation');
 		$data['product_id'] = '';
 		$data['slug'] = '';
@@ -150,7 +145,7 @@ class Admin extends Admin_Controller
 			$data['slug'] =$product->slug;
 			$data['group_id'] = $product->group_id;
 			$data['product'] = isset($product->product)?$product->product:"";
-			//$data['shortname'] = $product->shortname;
+		
 			$data['product_code'] = $product->product_code;
 			$data['short_description'] = isset($product->short_description)?$product->short_description:"";
 			$data['full_description'] =isset($product->full_description)?$product->full_description:"";
@@ -158,7 +153,7 @@ class Admin extends Admin_Controller
 			$data['list_price'] = $product->list_price;
 			$data['extra'] = $product->extra;
 			$data['product_code']=$product->product_code;
-			$data['image']=$product->image;
+			$data['image']=!empty($product->image)?$product->image:"";
 			$data['avail_since']=$product->avail_since;
 			$data['status']=$product->status;
 			
@@ -171,7 +166,7 @@ class Admin extends Admin_Controller
 				$this->template
 				->set('hours', array_combine($hours = range(0, 23), $hours))
 				->set('minutes', array_combine($minutes = range(0, 59), $minutes))
-				->set('categories',array("1"=>2));
+				->set('categories',array("1"=>"ROOT"));
 				
 				
 				$this->template->set($data);
@@ -181,10 +176,34 @@ class Admin extends Admin_Controller
 				->append_metadata($this->load->view('fragments/wysiwyg', array(), true))->build('admin/form');
 			
 		} else {
-			$save['product_id'] = $id;
-            $save['list_price'] =$this->input->post("list_price");
-            echo "<pre>";
-            print_r($save);die;
+			$save['product_id'] = intval($id);
+            $save['list_price'] =$this->input->post("list_price")?$this->input->post("list_price"):0.99;
+            $save['status']=$this->input->post("status");
+            $save['cate_id']=$this->input->post("category_id");
+            
+            $save['lang'][CURRENT_LANGUAGE]['product']=$this->input->post("title");
+            $save['lang'][CURRENT_LANGUAGE]['short_description']=$this->input->post("title");
+            $save['lang'][CURRENT_LANGUAGE]['search_words']=$this->input->post("keywords");
+            $save['lang'][CURRENT_LANGUAGE]['shortname']=$this->input->post("title");
+            $save['lang'][CURRENT_LANGUAGE]['age_warning_message']=$this->input->post("age_warning_message")?$this->input->post("age_warning_message"):"";
+            $save['lang'][CURRENT_LANGUAGE]['full_description']=$this->input->post("body");
+            $product_id=$this->product->save($id,$save);
+            if( $save['status']=="D"){
+            	//generate image
+            	$this->product->generate_image($product_id);
+            }
+            
+            if($product_id){
+            	$this->session->set_flashdata("success",lang("design:publish_success"));
+            }else{
+            	$this->session->set_flashdata("error",lang("design:publish_error"));
+            }
+            if($this->input->post("btnAction")=="save_exit"){
+            	redirect("admin/tdesign/index/");
+            }else{
+            	redirect("admin/tdesign/form/".intval($id));
+            }
+          
 		}
 		
 		

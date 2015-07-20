@@ -49,7 +49,7 @@ class Module_TDesign extends Module
 		
 		$menu['lang:cp:nav_design'] = array(
 			'lang:design:create'=> 'admin/tdesign/create',
-			'lang:design:manage'=> 'admin/tdesign/manage'
+			'lang:design:manage'=> 'admin/tdesign/'
 		);
 		//echo "<pre>";
 		//print_r($menu);die;

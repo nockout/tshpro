@@ -33,7 +33,7 @@ class Admin_Manage extends Admin_Controller
 	public function index()
 	{
 		
-		$designs=$this->product_m->get_designs(array());
+		$designs=$this->product_m->get_products(array());
 		//echo "<pre>";
 		//print_r($designs);;
 	//	die;
