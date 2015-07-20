@@ -5,13 +5,15 @@ $lang['cp:nav_design']                       = 'Design';
 $lang['design:create']						 = "New Design ";
 $lang['design:management']						 = "Manage Designs ";
 $lang['design:design_title']						 = "New Design ";
-
+$lang['design:create_title']						 = "New Design ";
+$lang['design:edit_title']						 = "Edit Design ";
 $lang['design:currently_no_products']						 = "There are no designs at the moment";
-
+$lang['design:currently_no_products']			="Content";
 $lang['design:design']                 = 'Design';
 $lang['design:designs']                   = 'Designs';
 
 // labels
+$lang['design:description_label']="Description";
 $lang['design:designed_label']                   = 'Name';
 $lang['design:designed_label_alt']               = 'Designed at';
 $lang['design:written_by_label']				= 'Design by';
@@ -91,9 +93,9 @@ $lang['design:mass_delete_success']            = 'The Designs "%s" have been del
 $lang['design:delete_error']                   = 'No Designs were deleted.';
 $lang['design:already_exist_error']            = 'A Design with this URL already exists.';
 $lang['design:template_upload_sucessfull']            = 'Your template file uploaded successfully';
-
+$lang['design:disabled_after'] 				= 'Designing comments after %s has been disabled.';
 $lang['design:twitter_Designed']                 = 'Designed "%s" %s';
-$lang['design:twitter_error']                  = 'Twitter Error';
+$lang['design:no_origin_size_set']                  = 'No original size be set.Pleas,contact administrator to repair it ';
 
 // date
 $lang['design:archive_date_format']		= "%B %Y";
