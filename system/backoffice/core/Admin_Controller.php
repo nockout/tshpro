@@ -80,8 +80,8 @@ class Admin_Controller extends MY_Controller {
 			$menu_items = array();
 
 			// This array controls the order of the admin items.
+		//	$this->template->menu_order = array('lang:cp:nav_content', 'lang:cp:nav_structure', 'lang:cp:nav_data', 'lang:cp:nav_users', 'lang:cp:nav_settings', 'lang:global:profile');
 			$this->template->menu_order = array('lang:cp:nav_content', 'lang:cp:nav_structure', 'lang:cp:nav_data', 'lang:cp:nav_users', 'lang:cp:nav_settings', 'lang:global:profile');
-
 			$modules = $this->module_m->get_all(array(
 				'is_backend' => true,
 				'group' => $this->current_user->group,
@@ -146,9 +146,14 @@ class Admin_Controller extends MY_Controller {
 
 				$ordered_menu = array_merge_recursive($ordered_menu, $translated_menu_items);
 			}
-
+			unset($ordered_menu['Content']);
 			// And there we go! These are the admin menu items.
 			$this->template->menu_items = $ordered_menu;
+			//echo "<pre>";
+		//	print_r($this->template->menu_items);
+		//die;
+			
+			//re move menu content temp
 		}
 
 		// ------------------------------

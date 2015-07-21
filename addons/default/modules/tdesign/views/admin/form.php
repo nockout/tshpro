@@ -89,7 +89,7 @@
 				
 					<li>
 						<label for="keywords"><?php echo lang('global:keywords') ?></label>
-						<div class="input"><?php echo form_input('keywords', isset($keyword)?htmlspecialchars_decode($keyword):"", 'id="keywords"') ?></div>
+						<div class="input"><?php echo form_input('keywords', isset($keywords)?htmlspecialchars_decode($keywords):"", 'id="keywords"') ?></div>
 					</li>
 				
 			</ul>

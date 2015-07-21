@@ -54,8 +54,7 @@
 		<canvas id="mycanvas" width="1010" height="1010"></canvas>
 		</div>
 	</div>
-</section>
-<?php
+	<?php
 $attributes = array (
 		'id' => 'export_template' 
 );
@@ -64,9 +63,12 @@ $hidden = array (
 );
 ?>
 
-<? echo form_open("admin/tdesign/create/export",$attributes,$hidden)?>
-  <? echo form_hidden($hidden)?>
- <?php echo form_close()?>
+<?php
+ echo form_open("admin/tdesign/create/export",$attributes,$hidden); 
+ echo form_hidden($hidden);
+ echo form_close(); ?>
+</section>
+
 <script>
  jQuery(document).ready(function ($) { 
          $('.export').click(function(){

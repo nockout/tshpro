@@ -73,6 +73,12 @@ class Admin extends Admin_Controller
 	 *
 	 * Shows a list of the groups.
 	 */
+	public function generate_folder(){
+		
+		$this->load->library('product');
+		$this->product->generate_folder();
+		ECHO "DONE";
+	}
 	public function index()
 	{
 		$this->load->library('product');
@@ -105,6 +111,7 @@ class Admin extends Admin_Controller
 		$data['list_price'] = '';
 		$data['extra'] = '';
 		$data['product_code']="";
+		$data['keywords']="";
 		$data['product_categories'] =array();
 		if ($id) {
 			if($status=="D"){
@@ -149,14 +156,14 @@ class Admin extends Admin_Controller
 			$data['product_code'] = $product->product_code;
 			$data['short_description'] = isset($product->short_description)?$product->short_description:"";
 			$data['full_description'] =isset($product->full_description)?$product->full_description:"";
-			$data['search_words'] = isset($product->search_words)?$product->search_words:"";
+			$data['keywords'] = isset($product->search_words)?$product->search_words:"";
 			$data['list_price'] = $product->list_price;
 			$data['extra'] = $product->extra;
 			$data['product_code']=$product->product_code;
 			$data['image']=!empty($product->image)?$product->image:"";
 			$data['avail_since']=$product->avail_since;
 			$data['status']=$product->status;
-			
+		
 			
 		
 		}
@@ -194,9 +201,9 @@ class Admin extends Admin_Controller
             }
             
             if($product_id){
-            	$this->session->set_flashdata("success",lang("design:publish_success"));
+            	$this->session->set_flashdata("success",sprintf(lang("design:publish_success"),$this->input->post("title")));
             }else{
-            	$this->session->set_flashdata("error",lang("design:publish_error"));
+            	$this->session->set_flashdata("error",sprintf(lang("design:publish_error"),$this->input->post("title")));
             }
             if($this->input->post("btnAction")=="save_exit"){
             	redirect("admin/tdesign/index/");

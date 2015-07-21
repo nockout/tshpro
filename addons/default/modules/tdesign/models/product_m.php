@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-include "Base_m.php";
+include "base_m.php";
 class Product_m extends Base_m
 {
 	protected $_table = 'tshirt_products';
@@ -131,8 +131,9 @@ class Product_m extends Base_m
 	}
 	public function get_product_draft($id){
 		if(!$this->allowViewAll()){
-			$this->db->where(array("user_id",$this->current_user->user_id));
+			$this->db->where("user_id",$this->current_user->user_id);
 		}
+		
 		return $this->db->where("status","D")->where("product_id",$id)->get($this->_table)->row();
 	}
 	private function allowViewAll(){
