@@ -17,7 +17,6 @@
 					class="customfile-feedback span8">
 				<button type="submit" value="Upload" aria-hidden="true"
 					class="upload-button" style="float: left;">Upload</button>
-						
 			</div>
 			<input type="file" id="img_uploadTemplate" class="hidden span8 "
 				name="img_uploadTemplate" />
@@ -25,7 +24,7 @@
 			<hr>
 				<?php echo form_close()?>
 				
-			
+		
 			<?php if(isset($collections)&&count($collections)):?>		
 			<h5>
 				<i class="icon-picture"></i> <?php echo lang("design:add_mockup")?>
@@ -50,9 +49,15 @@
 						<h5>
 				<i class="icon-cog"></i> <?php echo lang("design:help")?>
 					</h5>
-			
-				<a target="_blank" href="uploads/default/template.zip" style="text-decoration: underline;">TEmplate Zip</a>
-				
+			<p class="help">
+				<span class="badge badge-info"><i class="icon-edit"></i></span> :
+						<?php echo lang("design:text_help")?> <br> <span
+					class="badge badge-info"><i class="icon-remove"></i></span>:
+						<?php echo lang("design:remove_text_help")?>  <br> <span
+					class="badge badge-info"><span
+					class="ui-icon ui-icon-white ui-icon-gripsmall-diagonal-se"></span></span>:
+						<?php echo lang("design:text_resize_image")?> 
+					</p>
 		</div>
 	</div>
 

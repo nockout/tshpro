@@ -23,6 +23,25 @@ class Product{
 		
 		return $design;
 	}
+	public function get_options($type_product=null){
+		if(!$type_product)
+			return;
+	//load xml 
+		$types=array(
+				"shirts"=>array(
+						"Men",
+						"Women"
+				),
+				'phone-accessories'=>array(
+						
+				)
+		);
+		if(isset($types[$type_product])){
+			return $types[$type_product];
+		}
+		
+		return null;
+	}
 	public function get_products($cond=array()){
 		return $this->CI->Product_m->get_products($cond);
 	}
@@ -34,6 +53,39 @@ class Product{
 	{
 		return $this->CI->Product_m->get($id);
 	
+	}
+	public function templates($folders=array()){
+		$path = rtrim($this->CI->config->item('files:path'), DIRECTORY_SEPARATOR);
+		$fods=$this->get_templates($folders);
+		if(empty($fods)){
+			return ;
+		}
+		$path = BASE_URI.rtrim($this->CI->config->item('files:path'), DIRECTORY_SEPARATOR);
+		foreach ($fods as $key=>$f){
+		
+			if(isset($f['data'])){
+				foreach ($f['data'] as $file){
+					$file->link=$path.'/'.$file->_path . $file->filename;
+				}
+				$result[$key]=$f['data'];
+			}
+			
+		}
+		
+		return $result;
+	}
+	private function get_templates($folders){
+		if(empty($folders))
+			return;
+		$this->CI->load->library("files/files");
+		$templates=array();
+		foreach ($folders as $folder){
+			$templates[$folder]=$this->CI->files->get_files("local",$folder);
+				
+		}
+		
+		
+		return $templates;
 	}
 	public function generate_image($product_id){
 			if(!intval($product_id))

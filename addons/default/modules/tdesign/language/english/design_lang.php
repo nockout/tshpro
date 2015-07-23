@@ -63,7 +63,7 @@ $lang['design:select_font']					= 'Select Fonts';
 $lang['design:font_color']					= 'Font Colors';
 $lang['design:font']					= 'Fonts';
 
-$lang['design:add_mockup']					= 'Add Mockup';
+
 $lang['design:upload_template']					= 'Upload Template';
 $lang['design:image_options']					= 'Image Options';
 

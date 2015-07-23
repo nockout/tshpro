@@ -50,11 +50,10 @@
 		</div>
 
 
-		<div id="convascontent" style="display: none">
-		<canvas id="mycanvas" width="1010" height="1010"></canvas>
-		</div>
+		<div id="convascontent" style="display: none"></div>
 	</div>
-	<?php
+</section>
+<?php
 $attributes = array (
 		'id' => 'export_template' 
 );
@@ -63,21 +62,17 @@ $hidden = array (
 );
 ?>
 
-<?php
- echo form_open("admin/tdesign/create/export",$attributes,$hidden); 
- echo form_hidden($hidden);
- echo form_close(); ?>
-</section>
-
+<? echo form_open("admin/tdesign/create/export",$attributes,$hidden)?>
+  <? echo form_hidden($hidden)?>
+ <?php echo form_close()?>
 <script>
  jQuery(document).ready(function ($) { 
          $('.export').click(function(){
       
             $('#printable').find('i').css('display', 'none');
             $('#printable').find('.ui-icon').css('display', 'none');
-          
-        //    $('#printable').css("width", $("#Tshirtsrc").width());
-        //    $('#printable').css("height", $("#Tshirtsrc").height());
+            $('#printable').css("width", $("#Tshirtsrc").width());
+            $('#printable').css("height", $("#Tshirtsrc").height());
             //get printable section
              var exportCanvas = document.getElementById('printable');
              //get convas container

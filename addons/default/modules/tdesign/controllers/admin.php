@@ -73,6 +73,90 @@ class Admin extends Admin_Controller
 	 *
 	 * Shows a list of the groups.
 	 */
+	public function export(){
+		
+		if(!isset($_REQUEST['base_64image'])){
+			$this->session->set_flashdata("error",lang("design:no_design_found"));
+			redirect("admin/tdesign/create_design");
+		}
+		$base64_str = substr($_REQUEST['base_64image'], strpos($_REQUEST['base_64image'], ",")+1);
+		
+		//decode base64 string
+		$decoded = base64_decode($base64_str);
+		
+	
+		//create png from decoded base 64 string and save the image in the parent folder
+	
+	
+	
+		
+	
+		$name= "temp".uniqid(). '.png';
+		$file = UPLOAD_PATH.'../design/templates/' .$name;
+		$result = file_put_contents($file, $decoded);
+		
+		
+		$this->load->library('product');
+		$this->load->helper("tdesign");
+		// create draft design
+		$product=$this->product->create_draft(array("raw_url"=>$file,"image"=>get_design_image_path("templates",$name)));
+		//redirect("admin/tdesign/create");
+		if(empty($product)){
+			show_error("Service Currently Unvaiable");
+			return;
+		}
+		$type=$this->input->post("product_type")?$this->input->post("product_type"):"shirts";
+		
+		redirect("admin/tdesign/form/".$product->product_id."/".$type);
+	}
+	public function create_design(){
+		$this->load->library('product');
+		$this->lang->load("templates");
+		//$this->pyrocache->delete("TEMPLATE_CACHE");
+		//die;
+// 		$template_cache = $this->pyrocache->get('TEMPLATE_CACHE');
+// 		if ( empty($template_cache))
+// 		{
+// 			$template_folders=array("shirts","phone-accessories","cups");
+// 			$templates=$this->product->templates($template_folders);
+		
+// 			$template_cache=$this->load->view("admin/create/templates/template",array('templates'=>$templates),TRUE);
+// 			$this->pyrocache->write($template_cache, 'TEMPLATE_CACHE',86400);
+			
+// 		}else{
+		
+// 			$template_cache=	$this->pyrocache->get( 'TEMPLATE_CACHE');
+// 		}
+		$template_folders=array("shirts","phone-accessories","cups");
+		$templates=$this->product->templates($template_folders);
+		
+		$template_cache=$this->load->view("admin/create/templates/template",array('templates'=>$templates),TRUE);
+		$this->pyrocache->write($template_cache, 'TEMPLATE_CACHE',86400);
+		
+		$this->template->append_js(array("module::fancy_design/jquery.min.js",
+				"module::fancy_design/jquery-ui.min.js",
+				"module::fancy_design/bootstrap.min.js",
+				"module::fancy_design/fabric.js",
+				"module::fancy_design/jquery.fancyProductDesigner.js",
+			//	"module::fancy_design/app.js"
+		));
+		$this->template->append_css(array(
+										//"module::fancy_design/bootstrap.css",
+										"module::fancy_design/icon-font.css",
+										"module::fancy_design/jquery.fancyProductDesigner.css",								
+										"module::fancy_design/plugins.min.css"));
+		$this->template->title($this->module_details['name']);
+		$this->template->set("templates",$template_cache);
+		$this->template->build('admin/create/main');;
+		
+	}
+	public function sidebar(){
+		$this->lang->load("templates");
+		echo $this->load->view('admin/create/templates/actions',array(),TRUE);;
+		die;
+	}
+	
+	
 	public function generate_folder(){
 		
 		$this->load->library('product');
@@ -92,9 +176,9 @@ class Admin extends Admin_Controller
 			->build('admin/index');;
 
 	}
-	public function form($id=null,$status="null"){
+	public function form($id=null,$type="null"){
 		$id or redirect('admin/index');
-	
+		
 		$this->load->library('product');
 	
 		$this->load->library('form_validation');
@@ -114,13 +198,16 @@ class Admin extends Admin_Controller
 		$data['keywords']="";
 		$data['product_categories'] =array();
 		if ($id) {
-			if($status=="D"){
-			
-				$product=$this->product->get_draft($id);
-			}else{
+		
 				$product=$this->product->get_product($id);
-			}
-			
+				if($product->status=="D"){
+					$extra=unserialize($product->extra);
+					if(isset($extra['image'])){
+					
+						$product->image=$extra['image'];
+					}
+					
+				}
 			if(empty($product))
 			{
 				die("no design found");
@@ -177,7 +264,7 @@ class Admin extends Admin_Controller
 				
 				
 				$this->template->set($data);
-				$this->template->append_css ( 'module::form.css' );;
+			//	$this->template->append_css ( 'module::form.css' );;
 				$this->template
 				->title($this->module_details['name'], lang('design:create_title'))
 				->append_metadata($this->load->view('fragments/wysiwyg', array(), true))->build('admin/form');
