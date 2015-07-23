@@ -84,7 +84,7 @@ $lang['global:enabled']					= 'Enabled';
 $lang['global:disabled'] 				= 'Disabled';
 
 $lang['all_right_reserved']				= 'All Rights Reserved.';
-$lang['powered_by_pyrocms']				= 'Powered by AYCA Store';
+$lang['powered_by_pyrocms']				= 'Powered by PyroCMS';
 $lang['top_page']						= 'Top';
 $lang['back_to_top']					= 'Back to Top';
 
