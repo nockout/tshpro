@@ -55,5 +55,5 @@ $lang['required_label'] 				= 'Required';
 $lang['sb_recent_users'] 				= 'Recent users';
 
 $lang['cp:nav_design']					= 'Design';
-
+$lang['cp:nav_option']					= 'Option';
 /* End of file admin_lang.php */
