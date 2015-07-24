@@ -111,7 +111,7 @@ class Admin extends Admin_Controller
 	}
 	public function create_design(){
 		$this->load->library('product');
-		$this->lang->load("templates");
+		$this->lang->load("templates");;
 		//$this->pyrocache->delete("TEMPLATE_CACHE");
 		//die;
 // 		$template_cache = $this->pyrocache->get('TEMPLATE_CACHE');
@@ -131,8 +131,8 @@ class Admin extends Admin_Controller
 		$templates=$this->product->templates($template_folders);
 		
 		$template_cache=$this->load->view("admin/create/templates/template",array('templates'=>$templates),TRUE);
-		$this->pyrocache->write($template_cache, 'TEMPLATE_CACHE',86400);
-		
+	//	$this->pyrocache->write($template_cache, 'TEMPLATE_CACHE',86400);
+
 		$this->template->append_js(array("module::fancy_design/jquery.min.js",
 				"module::fancy_design/jquery-ui.min.js",
 				"module::fancy_design/bootstrap.min.js",
@@ -140,6 +140,7 @@ class Admin extends Admin_Controller
 				"module::fancy_design/jquery.fancyProductDesigner.js",
 			//	"module::fancy_design/app.js"
 		));
+		
 		$this->template->append_css(array(
 										//"module::fancy_design/bootstrap.css",
 										"module::fancy_design/icon-font.css",
@@ -149,6 +150,26 @@ class Admin extends Admin_Controller
 		$this->template->set("templates",$template_cache);
 		$this->template->build('admin/create/main');;
 		
+	}
+	public function delete($id=null){
+		if(!empty($id)){
+			$this->load->library('product');
+			if($this->product->delete($id))
+			{
+				$this->session->set_flashdata("success",sprintf(lang("design:delete_success"),""));
+			}else{
+				$this->session->set_flashdata("error",sprintf(lang("design:delete_error"),""));
+			}
+		}
+		redirect('admin/tdesign/index');
+	}
+	public function auto_delete($id){
+		$this->load->library('product');
+		$this->product->auto_delete($id);
+	
+	}
+	public function action(){
+		redirect('admin/tdesign/index');
 	}
 	public function sidebar(){
 		$this->lang->load("templates");
@@ -163,15 +184,18 @@ class Admin extends Admin_Controller
 		$this->product->generate_folder();
 		ECHO "DONE";
 	}
-	public function index()
+	public function index($page=0,$limit=6)
 	{
 		$this->load->library('product');
-			$designs=$this->product->get_products(array());
-		
-		$categories =array();
+		$designs=$this->product->get_products(array(),$page,$limit);
+	
+	    $pagination = create_pagination('admin/tdesign/index', $designs['total'],5);
+		$categories =array();	
+	//	print_r($pagination);die;
 		$this->template->set('categories',$categories);
  		$this->template->
- 			set('designs',$designs)
+ 			set('designs',$designs['objects'])
+ 			->set('pagination', $pagination)
  			->title($this->module_details['name'])
 			->build('admin/index');;
 
@@ -286,7 +310,7 @@ class Admin extends Admin_Controller
             	//generate image
             	$this->product->generate_image($product_id);
             }
-            
+          
             if($product_id){
             	$this->session->set_flashdata("success",sprintf(lang("design:publish_success"),$this->input->post("title")));
             }else{

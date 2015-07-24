@@ -8,7 +8,7 @@
 			<?php if ($designs) : ?>
 				<?php echo $this->load->view('admin/partials/filters') ?>
 				
-				<?php echo form_open('admin/blog/action') ?>
+				<?php echo form_open('admin/tdesign/action') ?>
 				
 					<div id="filter-stage">
 						<?php echo $this->load->view('admin/tables/designs') ?>

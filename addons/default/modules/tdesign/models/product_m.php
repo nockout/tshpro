@@ -40,7 +40,40 @@ class Product_m extends Base_m
 		parent::__construct();
 		
 	}
-	public function get_products($params,$limit=6,$offset=0){
+	public function delete($id){
+		if(empty($id))
+			return;
+		if(!$this->allowViewAll())
+		{
+			$this->db->where("user_id",$this->current_user->user_id);
+		}
+		
+		if(!is_array($id)){
+			$id=array($id);
+		}
+		if(!$this->db->where_in("product_id",$id)->get($this->_table)->result()){
+		
+			return false;
+		}
+		return $this->db->where_in("product_id",($id))->update($this->_table,array("deleted"=>1));
+	}
+	public function auto_delete($id){
+		if(empty($id))
+			return ;
+		if(!is_array(($id))){
+			$id=array($id);
+		}
+		
+		$this->db->where_in('product_id',($id));
+		if($this->db->delete($this->_table)){
+			return	$this->db->where_in("product_id",($id))->delete($this->_descriptions);
+		
+		}
+		return  ;
+		
+	}
+	
+	public function get_products($params,$offset=0,$limit=6){
 		
 
 		//$this->db->select("*");
@@ -50,22 +83,40 @@ class Product_m extends Base_m
 		if(isset($params['category'])){
 		
 		}
-		$this->db->select("*");
+
+		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
 
 		$this->db->select("(SELECT username FROM ".(SITE_REF."_".$this->_users)." WHERE id=user_id LIMIT 1) AS user_name", FALSE);
-		$this->limit($limit,$offset);
+	
 		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id');
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
-		return $this->get_all();
+		$this->db->where('deleted',0);
+		$this->db->offset($offset)->limit($limit);
+		$this->db->order_by("avail_since","DESC");
+		$objct=$this->db->get($this->_table)->result();
+		//print_r($objct);die;
+		$return=array();
+		$result['objects']=$objct;
+		$result['total']=0;
+		$query = $this->db->query('SELECT FOUND_ROWS() AS `Count`');
+        $result['total']= $query->row()->Count;
+          
+	
+		return $result;
+		
 	
 	}
 	public function get($id){
 		if(!$this->allowViewAll()){
 			$this->db->where("user_id",$this->current_user->user_id);
 		}
+		if($row=$this->is_draft($id)){
+			return $row;
+		}
 		$this->db->select("*");
 		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id',"LEFT");
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
+		$this->db->where('deleted',0);
 		$result=$this->db->where($this->_table.'.product_id',$id)->get($this->_table)->row();
 		$result->images=$this->get_images($id);
 		if(!empty($result->images)){
@@ -77,7 +128,10 @@ class Product_m extends Base_m
 		return $result;
 	}
 	public function get_images($id){
-		return $this->db->where('product_id',intval($id))->get($this->_images)->result();
+		if(!is_array($id)){
+			$id=array($id);
+		}
+		return $this->db->where_in('product_id',$id)->get($this->_images)->result();
 	}
 	public function create_draft($extra=null){
 				if(!empty($extra)){
@@ -127,7 +181,7 @@ class Product_m extends Base_m
 			$this->save_lang($id,$this->langs,$data);
 	}
 	public function is_draft($id){
-		return $this->db->where("status","D")->get($this->_table)->row();
+		return $this->db->where('product_id',intval($id))->where("status","D")->get($this->_table)->row();
 	}
 	public function get_product_draft($id){
 		if(!$this->allowViewAll()){

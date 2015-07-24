@@ -14,4 +14,5 @@ class Image_m extends MY_Model {
 		return $this->db->get ( $this->_images_type )->result();
 		
 	}
+	
 }
