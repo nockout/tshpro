@@ -56,6 +56,7 @@
 				<li data-role="synchronize"	data-applies-to="folder" data-menu="synchronize"><?php echo lang('files:synchronize') ?></li>
 				<li data-role="delete_file"	data-applies-to="file" data-menu="delete"><?php echo lang('files:delete') ?></li>
 				<li data-role="delete_folder"	data-applies-to="folder" data-menu="delete"><?php echo lang('files:delete') ?></li>
+				<li data-role="set_group"	data-applies-to="file" data-menu="set_group"><?php echo lang('files:set_group') ?></li>
 				<li data-applies-to="folder file pane" data-menu="details"><?php echo lang('files:details') ?></li>
 			</ul>
 
