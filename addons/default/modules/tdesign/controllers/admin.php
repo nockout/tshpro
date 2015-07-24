@@ -169,6 +169,15 @@ class Admin extends Admin_Controller
 	
 	}
 	public function action(){
+		
+		switch ($this->input->post("btnAction"))
+		 { 	case "delete": 
+		 	if($ids=$this->input->post("action_to")){
+		 		$this->load->library('product');
+		 		$this->product->delete($ids);
+		 	}
+		 	
+		  };
 		redirect('admin/tdesign/index');
 	}
 	public function sidebar(){
