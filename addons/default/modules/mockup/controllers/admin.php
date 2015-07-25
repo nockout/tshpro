@@ -177,7 +177,7 @@ class Admin extends Admin_Controller
 	
 	}
 	private function add_js(){
-		
+		//test
 
 	}
 	public function img_upload() {
