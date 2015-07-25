@@ -17,7 +17,8 @@
 				<tr>
 					<td><?php echo form_checkbox('action_to[]', $mockup->id_mockup) ?></td>
 					<td class="collapse"><?php  echo $mockup->name?></td>
-					<td class="collapse"><?php echo format_date($mockup->datetime) ?></td>				
+					<td class="collapse"><?php  echo $mockup->id_category_default?></td>
+					<td class="collapse"><?php echo format_date($mockup->timestamp) ?></td>				
 					<td><?php echo lang('mockup:'.$mockup->status.'_label') ?></td>
 					<td style="padding-top:10px;">
                        
