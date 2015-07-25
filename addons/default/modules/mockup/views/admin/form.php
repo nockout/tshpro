@@ -8,7 +8,7 @@
 </section>
 <section class="item">
 	<div class="content">
-
+<?php echo form_open_multipart()?>
 <div class="tabs">
 
 			<ul class="tab-menu">
@@ -84,8 +84,8 @@
 			value="<?php if ($this->method != 'create'): echo $mockup_id; endif; ?>" />
 
 		<div class="buttons">
-	<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel')))?>
-</div>
+			<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel')))?>
+		</div>
 <?php echo form_close()?>
 
 	
