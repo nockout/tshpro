@@ -56,4 +56,5 @@ $lang['sb_recent_users'] 				= 'Recent users';
 
 $lang['cp:nav_design']					= 'Design';
 $lang['cp:nav_option']					= 'Option';
+$lang['cp:nav_mockup']					= 'Mockup';
 /* End of file admin_lang.php */
