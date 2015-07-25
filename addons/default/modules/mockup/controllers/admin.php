@@ -58,6 +58,9 @@ class Admin extends Admin_Controller
 	 *
 	 * Shows a list of the groups.
 	 */
+	public function combinations(){
+		
+	}
 
 	public function index($page=0,$limit=6)
 	{
@@ -134,11 +137,13 @@ class Admin extends Admin_Controller
 				
 				
 				$this->template->set($data);
-				//$this->add_js();
+				
 			//	$frame_images=$this->load->view("admin/images",array(),true);
 				$this->template
-				->title($this->module_details['name'], lang('mockup:create_title'))
-				->append_metadata($this->load->view('fragments/wysiwyg', array(), true))->build('admin/form');
+				->title($this->module_details['name'], lang('mockup:create_title'));
+				$this->add_js();
+					$this->template->build('admin/form');
+				$this->add_js();
 				return;
 			
 		} else {
@@ -176,8 +181,25 @@ class Admin extends Admin_Controller
 		
 	
 	}
+	private function get_options(){
+			$this->load->library('option/option');
+			
+	}
 	private function add_js(){
-		//test
+
+		//Asset::js_inline('jQuery.noConflict();');
+		$this->template->append_js("module::jquery-1.8.3.js");
+		$this->template->append_js("module::jquery-ui-1.9.2.custom.js");
+		$this->template->append_js("module::template/tmpl.min.js");
+		$this->template->append_js("module::template/load-image.min.js");
+	
+		$this->template->append_js("module::jquery.fileupload.js");
+		$this->template->append_js("module::jquery.fileupload-process.js");
+		$this->template->append_js("module::jquery.fileupload-image.js");
+		$this->template->append_js("module::jquery.fileupload-ui.js");
+		$this->template->append_js("module::jquery.fileupload-jquery-ui.js");
+		$this->template->append_js("module::locale.js");
+		$this->template->append_js("module::main.js");
 
 	}
 	public function img_upload() {
