@@ -9,7 +9,6 @@
 <section class="item">
 	<div class="content">
 
-
 <div class="tabs">
 
 			<ul class="tab-menu">
@@ -20,7 +19,7 @@
 
 			<!-- Content tab -->
 			<div class="form_inputs" id="information">
-			<?php echo form_open_multipart()?>
+			
 				<div class="one_half">
 					<fieldset>
 						<ul>
@@ -49,7 +48,7 @@
 
 					</fieldset>
 				</div>
-			<?php echo form_close()?>
+		
 			</div>
 
 			<div class="form_inputs" id="combinations">
@@ -80,14 +79,15 @@
 
 		</div>
 
+
 		<input type="hidden" name="row_edit_id"
 			value="<?php if ($this->method != 'create'): echo $mockup_id; endif; ?>" />
 
 		<div class="buttons">
 	<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel')))?>
 </div>
+<?php echo form_close()?>
 
-
-
+	
 </div>
 </section>
