@@ -16,6 +16,8 @@ $(function () {
     'use strict';
 
     // Initialize the jQuery File Upload widget:
+   // console.log(  $("#fileupload").attr('action'));
+  // return;
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},

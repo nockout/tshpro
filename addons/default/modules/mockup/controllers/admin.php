@@ -134,10 +134,12 @@ class Admin extends Admin_Controller
 				
 				
 				$this->template->set($data);
-				$this->add_js();
+				//$this->add_js();
+			//	$frame_images=$this->load->view("admin/images",array(),true);
 				$this->template
 				->title($this->module_details['name'], lang('mockup:create_title'))
-				->append_metadata($this->load->view('fragments/wysiwyg', array(), true))->build('admin/test');
+				->append_metadata($this->load->view('fragments/wysiwyg', array(), true))->build('admin/form');
+				return;
 			
 		} else {
 			$save['id_mockup'] = intval($id);
@@ -176,56 +178,28 @@ class Admin extends Admin_Controller
 	}
 	private function add_js(){
 		
-		$this->template->append_js('module::template/tmpl.min.js');
-		$this->template->append_js("module::template/load-image.min.js");
-	
-	  	$this->template->append_js('module::jquery.fileupload.js');
- 		$this->template->append_js('module::jquery.fileupload-process.js');
-		
-		$this->template->append_js('module::jquery.fileupload-image.js');
-		$this->template->append_js('module::jquery.fileupload-ui.js');
-		$this->template->append_js('module::jquery.fileupload-jquery-ui.js');
-	
-	//	$this->template->append_js('module::locale.js');
-		$this->template->append_js('module::main.js');
+
 	}
-	public function upload_image(){
+	public function img_upload() {
 		error_reporting(E_ALL | E_STRICT);
-		
-		
-		header('Pragma: no-cache');
-		header('Cache-Control: no-store, no-cache, must-revalidate');
-		header('Content-Disposition: inline; filename="files.json"');
-		header('X-Content-Type-Options: nosniff');
-		header('Access-Control-Allow-Origin: *');
-		header('Access-Control-Allow-Methods: OPTIONS, HEAD, GET, POST, PUT, DELETE');
-		header('Access-Control-Allow-Headers: X-File-Name, X-File-Type, X-File-Size');
-		
-		
-		
-		$this->load->helper("upload");
-		
-		$upload_handler = new UploadHandler();
-		switch ($_SERVER['REQUEST_METHOD']) {
-			case 'OPTIONS':
-				break;
-			case 'HEAD':
-			case 'GET':
-				$upload_handler->get();
-				break;
-			case 'POST':
-				if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
-					$upload_handler->delete();
-				} else {
-					$upload_handler->post();
-				}
-				break;
-			case 'DELETE':
-				$upload_handler->delete();
-				break;
-			default:
-				header('HTTP/1.1 405 Method Not Allowed');
+		$this->load->library('session');
+		if(!isset($_REQUEST['mockup_id'])){
+			echo json_encode(array());
+						die;
 		}
+		$r = $_REQUEST['mockup_id'];
+	
+		//  $product_id = $this->session->userdata('pid');
+		if (isset($r) && $product_id = intval($r)) {
+	
+			$this->load->library("Mockup");
+			if ($product_id) {
+				//$img = new Image_model();
+				$this->Mockup->processImage(intval($product_id));
+				return;
+			}
+		}
+		die('No product id found');
 	}
 	
 }

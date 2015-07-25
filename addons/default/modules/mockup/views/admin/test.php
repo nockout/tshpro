@@ -16,8 +16,8 @@
 		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 		<!-- The file upload form used as target for the file upload widget -->
-		<?php $attribute=array('id'=>'fileupload1')?>
-<?php echo form_open_multipart('admin/mockup/upload_image',$attribute); ?>		
+		<?php $attribute=array('id'=>'fileupload')?>
+<?php echo form_open_multipart('admin/mockup/img_upload',$attribute); ?>		
     		<div class="fileupload-buttonbar">
 				<div class="fileupload-buttons">
 

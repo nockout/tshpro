@@ -49,7 +49,7 @@
 
 					</fieldset>
 				</div>
-<?php echo form_close()?>
+			<?php echo form_close()?>
 			</div>
 
 			<div class="form_inputs" id="combinations">
@@ -72,7 +72,7 @@
 								</fieldset>
 								</div>
 								<?php else:?>
-						<?php  $this->load->view("admin/images")?>
+						<?php // $this->load->view("admin/images",array(),true)?>
 				
 					<?php endif;?>
 				</div>

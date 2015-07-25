@@ -166,4 +166,119 @@ class Mockup {
 		return true;
 		// / $this->db->where("mockup_id",intval($id))->delete($this->_images);
 	}
+	public function processImage($mockup_id) {
+		if(empty($mockup_id))
+			return;
+		$config['upload_dir'] = "global/images/p/";
+		$config['upload_dir'] = $config['upload_dir'];
+	
+		if (!is_dir($config['upload_dir'])) { //create the folder if it's not already exists
+			mkdir($config['upload_dir'], 0755, TRUE);
+		}
+		$config['script_url'] = base_url() . "product/img_upload/";
+		$config['upload_url'] = base_url() . "product/img_upload/";
+		$upload_handler = new UploadHandler($config);
+	
+	
+		header('Pragma: no-cache');
+		header('Cache-Control: no-store, no-cache, must-revalidate');
+		header('Content-Disposition: inline; filename="files.json"');
+		header('X-Content-Type-Options: nosniff');
+		header('Access-Control-Allow-Origin: *');
+		header('Access-Control-Allow-Methods: OPTIONS, HEAD, GET, POST, PUT, DELETE');
+		header('Access-Control-Allow-Headers: X-File-Name, X-File-Type, X-File-Size');
+		switch ($_SERVER['REQUEST_METHOD']) {
+			case 'OPTIONS':
+				break;
+			case 'HEAD':
+			case 'GET':
+				$this->product_id = $product_id;
+				$upload_dir = dirname($_SERVER['SCRIPT_FILENAME']) . '/global/images/p/';
+				$url = base_url();
+				$files = array();
+				if ($images = $this->getImageIDByProduct($this->product_id)) {
+					foreach ($images as $img) {
+						$file = new stdClass();
+						$file->name = $this->product_id . '-' . $img->id_image . '-' . 'medium' . '.jpg';
+						$file->id_image = $img->id_image;
+						$file->url = $url . 'global/images/p/' . $this->product_id . '-' . $img->id_image . '-' . 'medium' . '.jpg';
+						$file->delete_url = $this->getFullUrl() . '/product/img_upload'
+								. '?id_image=' . rawurlencode($img->id_image).'&&product_id='.rawurlencode($product_id);
+						$file->delete_url .= '&_method=DELETE';
+						$file->deleteType='DELETE';
+						$files[] = $file;
+					};
+				}
+				$obj=new stdClass();
+				$obj->files=$files;
+				print_r(json_encode($obj));
+				break;
+			case 'POST':
+				if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
+					$upload_handler->delete();
+				} else {
+					$this->product_id = $product_id;
+					parent::create($this->fields);
+					if (is_object($this)) {
+						$types = self::getImageType();
+						if (!is_array($types)) {
+							die('Can\'t not get image types');
+						}
+						$imge_version = array();
+	
+						foreach ($types as $type) {
+							$imge_version[$type->name] = array(
+									'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']) . '/global/images/p/',
+									'upload_url' => $upload_handler->getFullUrl() . '/files/',
+									'max_width' => $type->width,
+									'max_height' => $type->height,
+									'jpeg_quality' => 95);
+						}
+						// $upload_handler->options['image_versions'] = $imge_version;
+						$this->load->library('images');
+						$images = new CI_Images();
+						$files = $_FILES['files'];
+	
+						if (isset($files['tmp_name'][0])) {
+	
+							foreach ($imge_version as $name => $version) {
+								$new_name = $this->product_id . '-' . $this->id_image . '-' . $name . '.jpg';
+								$images->imageResize($files['tmp_name'][0], $version['upload_dir'] . $new_name
+										, $version['max_width'], $version['max_height']);
+							}
+						}
+						$files_return = array();
+						if ($images = $this->getImageIDByProduct($this->product_id)) {
+							//     foreach ($images as $img) {
+							$file = new stdClass();
+							$file->name = $this->product_id . '-' . $this->id_image . '-' . 'medium' . '.jpg';
+							$file->id_image = $this->id_image;
+							$file->url = base_url() . 'global/images/p/' . $this->product_id . '-' . $this->id_image . '-' . 'medium' . '.jpg';
+							$file->delete_url = $this->getFullUrl() . '/product/img_upload' . '?id_image=' . rawurlencode($this->id_image).'&product_id='.rawurlencode($product_id);
+							$file->delete_url .= '&_method=DELETE';
+							$file->deleteType='DELETE';
+							$files_return[] = $file;
+	
+	
+							//  };
+						}
+						$object= new stdClass();
+						$object->files=$files_return;
+						$object->notifications= json_encode ( $this->tools->set_notification
+								( 'N', 'notice', 'Image upload successfull.' )
+						);
+						print_r(json_encode($object));
+					}
+				}
+				break;
+			case 'DELETE':
+				$this->img_delete(intval($_REQUEST['id_image']), $product_id);
+				echo json_encode($this->tools->set_notification('N', 'notice', 'Delete successfull'));
+				return;
+				break;
+			default:
+				header('HTTP/1.1 405 Method Not Allowed');
+		}
+	}
+	
 }
