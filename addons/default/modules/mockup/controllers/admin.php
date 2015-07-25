@@ -186,6 +186,7 @@ class Admin extends Admin_Controller
 			
 	}
 	private function add_js(){
+
 		//Asset::js_inline('jQuery.noConflict();');
 		$this->template->append_js("module::jquery-1.8.3.js");
 		$this->template->append_js("module::jquery-ui-1.9.2.custom.js");
@@ -199,7 +200,7 @@ class Admin extends Admin_Controller
 		$this->template->append_js("module::jquery.fileupload-jquery-ui.js");
 		$this->template->append_js("module::locale.js");
 		$this->template->append_js("module::main.js");
-	
+
 	}
 	public function img_upload() {
 		error_reporting(E_ALL | E_STRICT);
