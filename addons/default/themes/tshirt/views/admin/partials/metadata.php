@@ -1,6 +1,9 @@
 <?php
+//Asset::js("module::jquery-1.8.3.js");
+
 Asset::js('jquery/jquery.js');
 Asset::js_inline('jQuery.noConflict();');
+//Asset::js("module::jquery-ui-1.9.2.custom.js");
 Asset::js('jquery/jquery-ui.min.js', 'jquery/jquery-ui.min.js');
 Asset::js('jquery/jquery.colorbox.js');
 Asset::js('jquery/jquery.cooki.js');
