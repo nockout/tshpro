@@ -23,8 +23,8 @@
 					<td style="padding-top:10px;">
                        
                       
-						<a href="<?php echo site_url('admin/tmockup/form/' . $mockup->id_mockup) ?>" title="<?php echo lang('global:edit')?>" class="button"><?php echo lang('global:edit')?></a>
-						<a href="<?php echo site_url('admin/tmockup/delete/' . $mockup->id_mockup) ?>" title="<?php echo lang('global:delete')?>" class="button confirm"><?php echo lang('global:delete')?></a>
+						<a href="<?php echo site_url('admin/mockup/form/' . $mockup->id_mockup) ?>" title="<?php echo lang('global:edit')?>" class="button"><?php echo lang('global:edit')?></a>
+						<a href="<?php echo site_url('admin/mockup/delete/' . $mockup->id_mockup) ?>" title="<?php echo lang('global:delete')?>" class="button confirm"><?php echo lang('global:delete')?></a>
 					</td>
 				</tr>
 			<?php endforeach ?>
