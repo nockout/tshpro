@@ -109,27 +109,11 @@ class Admin extends Admin_Controller
 	public function create_design(){
 		$this->load->library('product');
 		$this->lang->load("templates");;
-		//$this->pyrocache->delete("TEMPLATE_CACHE");
-		//die;
-// 		$template_cache = $this->pyrocache->get('TEMPLATE_CACHE');
-// 		if ( empty($template_cache))
-// 		{
-// 			$template_folders=array("shirts","phone-accessories","cups");
-// 			$templates=$this->product->templates($template_folders);
-		
-// 			$template_cache=$this->load->view("admin/create/templates/template",array('templates'=>$templates),TRUE);
-// 			$this->pyrocache->write($template_cache, 'TEMPLATE_CACHE',86400);
-			
-// 		}else{
-		
-// 			$template_cache=	$this->pyrocache->get( 'TEMPLATE_CACHE');
-// 		}
-		$template_folders=array("shirts","phone-accessories","cups");
-		$templates=$this->product->templates($template_folders);
-		
+	
+		$templates=$this->product->cate_templates();
+	
 		$template_cache=$this->load->view("admin/create/templates/template",array('templates'=>$templates),TRUE);
-	//	$this->pyrocache->write($template_cache, 'TEMPLATE_CACHE',86400);
-
+	
 		$this->template->append_js(array("module::fancy_design/jquery.min.js",
 				"module::fancy_design/jquery-ui.min.js",
 				"module::fancy_design/bootstrap.min.js",
