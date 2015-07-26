@@ -149,11 +149,8 @@ class Admin_Controller extends MY_Controller {
 			unset($ordered_menu['Content']);
 			// And there we go! These are the admin menu items.
 			$this->template->menu_items = $ordered_menu;
-			//echo "<pre>";
-		//	print_r($this->template->menu_items);
-		//die;
 			
-			//re move menu content temp
+	
 		}
 
 		// ------------------------------
