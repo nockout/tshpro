@@ -6,7 +6,7 @@ jQuery(document)
 			var yourDesigner = $('#clothing-designer')
 					.fancyProductDesigner(
 							{
-								
+								width: "100%",
 								editorMode : false,
 								fonts : [ 'Arial', 'Fearless',
 										'Helvetica', 'Times New Roman',
@@ -28,7 +28,7 @@ jQuery(document)
 									resizeToW: 1200,
 								    resizeToH: 1200,
 									scale: "0.6",
-									autoSelect: true,
+									//autoSelect: true,
 									draggable : true,
 									
 										//Allows to set the z-index of an element, -1 means it will be added on the stack of layers

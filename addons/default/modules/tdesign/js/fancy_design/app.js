@@ -130,7 +130,7 @@ jQuery(document)
 					});
 
 					// upload image
-					document.getElementById('design-upload').onchange = function(
+					/*document.getElementById('design-upload').onchange = function(
 							e) {
 						if (window.FileReader) {
 							var reader = new FileReader();
@@ -172,5 +172,5 @@ jQuery(document)
 						} else {
 							alert('FileReader API is not supported in your browser, please use Firefox, Safari, Chrome or IE10!')
 						}
-					};
+					};*/
 				});
