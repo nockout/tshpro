@@ -8,7 +8,6 @@ $lang['design:design_title']						 = "New Design ";
 $lang['design:create_title']						 = "New Design ";
 $lang['design:edit_title']						 = "Edit Design ";
 $lang['design:currently_no_products']						 = "There are no designs at the moment";
-$lang['design:currently_no_products']			="Content";
 $lang['design:design']                 = 'Design';
 $lang['design:designs']                   = 'Designs';
 

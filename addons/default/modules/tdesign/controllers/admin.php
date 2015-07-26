@@ -62,10 +62,7 @@ class Admin extends Admin_Controller
 	{
 	    parent::__construct();
 	    $this->lang->load('design');
-	  //  $this->load->model('permission_m');
-	    //$this->load->model('groups/group_m');
-	  //  $this->lang->load('permissions');
-	   // $this->lang->load('groups/group');
+	
 	}
 
 	/**
