@@ -1,7 +1,7 @@
 
 <?php if(isset($templates)&&count($templates)):?>
 		<?php foreach ($templates as $key=>$cate):?>
-		<?php echo "<pre>";print_r($cate);continue;?>
+		<?php //echo "<pre>";print_r($cate);continue;?>
 		<?php if(count($cate->templates)):?>
 <div class="fpd-category" title="<?php echo $cate->name?>">
 				<?php foreach ($cate->templates as $file):?>
