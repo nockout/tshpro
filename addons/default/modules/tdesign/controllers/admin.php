@@ -107,6 +107,7 @@ class Admin extends Admin_Controller
 		redirect("admin/tdesign/form/".$product->product_id."/".$type);
 	}
 	public function create_design(){
+		
 		$this->load->library('product');
 		$this->lang->load("templates");;
 	
@@ -119,14 +120,16 @@ class Admin extends Admin_Controller
 				"module::fancy_design/bootstrap.min.js",
 				"module::fancy_design/fabric.js",
 				"module::fancy_design/jquery.fancyProductDesigner.js",
-			//	"module::fancy_design/app.js"
+				//"module::fancy_design/app.js"
 		));
 		
 		$this->template->append_css(array(
 										//"module::fancy_design/bootstrap.css",
 										"module::fancy_design/icon-font.css",
 										"module::fancy_design/jquery.fancyProductDesigner.css",								
-										"module::fancy_design/plugins.min.css"));
+										"module::fancy_design/plugins.min.css",
+				"module::designer.css"
+		));
 		$this->template->title($this->module_details['name']);
 		$this->template->set("templates",$template_cache);
 		$this->template->build('admin/create/main');;

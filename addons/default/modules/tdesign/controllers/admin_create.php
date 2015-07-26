@@ -31,7 +31,7 @@ class Admin_Create extends Admin_Controller {
 	 * Shows a list of the groups.
 	 */
 	private function create($data = array()) {
-
+		
 		$this->load->helper ( "tdesign" );
 		$collections = $this->session->userdata ( "templates" );
 		$this->load->model('Image_m');
@@ -172,6 +172,7 @@ class Admin_Create extends Admin_Controller {
 	}
 	
 	public function index() {
+		
 		$this->create ();
 		
 		// print($this->current_user->group);di

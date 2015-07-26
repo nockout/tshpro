@@ -1,6 +1,6 @@
 <?php  echo $this->load->view('admin/create/script') ?>
 <div id="main-container" class="container">
-	<div id="clothing-designer" class="fpd-shadow-1">
+	<div id="clothing-designer" class="fpd-shadow-1 clothing-designer-1">
 		<?php echo $templates?>
 		<div class="fpd-design">
 			
@@ -10,7 +10,7 @@
 	
 		
 				<button class="" id="export"  class="">EXPORT</button>
-				<button class="" id="test"  class="">EXPORT</button>
+				<button class="" id="test"  class="">test</button>
 		
 	</div>
 	
