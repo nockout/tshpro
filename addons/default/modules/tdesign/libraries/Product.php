@@ -98,16 +98,17 @@ class Product {
 	}
 	private function get_template_by_category($id_category){
 		//echo $id_category;
-		$tplate_table='default_tshirt_template';
+		$tplate_table='tshirt_template';
 		$tplate_table_lang="tshirt_template_lang";
 		if(empty($id_category))
 			return;
-		$this->CI->db->join($tplate_table_lang,$tplate_table_lang.".id_template=".$tplate_table_lang.".id_template");
-		$this->CI->db->where("lang_code",CURRENT_LANGUAGE);
+		
 		$this->CI->db->where("id_category_default",intval($id_category));
+		$this->CI->db->join($tplate_table_lang,$tplate_table.".id_template=".$tplate_table_lang.".id_template","lEFT");
+		$this->CI->db->where("lang_code",CURRENT_LANGUAGE);
+
 		$tempaltes=$this->CI->db->get($tplate_table)->result();
-		//echo "<pre>";
-	//	print_r($tempaltes);die;
+		
 		
 		return $tempaltes;
 	}
