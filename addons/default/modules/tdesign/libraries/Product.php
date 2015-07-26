@@ -50,7 +50,7 @@ class Product {
 	public function get_product($id) {
 		return $this->CI->Product_m->get ( $id );
 	}
-	public function templates($folders = array()) {
+	public function templatesbk($folders = array()) {
 		$path = rtrim ( $this->CI->config->item ( 'files:path' ), DIRECTORY_SEPARATOR );
 		$fods = $this->get_templates ( $folders );
 		if (empty ( $fods )) {
@@ -68,6 +68,67 @@ class Product {
 		}
 		
 		return $result;
+	}
+	public function cate_templates($folders = array()) {
+		//$path = rtrim ( $this->CI->config->item ( 'files:path' ), DIRECTORY_SEPARATOR );
+		//get category
+	
+
+		$categorys='tshirt_template_categories';
+		$this->CI->db->select("*");
+		$cates=$this->CI->db->get($categorys)->result();
+		//print_r($cates);die;
+		if(empty($cates)){
+			return;
+		}
+		//$result=array();
+		foreach ($cates as $cate){
+		$tempaltes=	$this->get_template_by_category($cate->id_category);
+		if($tempaltes)	{
+			foreach ($tempaltes as $t){
+				$t->images=$this->get_templates_images($t->id_template);
+				}
+			$cate->templates=$tempaltes;
+			}
+		}
+		//echo "<pre>";
+		//print_r($cates);die;
+		
+		return $cates;
+	}
+	private function get_template_by_category($id_category){
+		//echo $id_category;
+		$tplate_table='tshirt_template';
+		$tplate_table_lang="tshirt_template_lang";
+		if(empty($id_category))
+			return;
+		
+		$this->CI->db->where("id_category_default",intval($id_category));
+		$this->CI->db->join($tplate_table_lang,$tplate_table.".id_template=".$tplate_table_lang.".id_template","lEFT");
+		$this->CI->db->where("lang_code",CURRENT_LANGUAGE);
+
+		$tempaltes=$this->CI->db->get($tplate_table)->result();
+		
+		
+		return $tempaltes;
+	}
+	private function get_templates_images($template_id){
+		$path=UPLOAD_PATH.'../template/';
+		$imga_table="tshirt_template_image";
+		if(empty($template_id))
+			return;
+		
+		$result=$this->CI->db->where("id_template",$template_id)->get($imga_table)->result();
+		if(!$result)
+			return;
+		$return=array();
+		foreach ($result as $r){
+			$realPath=$path.$r->id_template."_".$r->id_image.".jpg";
+			if(file_exists($realPath)){
+				$return[]=$realPath;
+			}
+		}
+		return $return;
 	}
 	private function get_templates($folders) {
 		if (empty ( $folders ))
