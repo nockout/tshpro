@@ -26,3 +26,10 @@
 	font-size: 25px !important;
 	line-height: 26px !important;
 }
+
+*, *::before, *::after {
+    box-sizing: none !imporatant;
+}
+*, *::before, *::after {
+     box-sizing: none !imporatant;
+}
