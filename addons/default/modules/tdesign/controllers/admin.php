@@ -124,7 +124,7 @@ class Admin extends Admin_Controller
 		));
 		
 		$this->template->append_css(array(
-										//"module::fancy_design/bootstrap.css",
+										"module::fancy_design/bootstrap.css",
 										"module::fancy_design/icon-font.css",
 										"module::fancy_design/jquery.fancyProductDesigner.css",								
 										"module::fancy_design/plugins.min.css",
