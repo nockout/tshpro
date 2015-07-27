@@ -115,4 +115,6 @@ $lang['global:plugin']					= 'Plugin'; #translate
 $lang['global:options']					= 'Options'; #translate
 $lang['global:plain-text']				= 'Plain Text'; #translate
 
+$lang['design:create']					= 'New Design';
+$lang['design:manage']					= 'Manage Designs';
 /* End of file global_lang.php */
