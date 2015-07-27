@@ -4,12 +4,10 @@
 $lang['cp:nav_design']                       = 'Design';
 $lang['design:create']						 = "New Design ";
 $lang['design:management']						 = "Manage Designs ";
-
 $lang['design:design_title']						 = "New Design ";
 $lang['design:create_title']						 = "New Design ";
 $lang['design:edit_title']						 = "Edit Design ";
 $lang['design:currently_no_products']						 = "There are no designs at the moment";
-$lang['design:currently_no_products']			="Content";
 $lang['design:design']                 = 'Design';
 $lang['design:designs']                   = 'Designs';
 
@@ -63,7 +61,8 @@ $lang['design:font_size']					= 'Font size';
 $lang['design:select_font']					= 'Select Fonts';
 $lang['design:font_color']					= 'Font Colors';
 $lang['design:font']					= 'Fonts';
-
+$lang['design:apply_this_style']="Apply this style";
+$lang['design:save_all_design']="Save all styles";
 
 $lang['design:upload_template']					= 'Upload Template';
 $lang['design:image_options']					= 'Image Options';
@@ -87,11 +86,11 @@ $lang['design:design_add_success']            = 'The Design "%s" was added.';
 $lang['design:design_add_error']              = 'An error occured.';
 $lang['design:edit_success']                   = 'The Design "%s" was updated.';
 $lang['design:edit_error']                     = 'An error occurred.';
-$lang['design:publish_success']                = 'The Design "%s" has been published.';
-$lang['design:mass_publish_success']           = 'The Designs "%s" have been published.';
+$lang['design:publish_success']                = 'The Design  has been published.';
+$lang['design:mass_publish_success']           = 'The Designs  have been published.';
 $lang['design:publish_error']                  = 'No Designs were published.';
-$lang['design:delete_success']                 = 'The Design "%s" has been deleted.';
-$lang['design:mass_delete_success']            = 'The Designs "%s" have been deleted.';
+$lang['design:delete_success']                 = 'The Design  has been deleted.';
+$lang['design:mass_delete_success']            = 'The Designs  have been deleted.';
 $lang['design:delete_error']                   = 'No Designs were deleted.';
 $lang['design:already_exist_error']            = 'A Design with this URL already exists.';
 $lang['design:template_upload_sucessfull']            = 'Your template file uploaded successfully';
