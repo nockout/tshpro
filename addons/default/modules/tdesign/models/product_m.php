@@ -188,14 +188,16 @@ class Product_m extends Base_m
 		return $this->db->where('product_id',intval($id))->where("status","D")->get($this->_table)->row();
 	}
 	public function get_product_draft($id){
+		//echo $id;die;
 		if(!$this->allowViewAll()){
 			$this->db->where("user_id",$this->current_user->user_id);
 		}
 		$this->db->join($this->_descriptions,$this->_table.'.product_id='.$this->_descriptions.'.product_id',"LEFT");
-		$this->db->where("lang_code",CURRENT_LANGUAGE);
-		echo "<pre>";
-		print_r( $this->db->where("status","D")->where($this->_table.'.product_id',$id)->get($this->_table)->row());
-		die;
+		$this->db->where("status","O");
+		$this->db->where($this->_table.'.product_id',$id);
+		$row=$this->db->get($this->_table)->row();
+		return ($row );
+		
 	}
 	private function allowViewAll(){
 		return (in_array($this->current_user->group, $this->_viewAllgroups))?true:false;

@@ -71,7 +71,9 @@ class Admin extends Admin_Controller
 	 * Shows a list of the groups.
 	 */
 	public function save_images(){
-		
+		//$this->load->model("product_m");
+		//$this->product_m->get_product_draft(23);
+		//die;
 		if(!isset($_REQUEST['products'])){
 			$this->session->set_flashdata("error","design:no_design_found");
 			redirect("admin/tdesign/create_design");
@@ -103,8 +105,8 @@ class Admin extends Admin_Controller
 			}
 			$products[]=$this->product->create_draft(array("raw_url"=>$files,"image"=>$urls,"name"=>$arr_base64_imgs['title'],'price'=>$arr_base64_imgs['price']));
 		}
-		echo "<pre>";
-		print_r($products);die;
+	//	echo "<pre>";
+		//print_r($products);die;
 		if(empty($products)){
 			show_error("Service Currently Unvaiable");
 			return;
@@ -112,7 +114,7 @@ class Admin extends Admin_Controller
 		
 		if(count($products)==1){
 			
-			//redirect("admin/tdesign/form/".$product);
+			redirect("admin/tdesign/form/".$products[0]->product_id);
 		}
 		redirect("admin/tdesign/index");
 		
