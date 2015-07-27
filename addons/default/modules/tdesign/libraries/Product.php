@@ -157,17 +157,21 @@ class Product {
 			return;
 		}
 		
-		$id_image = $this->CI->Product_m->generate_image_id ( $product_id );
+		
 		$types = $this->CI->Image_m->image_types_by_names ( array (
 				"products" => 1 
 		) );
 		if (empty ( $types ))
 			return false;
-		foreach ( $types as $t ) {
+		foreach ($extra ['raw_url'] as $url){
+			$id_image = $this->CI->Product_m->generate_image_id ( $product_id );
+			foreach ( $types as $t ) {
 			$destPath = sprintf ( "%s/%s/%s", $upload_path, $t->name, $id_image . "_" . $product_id . '.jpg' );
-			$this->CI->image->resize_image ( $extra ['raw_url'], $destPath, $t->width, $t->height );
+			$this->CI->image->resize_image ( $url, $destPath, $t->width, $t->height );
+			}
+			
 		}
-		
+	
 		return true;
 	}
 	public function generate_folder() {

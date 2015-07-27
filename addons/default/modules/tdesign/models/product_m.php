@@ -118,13 +118,14 @@ class Product_m extends Base_m
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
 		$this->db->where('deleted',0);
 		$result=$this->db->where($this->_table.'.product_id',$id)->get($this->_table)->row();
-		$result->images=$this->get_images($id);
-		if(!empty($result->images)){
-			$first=reset($result->images);
+		$images=$this->get_images($id);
+		if(!empty($images)){
+			//$first=reset($result->images);
 			$this->load->helper('tdesign');
-			$result->image=get_design_image_path("original",$first->id_image.'_'.$first->product_id.'.jpg');
+			foreach ($images as $image)
+			$result->image[]=get_design_image_path("original",$image->id_image.'_'.$image->product_id.'.jpg');
 		}
-	
+		
 		return $result;
 	}
 	public function get_images($id){

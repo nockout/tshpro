@@ -61,7 +61,8 @@ $lang['design:font_size']					= 'Font size';
 $lang['design:select_font']					= 'Select Fonts';
 $lang['design:font_color']					= 'Font Colors';
 $lang['design:font']					= 'Fonts';
-
+$lang['design:apply_this_style']="Apply this style";
+$lang['design:save_all_design']="Save all styles";
 
 $lang['design:upload_template']					= 'Upload Template';
 $lang['design:image_options']					= 'Image Options';

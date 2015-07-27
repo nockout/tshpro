@@ -268,8 +268,10 @@ class Admin extends Admin_Controller
 		if ($id) {
 		
 				$product=$this->product->get_product($id);
-				if($product->status=="D"){
+				if($product->status=="O"){
 					$extra=unserialize($product->extra);
+					//echo "<pre>";
+				//	print_r($extra);die;
 					if(isset($extra['image'])){
 					
 						$product->image=$extra['image'];
@@ -315,7 +317,9 @@ class Admin extends Admin_Controller
 			$data['list_price'] = $product->list_price;
 			$data['extra'] = $product->extra;
 			$data['product_code']=$product->product_code;
-			$data['image']=!empty($product->image)?$product->image:"";
+			//echo "<pre>";
+			//print_r($product->extra);die;
+			$data['images']=!empty($product->image)?$product->image:"";
 			$data['avail_since']=$product->avail_since;
 			$data['status']=$product->status;
 		
@@ -332,7 +336,7 @@ class Admin extends Admin_Controller
 				
 				
 				$this->template->set($data);
-			//	$this->template->append_css ( 'module::form.css' );;
+		
 				$this->template
 				->title($this->module_details['name'], lang('design:create_title'))
 				->append_metadata($this->load->view('fragments/wysiwyg', array(), true))->build('admin/form');
@@ -344,13 +348,12 @@ class Admin extends Admin_Controller
             $save['cate_id']=$this->input->post("category_id");
             
             $save['lang'][CURRENT_LANGUAGE]['product']=$this->input->post("title");
-            $save['lang'][CURRENT_LANGUAGE]['short_description']=$this->input->post("title");
+      
             $save['lang'][CURRENT_LANGUAGE]['search_words']=$this->input->post("keywords");
-            $save['lang'][CURRENT_LANGUAGE]['shortname']=$this->input->post("title");
-            $save['lang'][CURRENT_LANGUAGE]['age_warning_message']=$this->input->post("age_warning_message")?$this->input->post("age_warning_message"):"";
+       
             $save['lang'][CURRENT_LANGUAGE]['full_description']=$this->input->post("body");
             $product_id=$this->product->save($id,$save);
-            if( $save['status']=="D"){
+            if( $product->status=="O"){
             	//generate image
             	$this->product->generate_image($product_id);
             }
