@@ -70,6 +70,9 @@ class Admin extends Admin_Controller
 	 *
 	 * Shows a list of the groups.
 	 */
+	public function save_images(){
+		
+	}
 	public function export(){
 		
 		if(!isset($_REQUEST['base_64image'])){
@@ -132,6 +135,7 @@ class Admin extends Admin_Controller
 		));
 		$this->template->title($this->module_details['name']);
 		$this->template->set("templates",$template_cache);
+		$this->template->set("template_categories",$templates);
 		$this->template->build('admin/create/main');;
 		
 	}

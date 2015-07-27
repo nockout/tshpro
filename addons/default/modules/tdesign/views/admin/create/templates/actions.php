@@ -88,7 +88,18 @@ $insta_recent_images_button = isset($_POST['instaRecentImagesButton']) ? $_POST[
 			<i class="fpd-icon-product"></i><span><?php echo $products_btn; ?></span>
 		</div>
 	</div>
+	<div class="fpd-right">
+		<div class="fpd-more fpd-btn fpd-dropdown" >
+			<i class="fpd-icon-more fpd-tooltip fpd-primary-text-color" title="<?php echo $more_btn; ?>"></i>
+			<div class="fpd-dropdown-menu fpd-shadow-1  fpd-scale-tr">
+			
+				<span class="fpd-save-product fpd-btn"><?php echo $save_product; ?></span>
+				<span class="fpd-load-saved-products fpd-btn"><?php echo $load_saved_products; ?></span>
+			</div>
+			<a href="" download="" target="_blank" class="fpd-download-anchor" style="display: none;"></a> <!-- Hidden anchor -->
+		</div>
 
+	</div>
 	<!-- Right -->
 
 </section>

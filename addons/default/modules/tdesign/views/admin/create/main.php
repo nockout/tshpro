@@ -1,4 +1,5 @@
 <?php  echo $this->load->view('admin/create/script')?>
+
 <div class="row">
 	<div  id="main-container" class="col-xs-8" >
 	<div id="clothing-designer" class="fpd-shadow-1 clothing-designer-1">
@@ -6,11 +7,11 @@
 		<div class="fpd-design"></div>
 	</div>
 </div>
-	<?php echo $this->load->view("admin/create/right")?>
+	<?php // echo $this->load->view("admin/create/right")?>
 
-<!-- <button class="" id="export" class="">EXPORT</button> -->
+ <button class="" id="export" class="">EXPORT</button> 
 
-
+ 	<input type="file" id="design-upload" style="display: none;" />
 
 
 <div class="hidden one_third">
@@ -27,3 +28,4 @@
 </div>
 
 </div>
+</section>

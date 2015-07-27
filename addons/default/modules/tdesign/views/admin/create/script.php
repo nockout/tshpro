@@ -6,6 +6,7 @@ jQuery(document)
 			var yourDesigner = $('#clothing-designer')
 					.fancyProductDesigner(
 							{
+								
 								width: "100%",
 								editorMode : false,
 								fonts : [ 'Arial', 'Fearless',
@@ -35,6 +36,7 @@ jQuery(document)
 									
 								},
 								templatesDirectory :"<?php echo base_url("index.php/admin/tdesign/")?>/",
+								phpDirectory: "php/",
 								customImageParameters : {
 									draggable : true,
 									removable : true,
@@ -117,7 +119,24 @@ jQuery(document)
 								}
 							}).data('fancy-product-designer');
 
-	
+				//console.log($("#fbd-category-modify"));
+			$("#fbd-category-modify").change(function(){
+				var val=$(this).val();
+				$("#fpd-content-body").html();
+				var html=$("#tempcate"+val).html();
+				$(".fpd-content-body").html(html);
+// 				$(".fpd-content-body picture").ccs("display","block");
+			})
+			if(	$("#fbd-category-modify").val()){
+				var val=$("#fbd-category-modify").val();
+				var html=$("#tempcate"+val).html();
+				$(".fpd-content-body").html(html);
+			}
+			$(".img-product").click(function(){
+				//var src="";
+				//yourDesigner.addElement("image", "uploads/default/../template/7_60.jpg", "test");
+				console.log($(this));
+					});
 			// save image on webserver
 				$('button#test').on("click",function() {
 					var views=yourDesigner.getView();
@@ -140,51 +159,52 @@ jQuery(document)
 						}
 			);
 
-			
-
 			// upload image
-// 			document.getElementById('design-upload').onchange = function(e) {
-// 				if (window.FileReader) {
-// 					var reader = new FileReader();
-// 					reader.readAsDataURL(e.target.files[0]);
-// 					reader.onload = function(e) {
+			document.getElementById('design-upload').onchange = function(e) {
+				if (window.FileReader) {
+					var reader = new FileReader();
+					reader.readAsDataURL(e.target.files[0]);
+					reader.onload = function(e) {
 
-// 						var image = new Image;
-// 						image.src = e.target.result;
-// 						image.onload = function() {
-// 							var maxH = 400, maxW = 300, imageH = this.height, imageW = this.width, scaling = 1;
+						var image = new Image;
+						image.src = e.target.result;
+						image.onload = function() {
+							var maxH = 400, maxW = 300, imageH = this.height, imageW = this.width, scaling = 1;
 
-// 							if (imageW > imageH) {
-// 								if (imageW > maxW) {
-// 									scaling = maxW / imageW;
-// 								}
-// 							} else {
-// 								if (imageH > maxH) {
-// 									scaling = maxH / imageH;
-// 								}
-// 							}
+							if (imageW > imageH) {
+								if (imageW > maxW) {
+									scaling = maxW / imageW;
+								}
+							} else {
+								if (imageH > maxH) {
+									scaling = maxH / imageH;
+								}
+							}
 
-// 							yourDesigner.addElement('image',
-// 									e.target.result,
-// 									'my custom design', {
-// 										colors : $('#colorizable').is(
-// 												':checked') ? '#000000'
-// 												: false,
-// 										zChangeable : true,
-// 										removable : true,
-// 										draggable : true,
-// 										resizable : true,
-// 										rotatable : true,
-// 										autoCenter : true,
-// 										boundingBox : "Base",
-// 										scale : scaling
-// 									});
-// 						};
-// 					};
-// 				} else {
-// 					alert('FileReader API is not supported in your browser, please use Firefox, Safari, Chrome or IE10!')
-// 				}
-// 			};
+							yourDesigner.addElement('image',
+									e.target.result,
+									'my custom design', {
+										colors : $('#colorizable').is(
+												':checked') ? '#000000'
+												: false,
+										zChangeable : true,
+										removable : true,
+										draggable : true,
+										resizable : true,
+										rotatable : true,
+										autoCenter : true,
+										boundingBox : "Base",
+										scale : scaling
+									});
+						};
+					};
+				} else {
+					alert('FileReader API is not supported in your browser, please use Firefox, Safari, Chrome or IE10!')
+				}
+			};
 		});
+
+
+
 
 </Script>
