@@ -8502,6 +8502,7 @@ var FancyProductDesigner = function(a, b) {
                     j.visible = j.viewIndex == d
                 }
                 try {
+					console.log(r);
                     e.push(r.toDataURL({
                         format: a,
                         multiplier: c
