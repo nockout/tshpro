@@ -52,4 +52,9 @@ $lang['cp:google_analytics_no_connect']	= 'Không thể kết nối đến Googl
 $lang['required_label'] 				= 'Phải nhập';
 $lang['sb_recent_users'] 				= 'Người dùng gần đây';
 
+
+$lang['cp:nav_design']					= 'Thiết kế';
+$lang['cp:nav_option']					= 'lựa chọn';
+$lang['cp:nav_mockup']					= 'Mẫu thiết kế';
+$lang['cp:nav_template']					= 'Template';
 /* End of file admin_lang.php */

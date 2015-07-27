@@ -4,6 +4,7 @@
 $lang['cp:nav_design']                       = 'Design';
 $lang['design:create']						 = "New Design ";
 $lang['design:management']						 = "Manage Designs ";
+
 $lang['design:design_title']						 = "New Design ";
 $lang['design:create_title']						 = "New Design ";
 $lang['design:edit_title']						 = "Edit Design ";
