@@ -2,7 +2,11 @@
 jQuery(document)
 .ready(
 		function() {
-
+			var has_key="<?php echo $this->security->get_csrf_token_name() ?>";
+			
+			var has_value="<?php echo $this->security->get_csrf_hash()?>" ;
+		
+			var product =0;
 			var yourDesigner = $('#clothing-designer')
 					.fancyProductDesigner(
 							{
@@ -121,46 +125,53 @@ jQuery(document)
 								}
 							}).data('fancy-product-designer');
 
-				//console.log($("#fbd-category-modify"));
-			$("#fbd-category-modify").change(function(){
-				var val=$(this).val();
-				$("#fpd-content-body").html();
-				var html=$("#tempcate"+val).html();
-				$(".fpd-content-body").html(html);
-// 				$(".fpd-content-body picture").ccs("display","block");
-			})
-			if(	$("#fbd-category-modify").val()){
-				var val=$("#fbd-category-modify").val();
-				var html=$("#tempcate"+val).html();
-				$(".fpd-content-body").html(html);
-			}
-			$(".img-product").click(function(){
-				//var src="";
-				//yourDesigner.addElement("image", "uploads/default/../template/7_60.jpg", "test");
-				console.log($(this));
-					});
-			// save image on webserver
-				$('button#test').on("click",function() {
-					var views=yourDesigner.getView();
-				var test=[];
-					test.push(views);
-					console.log(views);
-				//	yourDesigner.addProduct(views, "shirts");
-					var customeElment=yourDesigner.addView(views);
-					console.log(customeElment);
-					});
 					
-					$('button#export').on("click",function() {
-						
-						var base64_data= yourDesigner.getProductDataURL();
+					$('button#putinconllection').on("click",function() {
 						var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
-						
-						$("input[name='base_64image']").val(base64_data);
-						$("input[name='product_type']").val(type);
-						$("#save_image").submit();
-						}
-			);
+						var views=yourDesigner.getViewsDataURL();
+						var products=yourDesigner.getProduct(true);
+						if(!products)
+							return;
+						var name=(products[0].title);
+						//return; 
+						var hmtl=[] ,hidden="";
+						if(views.length){
+							hmtl.push("<tr><td style='width: 30px' align='left'>");
+							hmtl.push("<img style='width:80px;height:80px' src='"+views[0]+"'></td>");
+							hmtl.push("<td style='position:relative'>");
+							hmtl.push("<i style='top:0;right:0;position:absolute; font-size: 1.3em;cursor: pointer' class='x_row pointer fpd-btn  fpd-icon-remove'></i>");
+							hmtl.push("<input type='text' id='title' maxlength='100' value='"+name+"' name=products["+product+"][title]>");
+							hmtl.push("<input type='text' id='title' maxlength='100' value='"+0.99+"' name=products["+product+"][price]>");
+							
+							for(i=0;i<views.length;i++){
 
+							hmtl.push( "<input  type='hidden' name='products["+product+"][images]["+i+"]' value='"+views[i]+"'>");
+							}
+					
+							
+						
+							hmtl.push("</td></tr>");
+							$("#yourdesigns").append(hmtl.join(""));
+							
+							$(".x_row").bind( "click", function() {
+								 
+								  $(this).closest('tr').remove();
+								});
+							product++;
+						}
+						
+						
+						return;
+					});
+					$('button#export').on("click",function() {
+						var postt = $( "#save_image" ).submit();
+						
+                         
+					});
+					$('.x_row').on("click",function(){
+						alert("Aaaa");
+						});
+					
 			// upload image
 			document.getElementById('design-upload').onchange = function(e) {
 				if (window.FileReader) {
@@ -207,6 +218,5 @@ jQuery(document)
 		});
 
 
-
-
+	
 </Script>

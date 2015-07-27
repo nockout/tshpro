@@ -138,12 +138,16 @@ class Product_m extends Base_m
 					$this->_default_fields['extra']=serialize($extra);
 				}
 				unset($this->_default_fields['product_id']);
-				$this->_default_fields['status']="D";
+				$this->_default_fields['status']="O";
 				$this->_default_fields['avail_since']=Date("Y-m-d H:i:s");
 				$this->_default_fields['cate_id']=1;
 				$this->_default_fields['user_id']=$this->current_user->id;
 				$this->db->insert($this->_table,$this->_default_fields);
 				$insert_id = $this->db->insert_id();
+				$lang[CURRENT_LANGUAGE]['product']=isset($extra['name'])?$extra['name']:"";
+				if($insert_id){
+						$this->save_lang($insert_id,CURRENT_LANGUAGE,$lang[CURRENT_LANGUAGE]);
+				}
 				return $this->get_product_draft($insert_id);
 							
 	
@@ -187,8 +191,11 @@ class Product_m extends Base_m
 		if(!$this->allowViewAll()){
 			$this->db->where("user_id",$this->current_user->user_id);
 		}
-		
-		return $this->db->where("status","D")->where("product_id",$id)->get($this->_table)->row();
+		$this->db->join($this->_descriptions,$this->_table.'.product_id='.$this->_descriptions.'.product_id',"LEFT");
+		$this->db->where("lang_code",CURRENT_LANGUAGE);
+		echo "<pre>";
+		print_r( $this->db->where("status","D")->where($this->_table.'.product_id',$id)->get($this->_table)->row());
+		die;
 	}
 	private function allowViewAll(){
 		return (in_array($this->current_user->group, $this->_viewAllgroups))?true:false;

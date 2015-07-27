@@ -72,6 +72,51 @@ class Admin extends Admin_Controller
 	 */
 	public function save_images(){
 		
+		if(!isset($_REQUEST['products'])){
+			$this->session->set_flashdata("error","design:no_design_found");
+			redirect("admin/tdesign/create_design");
+		}
+		$this->load->library('product');
+		$this->load->helper("tdesign");
+		$raw_designs=$_REQUEST['products'];
+		$products=array();
+		foreach ($raw_designs as $group=>$arr_base64_imgs){
+			$files=array();
+			$names=array();
+			if(empty($arr_base64_imgs["images"]))
+				continue;
+			//print_r($arr_base64_imgs);die;
+			foreach ($arr_base64_imgs["images"] as $image){
+				
+				$base64_str = substr($image, strpos($image, ",")+1);	
+			//decode base64 string
+				$decoded = base64_decode($base64_str);
+				$name= "temp".uniqid(). '.png';
+				$file=UPLOAD_PATH.'../design/templates/' .$name;
+				$files[] = $file;
+				$names[]=$name;
+				$result = file_put_contents($file, $decoded);
+			}
+			$urls=array();
+			foreach ($names as $tempname){
+				$urls[]=get_design_image_path("templates",$tempname);
+			}
+			$products[]=$this->product->create_draft(array("raw_url"=>$files,"image"=>$urls,"name"=>$arr_base64_imgs['title'],'price'=>$arr_base64_imgs['price']));
+		}
+		echo "<pre>";
+		print_r($products);die;
+		if(empty($products)){
+			show_error("Service Currently Unvaiable");
+			return;
+		}
+		
+		if(count($products)==1){
+			
+			//redirect("admin/tdesign/form/".$product);
+		}
+		redirect("admin/tdesign/index");
+		
+		
 	}
 	public function export(){
 		

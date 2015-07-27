@@ -1,4 +1,5 @@
 <?php  echo $this->load->view('admin/create/script')?>
+<section class="item">
 
 <div class="row">
 	<div  id="main-container" class="col-xs-8" >
@@ -6,10 +7,8 @@
 		<?php echo $templates?>
 		<div class="fpd-design"></div>
 	</div>
-</div>
-	<?php // echo $this->load->view("admin/create/right")?>
-
- <button class="" id="export" class="">EXPORT</button> 
+	</div>
+	<?php  echo $this->load->view("admin/create/right")?>
 
  	<input type="file" id="design-upload" style="display: none;" />
 
@@ -19,8 +18,9 @@
 
 	<!-- The form recreation -->
 	
-	<?php $hiddens=array("base_64image"=>"","product_type"=>"")?>
-	<?php echo form_open("admin/tdesign/export","id='save_image'",$hiddens);?>
+	<?php //$hiddens=array("base_64image"=>"","product_type"=>"")?>
+	<?php // echo form_open("admin/tdesign/export","id='save_image'",$hiddens);?>
+
 		
 		
 	
