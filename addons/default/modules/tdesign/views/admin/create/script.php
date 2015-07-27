@@ -19,17 +19,20 @@ jQuery(document)
 									rotatable : true,
 									autoCenter : true,
 									boundingBox : "Base"
-								},
+								},width: 900, boundingBoxColor:"#18BC9C",
+						    	stageHeight: 500,
 								elementParameters: {
-									x: 'center', //the x-position
+									/*x: 'center', //the x-position
 									y: 'center', //the y-position
 									z: -1,
 									colors : '#000',
 									resizeToW: 1200,
 								    resizeToH: 1200,
 									scale: "0.6",
-									//autoSelect: true,
-									draggable : true,
+									autoSelect: true,
+									draggable : true,*/boundingBox:true,
+						    		x:0,
+						    		y:0,autoCenter : true,
 									
 										//Allows to set the z-index of an element, -1 means it will be added on the stack of layers
 									
@@ -43,8 +46,7 @@ jQuery(document)
 							        minH:1200,
 							        maxW: 3600,
 							        maxH: 3600,
-							        scale: 0.6,
-							       
+							        scale: 0.6,							       
 									autoCenter : true,
 									boundingBox : "Base",
 									resizable : true,
