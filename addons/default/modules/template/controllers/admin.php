@@ -38,7 +38,7 @@ class Admin extends Admin_Controller
 			
 			array(
 					'field' => 'price',
-					'label' => 'lang:template:price',
+					'label' => 'lang:template:template_price',
 					'rules' => 'trim|numeric|required'
 			),
 			
@@ -181,7 +181,7 @@ class Admin extends Admin_Controller
 			
 		} else {
 			$save['id_template'] = intval($id);
-            $save['price'] =$this->input->post("list_price")?$this->input->post("list_price"):0.99;
+            $save['price'] =$this->input->post("price")?$this->input->post("price"):0.99;
             $save['status']=$this->input->post("status");
             $save['id_category_default']=$this->input->post("category_id");
             $save['color']=$this->input->post("id_color");
