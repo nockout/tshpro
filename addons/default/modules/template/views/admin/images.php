@@ -31,8 +31,9 @@
 				<div class="fileupload-buttonbar">
 					<div class="fileupload-buttons">
 
-						<span class="fileinput-button"> <span>Add files...</span> <input
-							type="file" name="files[]" multiple>
+						<span class="fileinput-button button  "> 
+							<span>Add files...</span> 
+							<input type="file" name="files[]" multiple>
 						</span>
 						<button type="submit" class="start">Start upload</button>
 						<button type="reset" class="cancel">Cancel upload</button>

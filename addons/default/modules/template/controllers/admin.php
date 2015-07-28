@@ -104,7 +104,7 @@ class Admin extends Admin_Controller
 	
 		
 		$this->load->library('form_validation');
-		
+		$data['colors_groups']=array();
 		$data['id_template'] = $id;
 		$data['timestamp'] = 0;
 		$data['status'] ="";
@@ -156,21 +156,28 @@ class Admin extends Admin_Controller
 			$data['id_color']=$tplate->color;
 			$data['category_id']=$tplate->id_category_default;
 		
+			if($tplate->colors_groups){
+				$data['colors_groups']=unserialize($tplate->colors_groups);
+			}
 			
 		
 		}
+		//echo "<pre>";
+		//print_r($_POST);die;
 		$this->form_validation->set_rules($this->validation_rules);
 		
 		if ($this->form_validation->run() == FALSE) {
 			
-				
+			$this->template->append_css("module::spectrum.css");
+				$this->template->append_css("module::custom.css");
 				$this->template->set('categories',array("1"=>"ROOT"));
 				
 				
 				$this->template->set($data);
-			
+				
 				$this->template
 				->title($this->module_details['name'], lang('template:create_title'));
+			
 				$this->add_js();
 				$this->template->build('admin/form');
 			
@@ -182,6 +189,7 @@ class Admin extends Admin_Controller
             $save['status']=$this->input->post("status");
             $save['id_category_default']=$this->input->post("category_id");
             $save['color']=$this->input->post("id_color");
+            $save['colors_groups']=serialize($this->input->post('colors'));
             if(!$save['id_template'])
             $save['timestamp']=date('Y-m-d H:i:s');
             $save['lang'][CURRENT_LANGUAGE]['name']=$this->input->post("title");
@@ -224,7 +232,8 @@ class Admin extends Admin_Controller
 		$this->template->append_js("module::jquery.fileupload-jquery-ui.js");
 		$this->template->append_js("module::locale.js");
 		$this->template->append_js("module::main.js");
-
+		$this->template->append_js("module::spectrum.js");
+		//$this->template->append_js("module::example.js");
 	}
 	public function img_upload() {
 		
