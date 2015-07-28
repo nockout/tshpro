@@ -147,9 +147,9 @@ class Template_m extends Base_m
 			}
 		}
 	}
-	public function createimage($id_template=0){
+	public function createimage($id_template=0,$type='FRONT'){
 		if(intval($id_template)){
-			$this->db->insert($this->_image_table,array("id_template"=>$id_template));
+			$this->db->insert($this->_image_table,array("id_template"=>$id_template,"type"=>$type));
 			$insert_id=$this->db->insert_id();
 			$object=new stdClass();
 			$object->id_template=$id_template;
@@ -158,11 +158,13 @@ class Template_m extends Base_m
 			
 		}
 	}
-	function get_images($id_template = 0) {
+	function get_images($id_template = 0,$type="FRONT") {
 			
-		$this->db->select('id_image');
+		$this->db->select('*');
 		$this->db->from($this->_image_table);
-			
+		if(!empty($type))
+		$this->db->where('type',$type)	;
+		$this->db->order_by("position","DESC");
 		$this->db->where('id_template', intval($id_template));
 			
 		$query=$this->db->get()->result();
@@ -170,6 +172,16 @@ class Template_m extends Base_m
 	
 	
 		return $query;
+	}
+	public function set_default($id_template=null,$id_image=null,$type=null){
+	
+		if(!$id_template&&$id_image&&type)
+				return;
+	
+		// reset 
+		$this->db->
+		where("id_template",$id_template)->where('type',$type)->update($this->_image_table,array("position"=>0));
+		return $this->db->where("id_image",intval($id_image))->update($this->_image_table,array("position"=>1));
 	}
 	function get_colors(){
 		return $this->db->get($this->_colors)->result();
@@ -179,7 +191,7 @@ class Template_m extends Base_m
 	}
 	 function get_image($id_template = 0) {
 		 
-		$this->db->select('id_image');
+		$this->db->select('*');
 		$this->db->from($this->_image_table);
 		 
 		$this->db->where('id_template', intval($id_template));

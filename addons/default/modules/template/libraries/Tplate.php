@@ -28,7 +28,9 @@ class Tplate {
 		return $this->CI->template_m->get ( $id );
 	}
 	
-
+	public function set_default($id_template,$id_image,$type){
+		return $this->CI->template_m->set_default($id_template, $id_image,$type );
+	}
 	
 	
 	public function delete($id) {
@@ -90,7 +92,9 @@ class Tplate {
 				$upload_dir = dirname($_SERVER['SCRIPT_FILENAME']) . $path;
 				$url = base_url();
 				$files = array();
-				if ($images = $this->CI->template_m->get_images($template_id)) {
+				$type=isset($_REQUEST['type'])?$_REQUEST['type']:"FRONT";
+				//echo $type;
+				if ($images = $this->CI->template_m->get_images($template_id,$type)) {
 					
 					foreach ($images as $img) {
 						$returnpath= $path . $template_id . '_' . $img->id_image .'.jpg';
@@ -103,6 +107,7 @@ class Tplate {
 								. '?id_image=' . rawurlencode($img->id_image).'&&id_template='.rawurlencode($template_id);
 						$file->delete_url .= '&&method=DELETE';
 						$file->deleteType='DELETE';
+						$file->url_default= site_url() . '/admin/template/set_default/'.$template_id.'/'.$img->id_image.'/'.$img->type;
 						$files[] = $file;
 						}
 					};
@@ -117,10 +122,12 @@ class Tplate {
 					$upload_handler->delete();
 				} else {
 					$id_template= $template_id;
+					$type=$this->CI->input->post('type')?$this->CI->input->post('type'):"FRONT";
+					
 					//parent::create($this->fields);
 					if(isset($_FILES['files'])){
 						
-							if ($timage=($this->CI->template_m->createimage($template_id))) {
+							if ($timage=($this->CI->template_m->createimage($template_id,$type))) {
 				
 								$new_file_path=$path.$id_template."_".$timage->id_image.".jpg";
 								
@@ -147,6 +154,7 @@ class Tplate {
 							$file->delete_url = $this->getFullUrl() . '/admin/template/img_upload' . '?id_image=' . rawurlencode($timage->id_image).'&&id_template='.rawurlencode( $id_template );
 							$file->delete_url .= '&&method=DELETE';
 							$file->deleteType='DELETE';
+							$file->url_default= site_url() . '/admin/template/set_default/'.$id_template.'/'.$img->id_image.'/'.$img->type;
 							$files_return[] = $file;
 	
 	

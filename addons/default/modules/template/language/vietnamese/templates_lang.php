@@ -44,3 +44,5 @@ $lang['template:currently_no_templates']						 = "There are no templates at the 
 $lang['template:no_template_found']						 = "No template found";
 $lang['template:action_success']						 = "Your action was successful";
 $lang['template:action_unsuccess']						 = "Your action was unsuccessful. Please try again";
+$lang['template:back_layer']="BACK ";
+$lang['template:front_layer']="FRONT ";

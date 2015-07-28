@@ -23,7 +23,11 @@ $(function () {
         //xhrFields: {withCredentials: true},
         url: $(this).attr('action')
     });
-
+    $('#fileupload_back').fileupload({
+        // Uncomment the following to send cross-domain cookies:
+        //xhrFields: {withCredentials: true},
+        url: $(this).attr('action')
+    });
     // Enable iframe cross-domain access via redirect option:
     $('#fileupload').fileupload(
         'option',
@@ -33,7 +37,7 @@ $(function () {
             '/cors/result.html?%s'
         )
     );
-
+		
     if (window.location.hostname === 'blueimp.github.io') {
         // Demo settings:
         $('#fileupload').fileupload('option', {
@@ -75,9 +79,47 @@ $(function () {
             $(this).removeClass('fileupload-processing');
         }).done(function (result) {
          
+        	
             $(this).fileupload('option', 'done')
                 .call(this, null, {result: result});
+            $("input[name='default']").bind("click",function(){
+            	$.ajax({
+                    // Uncomment the following to send cross-domain cookies:
+                    //xhrFields: {withCredentials: true},
+                    url:$(this).attr("url_default") ,
+                   
+                    dataType: 'json',
+                
+                }).done(function(){});
+        	});
+        
         });
+        
+        $('#fileupload_back').addClass('fileupload-processing');
+        var form=   $('#fileupload_back');
+        var $url=$('#fileupload_back').attr('action');
+        $.ajax({
+            // Uncomment the following to send cross-domain cookies:
+            //xhrFields: {withCredentials: true},
+            url: $url,
+            data:form.serialize(),
+            dataType: 'json',
+            context: $('#fileupload_back')[0]
+        }).always(function () {
+            $(this).removeClass('fileupload-processing');
+        }).done(function (result) {
+         
+        	
+            $(this).fileupload('option', 'done')
+                .call(this, null, {result: result});
+            
+            $("input[name='default']").on("click",function(){
+        		//alert("AAAA");
+        			});
+        });
+        
+        
+        
     }
 
 });

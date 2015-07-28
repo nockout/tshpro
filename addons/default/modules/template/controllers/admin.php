@@ -245,6 +245,7 @@ class Admin extends Admin_Controller
 						die;
 		}
 		$r = $_REQUEST['id_template'];
+		
 	
 		//  $product_id = $this->session->userdata('pid');
 		if ( $id_template = intval($r)) {
@@ -257,6 +258,14 @@ class Admin extends Admin_Controller
 			}
 		}
 		die('No product id found');
+	}
+	public function set_default($id_template=null, $id_image=null,$type=null){
+		//$id_template=$this->input->post('id_image');
+	//	$id_default=$this->input->post("id_template");
+		if($id_image&&$id_template&&$type){
+			$this->load->library("tplate");
+			$this->tplate->set_default($id_template,$id_image,$type);
+		}
 	}
 	
 }
