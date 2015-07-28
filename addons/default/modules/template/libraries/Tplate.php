@@ -3,9 +3,11 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Tplate {
 	var $CI;
+	var $img_extension;
 	public function __construct() {
 		$this->CI = &get_instance ();
 		$this->CI->load->model ( "template_m" );
+		$this->img_extension=$this->CI->config->item("template_extension")?$this->CI->config->item("template_extension"):'.png';
 	}
 
 	
@@ -97,12 +99,12 @@ class Tplate {
 				if ($images = $this->CI->template_m->get_images($template_id,$type)) {
 					
 					foreach ($images as $img) {
-						$returnpath= $path . $template_id . '_' . $img->id_image .'.jpg';
+						$returnpath= $path . $template_id . '_' . $img->id_image .$this->img_extension;
 						if(file_exists($returnpath)){
 						$file = new stdClass();
-						$file->name = $template_id . '_' . $img->id_image . '.jpg';
+						$file->name = $template_id . '_' . $img->id_image . $this->img_extension;
 						$file->id_image = $img->id_image;
-						$file->url = $path . $template_id . '_' . $img->id_image .'.jpg';
+						$file->url = $path . $template_id . '_' . $img->id_image .$this->img_extension;
 						$file->delete_url = site_url() . '/admin/template/img_upload'
 								. '?id_image=' . rawurlencode($img->id_image).'&&id_template='.rawurlencode($template_id);
 						$file->delete_url .= '&&method=DELETE';
@@ -129,7 +131,7 @@ class Tplate {
 						
 							if ($timage=($this->CI->template_m->createimage($template_id,$type))) {
 				
-								$new_file_path=$path.$id_template."_".$timage->id_image.".jpg";
+								$new_file_path=$path.$id_template."_".$timage->id_image.$this->img_extension;
 								
 								if (isset($_FILES['files']['tmp_name'][0])) {
 									$file_path=$_FILES['files']['tmp_name'][0];
@@ -148,13 +150,13 @@ class Tplate {
 				
 							//     foreach ($images as $img) {
 							$file = new stdClass();
-							$file->name = $id_template. '_' . $timage->id_image  . '.jpg';
+							$file->name = $id_template. '_' . $timage->id_image  . $this->img_extension;
 							$file->id_image =  $timage->id_image ;
-							$file->url =$path . $id_template. '_' .  $timage->id_image  .  '.jpg';
+							$file->url =$path . $id_template. '_' .  $timage->id_image  .  $this->img_extension;
 							$file->delete_url = $this->getFullUrl() . '/admin/template/img_upload' . '?id_image=' . rawurlencode($timage->id_image).'&&id_template='.rawurlencode( $id_template );
 							$file->delete_url .= '&&method=DELETE';
 							$file->deleteType='DELETE';
-							$file->url_default= site_url() . '/admin/template/set_default/'.$id_template.'/'.$img->id_image.'/'.$img->type;
+							$file->url_default= site_url() . '/admin/template/set_default/'.$id_template.'/'.$timage->id_image.'/'.$type;
 							$files_return[] = $file;
 	
 	
@@ -176,7 +178,7 @@ class Tplate {
 					$tid=$_REQUEST['id_template'];
 					$image_id=$_REQUEST['id_image'];
 				$this->CI->template_m->deleteimage($_REQUEST['id_image'], $_REQUEST['id_template']);
-				$deltepath=$path . $tid. '_' .$image_id   .  '.jpg';
+				$deltepath=$path . $tid. '_' .$image_id   .  $this->img_extension;
 			//	echo $deltepath;die;
 				if(file_exists($deltepath)){
 					@unlink($deltepath);

@@ -3,9 +3,11 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Product {
 	var $CI;
+	var $img_extension;
 	public function __construct() {
 		$this->CI = &get_instance ();
 		$this->CI->load->model ( "Product_m" );
+		$this->img_extension=$this->CI->config->item("template_extension")?$this->CI->config->item("template_extension"):".png";
 	}
 	public function create_draft($extra = null) {
 		return $this->CI->Product_m->create_draft ( $extra );
@@ -77,7 +79,7 @@ class Product {
 		$categorys='tshirt_template_categories';
 		$this->CI->db->select("*");
 		$cates=$this->CI->db->get($categorys)->result();
-		//print_r($cates);die;
+		
 		if(empty($cates)){
 			return;
 		}
@@ -91,9 +93,7 @@ class Product {
 			$cate->templates=$tempaltes;
 			}
 		}
-		//echo "<pre>";
-		//print_r($cates);die;
-		
+	
 		return $cates;
 	}
 	private function get_template_by_category($id_category){
@@ -106,9 +106,10 @@ class Product {
 		$this->CI->db->where("id_category_default",intval($id_category));
 		$this->CI->db->join($tplate_table_lang,$tplate_table.".id_template=".$tplate_table_lang.".id_template","lEFT");
 		$this->CI->db->where("lang_code",CURRENT_LANGUAGE);
+		$this->CI->db->order_by("position","DESC");
 
 		$tempaltes=$this->CI->db->get($tplate_table)->result();
-		
+	
 		
 		return $tempaltes;
 	}
@@ -118,15 +119,26 @@ class Product {
 		if(empty($template_id))
 			return;
 		
-		$result=$this->CI->db->where("id_template",$template_id)->get($imga_table)->result();
+		$result=$this->CI->db->where("id_template",$template_id)
+		->order_by(" type DESC, position DESC")
+		->get($imga_table)->result();
+		//echo "<pre>";
+		//print_r($result);die;
 		if(!$result)
 			return;
 		$return=array();
-		foreach ($result as $r){
-			$realPath=$path.$r->id_template."_".$r->id_image.".jpg";
-			if(file_exists($realPath)){
-				$return[]=$realPath;
+		$old_type="";
+		foreach ($result as $r){			
+			if($old_type!=$r->type){
+				$old_type=$r->type;
 			}
+			$realPath=$path.$r->id_template."_".$r->id_image.$this->img_extension;
+			if(file_exists($realPath)){
+			//	echo $old_type;die;
+				$return[$old_type][]=$realPath;
+			}
+			
+			$old_type=$r->type;
 		}
 		return $return;
 	}

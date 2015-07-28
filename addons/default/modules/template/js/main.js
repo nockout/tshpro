@@ -112,10 +112,16 @@ $(function () {
         	
             $(this).fileupload('option', 'done')
                 .call(this, null, {result: result});
-            
-            $("input[name='default']").on("click",function(){
-        		//alert("AAAA");
-        			});
+            $("input[name='default']").bind("click",function(){
+            	$.ajax({
+                    // Uncomment the following to send cross-domain cookies:
+                    //xhrFields: {withCredentials: true},
+                    url:$(this).attr("url_default") ,
+                   
+                    dataType: 'json',
+                
+                }).done(function(){});
+        	});
         });
         
         
