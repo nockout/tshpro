@@ -42,11 +42,7 @@ class Admin extends Admin_Controller
 					'rules' => 'trim|numeric|required'
 			),
 			
-			array(
-					'field' => 'id_color',
-					'label' => 'lang:template:color',
-					'rules' => 'trim|numeric|required'
-			),
+		
 		
 			
 			
@@ -150,7 +146,7 @@ class Admin extends Admin_Controller
 			$data['template_id'] = $id;
 			$data['title'] = isset($tplate->name)?$tplate->name:"";
 			$data['description'] = isset($tplate->short_description)?$tplate->short_description:"";
-			$data['price'] = $tplate->price;
+			$data['price'] =number_format($tplate->price, 2, ',', ' ');
 			$data['timestamp']=$tplate->timestamp;
 			$data['status']=$tplate->status;
 			$data['id_color']=$tplate->color;

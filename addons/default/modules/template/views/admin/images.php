@@ -11,7 +11,7 @@
 
 
 		<div class="container one_half">
-		<lable for="frontlayer">Front Layer </label>
+		<lable for="frontlayer"><?php echo lang("template:front_layer")?></label>
 		
 			<!-- Bootstrap CSS fixes for IE6 -->
 			<!--[if lt IE 7]>
@@ -117,7 +117,7 @@
 </script>
 		
 		</div>
-	<?php endif;?>
+	
 			
 				<div class="container one_half">
 		<lable title="" for="frontlayer"><?php echo lang("template:back_layer")?> </label>
@@ -146,8 +146,8 @@
 							<input type="file" name="files[]" multiple>
 <!-- 						</span> -->
 						<button type="submit" class="start">Start upload</button>
-					<!-- 		<button type="reset" class="cancel">Cancel upload</button>
-						<button type="button" class="delete">Delete</button>-->
+							<button type="reset" class="cancel">Cancel upload</button>
+					<!--	<button type="button" class="delete">Delete</button>-->
 					<!-- 		<input type="checkbox" class="toggle">-->
 						<!-- The loading indicator is shown during file processing -->
 						<span class="fileupload-loading"></span>
@@ -228,12 +228,7 @@
 		</div>
 			
 	</fieldset>
-								
-			<script>
-
+			<?php endif;?>					
 			
-				
-			</script>	
-
 
 </div>

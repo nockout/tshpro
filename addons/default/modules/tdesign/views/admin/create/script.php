@@ -129,6 +129,7 @@ jQuery(document)
 					$('button#putinconllection').on("click",function() {
 						var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 						var views=yourDesigner.getViewsDataURL();
+						var price=yourDesigner.getPrice()
 						var products=yourDesigner.getProduct(true);
 						if(!products)
 							return;
@@ -141,7 +142,7 @@ jQuery(document)
 							hmtl.push("<td style='position:relative'>");
 							hmtl.push("<i style='top:0;right:0;position:absolute; font-size: 1.3em;cursor: pointer' class='x_row pointer fpd-btn  fpd-icon-remove'></i>");
 							hmtl.push("<input type='text' id='title' maxlength='100' value='"+name+"' name=products["+product+"][title]>");
-							hmtl.push("<input type='text' id='title' maxlength='100' value='"+0.99+"' name=products["+product+"][price]>");
+							hmtl.push("<input type='text' id='title' maxlength='100' value='"+price+"' name=products["+product+"][price]>");
 							
 							for(i=0;i<views.length;i++){
 

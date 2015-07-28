@@ -11,7 +11,7 @@
 				</li>
 				<li><label for="category_id"><?php echo lang('template:category_label') ?><span>*</span></label>
 					<div class="input">
-					<?php echo form_dropdown('category_id', array(lang('template:no_category_select_label')) + $categories,set_value('category_id',$category_id) ) ?>	
+					<?php echo form_dropdown('category_id', array(""=>lang('template:no_category_select_label')) + $categories,set_value('category_id',$category_id) ) ?>	
 					</div>
 					</li>
 
@@ -40,15 +40,7 @@
 						
 							
 				</li>
-				<li>
-					<div class="input">
-					
-						<?php echo form_dropdown('id_color', array(lang('template:no_color_select_label')) + $colors,set_value('id_color',$id_color) ) ?>
-							<button value="+" type="button" class="add">+</button>
-					</div>
 				
-
-				</li>
 				<li><label for="status"><?php echo lang('template:status') ?></label>
 
 					<div class="input"><?php echo form_dropdown('status', array( 'A' => lang('template:active'),'D' => lang('template:inactive')), set_value("status",$status)) ?></div>
