@@ -44,11 +44,11 @@ class Admin extends Admin_Controller
 					'label' => 'lang:design:date_label',
 					'rules' => 'trim|required'
 			),
-			array(
+			/* array(
 					'field' => 'created_on_hour',
 					'label' => 'lang:design:created_hour',
 					'rules' => 'trim|numeric|required'
-			),
+			), */
 			
 			array(
 					'field' => 'keywords',
@@ -249,7 +249,7 @@ class Admin extends Admin_Controller
 		$id or redirect('admin/index');
 		
 		$this->load->library('product');
-	
+		$this->load->helper('currency');
 		$this->load->library('form_validation');
 		$data['product_id'] = '';
 		$data['slug'] = '';

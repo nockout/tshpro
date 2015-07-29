@@ -67,8 +67,8 @@
 	
 					<div class="input datetime_input">
 						<?php echo form_input('created_on', date('Y-m-d', strtotime($avail_since)), 'maxlength="10" id="datepicker" class="text width-20"') ?> &nbsp;
-						<?php echo form_dropdown('created_on_hour', $hours, date('H',strtotime($avail_since))) ?> :
-						<?php echo form_dropdown('created_on_minute', $minutes, date('i', ltrim(strtotime($avail_since), '0'))) ?>
+						<?php //echo form_dropdown('created_on_hour', $hours, date('H',strtotime($avail_since))) ?> :
+						<?php //echo form_dropdown('created_on_minute', $minutes, date('i', ltrim(strtotime($avail_since), '0'))) ?>
 					</div>
 				</li>
 			

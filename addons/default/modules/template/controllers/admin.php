@@ -26,7 +26,7 @@ class Admin extends Admin_Controller
 			array(
 					'field' => 'category_id',
 					'label' => 'lang:template:category_label',
-					'rules' => 'trim|required|numeric'
+					'rules' => 'trim|required|demical'
 			),
 			
 		
@@ -39,7 +39,7 @@ class Admin extends Admin_Controller
 			array(
 					'field' => 'price',
 					'label' => 'lang:template:template_price',
-					'rules' => 'trim|numeric|required'
+					'rules' => 'trim|numeric|integer'
 			),
 			
 		
@@ -48,11 +48,12 @@ class Admin extends Admin_Controller
 			
 	);
 	
+	
 	public function __construct()
 	{
 	    parent::__construct();
 		    $this->lang->load('template');
-
+		    $this->load->helper('currency');
 		    $this->categories =array(1=>"Shirt",2=>"Phone");
 	}
 
@@ -100,6 +101,7 @@ class Admin extends Admin_Controller
 	
 		
 		$this->load->library('form_validation');
+
 		$data['colors_groups']=array();
 		$data['id_template'] = $id;
 		$data['timestamp'] = 0;
@@ -146,7 +148,7 @@ class Admin extends Admin_Controller
 			$data['template_id'] = $id;
 			$data['title'] = isset($tplate->name)?$tplate->name:"";
 			$data['description'] = isset($tplate->short_description)?$tplate->short_description:"";
-			$data['price'] =number_format($tplate->price, 2, ',', ' ');
+			$data['price'] =$tplate->price;
 			$data['timestamp']=$tplate->timestamp;
 			$data['status']=$tplate->status;
 			$data['id_color']=$tplate->color;
