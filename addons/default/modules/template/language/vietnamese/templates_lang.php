@@ -8,6 +8,8 @@ $lang['template:template_name']					="template Name";
 $lang['template:template_title']				="templates";
 $lang['template:group']				="Groups";
 $lang['template:template_price']				="Price";
+$lang['template:price_max']				="Max price";
+
 $lang['template:color']				="Color";
 $lang['template:template_position']="Position";
 $lang['template:template_type']="Type";
@@ -46,3 +48,4 @@ $lang['template:action_success']						 = "Your action was successful";
 $lang['template:action_unsuccess']						 = "Your action was unsuccessful. Please try again";
 $lang['template:back_layer']="BACK LAYER ";
 $lang['template:front_layer']="FRONT LAYER";
+$lang["check_price"]="The max price can't less than price";
