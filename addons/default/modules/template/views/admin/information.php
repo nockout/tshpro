@@ -9,6 +9,9 @@
 				<li><label for="price"><?php echo lang('template:template_price') ?> <span>*</span></label>
 					<div class="input"><?php echo form_input('price', set_value('price',$price), 'maxlength="100" id="price"') ?></div>
 				</li>
+				<li><label for="price"><?php echo lang('template:price_max') ?> <span>*</span></label>
+					<div class="input"><?php echo form_input('price_max', set_value('price_max',$price_max), 'maxlength="100" id="price_max"') ?></div>
+				</li>
 				<li><label for="category_id"><?php echo lang('template:category_label') ?><span>*</span></label>
 					<div class="input">
 					<?php echo form_dropdown('category_id', array(""=>lang('template:no_category_select_label')) + $categories,set_value('category_id',$category_id) ) ?>	

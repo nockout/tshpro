@@ -41,12 +41,18 @@ class Admin extends Admin_Controller
 					'label' => 'lang:template:template_price',
 					'rules' => 'trim|numeric|integer'
 			),
-			
+			array(
+					'field' => 'price_max',
+					'label' => 'lang:template:template_price',
+					'rules' => 'trim|numeric|integer|callback_check_price'
+			),
+				
 		
 		
 			
 			
 	);
+	
 	
 	
 	public function __construct()
@@ -56,7 +62,16 @@ class Admin extends Admin_Controller
 		    $this->load->helper('currency');
 		    $this->categories =array(1=>"Shirt",2=>"Phone");
 	}
-
+	public function check_price(){
+		$price=intval($this->input->post('price'));
+		$price_max=intval($this->input->post("price_max"));
+		if(!$price&&$price_max){
+				
+			return false;
+		}
+	//	echo "<aaa>";die;
+		return ($price<$price_max)?true:false;
+	}
 	/**
 	 * The main index page in the administration.
 	 *
@@ -103,6 +118,7 @@ class Admin extends Admin_Controller
 		$this->load->library('form_validation');
 
 		$data['colors_groups']=array();
+		$data['price_max']='';
 		$data['id_template'] = $id;
 		$data['timestamp'] = 0;
 		$data['status'] ="";
@@ -146,6 +162,7 @@ class Admin extends Admin_Controller
 			}
 			//set values to db values
 			$data['template_id'] = $id;
+			$data['price_max']=$tplate->price_max;
 			$data['title'] = isset($tplate->name)?$tplate->name:"";
 			$data['description'] = isset($tplate->short_description)?$tplate->short_description:"";
 			$data['price'] =$tplate->price;
@@ -183,7 +200,8 @@ class Admin extends Admin_Controller
 			
 		} else {
 			$save['id_template'] = intval($id);
-            $save['price'] =$this->input->post("price")?$this->input->post("price"):0.99;
+            $save['price'] =$this->input->post("price")?$this->input->post("price"):"";
+            $save['price_max'] =$this->input->post("price_max")?$this->input->post("price_max"):"";
             $save['status']=$this->input->post("status");
             $save['id_category_default']=$this->input->post("category_id");
             $save['color']=$this->input->post("id_color");
@@ -217,6 +235,7 @@ class Admin extends Admin_Controller
 
 	private function add_js(){
 
+	
 		//Asset::js_inline('jQuery.noConflict();');
 		$this->template->append_js("module::jquery-1.8.3.js");
 		$this->template->append_js("module::jquery-ui-1.9.2.custom.js");
