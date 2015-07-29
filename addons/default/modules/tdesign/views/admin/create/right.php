@@ -30,6 +30,7 @@
  				<button class="" id="export" class=""><?php echo lang("design:save_all_design")?></button> 
 				
 				</div>
+				<div id="slider"></div>
 				<?php echo  form_close()?>
 			</div>
 		

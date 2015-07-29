@@ -173,8 +173,9 @@ class Admin extends Admin_Controller
 				"module::fancy_design/jquery.fancyProductDesigner.js",
 				//"module::fancy_design/app.js"
 		));
-		
+	
 		$this->template->append_css(array(
+										"module::fancy_design/jquery-ui.css",
 										"module::fancy_design/bootstrap.css",
 										"module::fancy_design/icon-font.css",
 										"module::fancy_design/jquery.fancyProductDesigner.css",								

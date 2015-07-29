@@ -11,6 +11,7 @@
 						
 								<?php  
 							$pFront["price"]=number_format($t->price, 2, ',', ' ');
+							
 								//$pFront1["price"]=$t->price;?>
 			<?php if(!empty($t->colors_groups)){
 				//echo "Aaa";die;

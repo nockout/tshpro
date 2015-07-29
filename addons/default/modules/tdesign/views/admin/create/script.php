@@ -129,7 +129,10 @@ jQuery(document)
 					$('button#putinconllection').on("click",function() {
 						var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 						var views=yourDesigner.getViewsDataURL();
-						var price=yourDesigner.getPrice()
+						var price=yourDesigner.getPrice();
+						///var max=yourDesigner.getMaxPrice();
+						//console.log(max);
+						price=parseInt(price.replace(/\s+/g, ''));
 						var products=yourDesigner.getProduct(true);
 						if(!products)
 							return;
@@ -142,8 +145,13 @@ jQuery(document)
 							hmtl.push("<td style='position:relative'>");
 							hmtl.push("<i style='top:0;right:0;position:absolute; font-size: 1.3em;cursor: pointer' class='x_row pointer fpd-btn  fpd-icon-remove'></i>");
 							hmtl.push("<input type='text' id='title' maxlength='100' value='"+name+"' name=products["+product+"][title]>");
-							hmtl.push("<input type='text' id='title' maxlength='100' value='"+price+"' name=products["+product+"][price]>");
 							
+							hmtl.push("<div id='slider"+product+"'>");
+						
+							hmtl.push("</div>");
+							hmtl.push("<input type='hidden' id='price"+product+"' maxlength='100' value='"+price+"' name=products["+product+"][price]>");
+							hmtl.push(" <p><label id='label"+product+"' >Price:"+price+"</label>");
+							hmtl.push("</p>");
 							for(i=0;i<views.length;i++){
 
 							hmtl.push( "<input  type='hidden' name='products["+product+"][images]["+i+"]' value='"+views[i]+"'>");
@@ -158,6 +166,22 @@ jQuery(document)
 								 
 								  $(this).closest('tr').remove();
 								});
+							var productprice=($("#price"+product));
+							var label=($("#label"+product));
+							$("#slider"+product).slider({
+							    range: "min",
+							    value: price,
+							    step: 5000,
+							    min: 10000,
+							    max: 200000,
+							    slide: function(event, ui) {
+			    
+							    	productprice.val(ui.value);     	
+							    	label.html("Price:"+ui.value);
+							     	
+							    }
+							});
+							
 							product++;
 						}
 						
@@ -169,10 +193,19 @@ jQuery(document)
 						
                          
 					});
-					$('.x_row').on("click",function(){
-						alert("Aaaa");
-						});
+				
+// 					$("#slider").slider({
+// 					    range: "min",
+// 					    value: 1,
+// 					    step: 1000,
+// 					    min: 0,
+// 					    max: 5000000,
+// 					    slide: function(event, ui) {
+// 					     //	alert("Aaaa");
+// 					    }
+// 					});
 					
+										
 			// upload image
 			document.getElementById('design-upload').onchange = function(e) {
 				if (window.FileReader) {
