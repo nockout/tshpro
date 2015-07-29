@@ -1,19 +1,19 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-$lang['cp:nav_design']                       = 'Design';
-$lang['design:create']						 = "New Design ";
-$lang['design:management']						 = "Manage Designs ";
+$lang['cp:nav_design']                       = 'Thiết kế';
+$lang['design:create']						 = "Tạo mới Design ";
+$lang['design:management']						 = "Quản lý Designs ";
 $lang['design:design_title']						 = "New Design ";
-$lang['design:create_title']						 = "New Design ";
-$lang['design:edit_title']						 = "Edit Design ";
-$lang['design:currently_no_products']						 = "There are no designs at the moment";
+$lang['design:create_title']						 = "Tạo mới Design ";
+$lang['design:edit_title']						 = "chỉnh sửa Design ";
+$lang['design:currently_no_products']						 = "Không có design nào";
 $lang['design:design']                 = 'Design';
 $lang['design:designs']                   = 'Designs';
 $lang['design:price']="Price";
 // labels
 $lang['design:description_label']="Description";
-$lang['design:designed_label']                   = 'Name';
+$lang['design:designed_label']                   = 'Tên';
 $lang['design:designed_label_alt']               = 'Designed at';
 $lang['design:written_by_label']				= 'Design by';
 $lang['design:author_unknown']				= 'Unknown';
