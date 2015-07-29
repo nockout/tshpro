@@ -345,7 +345,7 @@ class Admin extends Admin_Controller
 			
 		} else {
 			$save['product_id'] = intval($id);
-            $save['list_price'] =$this->input->post("list_price")?$this->input->post("list_price"):0.99;
+            $save['list_price'] =$this->input->post("list_price")?$this->input->post("list_price"):"";
             $save['status']=$this->input->post("status");
             $save['cate_id']=$this->input->post("category_id");
             

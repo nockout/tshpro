@@ -142,6 +142,7 @@ class Product_m extends Base_m
 				$this->_default_fields['status']="O";
 				$this->_default_fields['avail_since']=Date("Y-m-d H:i:s");
 				$this->_default_fields['cate_id']=1;
+				$this->_default_fields['list_price']=isset($extra['price'])?$extra['price']:"";
 				$this->_default_fields['user_id']=$this->current_user->id;
 				$this->db->insert($this->_table,$this->_default_fields);
 				$insert_id = $this->db->insert_id();

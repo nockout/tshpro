@@ -49,7 +49,10 @@
 	
 					</div>
 				</li>
-	
+					<li>
+					<label for="price"><?php echo lang('design:price') ?> </label>
+					<div class="input"><?php echo form_input('list_price', set_value("list_price",$list_price), 'maxlength="100" id="price"') ?></div>
+				</li>
 				
 				<li>
 					<label for="status"><?php echo lang('design:status_label') ?></label>

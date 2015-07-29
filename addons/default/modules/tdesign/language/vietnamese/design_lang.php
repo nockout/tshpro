@@ -10,7 +10,7 @@ $lang['design:edit_title']						 = "Edit Design ";
 $lang['design:currently_no_products']						 = "There are no designs at the moment";
 $lang['design:design']                 = 'Design';
 $lang['design:designs']                   = 'Designs';
-
+$lang['design:price']="Price";
 // labels
 $lang['design:description_label']="Description";
 $lang['design:designed_label']                   = 'Name';
