@@ -44,11 +44,11 @@ class Admin extends Admin_Controller
 					'label' => 'lang:design:date_label',
 					'rules' => 'trim|required'
 			),
-			/* array(
-					'field' => 'created_on_hour',
-					'label' => 'lang:design:created_hour',
+			 array(
+					'field' => 'list_price',
+					'label' => 'lang:design:price',
 					'rules' => 'trim|numeric|required'
-			), */
+			), 
 			
 			array(
 					'field' => 'keywords',
@@ -100,6 +100,7 @@ class Admin extends Admin_Controller
 				$result = file_put_contents($file, $decoded);
 			}
 			$urls=array();
+			
 			foreach ($names as $tempname){
 				$urls[]=get_design_image_path("templates",$tempname);
 			}
@@ -120,6 +121,14 @@ class Admin extends Admin_Controller
 		
 		
 	}
+	function test(){
+		printf("uniqid(): %s\r\n", uniqid());die;
+		$string='a:25:{s:2:"en";s:5:"Users";s:2:"ar";s:20:"المستخدمون";s:2:"br";s:9:"Usuários";s:2:"pt";s:12:"Utilizadores";s:2:"cs";s:11:"Uživatelé";s:2:"da";s:7:"Brugere";s:2:"de";s:8:"Benutzer";s:2:"el";s:14:"Χρήστες";s:2:"es";s:8:"Usuarios";s:2:"fa";s:14:"کاربران";s:2:"fi";s:12:"Käyttäjät";s:2:"fr";s:12:"Utilisateurs";s:2:"he";s:14:"משתמשים";s:2:"id";s:8:"Pengguna";s:2:"it";s:6:"Utenti";s:2:"lt";s:10:"Vartotojai";s:2:"nl";s:10:"Gebruikers";s:2:"pl";s:12:"Użytkownicy";s:2:"ru";s:24:"Пользователи";s:2:"sl";s:10:"Uporabniki";s:2:"tw";s:6:"用戶";s:2:"cn";s:6:"用户";s:2:"hu";s:14:"Felhasználók";s:2:"th";s:27:"ผู้ใช้งาน";s:2:"se";s:10:"Användare";}';
+		echo "<pre>";
+		print_r(unserialize($string));
+		
+	}
+	
 	public function export(){
 		
 		if(!isset($_REQUEST['base_64image'])){
@@ -235,7 +244,7 @@ class Admin extends Admin_Controller
 		$this->load->library('product');
 		$designs=$this->product->get_products(array(),$page,$limit);
 	
-	    $pagination = create_pagination('admin/tdesign/index', $designs['total'],5);
+	    $pagination = create_pagination('admin/tdesign/index', $designs['total'],6);
 		$categories =array();	
 	//	print_r($pagination);die;
 		$this->template->set('categories',$categories);
@@ -345,7 +354,7 @@ class Admin extends Admin_Controller
 			
 		} else {
 			$save['product_id'] = intval($id);
-            $save['list_price'] =$this->input->post("list_price")?$this->input->post("list_price"):"";
+            $save['list_price'] =$this->input->post("list_price")?$this->input->post("list_price"):0;
             $save['status']=$this->input->post("status");
             $save['cate_id']=$this->input->post("category_id");
             

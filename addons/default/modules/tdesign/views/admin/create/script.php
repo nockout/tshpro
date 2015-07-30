@@ -59,11 +59,11 @@ jQuery(document)
 								},
 								labels: { //different labels used for the UI
 									<?php echo $this->security->get_csrf_token_name() ?>:'<?php echo $this->security->get_csrf_hash() ?>',
-									layersButton: 'Manage Layers',
-									addsButton: 'Add Something',
-									moreButton: 'Actions',
-									productsButton: 'Change Products',
-									downloadImage: 'Download Image',
+									layersButton: '<?php echo lang("template:manages_layer")?>',
+									addsButton: '<?php echo lang("template:functions")?>',
+									moreButton: '<?php echo lang("template:_layers")?>',
+									productsButton: '<?php echo lang("template:choose_product")?>',
+									downloadImage: '<?php echo lang("template:download_image")?>',
 									print: 'Print',
 									downLoadPDF: 'Download PDF',
 									saveProduct: 'Save',
@@ -73,14 +73,14 @@ jQuery(document)
 									resetProductButton: 'Reset Product',
 									zoomButton: 'Zoom',
 									panButton: 'Pan',
-									addImageButton: '<?php echo lang("design:add_mockup")?>',
-									addTextButton: 'Add your own text',
-									enterText: 'Enter your text',
+									addImageButton: '<?php echo lang("template:add_mockup")?>',
+									addTextButton: '<?php echo lang("template:enter_text")?>',
+									enterText: '<?php echo lang("template:enter_text")?>',
 									addFBButton: 'Add photo from facebook',
 									addInstaButton: 'Add photo from instagram',
 									addDesignButton: 'Choose from Designs',
 									fillOptions: 'Fill Options',
-									color: 'Color',
+									color: '<?php echo lang("template:color")?>',
 									patterns: 'Patterns',
 									opacity: 'Opacity',
 									filter: 'Filter',
@@ -118,7 +118,7 @@ jQuery(document)
 									remove: 'Remove',
 									outOfContainmentAlert: 'Move it in his containment!',
 									uploadedDesignSizeAlert: "<?php echo lang("design:invalid_mockup_size")?>",
-									initText: "Initializing product designer",
+									initText: "<?php echo lang("template:init_design")?>",
 									myUploadedImgCat: "Your uploaded images",
 									moveUp: 'Move Up',
 									moveDown: 'Move Down'
@@ -130,6 +130,9 @@ jQuery(document)
 						var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 						var views=yourDesigner.getViewsDataURL();
 						var price=yourDesigner.getPrice();
+						
+						//console.log(yourDesigner.getCustomElements());
+						//return;
 						///var max=yourDesigner.getMaxPrice();
 						//console.log(max);
 						price=parseInt(price.replace(/\s+/g, ''));

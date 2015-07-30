@@ -54,6 +54,9 @@ $lang['sb_recent_users'] 				= 'Người dùng gần đây';
 
 
 $lang['cp:nav_design']					= 'Thiết kế';
+$lang['cp:nav_design_management']					= 'Quản lý style';
+$lang['cp:nav_design_create']					= 'Tạo một style';
+$lang['cp:nav_design']					= 'Thiết kế';
 $lang['cp:nav_option']					= 'lựa chọn';
 $lang['cp:nav_mockup']					= 'Mẫu thiết kế';
 $lang['cp:nav_template']					= 'Template';

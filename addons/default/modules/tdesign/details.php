@@ -46,10 +46,15 @@ class Module_TDesign extends Module
 
 	public function admin_menu(&$menu)
 	{
-		
-		$menu['lang:cp:nav_design'] = array(
-			'lang:design:create'=> 'admin/tdesign/create_design',
-			'lang:design:manage'=> 'admin/tdesign/'
+
+		$menu['lang:cp:nav_design']['lang:cp:nav_design_create'] = array(
+				'lang:design:create'=> 'admin/tdesign/create_design',
+				//'lang:design:management'=> 'admin/tdesign/'
+		);
+
+		$menu['lang:cp:nav_design']['lang:cp:nav_design_management'] = array(
+				//'lang:design:create'=> 'admin/tdesign/create_design',
+				'lang:design:management'=> 'admin/tdesign/'
 		);
 		//echo "<pre>";
 		//print_r($menu);die;

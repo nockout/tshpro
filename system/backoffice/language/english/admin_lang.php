@@ -58,4 +58,13 @@ $lang['cp:nav_design']					= 'Design';
 $lang['cp:nav_option']					= 'Option';
 $lang['cp:nav_mockup']					= 'Mockup';
 $lang['cp:nav_template']					= 'Template';
+
+
+$lang['cp:nav_design']					= 'Design';
+$lang['cp:nav_design_management']					= 'Manage designs';
+$lang['cp:nav_design_create']					= 'Create Design';
+$lang['cp:nav_design']					= 'Design';
+$lang['cp:nav_option']					= 'Option';
+$lang['cp:nav_mockup']					= 'Mẫu thiết kế';
+$lang['cp:nav_template']					= 'Template';
 /* End of file admin_lang.php */

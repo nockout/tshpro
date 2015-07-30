@@ -77,8 +77,9 @@ class Product_m extends Base_m
 		
 
 		//$this->db->select("*");
-		if($this->allowViewAll()){
-			$this->db->set('user_id',$this->current_user->user_id);	
+		if(!$this->allowViewAll()){
+		
+			$this->db->where('user_id',$this->current_user->user_id);	
 		}
 		if(isset($params['category'])){
 		
