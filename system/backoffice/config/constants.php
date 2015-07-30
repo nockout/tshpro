@@ -191,6 +191,7 @@ define('CMS_EDITION', 'Community');
 | When was the current version of PyroCMS released - in US Date format now.
 |
 */
+define('IS_AJAX', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 
 define('CMS_DATE', '06/07/2014');
 
