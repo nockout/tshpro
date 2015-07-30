@@ -130,6 +130,9 @@ jQuery(document)
 						var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 						var views=yourDesigner.getViewsDataURL();
 						var price=yourDesigner.getPrice();
+						
+						//console.log(yourDesigner.getCustomElements());
+						//return;
 						///var max=yourDesigner.getMaxPrice();
 						//console.log(max);
 						price=parseInt(price.replace(/\s+/g, ''));

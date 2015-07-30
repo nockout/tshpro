@@ -1,4 +1,4 @@
-<?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php  defined('BASEPATH') or exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING
@@ -20,10 +20,12 @@
 |	http://www.codeigniter.com/user_guide/general/routing.html
 */
 
+// public
+$route['(blog)/(:num)/(:num)/(:any)']   = 'blog/view/$4';
+$route['(blog)/page(/:num)?']           = 'blog/index$2';
+$route['(blog)/rss/all.rss']            = 'rss/index';
+$route['(blog)/rss/(:any).rss']         = 'rss/category/$2';
 
-$route['template/admin(/:any)?']		= 'admin$1';
-$route['template/admin/template(/:any)?']		= 'admin$1';
-//$route['tdesign/admin/(/:any)?']		= 'admin_widgets$1';
-//$route['addons/admin/widgets(/:any)?']		= 'admin_widgets$1';
-//$route['addons/admin/plugins?']				= 'admin_plugins';
-//$route['addons/admin/field-types?']			= 'admin_field_types';
+// admin
+$route['blog/admin/categories(/:any)?'] = 'admin_categories$1';
+$route['blog/admin/fields(/:any)?']		= 'admin_fields$1';

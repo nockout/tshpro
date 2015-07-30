@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-$lang['cp:nav_design']                       = 'Design';
+//$lang['cp:nav_design']                       = 'Design';
 $lang['design:create']						 = "Tạo Style ";
 $lang['design:management']						 = "Quản lý style";
 $lang['design:design_title']						 = "Style mới ";
