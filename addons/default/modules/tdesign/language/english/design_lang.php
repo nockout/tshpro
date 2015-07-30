@@ -101,3 +101,4 @@ $lang['design:no_origin_size_set']                  = 'No original size be set.P
 
 // date
 $lang['design:archive_date_format']		= "%B %Y";
+$lang['design:your_design']='Styles';

@@ -5,7 +5,7 @@
 		<div class="fpd-left">
 			<div data-context="layers" class="fpd-btn fpd-primary-text-color"
 				style="display: inline-block;">
-				<i class="fpd-icon-layers"></i><span>Your Designs</span>
+				<i class="fpd-icon-layers"></i><span><?php echo lang("design:style")?></span>
 			</div>
 
 		</div>

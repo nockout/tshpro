@@ -2,32 +2,32 @@
 
 
 $lang['cp:nav_design']                       = 'Design';
-$lang['design:create']						 = "New Design ";
-$lang['design:management']						 = "Manage Designs ";
-$lang['design:design_title']						 = "New Design ";
-$lang['design:create_title']						 = "New Design ";
+$lang['design:create']						 = "Tạo Style ";
+$lang['design:management']						 = "Quản lý style";
+$lang['design:design_title']						 = "Style mới ";
+$lang['design:create_title']						 = "Tạo Style ";
 $lang['design:edit_title']						 = "Edit Design ";
-$lang['design:currently_no_products']						 = "There are no designs at the moment";
+$lang['design:currently_no_products']						 = "Không có style tại thời điểm này";
 $lang['design:design']                 = 'Design';
 $lang['design:designs']                   = 'Designs';
-$lang['design:price']="Price";
+$lang['design:style']                   = 'Styles';
+$lang['design:price']="Giá";
 // labels
-$lang['design:description_label']="Description";
-$lang['design:designed_label']                   = 'Name';
-$lang['design:designed_label_alt']               = 'Designed at';
-$lang['design:written_by_label']				= 'Design by';
+$lang['design:description_label']="Miêu tả";
+$lang['design:designed_label']                   = 'Tên ';
+$lang['design:designed_label_alt']               = 'Ngày tạo';
 $lang['design:author_unknown']				= 'Unknown';
 $lang['design:keywords_label']				= 'Keywords';
 $lang['design:tagged_label']					= 'Tagged';
-$lang['design:category_label']                 = 'Category';
+$lang['design:category_label']                 = 'Danh mục';
 $lang['design:design_label']                     = 'Design';
-$lang['design:date_label']                     = 'Date';
+$lang['design:date_label']                     = 'Ngày tạo';
 $lang['design:date_at']                        = 'at';
 $lang['design:time_label']                     = 'Time';
-$lang['design:status_label']                   = 'Status';
+$lang['design:status_label']                   = 'Trạng thái';
 $lang['design:draft_label']                    = 'Draft';
-$lang['design:A_label']                   = 'Active';
-$lang['design:D_label']                   = 'Disable';
+$lang['design:A_label']                   = 'Kích hoạt';
+$lang['design:D_label']                   = 'Không kích hoạt';
 $lang['design:live_label']                     = 'Live';
 $lang['design:content_label']                  = 'Content';
 $lang['design:options_label']                  = 'Options';
@@ -61,8 +61,8 @@ $lang['design:font_size']					= 'Font size';
 $lang['design:select_font']					= 'Select Fonts';
 $lang['design:font_color']					= 'Font Colors';
 $lang['design:font']					= 'Fonts';
-$lang['design:apply_this_style']="Apply this style";
-$lang['design:save_all_design']="Save all styles";
+$lang['design:apply_this_style']="Lưu style này";
+$lang['design:save_all_design']="Export tất cả style";
 
 $lang['design:upload_template']					= 'Upload Template';
 $lang['design:image_options']					= 'Image Options';
@@ -100,3 +100,4 @@ $lang['design:no_origin_size_set']                  = 'No original size be set.P
 
 // date
 $lang['design:archive_date_format']		= "%B %Y";
+$lang['design:your_design']='Designs';
