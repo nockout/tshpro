@@ -9,6 +9,6 @@ $lang['template:manages_layer']='Layers';
 $lang['template:choose_product']='Choose Product';
 $lang['template:enter_text']='Enter your text';
 $lang['template:functions']='Features';
-template:functions
+
 
 
