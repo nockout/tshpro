@@ -74,14 +74,30 @@ class Admin extends Admin_Controller
 		//$this->load->model("product_m");
 		//$this->product_m->get_product_draft(23);
 		//die;
+		if(!isset($_REQUEST['arts'])){
+			$this->session->set_flashdata("error","design:no_art_found");
+			redirect("admin/tdesign/create_design");
+		}
 		if(!isset($_REQUEST['products'])){
 			$this->session->set_flashdata("error","design:no_design_found");
 			redirect("admin/tdesign/create_design");
 		}
+		// create art products;
+		
 		$this->load->library('product');
 		$this->load->helper("tdesign");
+		$raw_arts=[];
+		$id_art=$this->product->create_new_art(array('data'=>serialize($_REQUEST['arts'])));
+		if(!$id_art)
+		{
+			$this->session->set_flashdata("error","design:no_art_found");
+			redirect("admin/tdesign/create_design");
+		}
+		
+		
 		$raw_designs=$_REQUEST['products'];
 		$products=array();
+		$group_id=time();
 		foreach ($raw_designs as $group=>$arr_base64_imgs){
 			$files=array();
 			$names=array();
@@ -104,7 +120,7 @@ class Admin extends Admin_Controller
 			foreach ($names as $tempname){
 				$urls[]=get_design_image_path("templates",$tempname);
 			}
-			$products[]=$this->product->create_draft(array("raw_url"=>$files,"image"=>$urls,"name"=>$arr_base64_imgs['title'],'price'=>$arr_base64_imgs['price']));
+			$products[]=$this->product->create_draft(array('group_id'=>$group_id,'id_art'=>intval($id_art),"raw_url"=>$files,"image"=>$urls,"name"=>$arr_base64_imgs['title'],'price'=>$arr_base64_imgs['price']));
 		}
 	//	echo "<pre>";
 		//print_r($products);die;
@@ -189,7 +205,8 @@ class Admin extends Admin_Controller
 										"module::fancy_design/icon-font.css",
 										"module::fancy_design/jquery.fancyProductDesigner.css",								
 										"module::fancy_design/plugins.min.css",
-				"module::designer.css"
+				"module::designer.css",
+				
 		));
 		$this->template->title($this->module_details['name']);
 		$this->template->set("templates",$template_cache);

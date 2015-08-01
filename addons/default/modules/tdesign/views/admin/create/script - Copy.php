@@ -15,8 +15,8 @@ jQuery(document)
 				"title":"abcd1234",
 				"thumbnail":"uploads/default/../template/8_104.png",
 				"elements":elements
-			}];
-			var product=0;
+		}];
+			
 			var yourDesigner = $('#clothing-designer')
 					.fancyProductDesigner(
 							{
@@ -138,32 +138,30 @@ jQuery(document)
 
 					
 					$('button#putinconllection').on("click",function() {
-						var hmtl=[];
 						var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 						var views=yourDesigner.getViewsDataURL();
 						var price=yourDesigner.getPrice()?yourDesigner.getPrice():"";
-						
-
 						
 						//console.log(yourDesigner.getCustomElements());
 						//return;
 						///var max=yourDesigner.getMaxPrice();
 						//console.log(max);
-						
 						price=parseInt(price.replace(/\s+/g, ''));
 						var products=yourDesigner.getProduct(true);
 						if(!products)
 							return;
 						var name=(products[0].title);
 						//return; 
-						
+						var hmtl=[] ,hidden="";
 						if(views.length){
 							hmtl.push("<tr><td style='width: 30px' align='left'>");
 							hmtl.push("<img style='width:80px;height:80px' src='"+views[0]+"'></td>");
 							hmtl.push("<td style='position:relative'>");
 							hmtl.push("<i style='top:0;right:0;position:absolute; font-size: 1.3em;cursor: pointer' class='x_row pointer fpd-btn  fpd-icon-remove'></i>");
-							hmtl.push("<input type='text' id='title' maxlength='100' value='"+name+"' name=products["+product+"][title]>");	
+							hmtl.push("<input type='text' id='title' maxlength='100' value='"+name+"' name=products["+product+"][title]>");
+							
 							hmtl.push("<div id='slider"+product+"'>");
+						
 							hmtl.push("</div>");
 							hmtl.push("<input type='hidden' id='price"+product+"' maxlength='100' value='"+price+"' name=products["+product+"][price]>");
 							hmtl.push(" <p><label id='label"+product+"' >Price:"+price+"</label>");
@@ -205,31 +203,16 @@ jQuery(document)
 						return;
 					});
 					$('button#export').on("click",function() {
-						var hmtl=[];
-						var art=yourDesigner.getCustomElements();
-						if(!art.length){
-								alert("Your art is empty");
-									return;
-							}else{
-								for(i=0;i<art.length;i++){
-									console.log(art[i].element.toDataURL());
-									hmtl.push("<input type='hidden'  maxlength='100' value='"+art[i].element.toDataURL()+"' name=arts["+i+"]>");							
-												
-								}
-							
-						}
-						hmtl.push("</td></tr>");
-						$("#yourdesigns").append(hmtl.join(""));
 						var postt = $( "#save_image" ).submit();
 						
                          
 					});
 					//console.log($(".fpd-views-related > .fpd-item"));
 					//return;
-// 					$(".fpd-views-related > .fpd-item").on("click",function(){
-// 								yourDesigner.addProduct(objectView);
-// 								yourDesigner.loadProduct(objectView);
-// 						});
+					$(".fpd-views-related > .fpd-item").on("click",function(){
+								yourDesigner.addProduct(objectView);
+								yourDesigner.loadProduct(objectView);
+						});
 					
 // 					$("#slider").slider({
 // 					    range: "min",

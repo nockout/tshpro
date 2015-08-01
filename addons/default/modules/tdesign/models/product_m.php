@@ -143,6 +143,7 @@ class Product_m extends Base_m
 				$this->_default_fields['status']="O";
 				$this->_default_fields['avail_since']=Date("Y-m-d H:i:s");
 				$this->_default_fields['cate_id']=1;
+				$this->_default_fields['id_art']=$extra['id_art'];
 				$this->_default_fields['list_price']=isset($extra['price'])?$extra['price']:"";
 				$this->_default_fields['user_id']=$this->current_user->id;
 				$this->db->insert($this->_table,$this->_default_fields);
@@ -201,6 +202,12 @@ class Product_m extends Base_m
 		$row=$this->db->get($this->_table)->row();
 		return ($row );
 		
+	}
+	public function create_art($data=array()){
+		if(empty($data))
+			return;
+		 $this->db->insert("tshirt_arts",$data);
+		 return $this->db->insert_id();
 	}
 	private function allowViewAll(){
 		return (in_array($this->current_user->group, $this->_viewAllgroups))?true:false;
