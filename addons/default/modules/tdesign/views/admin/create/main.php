@@ -6,8 +6,11 @@
 	<div id="clothing-designer" class="fpd-shadow-1 clothing-designer-1">
 		<?php echo $templates?>
 		<div class="fpd-design"></div>
+		<?php  //echo $this->load->view("admin/create/relateproduct")?>
 	</div>
+	
 	</div>
+
 	<?php  echo $this->load->view("admin/create/right")?>
 
  	<input type="file" id="design-upload" style="display: none;" />

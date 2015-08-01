@@ -24,6 +24,9 @@ class Product {
 		
 		return $design;
 	}
+	public function create_new_art($art=array()){
+		return $this->CI->Product_m->create_art($art);
+	}
 	public function get_options($type_product = null) {
 		if (! $type_product)
 			return;

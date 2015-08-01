@@ -19,3 +19,25 @@
    width: 490px;
 }
 */
+
+@CHARSET "UTF-8";
+
+.fpd-views-related > .fpd-item > picture {
+    background-repeat: no-repeat;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.fpd-views-related{
+	position: absolute;
+	top:0px;
+	left:10px
+}
+.fpd-views-related > .fpd-item {
+    background: #fafafa none repeat scroll 0 0;
+    cursor: pointer;
+    height: 70px;
+    margin-bottom: 10px;
+    padding: 15px;
+    width: 60px;
+}

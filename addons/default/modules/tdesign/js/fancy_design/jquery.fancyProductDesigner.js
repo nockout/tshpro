@@ -8681,6 +8681,9 @@ var FancyProductDesigner = function(a, b) {
         x.clear(), J = a;
         var i = '<div class="fpd-views-selection fpd-grid-contain fpd-clearfix fpd-' + d.viewSelectionPosition + " " + (d.viewSelectionFloated ? "fpd-float-items" : "") + '"></div>';
         "outside" == d.viewSelectionPosition ? g.after(i) : j.append(i), g.on("viewCreate", b), x.addView(J[0]), x.selectView(0)
+	
+		
+		
     }, FancyProductDesigner.prototype.selectProduct = function(a) {
         if (a == H) return !1;
         H = a, 0 > a ? H = 0 : a > x.getProductsLength() - 1 && (H = x.getProductsLength() - 1);
