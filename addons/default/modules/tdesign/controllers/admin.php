@@ -293,6 +293,7 @@ class Admin extends Admin_Controller
 		$data['product_code']="";
 		$data['keywords']="";
 		$data['product_categories'] =array();
+		$data['arts']="";
 		if ($id) {
 		
 				$product=$this->product->get_product($id);
@@ -350,7 +351,7 @@ class Admin extends Admin_Controller
 			$data['images']=!empty($product->image)?$product->image:"";
 			$data['avail_since']=$product->avail_since;
 			$data['status']=$product->status;
-		
+			$data['arts']=$product->arts;
 			
 		
 		}

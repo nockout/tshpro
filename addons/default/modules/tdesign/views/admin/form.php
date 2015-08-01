@@ -18,11 +18,19 @@
 		
 		<div class="one_half">
 		<fieldset>
+		<?php if(isset($arts)):?>
+			<?php foreach ($arts as $art):?>
+			
+			<img alt="" src="<?php echo $art?>">
+			<?php endforeach;?>
+		
+		<?php endif?>
+		<div class="clearfix"></div>	
 		<?php if(isset($images)&&count($images)):?>
 		<?php $image=array_shift($images);?>
 		
-		<img style="width:345px;heith:345px" data-pyroimage="true" alt="your art" src="<?php echo isset($image)?$image:""?>" id="target">
-		<div class="clearfix"></div>	
+		<img style="width:90px;heith:90px" data-pyroimage="true" alt="your art" src="<?php echo isset($image)?$image:""?>" id="target">
+	
 		<?php foreach ($images as $img):?>
 		<img style="width:90px;heith:90px" data-pyroimage="true" alt="your art" src="<?php echo isset($img)?$img:""?>" id="target">
 		<?php endforeach;?>
