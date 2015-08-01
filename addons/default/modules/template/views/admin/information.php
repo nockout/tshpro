@@ -18,31 +18,7 @@
 					</div>
 					</li>
 
-			
-				<li>
-					<label for="status"><?php echo lang('template:color') ?><span>*</span></label>
-
-					<div class="clearfix"></div>
-			
-						<input id=full>
-						<div class="clearfix"></div>
-						
-						<div id="colors_groups">
-							<?php if(isset($colors_groups)&&count($colors_groups)):?>
-							<?php foreach ($colors_groups as $color):?>
-							<div class="pickercolors" style="background:<?php echo $color ?>" > 
-							<input type="hidden" class="pickercolors" value="<?php echo $color?>"  name="colors[]"  />
-							
-							</div>
-							
-							<?php endforeach;?>
-							<?php endif?>
-						</div>
-						<div class="clearfix"></div>
-						<label for="title"><span>* <?php echo lang("template:doublick_remove")?></span></label>
-						
-							
-				</li>
+		
 				
 				<li><label for="status"><?php echo lang('template:status') ?></label>
 
