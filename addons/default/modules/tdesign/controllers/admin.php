@@ -70,10 +70,12 @@ class Admin extends Admin_Controller
 	 *
 	 * Shows a list of the groups.
 	 */
+	
 	public function save_images(){
 		//$this->load->model("product_m");
 		//$this->product_m->get_product_draft(23);
 		//die;
+	
 		if(!isset($_REQUEST['arts'])){
 			$this->session->set_flashdata("error","design:no_art_found");
 			redirect("admin/tdesign/create_design");
@@ -94,7 +96,7 @@ class Admin extends Admin_Controller
 			redirect("admin/tdesign/create_design");
 		}
 		
-		
+	
 		$raw_designs=$_REQUEST['products'];
 		$products=array();
 		$group_id=time();
@@ -129,11 +131,11 @@ class Admin extends Admin_Controller
 			return;
 		}
 		
-		if(count($products)==1){
+// 		if(count($products)==1){
 			
-			redirect("admin/tdesign/form/".$products[0]->product_id);
-		}
-		redirect("admin/tdesign/index");
+// 			redirect("admin/tdesign/form/".$products[0]->product_id);
+// 		}
+		redirect("admin/tdesign/manage/arts");
 		
 		
 	}

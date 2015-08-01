@@ -22,7 +22,8 @@
 
 $route['tdesign/admin/create']				= 'admin_create';
 $route['tdesign/admin/create(/:any)?']		= 'admin_create$1';
-$route['tdesign/admin/manage']				= 'admin_manage';
+
+$route['tdesign/admin/manage(/:any)']				= 'admin_manage$1';
 //$route['tdesign/admin/(/:any)?']		= 'admin_widgets$1';
 //$route['addons/admin/widgets(/:any)?']		= 'admin_widgets$1';
 //$route['addons/admin/plugins?']				= 'admin_plugins';

@@ -73,7 +73,7 @@ class Product_m extends Base_m
 		
 	}
 	
-	public function get_products($params,$offset=0,$limit=6){
+	public function get_products($params=array(),$offset=0,$limit=6){
 		
 
 		//$this->db->select("*");
@@ -81,21 +81,20 @@ class Product_m extends Base_m
 		
 			$this->db->where('user_id',$this->current_user->user_id);	
 		}
-		if(isset($params['category'])){
 		
-		}
+	
+	
 
 		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
 
 		$this->db->select("(SELECT username FROM ".(SITE_REF."_".$this->_users)." WHERE id=user_id LIMIT 1) AS user_name", FALSE);
-	
+		$this->db->where($params);
 		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id');
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
 		$this->db->where('deleted',0);
 		$this->db->offset($offset)->limit($limit);
 		$this->db->order_by("avail_since","DESC");
 		$objct=$this->db->get($this->_table)->result();
-		//print_r($objct);die;
 		$return=array();
 		$result['objects']=$objct;
 		$result['total']=0;
@@ -123,10 +122,9 @@ class Product_m extends Base_m
 		$result=$this->db->where($this->_table.'.product_id',$id)->get($this->_table)->row();
 		
 		$images=$this->get_images($id);
-		//echo "<pre>";
-		//print_r($result);die;
+	
 		if(!empty($images)){
-			//$first=reset($result->images);
+			
 			$this->load->helper('tdesign');
 			foreach ($images as $image)
 			$result->image[]=get_design_image_path("original",$image->id_image.'_'.$image->product_id.'.jpg');
@@ -134,8 +132,7 @@ class Product_m extends Base_m
 		if(!empty($result->arts)){
 			$result->arts=unserialize($result->arts);
 		}
-		//echo "<pre>";
-		//print_r($result);die;
+	
 		return $result;
 	}
 	public function get_images($id){
@@ -212,9 +209,33 @@ class Product_m extends Base_m
 		return ($row );
 		
 	}
+	public function get_arts($parrams=array(),$offset=0,$limit=12){
+		if(!$this->allowViewAll()){
+		
+			$this->db->where('user_id',$this->current_user->user_id);
+		}	
+	
+		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
+
+		$this->db->select("(SELECT username FROM ".(SITE_REF."_".$this->_users)." WHERE id=user_id LIMIT 1) AS user_name", FALSE);
+	
+		$this->db->where('deleted',0);
+		$this->db->offset($offset)->limit($limit);
+		$this->db->order_by("add_time","DESC");
+		$objct=$this->db->get("tshirt_arts")->result();
+		//print_r($objct);die;
+		$return=array();
+		$result['objects']=$objct;
+		$result['total']=0;
+		$query = $this->db->query('SELECT FOUND_ROWS() AS `Count`');
+        $result['total']= $query->row()->Count;
+        return $result;
+	}
 	public function create_art($data=array()){
 		if(empty($data))
 			return;
+		$data['user_id']=$this->current_user->user_id;
+		$data['add_time']=date('Y-m-d H:i:s');
 		 $this->db->insert("tshirt_arts",$data);
 		 return $this->db->insert_id();
 	}

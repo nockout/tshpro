@@ -27,17 +27,38 @@ class Admin_Manage extends Admin_Controller
 
 	/**
 	 * The main index page in the administration.
-	 *
+	 *aa
 	 * Shows a list of the groups.
 	 */
-	public function index()
-	{
+	
+	public function arts($page=0,$limit=12){
+	
+		$object=$this->product_m->get_arts(array(),$page,$limit);
+		$arts="";
+		if(!empty($object)){
+			$arts=$object['objects'];
+		}
 		
-		$designs=$this->product_m->get_products(array());
-		//echo "<pre>";
-		//print_r($designs);;
-	//	die;
+		$this->template->
+		set('arts',$arts)
+		->append_css("module::designer.css")
+		->title(lang("design:arts"))
+		->build('admin/arts');
+	}
+	public function index($id=null)
+	{
+		$id or redirect("admin/tdesign/manage/arts");
+	
+		$objects=$this->product_m->get_products(array("id_art"=>intval($id)));
+		//echo "<pre[>";
+		$designs='';
+		//print_r($objects);die;
+		if(!empty($objects)){
+			$designs=$objects['objects'];
+		}
+		
 		$categories =array();
+	
 		$this->template->set('categories',$categories);
  		$this->template->
  			set('designs',$designs)
