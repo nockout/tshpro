@@ -7,12 +7,10 @@
 	<ul class="art_list">
 	<?php if(!empty($arts)):?>
 	<?php foreach ($arts as $art):?>
-	<?php
-			if (! empty ( unserialize ( $art->data ) )) {
-				$data = unserialize ( $art->data );
-			} else {
-				continue;
-			}
+	<?php  $data=unserialize ( $art->data );
+			if ( empty (  $data)) {
+					continue;
+			} 
 			?>
 			
 	<li class="one_quarter art_list ">
