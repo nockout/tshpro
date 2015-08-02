@@ -220,6 +220,8 @@ class Admin extends Admin_Controller
 	public function delete($id=null){
 		if(!empty($id)){
 			$this->load->library('product');
+			//check logo 
+			
 			if($this->product->delete($id))
 			{
 				$this->session->set_flashdata("success",sprintf(lang("design:delete_success"),""));

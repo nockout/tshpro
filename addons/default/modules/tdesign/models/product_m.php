@@ -51,12 +51,35 @@ class Product_m extends Base_m
 		if(!is_array($id)){
 			$id=array($id);
 		}
+		//check user logo
+		
 		if(!$this->db->where_in("product_id",$id)->get($this->_table)->result()){
 		
 			return false;
 		}
+		$this->get_product_art($id);
 		return $this->db->where_in("product_id",($id))->update($this->_table,array("deleted"=>1));
 	}
+	public function get_product_art($product_id){
+		
+		$this->db->where_in("product_id",$product_id);
+		$result=$this->db->get($this->_table)->result();
+		
+		if($result){
+			foreach ($result as $art){
+				$id_art=$art->id_art;
+				//unset($art);
+				$this->db->where("id_art",$id_art);
+				$query=$this->db->get("$this->_table");
+				if($query->num_rows()<=1){
+					$this->db->where("id",$id_art)->update("tshirt_arts",array("deleted"=>1));
+				
+				}
+			}			
+			
+		}
+	}
+	
 	public function auto_delete($id){
 		if(empty($id))
 			return ;
