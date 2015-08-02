@@ -25,7 +25,8 @@ class Home extends Public_Controller
 		$product=$this->product_m->get($id);
 		if(empty($product))
 			redirect("home");
-		
+		//echo "<pre>";
+		//print_r($product);die;
 		$this->template
 		->title($this->module_details['name'])
 // 		->set_breadcrumb(lang('blog:blog_title'))

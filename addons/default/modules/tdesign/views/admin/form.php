@@ -26,7 +26,8 @@
 		
 		<?php //endif?>
 		<div class="clearfix"></div>	
-		<?php if(isset($images)&&count($images)):?>
+		<?php if(!empty($images)):?>
+		<?php echo $images;die;?>
 		<?php $image=array_shift($images);?>
 		
 		<img style="width:320px;heith:320px" data-pyroimage="true" alt="your art" src="<?php echo isset($image)?$image:""?>" id="target">
@@ -64,13 +65,10 @@
 				
 				<li>
 					<label for="status"><?php echo lang('design:status_label') ?></label>
-					<?php if(isset($status)&&$status=="D"):?>
-						<?php echo form_hidden("status",$status)?>
-						<div class="input"><?php echo lang('design:draft_label')?></div>
-						
-					<?php else:?>
-					<div class="input"><?php echo form_dropdown('status', array(""=>lang(""), 'A' => lang('design:live_label'),'D' => lang('design:live_label'), $status)) ?></div>
-					<?php endif?>
+					
+					<div class="input">
+					<?php echo form_dropdown('status', array(""=>lang(""), 'A' => lang('design:status_A_label'),'D' => lang('design:status_D_label')), set_value("status",$status)) ?></div>
+				
 					
 				</li>
 				<li class="date-meta">
@@ -82,7 +80,11 @@
 						<?php //echo form_dropdown('created_on_minute', $minutes, date('i', ltrim(strtotime($avail_since), '0'))) ?>
 					</div>
 				</li>
-			
+				<li class="date-meta">
+					<?php echo anchor_popup("admin/tdesign/download_logos/".$art_id) ?></label>
+					
+					
+				</li>
 
 				</ul>
 		

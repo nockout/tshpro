@@ -1,13 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-$lang['cp:nav_design']                       = 'Thiết kế';
-$lang['design:create']						 = "Tạo mới Design ";
-$lang['design:management']						 = "Quản lý Designs ";
-$lang['design:design_title']						 = "New Design ";
-$lang['design:create_title']						 = "Tạo mới Design ";
-$lang['design:edit_title']						 = "chỉnh sửa Design ";
-$lang['design:currently_no_products']						 = "Không có design nào";
 //$lang['cp:nav_design']                       = 'Design';
 $lang['design:create']						 = "Tạo Style ";
 $lang['design:management']						 = "Quản lý style";
@@ -25,10 +18,6 @@ $lang['design:designs']                   = 'Designs';
 $lang['design:price']="Price";
 $lang['design:arts']="Arts";
 // labels
-$lang['design:description_label']="Description";
-$lang['design:designed_label']                   = 'Tên';
-$lang['design:designed_label_alt']               = 'Designed at';
-$lang['design:written_by_label']				= 'Design by';
 $lang['design:description_label']="Miêu tả";
 $lang['design:designed_label']                   = 'Tên ';
 $lang['design:designed_label_alt']               = 'Ngày tạo';
@@ -42,25 +31,23 @@ $lang['design:date_at']                        = 'at';
 $lang['design:time_label']                     = 'Time';
 $lang['design:status_label']                   = 'Trạng thái';
 $lang['design:draft_label']                    = 'Draft';
-$lang['design:A_label']                   = 'hoạt động';
-$lang['design:D_label']                   = 'không hoạt động';
-$lang['design:A_label']                   = 'Kích hoạt';
-$lang['design:D_label']                   = 'Không kích hoạt';
+$lang['design:status_A_label']                   = 'Kích hoạt';
+$lang['design:status_D_label']                   = 'Không kích hoạt';
 $lang['design:live_label']                     = 'Live';
-$lang['design:content_label']                  = 'Nội dung';
-$lang['design:options_label']                  = 'Lựa chọn';
-$lang['design:intro_label']                    = 'Giới thiêu';
+$lang['design:content_label']                  = 'Content';
+$lang['design:options_label']                  = 'Options';
+$lang['design:intro_label']                    = 'Introduction';
 $lang['design:no_category_select_label']       = '-- None --';
-$lang['design:new_category_label']             = 'Thêm 1 danh mucj';
+$lang['design:new_category_label']             = 'Add a category';
 $lang['design:subscripe_to_rss_label']         = 'Subscribe to RSS';
-$lang['design:all_Designs_label']                = 'Tất cả thiết kế';
+$lang['design:all_Designs_label']                = 'All Designs';
 $lang['design:designs_of_category_suffix']       = ' Designs';
 $lang['design:rss_name_suffix']                = ' design';
 $lang['design:rss_category_suffix']            = ' design';
-$lang['design:author_name_label']              = 'Tác giả';
-$lang['design:read_more_label']                = 'Đọc thêm&nbsp;&raquo;';
-$lang['design:created_hour']                   = 'Giờ tạo';
-$lang['design:created_minute']                 = 'Phút tạo';
+$lang['design:author_name_label']              = 'Author name';
+$lang['design:read_more_label']                = 'Read More&nbsp;&raquo;';
+$lang['design:created_hour']                   = 'Created on Hour';
+$lang['design:created_minute']                 = 'Created on Minute';
 $lang['design:comments_enabled_label']         = 'Comments Enabled';
 
 // titles

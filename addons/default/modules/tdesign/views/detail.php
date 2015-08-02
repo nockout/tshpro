@@ -9,11 +9,14 @@
 						<span class="priceshow"><?php echo $product->list_price?></span>
 						<img width="13" height="8" class="btm-s" src="">
 					
-					<?php echo "<pre>";print_r($product);die;?>
+					<?php if(!empty($product->image)):?>
+						<?php $first=array_shift($product->image);?>
+						<?php //echo $first;die;?>
 						<a data-theimage="<?php ?>" data-target="#imageModal" data-toggle="modal">
-							<img width="651" height="651" class="img-responsive lg_view" alt="Jeb Bush 2016" src="//images2.sunfrogshirts.com/2015/07/29/Jeb-Bush-2016.jpg">
+							<img width="651" height="651" class="img-responsive lg_view" alt="<?php echo $product->product?>" src="<?php echo $first?>">
 					
 						</a>
+					<?php endif?>
 						
 						
 							<div class="label label-default pull-right">

@@ -233,6 +233,7 @@ class Admin extends Admin_Controller
 		$this->product->auto_delete($id);
 	
 	}
+
 	public function action(){
 		
 		switch ($this->input->post("btnAction"))

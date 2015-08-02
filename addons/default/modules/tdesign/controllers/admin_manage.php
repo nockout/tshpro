@@ -50,18 +50,25 @@ class Admin_Manage extends Admin_Controller
 		$id or redirect("admin/tdesign/manage/arts");
 	
 		$objects=$this->product_m->get_products(array("id_art"=>intval($id)));
+		$artobj=$this->product_m->find_art_by_id($id);
+		
+		$arts="";
+		if(!empty($artobj)){
+			$arts=unserialize($artobj->data);
+		}
 		//echo "<pre[>";
 		$designs='';
 		//print_r($objects);die;
 		if(!empty($objects)){
 			$designs=$objects['objects'];
 		}
-		
+	
 		$categories =array();
 	
 		$this->template->set('categories',$categories);
  		$this->template->
- 			set('designs',$designs)
+ 			set('designs',$designs)->
+ 			set('arts',$arts)
  			->title($this->module_details['name'])
 			->build('admin/index');
 	}
