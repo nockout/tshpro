@@ -27,7 +27,7 @@
 		<?php //endif?>
 		<div class="clearfix"></div>	
 		<?php if(!empty($images)):?>
-		<?php echo $images;die;?>
+		<?php //echo $images;die;?>
 		<?php $image=array_shift($images);?>
 		
 		<img style="width:320px;heith:320px" data-pyroimage="true" alt="your art" src="<?php echo isset($image)?$image:""?>" id="target">
@@ -80,11 +80,7 @@
 						<?php //echo form_dropdown('created_on_minute', $minutes, date('i', ltrim(strtotime($avail_since), '0'))) ?>
 					</div>
 				</li>
-				<li class="date-meta">
-					<?php echo anchor_popup("admin/tdesign/download_logos/".$art_id) ?></label>
-					
-					
-				</li>
+				
 
 				</ul>
 		
