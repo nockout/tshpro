@@ -1,5 +1,5 @@
 <?php $pFront=$pFront1=$pBack=$pBack1=array('x'=>325,'y'=>329)?>
-<?php //echo "<pre>" print_r($views);die;?>
+<?php //echo "<pre>" ;print_r($templates);die;?>
 <?php if(isset($templates)&&count($templates)):?>
 <?php foreach ($templates as $t):?>
 		<?php if(empty($t->images)) 
@@ -14,7 +14,7 @@
 							
 								//$pFront1["price"]=$t->price;?>
 			<?php 
-			 print_r($t->colors_groups);die;
+			// print_r($t->colors_groups);die;
 			 $color =unserialize($t->colors_groups);
 			if(!empty($color)){
 				//echo "Aaa";die;
