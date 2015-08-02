@@ -64,13 +64,10 @@
 				
 				<li>
 					<label for="status"><?php echo lang('design:status_label') ?></label>
-					<?php if(isset($status)&&$status=="D"):?>
-						<?php echo form_hidden("status",$status)?>
-						<div class="input"><?php echo lang('design:draft_label')?></div>
-						
-					<?php else:?>
-					<div class="input"><?php echo form_dropdown('status', array(""=>lang(""), 'A' => lang('design:live_label'),'D' => lang('design:live_label'), $status)) ?></div>
-					<?php endif?>
+					
+					<div class="input">
+					<?php echo form_dropdown('status', array(""=>lang(""), 'A' => lang('design:status_A_label'),'D' => lang('design:status_D_label')), set_value("status",$status)) ?></div>
+				
 					
 				</li>
 				<li class="date-meta">
