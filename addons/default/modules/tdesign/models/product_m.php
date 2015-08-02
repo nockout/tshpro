@@ -231,6 +231,9 @@ class Product_m extends Base_m
         $result['total']= $query->row()->Count;
         return $result;
 	}
+	public function find_art_by_id($art_id){
+		return $this->db->get('tshirt_arts',array('id'=>intval($art_id)))->row();
+	}
 	public function create_art($data=array()){
 		if(empty($data))
 			return;
