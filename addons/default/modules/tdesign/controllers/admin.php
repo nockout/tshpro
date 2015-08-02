@@ -189,7 +189,7 @@ class Admin extends Admin_Controller
 		$this->lang->load("templates");;
 		
 		$templates=$this->product->cate_templates();
-		
+
 		$template_cache=$this->load->view("admin/create/templates/template",array('templates'=>$templates),TRUE);
 		
 		
@@ -211,6 +211,7 @@ class Admin extends Admin_Controller
 				"module::designer.css",
 				
 		));
+		
 		$this->template->title($this->module_details['name']);
 		$this->template->set("templates",$template_cache);
 		$this->template->set("template_categories",$templates);
