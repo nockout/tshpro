@@ -84,7 +84,7 @@ $lang['global:enabled']					= 'Enabled'; #translate
 $lang['global:disabled'] 				= 'Disabled'; #translate
 
 $lang['all_right_reserved']				= 'All Rights Reserved.'; #translate
-$lang['powered_by_pyrocms']				= 'Powered by PyroCMS'; #translate
+$lang['powered_by_pyrocms']				= 'Powered by Ttshirt'; #translate
 $lang['top_page']						= 'Top'; #translate
 $lang['back_to_top']					= 'Back to Top'; #translate
 
