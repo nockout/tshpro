@@ -13,9 +13,12 @@
 							$pFront["price"]=number_format($t->price, 2, ',', ' ');
 							
 								//$pFront1["price"]=$t->price;?>
-			<?php if(!empty(unserialize($t->colors_groups))){
+			<?php 
+			 print_r($t->colors_groups);die;
+			 $color =unserialize($t->colors_groups);
+			if(!empty($color)){
 				//echo "Aaa";die;
-				$pFront['colors']=implode(",", unserialize($t->colors_groups));
+				$pFront['colors']=implode(",", $color);
 				$pBack['colors']=$name;
 			}
 			$jsonFront=json_encode($pFront);
