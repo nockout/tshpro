@@ -5,7 +5,7 @@
  * @author  PyroCMS Dev Team
  * @package PyroCMS\Core\Modules\Blog\Controllers
  */
-class Home extends Public_Controller
+class Tdesign extends Public_Controller
 {
 	
 	/**
