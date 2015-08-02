@@ -232,7 +232,7 @@ class Product_m extends Base_m
         return $result;
 	}
 	public function find_art_by_id($art_id){
-		return $this->db->get('tshirt_arts',array('id'=>intval($art_id)))->row();
+		return $this->db->where('id',intval($art_id))->get('tshirt_arts')->row();
 	}
 	public function create_art($data=array()){
 		if(empty($data))
