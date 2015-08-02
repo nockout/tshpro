@@ -18,24 +18,24 @@
 		
 		<div class="one_half">
 		<fieldset>
-		<?php if(isset($arts)):?>
-			<?php foreach ($arts as $art):?>
+		<?php //if(isset($arts)):?>
+			<?php //foreach ($arts as $art):?>
 			
-			<img alt="" src="<?php echo $art?>">
-			<?php endforeach;?>
+			<!-- <img alt="" src="<?php //echo $art?>"> -->
+			<?php //endforeach;?>
 		
-		<?php endif?>
+		<?php //endif?>
 		<div class="clearfix"></div>	
 		<?php if(isset($images)&&count($images)):?>
 		<?php $image=array_shift($images);?>
 		
-		<img style="width:90px;heith:90px" data-pyroimage="true" alt="your art" src="<?php echo isset($image)?$image:""?>" id="target">
+		<img style="width:320px;heith:320px" data-pyroimage="true" alt="your art" src="<?php echo isset($image)?$image:""?>" id="target">
 	
 		<?php foreach ($images as $img):?>
-		<img style="width:90px;heith:90px" data-pyroimage="true" alt="your art" src="<?php echo isset($img)?$img:""?>" id="target">
+		<img style="width:90px;heith:320px" data-pyroimage="true" alt="your art" src="<?php echo isset($img)?$img:""?>" id="target">
 		<?php endforeach;?>
 		<?php else:?>
-		<img style="width:345px;heith:345px"  alt="your art" src="<?php echo Asset::get_filepath_img("load-art.jpg")?>" id="target">
+		<img style="width:90px;heith:90px"  alt="your art" src="<?php echo Asset::get_filepath_img("load-art.jpg")?>" id="target">
 		<?php endif?>
 		</fieldset>
 		</div>

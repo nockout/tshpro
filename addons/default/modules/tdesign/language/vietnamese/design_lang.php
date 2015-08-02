@@ -19,6 +19,11 @@ $lang['design:design']                 = 'Design';
 $lang['design:designs']                   = 'Designs';
 $lang['design:style']                   = 'Styles';
 $lang['design:price']="Giá";
+$lang['design:mockup']="Mock Ups";
+$lang['design:design']                 = 'Design';
+$lang['design:designs']                   = 'Designs';
+$lang['design:price']="Price";
+$lang['design:arts']="Arts";
 // labels
 $lang['design:description_label']="Description";
 $lang['design:designed_label']                   = 'Tên';

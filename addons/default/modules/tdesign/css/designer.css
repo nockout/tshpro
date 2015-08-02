@@ -41,3 +41,12 @@
     padding: 15px;
     width: 60px;
 }
+
+.art_list img{
+	width:200px;
+	height:200px;
+}
+.art_list li{
+	border: 1px solid #ebeef0;
+	display: inline;
+}
