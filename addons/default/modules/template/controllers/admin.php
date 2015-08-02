@@ -96,6 +96,22 @@ class Admin extends Admin_Controller
 		}
 		redirect("admin/template/index");
 	}
+	
+	public function delete($id=null){
+		if(!empty($id)){
+			$this->load->library('product');
+			//check logo
+				
+			if($this->product->delete($id))
+			{
+				$this->session->set_flashdata("success",sprintf(lang("design:delete_success"),""));
+			}else{
+				$this->session->set_flashdata("error",sprintf(lang("design:delete_error"),""));
+			}
+		}
+		redirect('admin/templete/index');
+	}
+	
 	public function index($page=0,$limit=6)
 	{
 		$this->load->library('tplate');
