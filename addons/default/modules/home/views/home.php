@@ -30,7 +30,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12 text-center">
-								<strong style="font-size:12px;" class="text-info">Forever in debt - THANKS USA Military</strong>
+								<strong style="font-size:12px;" class="text-info"><?php echo $p->product?></strong>
 							</div>
 						</div>
 						
