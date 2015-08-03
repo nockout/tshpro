@@ -189,7 +189,7 @@ jQuery(document)
 								$("#slider"+product).slider({
 								    range: "min",
 								    value: price,
-								    step: 1000,
+								    step: 5000,
 								    min: price,
 								    max: max_price,
 								    slide: function(event, ui) {
