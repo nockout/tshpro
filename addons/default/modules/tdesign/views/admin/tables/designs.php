@@ -25,7 +25,11 @@
 						<?php echo lang('design:author_unknown') ?>
 					<?php endif ?>
 					</td>
+					<?php if($design->deleted==3):?>
 					<td><?php echo lang('design:disable_label') ?></td>
+					<?php else:?>
+					<td><?php echo lang('design:'.$design->status.'_label') ?></td>
+					<?php endif;?>
 					<td style="padding-top:10px;">
                        
                       <?php if($design->deleted==0):?>
