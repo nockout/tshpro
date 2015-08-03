@@ -99,17 +99,17 @@ class Admin extends Admin_Controller
 	
 	public function delete($id=null){
 		if(!empty($id)){
-			$this->load->library('product');
+			$this->load->library('tplate');
 			//check logo
 				
-			if($this->product->delete($id))
+			if($this->tplate->delete($id))
 			{
 				$this->session->set_flashdata("success",sprintf(lang("design:delete_success"),""));
 			}else{
 				$this->session->set_flashdata("error",sprintf(lang("design:delete_error"),""));
 			}
 		}
-		redirect('admin/templete/index');
+		redirect('admin/template/index');
 	}
 	
 	public function index($page=0,$limit=6)

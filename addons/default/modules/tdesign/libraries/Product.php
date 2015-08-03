@@ -110,6 +110,7 @@ class Product {
 		$this->CI->db->join($tplate_table_lang,$tplate_table.".id_template=".$tplate_table_lang.".id_template","lEFT");
 		$this->CI->db->where("lang_code",CURRENT_LANGUAGE);
 		$this->CI->db->order_by("position","DESC");
+		$this->CI->db->where("deleted",0);
 
 		$tempaltes=$this->CI->db->get($tplate_table)->result();
 	
