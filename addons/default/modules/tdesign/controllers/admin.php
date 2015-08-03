@@ -90,7 +90,11 @@ class Admin extends Admin_Controller
 		$this->load->library('product');
 		$this->load->helper("tdesign");
 		$raw_arts=[];
-		$id_art=$this->product->create_new_art(array('data'=>serialize($_REQUEST['arts'])));
+		if(isset($_REQUEST['art_id'])){
+			$id_art=$_REQUEST['art_id'];
+		}else 		
+			$id_art=$this->product->create_new_art(array('data'=>serialize($_REQUEST['arts'])));
+		
 		if(!$id_art)
 		{
 			$this->session->set_flashdata("error","design:no_art_found");
