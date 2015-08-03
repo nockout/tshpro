@@ -110,7 +110,7 @@ class Product_m extends Base_m
 
 		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
 
-		$this->db->select("(SELECT username FROM ".(SITE_REF."_".$this->_users)." WHERE id=user_id LIMIT 1) AS user_name", FALSE);
+		//$this->db->select("(SELECT username FROM ".(SITE_REF."_".$this->_users)." WHERE id=user_id LIMIT 1) AS user_name", FALSE);
 		$this->db->where($params);
 		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id');
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
@@ -283,6 +283,17 @@ class Product_m extends Base_m
 		$this->db->join("tshirt_template_lang",'tshirt_template_lang.id_template=tshirt_template.id_template');
 		$this->db->where('tshirt_template_lang.lang_code',CURRENT_LANGUAGE);
 		return $this->db->get("tshirt_template")->row();
+	}
+	
+	public function get_category(){
+		//$this->db->select('DISTINCT(id_category)',0);
+		$this->db->where('delete',0);
+		$this->db->where('lang_code',CURRENT_LANGUAGE);
+		//$this->db->where('tshirt_template.id_template',$id_template);
+		//$this->db->join("tshirt_template_lang",'tshirt_template_lang.id_template=tshirt_template.id_template');
+		//$this->db->where('tshirt_template_lang.lang_code',CURRENT_LANGUAGE);
+		return $this->db->get("tshirt_template_categories")->result();
+		
 	}
 
 }
