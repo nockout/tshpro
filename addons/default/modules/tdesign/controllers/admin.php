@@ -428,8 +428,14 @@ class Admin extends Admin_Controller
 		
 	
 	}
-	function templateinfo(){
-		die(json_encode(array("max_price"=>50000,"price"=>25000,"id_template"=>15)));
+	function templateinfo($id_template=0){
+		$this->load->model('product_m');
+		
+		if($id_template){
+			$product=$this->product_m->get_product_template($id_template);
+			die(json_encode(array("na"=>$product->name,"mp"=>$product->price_max,"p"=>$product->price,"idt"=>$id_template)));
+		}
+		
 		
 	}
 

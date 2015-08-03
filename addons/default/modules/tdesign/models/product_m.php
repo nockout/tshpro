@@ -274,5 +274,14 @@ class Product_m extends Base_m
 		$this->db->insert($this->_images,array('product_id'=>intval($product_id)));
 		return $this->db->insert_id();
 	}
+	
+	public function get_product_template($id_template){
+		//$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
+		$this->db->where('deleted',0);
+		$this->db->where('tshirt_template.id_template',$id_template);
+		$this->db->join("tshirt_template_lang",'tshirt_template_lang.id_template=tshirt_template.id_template');
+		$this->db->where('tshirt_template_lang.lang_code',CURRENT_LANGUAGE);
+		return $this->db->get("tshirt_template")->row();
+	}
 
 }

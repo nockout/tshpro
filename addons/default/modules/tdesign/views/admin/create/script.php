@@ -139,28 +139,32 @@ jQuery(document)
 					
 					$('button#putinconllection').on("click",function() {
 	
-
-						$.get( "admin/tdesign/templateinfo", function( data ) {
+						var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
+						var views=yourDesigner.getViewsDataURL();
+						var products=yourDesigner.getProduct(true);
+						
+						$.get( "admin/tdesign/templateinfo/"+products[0].title, function( data ) {
 							var hmtl=[];
 							var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 							var views=yourDesigner.getViewsDataURL();
 					
 							//console.log(data);
-							var price=data.price;
+							
 							//price=parseInt(price.replace(/\s+/g, ''));
 							var products=yourDesigner.getProduct(true);
 							if(!products)
 								return;
-							var name=products[0].title;
-							var max_price=data.max_price;
-							console.log(max_price);
+							var price=parseInt(data.p);
+							//var name=products[0].title;
+							var max_price=parseInt(data.mp);
+							//console.log(max_price);
 							if(views.length){
 								hmtl.push("<tr><td style='width: 30px' align='left'>");
 								hmtl.push("<img style='width:80px;height:80px' src='"+views[0]+"'></td>");
 								hmtl.push("<td style='position:relative'>");
 								hmtl.push("<i style='top:0;right:0;position:absolute; font-size: 1.3em;cursor: pointer' class='x_row pointer fpd-btn  fpd-icon-remove'></i>");
-								hmtl.push("<input type='hidden'  maxlength='100' value='"+data.id_template+"' name=products["+product+"][id_template]>");
-								hmtl.push("<input type='text' id='title' maxlength='100' value='"+name+"' name=products["+product+"][title]>");	
+								hmtl.push("<input type='hidden'  maxlength='100' value='"+data.idt+"' name=products["+product+"][id_template]>");
+								hmtl.push("<input type='text' id='title' maxlength='100' value='"+data.na+"' name=products["+product+"][title]>");	
 								hmtl.push("<div id='slider"+product+"'>");
 								hmtl.push("</div>");
 								hmtl.push("<input type='hidden' id='price"+product+"' maxlength='100' value='"+price+"' name=products["+product+"][price]>");
@@ -181,11 +185,11 @@ jQuery(document)
 									});
 								var productprice=($("#price"+product));
 								var label=($("#label"+product));
-								console.log(price);
+								//console.log(price);
 								$("#slider"+product).slider({
 								    range: "min",
 								    value: price,
-								    step: 5000,
+								    step: 1000,
 								    min: price,
 								    max: max_price,
 								    slide: function(event, ui) {

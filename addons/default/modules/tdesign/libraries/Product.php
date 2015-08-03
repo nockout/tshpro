@@ -120,7 +120,6 @@ class Product {
 	
 	public function get_cate_fromproduct($id_category){
 		$cat="tshirt_template_categories";
-		
 		$this->CI->db->where("id_category",intval($id_category));
 		$this->CI->db->where("lang_code",CURRENT_LANGUAGE);
 		$this->CI->db->where("delete",0);
