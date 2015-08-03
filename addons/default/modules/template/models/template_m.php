@@ -58,7 +58,7 @@ class Template_m extends Base_m
 
 		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
 	
-		$this->db->select("(select name from ".$this->db->dbprefix("tshirt_template_categories")." where id_category=id_category_default) as cate_name");
+		$this->db->select("(select name from ".$this->db->dbprefix("tshirt_template_categories")." where id_category=id_category_default and lang_code='".CURRENT_LANGUAGE."') as cate_name");
 		$this->db->join($this->lang_table,$this->lang_table.'.'.$this->_primary.'='.$this->_table.'.'.$this->_primary);
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
 		$this->db->where('deleted',0);
