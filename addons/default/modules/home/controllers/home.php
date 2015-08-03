@@ -20,9 +20,15 @@ class Home extends Public_Controller
 
 
 	public function index()
-	{
+	{  
+		$this->load->model('product_m');
+		
+		$product=$this->product_m->get_products();
+		//echo "<pre>";
+		//print_r($product['objects']);die;
 		$this->template
 		->title($this->module_details['name'])
+		->set("products",$product['objects'])
 // 		->set_breadcrumb(lang('blog:blog_title'))
 // 		->set_metadata('og:title', $this->module_details['name'], 'og')
 // 		->set_metadata('og:type', 'blog', 'og')

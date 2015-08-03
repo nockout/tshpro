@@ -22,11 +22,11 @@ class Admin extends Admin_Controller
 					'rules' => 'trim|htmlspecialchars|required'
 			),
 		
-			array(
+			/* array(
 					'field' => 'category_id',
 					'label' => 'lang:design:category_label',
 					'rules' => 'trim|required|numeric'
-			),
+			), */
 			
 			array(
 					'field' => 'body',
