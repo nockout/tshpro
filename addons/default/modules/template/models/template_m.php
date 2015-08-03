@@ -9,21 +9,25 @@ class Template_m extends Base_m
 	protected $lang_table="tshirt_template_lang";
 	protected $_image_table="tshirt_template_image";
 	protected $_colors="tshirt_colors";
+	protected $template_design="tshirt_products";
+	
 	public function __construct()
 	{
 		parent::__construct();
 		
 	}
-	public function delete($id){
-		
-		
+	public function delete($id){		
 		if(!is_array($id)){
 			$id=array($id);
 		}
+		
 		if(!$this->db->where_in($this->_primary,$id)->get($this->_table)->result()){
 		
 			return false;
 		}
+		
+		$this->db->where_in("id_template",($id))->update($this->template_design,array("deleted"=>3));
+		
 		return $this->db->where_in($this->_primary,($id))->update($this->_table,array("deleted"=>1));
 	}
 	public function auto_delete($id){

@@ -103,13 +103,13 @@ class Admin extends Admin_Controller
 			//check logo
 				
 			if($this->tplate->delete($id))
-			{
+			{	
 				$this->session->set_flashdata("success",sprintf(lang("design:delete_success"),""));
 			}else{
 				$this->session->set_flashdata("error",sprintf(lang("design:delete_error"),""));
 			}
 		}
-		redirect('admin/template/index');
+		redirect('admin/template');
 	}
 	
 	public function index($page=0,$limit=6)

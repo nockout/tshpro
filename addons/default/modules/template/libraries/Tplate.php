@@ -37,7 +37,7 @@ class Tplate {
 	
 	public function delete($id) {
 		//$this->CI->load->model ( "Template_m" );
-	
+		
 		return $this->CI->template_m->delete ( $id );
 		
 		// unlink image;
