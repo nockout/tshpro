@@ -12,10 +12,10 @@
 							<img src="/images/leftpsm.png" class="leftp" height="3" width="6">
 						</div>
 						<div class="frameit">
-							<a href="/Forever-in-debt--THANKS-USA-Military.html" border="0">
+							<a href="<?php echo base_url("tdesign/index/$p->product_id")?>" border="0">
 							<?php if($p->extra):
 							    $image= unserialize($p->extra);
-							   
+							  
 							?>
 							<div class="frontThumb">
 								<img style="display: block;" src="<?php echo isset($image['image'][0]) ? $image['image'][0]:''?>" data-original="<?php echo isset($image['image'][0]) ? $image['image'][0]:''?>"
