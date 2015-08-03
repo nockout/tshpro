@@ -214,6 +214,11 @@ class Admin extends Admin_Controller
 		));
 		
 		$this->template->title($this->module_details['name']);
+		
+		if(isset($_POST['art_id'])){
+		
+			$this->template->set("art_id",$_POST['art_id']);
+		}
 		$this->template->set("templates",$template_cache);
 		$this->template->set("template_categories",$templates);
 		$this->template->build('admin/create/main');;

@@ -30,6 +30,9 @@
  				<button type="button" class="" id="export" class=""><?php echo lang("design:save_all_design")?></button> 
 				
 				</div>
+				<?php if(isset($art_id)):?>
+					<input type="hidden" name="art_id" value="<?php echo $art_id?>">
+				<?php endif;?>
 				<div id="slider"></div>
 				<?php echo  form_close()?>
 			</div>
