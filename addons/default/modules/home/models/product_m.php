@@ -100,10 +100,10 @@ class Product_m extends Base_m
 		
 
 		//$this->db->select("*");
-		if(!$this->allowViewAll()){
+		//if(!$this->allowViewAll()){
 		
-			$this->db->where('user_id',$this->current_user->user_id);	
-		}
+		//	$this->db->where('user_id',$this->current_user->user_id);	
+		//}
 		
 	
 	
@@ -282,7 +282,10 @@ class Product_m extends Base_m
 		$this->db->where('tshirt_template.id_template',$id_template);
 		$this->db->join("tshirt_template_lang",'tshirt_template_lang.id_template=tshirt_template.id_template');
 		$this->db->where('tshirt_template_lang.lang_code',CURRENT_LANGUAGE);
-		return $this->db->get("tshirt_template")->row();
+		$query=$this->db->get("tshirt_template");
+		if($query->num_rows()>0)
+			return $this->db->get("tshirt_template")->row();
+		return false;
 	}
 	
 	public function get_category(){
