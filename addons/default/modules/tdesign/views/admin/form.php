@@ -55,7 +55,7 @@
 					<label for="category_id"><?php echo lang('design:category_label') ?></label>
 					<div class="input">
 					<?php //echo form_dropdown('cate_id', array(lang('design:no_category_select_label')) + $categories, @cate_id) ?>
-					<?php echo form_input('cate_name',set_value("cate_name",$cate_name)) ?>
+					<?php echo form_input('cate_name',set_value("cate_name",$cate_name),'readonly=true') ?>
 					</div>
 				</li>
 					<li>
