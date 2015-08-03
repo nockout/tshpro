@@ -5,7 +5,9 @@
 
 	<section class="item">
 		<div class="content">
+		
 			<?php if ($designs) : ?>
+			<?php echo $this->load->view('admin/tables/moredesign') ?>
 				<?php echo $this->load->view('admin/partials/filters') ?>
 			
 				<?php echo form_open('admin/tdesign/action') ?>
@@ -14,6 +16,7 @@
 						<?php echo $this->load->view('admin/tables/designs') ?>
 					</div>
 				<?php echo form_close() ?>
+				
 			<?php else : ?>
 				<div class="no_data"><?php echo lang('design:currently_no_products') ?></div>
 			<?php endif ?>

@@ -48,7 +48,8 @@ $lang['design:read_more_label']                = 'Read More&nbsp;&raquo;';
 $lang['design:created_hour']                   = 'Created on Hour';
 $lang['design:created_minute']                 = 'Created on Minute';
 $lang['design:comments_enabled_label']         = 'Comments Enabled';
-
+$lang['design:disable_label']='Disable';
+$lang['design:adddmore']='more design';
 // titles
 $lang['design:create_title']                   = 'Add Design';
 $lang['design:edit_title']                     = 'Edit Design "%s"';

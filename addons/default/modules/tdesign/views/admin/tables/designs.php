@@ -48,4 +48,6 @@
 
 	<div class="table_action_buttons">
 		<?php $this->load->view('admin/partials/buttons', array('buttons' => array('delete', 'publish'))) ?>
+
 	</div>
+	

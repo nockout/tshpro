@@ -62,12 +62,13 @@ class Admin_Manage extends Admin_Controller
 		if(!empty($objects)){
 			$designs=$objects['objects'];
 		}
-	
+		
 		$categories =array();
 	
 		$this->template->set('categories',$categories);
  		$this->template->
  			set('designs',$designs)->
+ 			set('art_id',$id)->
  			set('arts',$arts)
  			->title($this->module_details['name'])
 			->build('admin/index');

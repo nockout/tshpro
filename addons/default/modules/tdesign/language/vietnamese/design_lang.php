@@ -50,6 +50,7 @@ $lang['design:created_hour']                   = 'Created on Hour';
 $lang['design:created_minute']                 = 'Created on Minute';
 $lang['design:comments_enabled_label']         = 'Comments Enabled';
 $lang['design:disable_label']='hết hiệu lực';
+$lang['design:adddmore']='Thêm mẫu';
 // titles
 $lang['design:create_title']                   = 'Add Design';
 $lang['design:edit_title']                     = 'Edit Design "%s"';
