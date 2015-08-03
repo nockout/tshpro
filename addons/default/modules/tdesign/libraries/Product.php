@@ -81,6 +81,7 @@ class Product {
 
 		$categorys='tshirt_template_categories';
 		$this->CI->db->select("*");
+		$this->CI->db->where("lang_code",CURRENT_LANGUAGE);
 		$cates=$this->CI->db->get($categorys)->result();
 		
 		if(empty($cates)){
