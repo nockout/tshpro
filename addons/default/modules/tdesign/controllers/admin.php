@@ -127,7 +127,8 @@ class Admin extends Admin_Controller
 			foreach ($names as $tempname){
 				$urls[]=get_design_image_path("templates",$tempname);
 			}
-			$products[]=$this->product->create_draft(array('group_id'=>$group_id,'id_art'=>intval($id_art),"raw_url"=>$files,"image"=>$urls,"name"=>$arr_base64_imgs['title'],'price'=>$arr_base64_imgs['price']));
+			
+			$products[]=$this->product->create_draft(array('group_id'=>$group_id,'id_art'=>intval($id_art),"raw_url"=>$files,"image"=>$urls,"name"=>$arr_base64_imgs['title'],"id_template"=>$arr_base64_imgs['id_template'],'price'=>$arr_base64_imgs['price']));
 		}
 	//	echo "<pre>";
 		//print_r($products);die;
