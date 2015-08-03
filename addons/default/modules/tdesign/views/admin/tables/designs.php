@@ -25,12 +25,13 @@
 						<?php echo lang('design:author_unknown') ?>
 					<?php endif ?>
 					</td>
-					<td><?php echo lang('design:'.$design->status.'_label') ?></td>
+					<td><?php echo lang('design:disable_label') ?></td>
 					<td style="padding-top:10px;">
                        
-                      
+                      <?php if($design->deleted==0):?>
 						<a href="<?php echo site_url('admin/tdesign/form/' . $design->product_id) ?>" title="<?php echo lang('global:edit')?>" class="button"><?php echo lang('global:edit')?></a>
 						<a href="<?php echo site_url('admin/tdesign/delete/' . $design->product_id) ?>" title="<?php echo lang('global:delete')?>" class="button confirm"><?php echo lang('global:delete')?></a>
+						<?php endif;?>
 					</td>
 				</tr>
 			<?php endforeach ?>
