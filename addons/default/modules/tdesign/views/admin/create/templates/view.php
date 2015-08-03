@@ -7,7 +7,7 @@
 			continue;?>
 		
 					
-							<?php  $name=$t->name;?>
+							<?php  $name=$t->id_template;?>
 						
 								<?php  
 							$pFront["price"]=number_format($t->price, 2, ',', ' ');
@@ -21,6 +21,7 @@
 				$pFront['colors']=implode(",", $color);
 				$pBack['colors']=$name;
 			}
+			$pFront['options']=array("max_price"=>10000);
 			$jsonFront=json_encode($pFront);
 			$jsonFront1=json_encode($pFront1);
 			$jsonBack=json_encode($pBack);
@@ -31,7 +32,9 @@
 	//		echo "<pre>";
 // 			print_r($t->images);die;
 			?>
-			<div class="fpd-product" class="fpd-shadow-1" title="<?php echo $name?>" data-thumbnail="<?php echo $first_layer?>">
+			
+			<div id="template_<?php echo $t->id_template?>" data='<?php echo json_encode(array("name"=>$name,'max_price'=>$t->price_max,"id_template"=>$t->id_template))?>'  class="fpd-product fpd-shadow-1" title="<?php echo $name?>" data-thumbnail="<?php echo $first_layer?>">
+	    			 
 	    			<img src="<?php echo $first_layer?>" title="<?php echo $name?>" data-parameters='<?php echo $jsonFront?>' />
 			  		<?php if(!empty($FRONT)):?>
 			  		

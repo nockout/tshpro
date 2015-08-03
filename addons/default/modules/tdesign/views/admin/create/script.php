@@ -138,68 +138,73 @@ jQuery(document)
 
 					
 					$('button#putinconllection').on("click",function() {
-						var hmtl=[];
-						var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
-						var views=yourDesigner.getViewsDataURL();
-						var price=yourDesigner.getPrice()?yourDesigner.getPrice():"";
-						
+	
 
-						
-						//console.log(yourDesigner.getCustomElements());
-						//return;
-						///var max=yourDesigner.getMaxPrice();
-						//console.log(max);
-						
-						price=parseInt(price.replace(/\s+/g, ''));
-						var products=yourDesigner.getProduct(true);
-						if(!products)
-							return;
-						var name=(products[0].title);
-						//return; 
-						
-						if(views.length){
-							hmtl.push("<tr><td style='width: 30px' align='left'>");
-							hmtl.push("<img style='width:80px;height:80px' src='"+views[0]+"'></td>");
-							hmtl.push("<td style='position:relative'>");
-							hmtl.push("<i style='top:0;right:0;position:absolute; font-size: 1.3em;cursor: pointer' class='x_row pointer fpd-btn  fpd-icon-remove'></i>");
-							hmtl.push("<input type='text' id='title' maxlength='100' value='"+name+"' name=products["+product+"][title]>");	
-							hmtl.push("<div id='slider"+product+"'>");
-							hmtl.push("</div>");
-							hmtl.push("<input type='hidden' id='price"+product+"' maxlength='100' value='"+price+"' name=products["+product+"][price]>");
-							hmtl.push(" <p><label id='label"+product+"' >Price:"+price+"</label>");
-							hmtl.push("</p>");
-							for(i=0;i<views.length;i++){
-
-							hmtl.push( "<input  type='hidden' name='products["+product+"][images]["+i+"]' value='"+views[i]+"'>");
-							}
+						$.get( "admin/tdesign/templateinfo", function( data ) {
+							var hmtl=[];
+							var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
+							var views=yourDesigner.getViewsDataURL();
 					
-							
+							//console.log(data);
+							var price=data.price;
+							//price=parseInt(price.replace(/\s+/g, ''));
+							var products=yourDesigner.getProduct(true);
+							if(!products)
+								return;
+							var name=products[0].title;
+							var max_price=data.max_price;
+							console.log(max_price);
+							if(views.length){
+								hmtl.push("<tr><td style='width: 30px' align='left'>");
+								hmtl.push("<img style='width:80px;height:80px' src='"+views[0]+"'></td>");
+								hmtl.push("<td style='position:relative'>");
+								hmtl.push("<i style='top:0;right:0;position:absolute; font-size: 1.3em;cursor: pointer' class='x_row pointer fpd-btn  fpd-icon-remove'></i>");
+								hmtl.push("<input type='hidden'  maxlength='100' value='"+data.id_template+"' name=products["+product+"][id_template]>");
+								hmtl.push("<input type='text' id='title' maxlength='100' value='"+name+"' name=products["+product+"][title]>");	
+								hmtl.push("<div id='slider"+product+"'>");
+								hmtl.push("</div>");
+								hmtl.push("<input type='hidden' id='price"+product+"' maxlength='100' value='"+price+"' name=products["+product+"][price]>");
+								hmtl.push(" <p><label id='label"+product+"' >Price:"+price+"</label>");
+								hmtl.push("</p>");
+								for(i=0;i<views.length;i++){
+									hmtl.push( "<input  type='hidden' name='products["+product+"][images]["+i+"]' value='"+views[i]+"'>");
+								}
 						
-							hmtl.push("</td></tr>");
-							$("#yourdesigns").append(hmtl.join(""));
+								
 							
-							$(".x_row").bind( "click", function() {
-								 
-								  $(this).closest('tr').remove();
+								hmtl.push("</td></tr>");
+								$("#yourdesigns").append(hmtl.join(""));
+								
+								$(".x_row").bind( "click", function() {
+									 
+									  $(this).closest('tr').remove();
+									});
+								var productprice=($("#price"+product));
+								var label=($("#label"+product));
+								console.log(price);
+								$("#slider"+product).slider({
+								    range: "min",
+								    value: price,
+								    step: 5000,
+								    min: price,
+								    max: max_price,
+								    slide: function(event, ui) {
+				    
+								    	productprice.val(ui.value);     	
+								    	label.html("Price:"+ui.value);
+								     	
+								    }
 								});
-							var productprice=($("#price"+product));
-							var label=($("#label"+product));
-							$("#slider"+product).slider({
-							    range: "min",
-							    value: price,
-							    step: 5000,
-							    min: 10000,
-							    max: 200000,
-							    slide: function(event, ui) {
-			    
-							    	productprice.val(ui.value);     	
-							    	label.html("Price:"+ui.value);
-							     	
-							    }
-							});
+								
+								product++;
+							}
 							
-							product++;
-						}
+							},"json");
+					
+					
+						
+						
+						
 						
 						
 						return;
