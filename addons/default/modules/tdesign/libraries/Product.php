@@ -117,6 +117,16 @@ class Product {
 		
 		return $tempaltes;
 	}
+	
+	public function get_cate_fromproduct($id_category){
+		$cat="tshirt_template_categories";
+		
+		$this->CI->db->where("id_category",intval($id_category));
+		$this->CI->db->where("lang_code",CURRENT_LANGUAGE);
+		$this->CI->db->where("delete",0);
+		return $this->CI->db->get($cat)->row();
+	}
+	
 	private function get_templates_images($template_id){
 		$path=UPLOAD_PATH.'../template/';
 		$imga_table="tshirt_template_image";

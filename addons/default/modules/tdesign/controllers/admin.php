@@ -290,6 +290,7 @@ class Admin extends Admin_Controller
 		$data['slug'] = '';
 		$data['group_id'] = '';
 		$data['product'] = "";
+		$data['cate_id'] = '';
 		$data['status'] = "";
 		$data['shortname'] = '';
 		$data['product_code'] = '';
@@ -328,6 +329,7 @@ class Admin extends Admin_Controller
 					$this->session->set_flashdata('error', lang('error_not_found'));
 					redirect($this->config->item('admin_folder') . '/products');
 				}
+				
 				$savelang['shortname'] = $product->shortname;
 				$savelang['product'] = $product->product;
 				$savelang['product_id'] = $product->product_id;
@@ -342,11 +344,15 @@ class Admin extends Admin_Controller
 			}
 			//set values to db values
 			$data['product_id'] = $id;
-		
+			//get name category
+	        $cat=$this->product->get_cate_fromproduct($product->cate_id);
+	        
+	       // die;
+			
 			$data['slug'] =$product->slug;
 			$data['group_id'] = $product->group_id;
 			$data['product'] = isset($product->product)?$product->product:"";
-		
+			$data['cate_name'] = $cat->name;
 			$data['product_code'] = $product->product_code;
 			$data['short_description'] = isset($product->short_description)?$product->short_description:"";
 			$data['full_description'] =isset($product->full_description)?$product->full_description:"";
@@ -382,7 +388,7 @@ class Admin extends Admin_Controller
 			$save['product_id'] = intval($id);
             $save['list_price'] =$this->input->post("list_price")?$this->input->post("list_price"):0;
             $save['status']=$this->input->post("status");
-            $save['cate_id']=$this->input->post("category_id");
+            //$save['cate_id']=$this->input->post("category_id");
             
             $save['lang'][CURRENT_LANGUAGE]['product']=$this->input->post("title");
       
