@@ -310,7 +310,7 @@ class Product_m extends Base_m
 		//$result=$this->db->where($this->_table.'.product_id',$id)->get($this->_table)->result();
 	
 		$result =$this->db->get($this->_table)->result();
-		if($result)
+		/* if($result)
 			foreach ($result as &$rs){
 			$images=$this->get_images($id);
 				
@@ -321,7 +321,7 @@ class Product_m extends Base_m
 					$rs->image[]=get_design_image_path("original",$image->id_image.'_'.$image->product_id.'.jpg');
 			}
 				
-		}
+		} */
 	
 	
 		return $result;
