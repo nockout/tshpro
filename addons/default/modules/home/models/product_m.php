@@ -299,4 +299,31 @@ class Product_m extends Base_m
 		
 	}
 
+	public function get_related($id_art,$id){
+	
+		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id',"LEFT");
+		$this->db->where('lang_code',CURRENT_LANGUAGE);
+		$this->db->where('deleted',0);
+		$this->db->where('id_art',$id_art);
+		$this->db->where($this->_table.'.product_id!='.$id);
+		//$this->db->group_by("id_art");
+		//$result=$this->db->where($this->_table.'.product_id',$id)->get($this->_table)->result();
+	
+		$result =$this->db->get($this->_table)->result();
+		if($result)
+			foreach ($result as &$rs){
+			$images=$this->get_images($id);
+				
+			if(!empty($images)){
+					
+				$this->load->helper('tdesign');
+				foreach ($images as $image)
+					$rs->image[]=get_design_image_path("original",$image->id_image.'_'.$image->product_id.'.jpg');
+			}
+				
+		}
+	
+	
+		return $result;
+	}
 }
