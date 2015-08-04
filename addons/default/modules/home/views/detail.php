@@ -55,7 +55,7 @@
 							<?php if(isset($relprd))
 								foreach ($relprd as $rp):
 							?>
-							<option selected="" value="<?php echo site_url("home/product/".$rp->product_id)?>"><?php echo $rp->product."-".$rp->list_price?></option>
+							<option  value="<?php echo site_url("home/product/".$rp->product_id)?>"><?php echo $rp->product."-".$rp->list_price?></option>
 							
 							<?php endforeach;?>
 									

@@ -52,8 +52,11 @@ class Home extends Public_Controller
 		//echo "<pre>";
 		//print_r($product);die;
 		if($product->id_art){
-			//$relatePro=$this->product_m->get();
+			$relatePro=$this->product_m->get_related($product->id_art,$id);
+			$this->template->set('relprd',$relatePro);
 		}
+		
+		
 		$this->template
 		->title($this->module_details['name'])
 		// 		->set_breadcrumb(lang('blog:blog_title'))
