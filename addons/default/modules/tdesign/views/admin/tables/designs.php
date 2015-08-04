@@ -47,7 +47,9 @@
 	<br>
 
 	<div class="table_action_buttons">
-		<?php $this->load->view('admin/partials/buttons', array('buttons' => array('delete', 'publish'))) ?>
+		<?php $this->load->view('admin/partials/buttons', array('buttons' => array('delete'))) ?>
+
+
 
 	</div>
 	
