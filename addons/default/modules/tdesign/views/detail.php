@@ -7,7 +7,7 @@
 				<div class="col-sm-7  ">
 					<div class="productFrame">
 						<span class="priceshow"><?php echo $product->list_price?></span>
-						<img width="13" height="8" class="btm-s" src="">
+					<!-- 	<img width="13" height="8" class="btm-s" src=""> -->
 			
 					<?php 
 					$extra=$product->extra;
@@ -19,7 +19,7 @@
 					if(!empty($extra['image'])):?>
 						<?php $first=array_shift($extra['image']);?>
 				
-						<a data-theimage="<?php ?>" data-target="#imageModal" data-toggle="modal">
+						<a data-theimage="<?php echo array_shift($extra['image'])?>" data-target="#imageModal" data-toggle="modal">
 							<img width="651" height="651" class="img-responsive lg_view" alt="<?php echo $product->product?>" src="<?php echo $first?>">
 					
 						</a>
