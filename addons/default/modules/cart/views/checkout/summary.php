@@ -94,8 +94,8 @@
 		
 		<tbody>
 			<?php
-			$subtotal = 0;
-
+			//echo "<pre>";
+			//print_r($this->go_cart->contents() );die;
 			foreach ($this->go_cart->contents() as $cartkey=>$product):?>
 				<tr>
 					<td><?php echo $product['product_code']; ?></td>
