@@ -67,4 +67,6 @@ $lang['cp:nav_design']					= 'Design';
 $lang['cp:nav_option']					= 'Option';
 $lang['cp:nav_mockup']					= 'Mẫu thiết kế';
 $lang['cp:nav_template']					= 'Template';
+$lang['cp:nav_order']					= 'Orders';
+
 /* End of file admin_lang.php */
