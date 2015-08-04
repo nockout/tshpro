@@ -6,6 +6,7 @@
 class Order_m extends MY_Model
 {
 	protected $_table = 'tshirt_orders';
+	protected $_orderItem='tshirt_order_items';
 
 	public function get_orders($params,$page=0,$limit=6){
 		
@@ -23,6 +24,26 @@ class Order_m extends MY_Model
 		$result['total']= $query->row()->Count;
 		
 		return $result;
+	}
+	public function get($id){
+		
+		$order=$this->db->where('id',intval($id))->get($this->_table)->row();
+		
+		if(empty($order))
+			return;
+		$order->items=$this->db->where("order_id",intval($id))->get($this->_orderItem)->result();
+		return $order;
+	}
+	public function save($param) {
+		if(empty($param))
+			return;
+		$id="";
+		if(!empty($param['id'])){
+			$id=intval($param['id']);
+			$this->db->where("id",intval($param['id']))->update($this->_table,$param);
+	
+		}
+		return $id;
 	}
 
 }
