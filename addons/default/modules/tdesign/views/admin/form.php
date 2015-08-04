@@ -80,7 +80,14 @@
 						<?php //echo form_dropdown('created_on_minute', $minutes, date('i', ltrim(strtotime($avail_since), '0'))) ?>
 					</div>
 				</li>
-				
+				<?php if(!empty($product_id)):?>
+			
+					
+						<a  target="_blank" href="<?php echo site_url("tdesign/index/".$product_id)?>">
+						Preview
+						</a>
+		
+				<?php endif?>
 
 				</ul>
 		
