@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * Public Blog module controller
@@ -43,7 +42,32 @@ class Home extends Public_Controller
 		->build('home');
 	}
 
-
+	public function product($id=null)
+	{
+		$this->load->model('product_m');
+		$id or redirect("home");
+		$product=$this->product_m->get($id);
+		if(empty($product))
+			redirect("home");
+		//echo "<pre>";
+		//print_r($product);die;
+		if($product->id_art){
+			//$relatePro=$this->product_m->get();
+		}
+		$this->template
+		->title($this->module_details['name'])
+		// 		->set_breadcrumb(lang('blog:blog_title'))
+		// 		->set_metadata('og:title', $this->module_details['name'], 'og')
+		// 		->set_metadata('og:type', 'blog', 'og')
+		// 		->set_metadata('og:url', current_url(), 'og')
+		// 		->set_metadata('og:description', $meta['description'], 'og')
+		// 		->set_metadata('description', $meta['description'])
+		// 		->set_metadata('keywords', $meta['keywords'])
+		// 		->set_stream($this->stream->stream_slug, $this->stream->stream_namespace)
+		->set('product', $product)
+		// 		->set('pagination', $posts['pagination'])
+		->build('detail');
+	}
 	
 	public function category($slug = '')
 	{
