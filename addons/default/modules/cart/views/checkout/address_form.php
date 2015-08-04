@@ -23,20 +23,23 @@ $zip		= array('placeholder'=>lang('address_zip'), 'maxlength'=>'10', 'class'=>'a
 	<?php
 	//post to the correct place.
 	echo form_open('cart/checkout/step_1',"");?>
+	
 		<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-			<?php // Address form ?>
-			<fieldset>
-				
-					<div class="form-group">
+		
+		<div class="row">
+		<div class="col-md-7 pull-right">
+		<div class="form-group">
 						<h2 style="margin:0px;">
 							<?php //echo ($address_form_prefix == 'bill')?lang('address'):lang('shipping_address');?>
 							<?php echo lang('address')?>
 						</h2>
 					</div>
+					</div>
+			</div>		
+		<div class="col-md-4 col-md-offset-1">
+			<?php // Address form ?>
+			<fieldset>
 				
-				
-			
 					<div class="form-group">
 						<label class="placeholder"><?php echo lang('address_company');?></label>
 						<?php echo form_input($company);?>
@@ -52,10 +55,15 @@ $zip		= array('placeholder'=>lang('address_zip'), 'maxlength'=>'10', 'class'=>'a
 					</div>
 			
 				
-					<div class="form-group">
+					
+				<div class="form-group">
 						<label class="placeholder"><?php echo lang('address_email');?><b class="r"> *</b></label>
 						<?php echo form_input($email);?>
 					</div>
+			
+			</div>
+			<div class="col-md-4 col-md-offset-1">
+			
 
 					<div class="form-group">
 						<label class="placeholder"><?php echo lang('address_phone');?><b class="r"> *</b></label>
@@ -80,17 +88,13 @@ $zip		= array('placeholder'=>lang('address_zip'), 'maxlength'=>'10', 'class'=>'a
 						<label class="placeholder"><?php echo lang('address_city');?><b class="r"> *</b></label>
 						<?php echo form_input($city);?>
 					</div>
-				
-				
-		
-
-				
+					
 					<div class="form-group">
 						
-						<input class="btn  btn-default btn-primary" type="submit" value="<?php echo lang('form_continue');?>"/>
+						<input class="btn  btn-default btn-primary pull-right" type="submit" value="<?php echo lang('form_continue');?>"/>
 					</div>
-			
 			</div>
+			
 		</fieldset>
 	</form>
 	</div>
