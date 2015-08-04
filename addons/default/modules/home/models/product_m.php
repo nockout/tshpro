@@ -130,9 +130,9 @@ class Product_m extends Base_m
 	
 	}
 	public function get($id){
-		if(!$this->allowViewAll()){
+		/* if(!$this->allowViewAll()){
 			$this->db->where("user_id",$this->current_user->user_id);
-		}
+		} */
 		if($row=$this->is_draft($id)){
 			return $row;
 		}
