@@ -12,7 +12,7 @@
 							<img src="/images/leftpsm.png" class="leftp" height="3" width="6">
 						</div>
 						<div class="frameit">
-							<a href="<?php echo base_url("tdesign/index/$p->product_id")?>" border="0">
+							<a href="<?php echo base_url("home/product/$p->product_id")?>" border="0">
 							<?php if($p->extra):
 							    $image= unserialize($p->extra);
 							  
