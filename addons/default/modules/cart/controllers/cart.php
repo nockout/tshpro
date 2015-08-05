@@ -315,11 +315,7 @@ class Cart extends Public_Controller {
 		if (!$product->quantity || $product->quantity <= 0 )
 		{
 			$product->quantity = 1;
-		}
-		
-		
-		
-			
+		}	
 			// Add the product item to the cart, also updates coupon discounts automatically
 			$this->go_cart->insert((array)$product);
 	

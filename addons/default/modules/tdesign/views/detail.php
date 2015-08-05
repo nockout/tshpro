@@ -52,10 +52,14 @@
 					<div style="margin-bottom: 25px;" class="form-group">
 						<label for="Style">Style</label>
 						<select onchange="location = this.options[this.selectedIndex].value;" class="form-control" name="shirtTypes" id="shirtTypes">
+							<?php if(isset($relprd))
+								foreach ($relprd as $rp):
+							?>
+							<option selected="" value="<?php echo site_url("home/product/".$rp->product_id)?>"><?php echo $rp->product?> $19.00</option>
 							
-								<option selected="" value="/Jeb-Bush-2016.html">Guys Tee $19.00</option>	
+							<?php endforeach;?>
+									
 							
-								<option value="/Jeb-Bush-2016-Ladies.html">Ladies Tee $19.00</option>	
 							
 						</select>
 					</div>

@@ -41,7 +41,9 @@ class Admin extends Admin_Controller
 	
 		
 	public function check_status(){
-		if($this->input->post("status")==2 && empty($this->input->post("comment"))){
+		$status=$this->input->post("status");
+		$comment=$this->input->post("comment");
+		if($status==2 && empty($comment)){
 			return false;
 		}
 		return true;
@@ -52,6 +54,7 @@ class Admin extends Admin_Controller
 		$this->load->model('order_m');
 		$detail=$this->order_m->get($id);
 		$data['detail']=$detail;
+		//echo"<pre>";print_r(unserialize($detail->items[0]->contents));die;
 		if(empty($detail)){
 			$this->session->set_flashdata("error",lang("order:no_order_found"));
 			redirect("admin/order/index");
