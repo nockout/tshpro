@@ -5,6 +5,7 @@ $lang['order:orders']                   = 'Orders';
 
 // labels
 $lang['order:total']="Total";
+
 $lang['order:ordered_label']                   = 'ordered';
 $lang['order:ordered_label_alt']               = 'ordered at';
 $lang['order:written_by_label']				= 'Written by';
@@ -41,7 +42,7 @@ $lang['order:edit_title']                     = 'Edit order "%s"';
 $lang['order:archive_title']                 = 'Archive';
 $lang['order:orders_title']					= 'orders';
 $lang['order:rss_orders_title']				= 'order orders for %s';
-$lang['order:order_title']					= 'order';
+$lang['order:order_title']					= 'Order';
 $lang['order:list_title']					= 'List orders';
 
 // messages
@@ -66,3 +67,7 @@ $lang['order:twitter_error']                  = 'Twitter Error';
 
 // date
 $lang['order:archive_date_format']		= "%B %Y";
+
+
+
+$lang['order:order_id']="Order ID";

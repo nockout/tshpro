@@ -1120,3 +1120,6 @@ table > tbody > tr {
   color: #5D7F88;
   background: #E3ECEE;
 }
+.text-right{
+	text-align: right !important;	
+}
