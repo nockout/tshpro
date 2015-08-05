@@ -48,11 +48,13 @@
 					
 					
 					
-					
+					<?php 
+					 
+					if(isset($relprd) && !empty($relprd)) : ?>
 				<div style="margin-bottom: 25px;" class="form-group">
 						<label for="Style">Style</label>
 						<select onchange="location = this.options[this.selectedIndex].value;" class="form-control" name="shirtTypes" id="shirtTypes">
-							<?php if(isset($relprd))
+							<?php 
 								foreach ($relprd as $rp):
 							?>
 							<option  value="<?php echo site_url("home/product/".$rp->product_id)?>"><?php echo $rp->product."-".$rp->list_price?></option>
@@ -63,6 +65,7 @@
 							
 						</select>
 					</div>
+					<?php endif;?>
 				
 
 					<div class="clearfix"></div>
