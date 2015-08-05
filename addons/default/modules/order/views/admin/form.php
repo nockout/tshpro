@@ -120,7 +120,7 @@
 				<table cellspacing="0">
 					<thead>
 						<tr>
-							
+							<th></th>
 							<th><?php echo lang("item:image")?></th>
 							<th class="collapse"><?php echo lang("item:name")?></th>
 							<th ><?php echo lang("item:quantity")?></th>
@@ -131,6 +131,7 @@
 					<?php foreach ($detail->items as $item):?>
 						<?php $productData=unserialize($item->contents)?>
 						<tr>
+							<td><?php $this->load->view("admin/partials/download",array("arts"=>$productData['arts']))?></td>
 							<?php 
 							?>
 							<td class="collapse">
@@ -144,6 +145,7 @@
 							<?php endforeach;?>
 							<?php endif?>
 							</td>
+							
 							<td class="collapse"><?php echo $productData['product']?></td>
 						
 
@@ -153,7 +155,7 @@
 						
 						<?php endforeach;?>
 						<tr>
-							<td colspan=4 class="text-right"><h2><?php echo lang("order:total")?>:<?php echo format_price($detail->total);?></h2></td>
+							<td colspan=5 class="text-right"><h2><?php echo lang("order:total")?>:<?php echo format_price($detail->total);?></h2></td>
 					
 						</tr>
 					</tbody>
