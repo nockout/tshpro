@@ -56,6 +56,8 @@ class Admin_Manage extends Admin_Controller
 		if(!empty($artobj)){
 			$arts=unserialize($artobj->data);
 		}
+		//echo "<pre>";
+	//	print_r($arts);die;
 		//echo "<pre[>";
 		$designs='';
 		//print_r($objects);die;

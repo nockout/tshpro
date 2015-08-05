@@ -139,7 +139,7 @@ jQuery(document)
 							var hmtl=[];
 							var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 							var views=yourDesigner.getViewsDataURL();
-					
+							
 							//console.log(data);
 							
 							//price=parseInt(price.replace(/\s+/g, ''));
@@ -212,9 +212,16 @@ jQuery(document)
 								alert("Your art is empty");
 									return;
 							}else{
+								var value="";
 								for(i=0;i<art.length;i++){
-									console.log(art[i].element.toDataURL());
-									hmtl.push("<input type='hidden'  maxlength='100' value='"+art[i].element.toDataURL()+"' name=arts["+i+"]>");							
+									if(art[i].element.type=="image"){
+										value=(art[i].element.source);
+																
+									}else{
+										value=art[i].element.toDataURL();
+										}		
+						
+									hmtl.push("<input type='hidden'  maxlength='100' value='"+value+"' name=arts["+i+"]>");							
 												
 								}
 							
