@@ -361,7 +361,16 @@ margin-top: -4px;
   max-width: 100%;
   margin: 0;
 }
-
+.filters ul {
+  float: left;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+.filters  > ul > li {
+    display: inline-block;
+    margin: 8px 0 5px 5px;
+}
 #filters legend {
   padding: 0 6px;
   font-size: 12px;
