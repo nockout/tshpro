@@ -305,7 +305,7 @@ class Product_m extends Base_m
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
 		$this->db->where('deleted',0);
 		$this->db->where('id_art',$id_art);
-		$this->db->where($this->_table.'.product_id!='.$id);
+		//$this->db->where($this->_table.'.product_id!='.$id);
 		//$this->db->group_by("id_art");
 		//$result=$this->db->where($this->_table.'.product_id',$id)->get($this->_table)->result();
 	
