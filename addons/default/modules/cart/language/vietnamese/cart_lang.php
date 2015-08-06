@@ -29,6 +29,7 @@ $lang['cart:total']="Tổng tiền";
 $lang['cart:place_order']="Đặt hàng";
 $lang['cart:sub_total']="Sub total";
 $lang['cart:shipping_address']="Địa chỉ";
+$lang['cart:select_province']="Thành phố";
 
 //message
 $lang['cart:title_contact_info']="Thông tin liên hệ";

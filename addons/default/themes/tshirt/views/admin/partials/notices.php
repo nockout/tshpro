@@ -42,9 +42,6 @@
 
 <?php 
 
-	/**
-	 * Admin Notification Event
-	 */
-	Events::trigger('admin_notification');
+
 	
 ?>

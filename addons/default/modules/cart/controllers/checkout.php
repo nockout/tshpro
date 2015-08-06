@@ -9,6 +9,7 @@ class Checkout extends Public_Controller {
        $this->load->library("go_cart");
      	$this->load->helper('currency');
        $this->lang->load(array("cart"));
+       $this->load->model(array("location_model"));
 		/*make sure the cart isnt empty*/
 		if($this->go_cart->total_items()==0)
 		{
@@ -51,28 +52,26 @@ class Checkout extends Public_Controller {
 	function index()
 	{
 		/*show address first*/
+		//$this->template->set("test","test");
 		$this->step_1();
 	}
 	function step_1(){
 
 		$data['customer']	= $this->go_cart->customer();
+		$cities=$this->location_model->get_provinces();
+		$data['cities']=array_merge(array(""=>lang("cart:select_province")),$cities);
 		
-		
-		$this->form_validation->set_rules('address_id', 'Billing Address ID', 'numeric');
-		$this->form_validation->set_rules('firstname', 'lang:address_firstname', 'trim|required|max_length[32]');
-		$this->form_validation->set_rules('lastname', 'lang:address_lastname', 'trim|required|max_length[32]');
-		$this->form_validation->set_rules('email', 'lang:address_email', 'trim|required|valid_email|max_length[128]');
-		$this->form_validation->set_rules('phone', 'lang:address_phone', 'trim|required|max_length[32]');
-		
-		$this->form_validation->set_rules('address1', 'lang:address', 'trim|required|max_length[128]');
-	
-		$this->form_validation->set_rules('city', 'lang:address_city', 'trim|required|max_length[128]');
-		
-		
+		$this->form_validation->set_rules('first_name', 'lang:cart:first_name', 'trim|required|max_length[32]');
+		$this->form_validation->set_rules('last_name', 'lang:cart:last_name', 'trim|required|max_length[32]');
+		$this->form_validation->set_rules('email', 'lang:cart:email', 'trim|required|valid_email|max_length[128]');
+		$this->form_validation->set_rules('phone', 'lang:phone', 'trim|required|max_length[32]');	
+		$this->form_validation->set_rules('address', 'lang:address', 'trim|required|max_length[128]');
+		$this->form_validation->set_rules('city', 'lang:city', 'trim|required|max_length[128]');
+			
 		if ($this->form_validation->run() == false)
 		{
-			
-				
+
+
 			$this->template->build('confirm', $data);
 		}
 		else
@@ -82,12 +81,12 @@ class Checkout extends Public_Controller {
 			$customer				= $this->go_cart->customer();
 		
 			$customer['bill_address']['company']		= $this->input->post('company');
-			$customer['bill_address']['firstname']	= $this->input->post('firstname');
-			$customer['bill_address']['lastname']		= $this->input->post('lastname');
+			$customer['bill_address']['firstname']	= $this->input->post('first_name');
+			$customer['bill_address']['lastname']		= $this->input->post('last_name');
 			$customer['bill_address']['email']		= $this->input->post('email');
 			$customer['bill_address']['phone']		= $this->input->post('phone');
-			$customer['bill_address']['address1']		= $this->input->post('address1');
-			$customer['bill_address']['address2']	= $this->input->post('address2');
+			$customer['bill_address']['address1']		= $this->input->post('address');
+			$customer['bill_address']['address2']	= $this->input->post('address');
 			$customer['bill_address']['city']			= $this->input->post('city');
 			$customer['bill_address']['zip']			= $this->input->post('zip');
 			$customer['bill_address']['zone']			= $this->input->post('zone');
@@ -97,12 +96,12 @@ class Checkout extends Public_Controller {
 				
 			//
 			$customer['ship_address']['company']		= $this->input->post('company');
-			$customer['ship_address']['firstname']	= $this->input->post('firstname');
-			$customer['ship_address']['lastname']		= $this->input->post('lastname');
+			$customer['ship_address']['firstname']	= $this->input->post('first_name');
+			$customer['ship_address']['lastname']		= $this->input->post('last_name');
 			$customer['ship_address']['email']		= $this->input->post('email');
 			$customer['ship_address']['phone']		= $this->input->post('phone');
-			$customer['ship_address']['address1']		= $this->input->post('address1');
-			$customer['ship_address']['address2']	= $this->input->post('address2');
+			$customer['ship_address']['address1']		= $this->input->post('address');
+			$customer['ship_address']['address2']	= $this->input->post('address');
 			$customer['ship_address']['city']			= $this->input->post('city');
 			$customer['ship_address']['zip']			= $this->input->post('zip');
 			$customer['ship_address']['zone']			= $this->input->post('zone');
@@ -110,12 +109,12 @@ class Checkout extends Public_Controller {
 			$customer['ship_address']['country']			= $this->input->post('country');
 			$customer['ship_address']['country_id']			= $this->input->post('country_id');
 			$customer['company']		= $this->input->post('company');
-			$customer['firstname']	= $this->input->post('firstname');
-			$customer['lastname']		= $this->input->post('lastname');
+			$customer['firstname']	= $this->input->post('first_name');
+			$customer['lastname']		= $this->input->post('last_name');
 			$customer['email']		= $this->input->post('email');
 			$customer['phone']		= $this->input->post('phone');
-			$customer['address2']		= $this->input->post('address1');
-			$customer['address1']		= $this->input->post('address1');
+			$customer['address2']		= $this->input->post('address');
+			$customer['address1']		= $this->input->post('address');
 			$customer['country_id']		= $this->input->post('country_id');
 			$customer['country']		= $this->input->post('country');
 			$customer['zone']		= $this->input->post('zone');
@@ -135,9 +134,11 @@ class Checkout extends Public_Controller {
 		
 		
 			$order_id = $this->go_cart->save_order();
-			$this->session->set_flashdata("success","Order đã được tạo thành công");
-			redirect();
-			//	redirect();
+			 $this->go_cart->destroy();
+// 			$this->session->set_flashdata("success","Order đã được tạo thành công");
+
+			redirect("cart/thank_you");
+		
 				
 		}
 		

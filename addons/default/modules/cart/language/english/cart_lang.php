@@ -21,3 +21,4 @@ $lang['cart:shipping_address']="Address";
 $lang['address']="Address";
 $lang['phone']="Phone";
 $lang['city']="City";
+$lang['cart:select_province']="Select Province";

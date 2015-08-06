@@ -56,10 +56,10 @@ class go_cart {
 		}
 		
 		$gc_setting = $this->CI->Settings_model->get_settings('gift_cards');
-		if(@$gc_setting['enabled']==1)
-		{
-			$this->gift_cards_enabled = true;
-		}
+// 		if(@$gc_setting['enabled']==1)
+// 		{
+// 			$this->gift_cards_enabled = true;
+// 		}
 		
 		//die(var_dump($this->_cart_contents));
 	}
@@ -1266,13 +1266,13 @@ class go_cart {
 			}
 			
 			//deduct any quantities from the database
-			if(!$item['is_gc'])
-			{
-				$product		= $this->CI->Product_model->get_product($item['id']);
-				$new_quantity	= intval($product->quantity) - intval($item['quantity']);
-				$product_quantity	= array('id'=>$product->id, 'quantity'=>$new_quantity);
-				$this->CI->Product_model->save($product_quantity);
-			}
+// 			if(!$item['is_gc'])
+// 			{
+// 				$product		= $this->CI->Product_model->get_product($item['product_id']);
+// 				$new_quantity	= intval($product->quantity) - intval($item['quantity']);
+// 				$product_quantity	= array('id'=>$product->id, 'quantity'=>$new_quantity);
+// 				$this->CI->Product_model->save($product_quantity);
+// 			}
 		}
 		//add the digital packages to the database
 		if(!empty($download_package))

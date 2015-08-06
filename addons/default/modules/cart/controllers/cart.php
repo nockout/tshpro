@@ -11,15 +11,16 @@ class Cart extends Public_Controller {
 		$this->load->config('tdesign/tdesign');
 		$this->load->helper('tdesign/tdesign');
 		$this->load->helper('formatting');
-		$this->lang->load(array('common',"cart","address"));
+		$this->lang->load(array('common',"cart"));
 		
 	}
 	function index()
 	{
-		$data['gift_cards_enabled'] = $this->gift_cards_enabled;
-		$data['homepage']			= true;
+		//$this->template->set("test","test");
+	//	$data['gift_cards_enabled'] = $this->gift_cards_enabled;
+		//$data['homepage']			= true;
 
-		$this->view('homepage', $data);
+	//	$this->temmplate->build('homepage', $data);
 	}
 
 
@@ -145,6 +146,9 @@ class Cart extends Public_Controller {
 		redirect('cart/view_cart');
 	}
 
+	function thank_you(){
+		$this->template->build('thank_you');
+	}
 	function update_cart($redirect = false)
 	{
 		//if redirect isn't provided in the URL check for it in a form field

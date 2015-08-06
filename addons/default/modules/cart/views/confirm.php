@@ -1,5 +1,5 @@
 <div class="container">
-
+	<?php echo $this->load->view("notices")?>
 
 	<div style="display: none; margin-top: 10px;" class="row"
 		id="frmValidateRow">
@@ -52,25 +52,21 @@
 
 						<div class="row">
 						
-							<div class="col-xs-6">
+							<div class="col-xs-12">
 
 								<div style="display: Block;" class="form-group has-feedback">
-									<label class="ielabel"><?php echo lang("city")?></label> <select
-										name="StateIDSelect" class="form-control" id="stateSelect">
-
-									</select>
+									<label class="ielabel"><?php echo lang("city")?></label> 
+									<?php echo form_dropdown('city', $cities, set_value("city"),'autocomplete="off" class="form-control"');?>
+									
 								</div>
-								<div style="display: None;" class="form-group has-feedback">
-									<label class="ielabel">State/Province</label> <input
-										type="text" value="" name="stateIDText"
-										placeholder="State/Prov" class="form-control" id="stateText">
-								</div>
+							
 							</div>
 
 						</div>
 						<div class="form-group has-feedback">
-							<label class="ielabel"><?php echo lang("cart:phone")?></label> <input type="text" value=""
-								class="form-control" placeholder="<?php echo lang("cart:phone")?>" id="phone" name="phone">
+							<label class="ielabel"><?php echo lang("cart:phone")?></label> 
+							<input type="text" value=""
+								class="form-control" placeholder="<?php echo lang("phone")?>" id="phone" name="phone">
 						</div>
 						<div class="form-group">
 							<input type="submit" value="<?php echo lang("cart:place_order")?>"

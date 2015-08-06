@@ -23,7 +23,9 @@
 		</div>
 		<div class="col-xs-9 cart-cell">
 			<i onclick="chkCart(delItem, '1');"
-				class="fa fa-times pull-right text-danger"></i><?php echo $item['product']?> </br>
+				class="glyphicon glyphicon-remove pull-right text-danger"></i>
+				<?php echo $item['product']?> 
+				</br>
 			<strong> <?php echo format_price($item['list_price'])?></strong><br>
 			<strong> <?php echo lang("cart:quantity")?>:<?php echo ($item['quantity'])?></strong>
 		</div>
