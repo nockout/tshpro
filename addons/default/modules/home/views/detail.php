@@ -52,7 +52,7 @@
 					 
 					if(isset($relprd) && !empty($relprd)) : ?>
 				<div style="margin-bottom: 25px;" class="form-group">
-						<label for="Style">Style</label>
+						<label for="Style"><?php echo lang("product:style")?></label>
 						<select onchange="location = this.options[this.selectedIndex].value;" class="form-control" name="shirtTypes" id="shirtTypes">
 							<?php 
 								foreach ($relprd as $rp):

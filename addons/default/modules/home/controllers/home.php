@@ -15,7 +15,7 @@ class Home extends Public_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		
+		$this->load->language('home');
 	}
 
 
@@ -43,7 +43,8 @@ class Home extends Public_Controller
 	}
 
 	public function product($id=null)
-	{
+	{	
+		
 		$this->load->model('product_m');
 		$id or redirect("home");
 		$product=$this->product_m->get($id);

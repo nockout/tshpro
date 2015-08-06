@@ -15,6 +15,7 @@ $lang['blog:post']                 = 'Post'; #translate
 $lang['blog:posts']                   = 'Posts'; #translate
 
 // labels
+$lang['product:style']                   = 'loại sản phẩm';
 $lang['blog:posted_label']                   = 'Đã gửi';
 $lang['blog:posted_label_alt']               = 'Gửi lúc at';
 $lang['blog:written_by_label']				= 'Viết bởi';

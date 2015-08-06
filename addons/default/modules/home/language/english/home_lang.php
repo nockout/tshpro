@@ -4,6 +4,7 @@ $lang['blog:post']                 = 'Post';
 $lang['blog:posts']                   = 'Posts';
 
 // labels
+$lang['product:style']                   = 'Style';
 $lang['blog:posted_label']                   = 'Posted';
 $lang['blog:posted_label_alt']               = 'Posted at';
 $lang['blog:written_by_label']				= 'Written by';
