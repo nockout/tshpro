@@ -154,13 +154,13 @@ class Product_m extends Base_m
 			return $row;
 		}
 		$subsql="( select data from ".$this->dbprefix("tshirt_arts") ." where id=id_art ) as arts";
-		$this->db->select(array("*",$subsql));
+		$this->db->select(array("*","list_price as price",$subsql));
 		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id',"LEFT");
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
 		$this->db->where('deleted',0);
 		$this->db->group_by("id_art");
 		$result=$this->db->where($this->_table.'.product_id',$id)->get($this->_table)->row();
-		
+	
 		$images=$this->get_images($id);
 	
 		if(!empty($images)){

@@ -42,8 +42,8 @@ class go_cart {
 	function __construct() 
 	{
 		$this->CI =& get_instance();
-		//$this->CI->load->model(array('Coupon_model' , 'Gift_card_model', 'Settings_model', 'Digital_Product_model'));
-		$this->CI->load->model(array('Coupon_model' , 'Gift_card_model', 'Settings_model'));
+// 		/$this->CI->load->model(array('Coupon_model' , 'Gift_card_model', 'Settings_model', 'Digital_Product_model'));
+		
 		// Load the saved session
 		if ($this->CI->session->userdata('cart_contents') !== FALSE)
 		{
@@ -55,11 +55,11 @@ class go_cart {
 			$this->_init_properties();
 		}
 		
-		$gc_setting = $this->CI->Settings_model->get_settings('gift_cards');
-		if(@$gc_setting['enabled']==1)
-		{
-			$this->gift_cards_enabled = true;
-		}
+		//$gc_setting = $this->CI->Settings_model->get_settings('gift_cards');
+// 		if(@$gc_setting['enabled']==1)
+// 		{
+// 			$this->gift_cards_enabled = true;
+// 		}
 		
 		//die(var_dump($this->_cart_contents));
 	}
@@ -170,7 +170,7 @@ class go_cart {
 		
 		
 		//record the quantity
-		$quantity	= isset($item['fixed_quantity'])&&($item['fixed_quantity']==0) ? $item['quantity'] : 1;
+		$quantity	= ($item['quantity']==0) ? $item['quantity'] : 1;
 		
 		//remove quantity from the row ID hash this will enable us to add
 		//the same item twice without having it appear twice due to quantity differences
@@ -213,10 +213,10 @@ class go_cart {
 			if(isset($this->_cart_contents['items'][$newkey]))
 			{
 				//make sure that fixed quantity items remain fixed quantity
-				//if(!(bool)$item['fixed_quantity'])
-				{
+				/* if(!(bool)$item['fixed_quantity'])
+				{ */
 					$this->_cart_contents['items'][$newkey]['quantity'] = $this->_cart_contents['items'][$newkey]['quantity'] + $item['quantity'];
-				}
+				//}
 			}
 			else
 			{
@@ -227,7 +227,7 @@ class go_cart {
 	
 		// Run the product through the coupons list to check if there is a coupon which applies to it
 		// cart contents item details and coupon data are automatically updated
-		$this->_check_product_for_discount($newkey);
+		//$this->_check_product_for_discount($newkey);
 
 		// Woot!
 		return TRUE;
@@ -293,7 +293,6 @@ class go_cart {
 	private function _check_product_for_discount($cartkey) {
 		
 		// Loop through our coupon pool to see if any apply to the newly added product
-		if(!empty($this->_cart_contents['coupon_list']))
 		foreach($this->_cart_contents['coupon_list'] as $code=>$contents)
 		{
 			// does the current coupon apply to the product we are adding?
@@ -713,8 +712,9 @@ class go_cart {
 			$this->_cart_contents['requires_shipping'] = false; // Go back to default and redetermine if there is anything shippable
 			
 			// Lets calculate the total item quantity
+			
 			$total_quantity = 0;
-
+			
 			foreach ($this->_cart_contents['items'] as $key => &$val)
 			{
 				// Apply any group discount
@@ -736,23 +736,25 @@ class go_cart {
 					$this->_cart_contents['group_discount'] 	+=  ($val['price'] - $this_price) * $val['quantity'];
 				} else {
 					// or use the regular price
+					if(empty($val['price']))
+						$val['price']=$val['list_price'];
 					$this_price = $val['price'];
 				}
 				
 				// Deal with shippable (if shipping is disabled in the config then go with that!)
-				if ( $val['shippable']== 1 )
+				/* if ( $val['shippable']== 1 )
 				{
 					// shipping insurable value & weight
 					$this->_cart_contents['order_insurable_value']  += $this_price;
 					$this->_cart_contents['order_weight'] 			+= $val['weight']*$val['quantity'];
 					$this->_cart_contents['requires_shipping'] 		= true;
-				}
+				} */
 				
 				// charge tax?
-				if($val['taxable'] == 1)
+				/* if($val['taxable'] == 1)
 				{
 					$taxable 		+= ($this_price * $val['quantity']);
-				}
+				} */
 				
 				$total 			+= ($this_price * $val['quantity']);
 				
@@ -771,59 +773,60 @@ class go_cart {
 			$this->_cart_contents['cart_subtotal'] = $total;
 			
 			// Calculate / set total coupon discount amounts
-			$this->_calculate_coupon_discount();
+// 			$this->_calculate_coupon_discount();
 			
 			// set taxable subtotal
-			$this->_cart_contents['taxable_total'] = $taxable - $this->_cart_contents['taxable_coupon_discount'];
+// 			$this->_cart_contents['taxable_total'] = $taxable - $this->_cart_contents['taxable_coupon_discount'];
 			
-			$this->_cart_contents['cart_total'] = $total - $this->_cart_contents['coupon_discount']; // $this->_cart_contents['group_discount'];
-			
+		//	$this->_cart_contents['cart_total'] = $total - $this->_cart_contents['coupon_discount']; // $this->_cart_contents['group_discount'];
+			$this->_cart_contents['cart_total'] = $total;
 			
 			// add any additional custom charges
-			if(!empty($this->_cart_contents['custom_charges']))
-			{
-				foreach($this->_cart_contents['custom_charges'] as $c)
-				{
-					$this->_cart_contents['cart_total'] += $c;
-				}
-			}
+// 			if(!empty($this->_cart_contents['custom_charges']))
+// 			{
+// 				foreach($this->_cart_contents['custom_charges'] as $c)
+// 				{
+// 					$this->_cart_contents['cart_total'] += $c;
+// 				}
+// 			}
 			
 			
 			// Compute taxes BEFORE shipping costs are added in?
-			if(! $this->CI->config->item('tax_shipping')) 
-			{
-				$this->_compute_tax();
-			}
+// 			if(! $this->CI->config->item('tax_shipping')) 
+// 			{
+// 				$this->_compute_tax();
+// 			}
 			
 			// Shipping costs
-			if($this->_cart_contents['requires_shipping']) 
-			{
-				$this->_cart_contents['cart_total']		+= $this->_cart_contents['shipping']['price'];
-				$this->_cart_contents['taxable_total']	+= $this->_cart_contents['shipping']['price'];
-			}
-			else
-			{
-				// placeholders
-				$this->_cart_contents['shipping']['method']	= false;  // defaults
-				$this->_cart_contents['shipping']['price']	= false;
-			}
+// 			if($this->_cart_contents['requires_shipping']) 
+// 			{
+// 				$this->_cart_contents['cart_total']		+= $this->_cart_contents['shipping']['price'];
+// 				$this->_cart_contents['taxable_total']	+= $this->_cart_contents['shipping']['price'];
+// 			}
+// 			else
+// 			{
+// 				// placeholders
+// 				$this->_cart_contents['shipping']['method']	= false;  // defaults
+// 				$this->_cart_contents['shipping']['price']	= false;
+// 			}
 			
 			// Compute taxes AFTER shipping costs are added in ?
-			if($this->CI->config->item('tax_shipping')) 
-			{
-				$this->_compute_tax();
-			}
+// 			if($this->CI->config->item('tax_shipping')) 
+// 			{
+// 				$this->_compute_tax();
+// 			}
 			
-			// finally
-			$this->_cart_contents['cart_total'] += $this->_cart_contents['tax'];
+// 			// finally
+// 			$this->_cart_contents['cart_total'] += $this->_cart_contents['tax'];
 
 			// set any gift card reduction
 			// updates totals accordingly
-			if($this->gift_cards_enabled) 
-			{
-				$this->_calculate_gift_card_discount();
-			}
-		}		
+// // 			if($this->gift_cards_enabled) 
+// 			{
+// // 				$this->_calculate_gift_card_discount();
+// 			}
+// 		}		
+		}
 		
 		// Save up
 		$this->CI->session->set_userdata(array('cart_contents' => $this->_cart_contents));
@@ -834,7 +837,6 @@ class go_cart {
 	
 	private function _compute_tax()
 	{
-		return 0;
 		$this->CI->load->model('Tax_model');
 		$this->_cart_contents['tax'] =  $this->CI->Tax_model->get_tax_total();
 	}
@@ -1125,21 +1127,21 @@ class go_cart {
 	// This saves the confirmed order 
 	function save_order() {
 
-		$this->CI->load->model('order_model');
-		$this->CI->load->model('Product_model');
+		$this->CI->load->model('order_m');
+	//	$this->CI->load->model('Product_model');
 		
 		//prepare our data for being inserted into the database
 		$save	= array();
 		
 		// Is this a non shippable order? 
 		$none_shippable = true;
-		foreach ($this->_cart_contents['items'] as $item)
-		{
-			if($item['shippable']==1)
-			{
-				$none_shippable = false;
-			}
-		}
+// 		foreach ($this->_cart_contents['items'] as $item)
+// 		{
+// 			if($item['shippable']==1)
+// 			{
+// 				$none_shippable = false;
+// 			}
+// 		}
 		//default status comes from the config file
 		$save['status'] = $this->CI->config->item('order_status');
 		
@@ -1231,7 +1233,7 @@ class go_cart {
 		}
 		
 		// save the order content
-		$order_id					= $this->CI->order_model->save_order($save, $contents);
+		$order_id					= $this->CI->order_m->save_order($save, $contents);
 	
 		// dont do anything else if the order failed to save
 		if(!$order_id) return false;
@@ -1266,47 +1268,47 @@ class go_cart {
 			}
 			
 			//deduct any quantities from the database
-			if(!$item['is_gc'])
-			{
-				$product		= $this->CI->Product_model->get_product($item['id']);
-				$new_quantity	= intval($product->quantity) - intval($item['quantity']);
-				$product_quantity	= array('id'=>$product->id, 'quantity'=>$new_quantity);
-				$this->CI->Product_model->save($product_quantity);
-			}
+// 			if(!$item['is_gc'])
+// 			{
+// 				$product		= $this->CI->Product_model->get_product($item['id']);
+// 				$new_quantity	= intval($product->quantity) - intval($item['quantity']);
+// 				$product_quantity	= array('id'=>$product->id, 'quantity'=>$new_quantity);
+// 				$this->CI->Product_model->save($product_quantity);
+// 			}
 		}
 		//add the digital packages to the database
-		if(!empty($download_package))
-		{
-			// create the record, send the email
-			$this->CI->Digital_Product_model->add_download_package($download_package, $order_id);
-		}
+// 		if(!empty($download_package))
+// 		{
+// 			// create the record, send the email
+// 			$this->CI->Digital_Product_model->add_download_package($download_package, $order_id);
+// 		}
 			
 			
 
-		// update the balance of any gift cards used to purchase the order
-		if($this->gift_cards_enabled && isset($this->_cart_contents['gc_list']))
-		{
-			$this->CI->Gift_card_model->update_used_card_balances($this->_cart_contents['gc_list']);
-		}			
+// 		// update the balance of any gift cards used to purchase the order
+// 		if($this->gift_cards_enabled && isset($this->_cart_contents['gc_list']))
+// 		{
+// 			$this->CI->Gift_card_model->update_used_card_balances($this->_cart_contents['gc_list']);
+// 		}			
 		
-		// touch any used product coupons (increment usage)
-		if(isset($this->_cart_contents['applied_coupons']))
-		{
-			foreach($this->_cart_contents['applied_coupons'] as $code=>$content)
-				$this->CI->Coupon_model->touch_coupon($code);
-		}
+// 		// touch any used product coupons (increment usage)
+// 		if(isset($this->_cart_contents['applied_coupons']))
+// 		{
+// 			foreach($this->_cart_contents['applied_coupons'] as $code=>$content)
+// 				$this->CI->Coupon_model->touch_coupon($code);
+// 		}
 		
-		// touch free shipping coupon
-		if($this->_cart_contents['free_shipping_coupon'])
-		{
-			$this->CI->Coupon_model->touch_coupon($this->_cart_contents['free_shipping_coupon']);
-		}
+// 		// touch free shipping coupon
+// 		if($this->_cart_contents['free_shipping_coupon'])
+// 		{
+// 			$this->CI->Coupon_model->touch_coupon($this->_cart_contents['free_shipping_coupon']);
+// 		}
 		
 		// touch whole order coupon
-		if(isset($this->_cart_contents['whole_order_discount_cp']))
-		{
-			$this->CI->Coupon_model->touch_coupon($this->_cart_contents['whole_order_discount_cp']);
-		}
+// 		if(isset($this->_cart_contents['whole_order_discount_cp']))
+// 		{
+// 			$this->CI->Coupon_model->touch_coupon($this->_cart_contents['whole_order_discount_cp']);
+// 		}
 		
 		
 		
@@ -1432,6 +1434,7 @@ class go_cart {
 
 	function get_custom_charges()
 	{
+		return true;
 		return $this->_cart_contents['custom_charges'];
 	}
 
@@ -1444,7 +1447,7 @@ class go_cart {
 	
 		if(empty($this->_cart_contents['customer']))
 		{
-			return false;
+			$this->_cart_contents['customer']=array();
 		}
 		else
 		{

@@ -71,3 +71,24 @@ $lang['order:archive_date_format']		= "%B %Y";
 
 
 $lang['order:order_id']="Order ID";
+$lang['order:name']="Name";
+$lang['order:phone']="Phone";
+$lang['order:mail']="Email";
+$lang['order:company']="Company";
+
+
+$lang['order:shipping_address1']="Address 1";
+$lang['order:shipping_address2']="Address 2";
+$lang['order:city']="City";
+$lang['order:country']="Country";
+
+$lang['item:image']="Image";
+$lang['item:name']="Name";
+$lang['item:quantity']="Quantity";
+$lang['item:price']="Price";
+
+$lang['order:status_no_process']="No process";
+$lang['order:status_proceceed']="Proceed";
+$lang['order:status_cancel']="Cancel";
+$lang['order:comment']="Chú thích";
+

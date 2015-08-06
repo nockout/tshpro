@@ -8,24 +8,32 @@
     <div class="page-header">
         <h2><?php echo lang('your_cart');?></h2>
     </div>
-    <?php echo form_open('cart/update_cart', array('id'=>'update_cart_form'));?>
-    
-    <?php include('checkout/summary.php');?>
+      <div class="row">
+   		 <?php echo form_open('cart/update_cart', array('id'=>'update_cart_form'));?>
+      		<div class="col-md-12" >
+   		 <?php include('checkout/summary.php');?>
+            
+        
 
-    <div class="row">
-        
-        
-        <div class="col-md-12" style="text-align:right;">
+                <a class="btn btn-large btn-primary" href="home" /><?php echo lang("cart:continue_shipping")?></a>
                 <input id="redirect_path" type="hidden" name="redirect" value=""/>
     
 
                 <input class="btn btn-large btn-primary" type="submit" onclick="$('#redirect_path').val('cart/checkout');" value="<?php echo lang('form_checkout');?>"/>
        
             
-        </div>
-    </div>
+    		<?php echo form_close()?>
+	
+      			  </div>
+      
+	</div>
+	
+	
+	
+	
+
 <div class="row"></div>
-</form>
+
 
 </div>
 <?php endif; ?>
