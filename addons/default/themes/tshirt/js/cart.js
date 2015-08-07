@@ -6,8 +6,19 @@
 			showcart();
 		});
 
+		$(".picksize").on("click",function(){
+			var size =$(this).attr('for');
+			$("input[name='sizeSelected']").val(size);
+		});
 		$("#ajax_cart").on("submit", function(ev) {
 
+			var size=$("#sizeSelected").val();
+			if(!size){
+				
+				alert("Bạn phải chọn size");
+				return false;
+			}
+		
 			$.ajax({
 				type : "POST",
 				async : false,
@@ -35,6 +46,10 @@
 
 	});
 })(jQuery);
+
+function selectSize(){
+	
+}
 function showcart() {
 
 	$('#cartModal').modal('toggle');

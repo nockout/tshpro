@@ -41,13 +41,18 @@ class Cart extends Public_Controller {
 		
 	}
 
+	function setSize(){
+		if($size=$this->input->post("size")){
+			$this->session->set_userdata("size",$size);
+		}
+	}
 	function ajax_add_to_cart(){
 		// Get our inputs
 		//$this->go_cart->destroy(false);
 	
 		$product_id		= $this->input->post('id');
 		$quantity 		= $this->input->post('quantity')?$this->input->post('quantity'):1;
-		$post_options 	= $this->input->post('option');
+		$size 	= $this->input->post('sizeSelected');
 		$this->load->model('product_model');
 		
 		// Get a cart-ready product array
@@ -56,7 +61,7 @@ class Cart extends Public_Controller {
 		if(empty($product))
 			die("no product found");
 		$product['id']=$product['product_id'];
-		
+		$product['sizeSelected']=	$size;
 		//if out of stock purchase is disabled, check to make sure there is inventory to support the cart.
 		
 			//$stock	= $this->product_model->get($product_id);
@@ -69,7 +74,7 @@ class Cart extends Public_Controller {
 				foreach($items as &$item)
 				{
 				
-					if(intval($item['id']) == intval($product_id))
+					if(intval($item['id']) == intval($product_id)&&$item['size']==$size)
 					{
 					
 					$item ['quantity']= intval($qty_count) + $item['quantity'];

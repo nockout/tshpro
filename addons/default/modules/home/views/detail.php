@@ -80,6 +80,7 @@
 				
 						</div>
 			<div class="clearfix"></div>
+			<?php echo form_open('cart/ajax_add_to_cart', 'id="ajax_cart" class="form-horizontal"');?>
 			<div class="form-group">
 
 				<button
@@ -94,25 +95,26 @@
 					<div data-toggle="buttons" class="btn-group">
 
 
-						<label class="btn btn-default" for="S"> <input type="radio"
+						<label class="picksize btn btn-default" for="S"> <input type="radio"
 							value="S" autocomplete="off"
 							data-se="0" name="size" id="S">S
-						</label> <label class="btn btn-default" for="M"> <input
+						</label> <label class=" picksize btn btn-default" for="M"> <input
 							type="radio" value="M" autocomplete="off" data-se="0" name="size"
 							id="M">M
-						</label> <label class="btn btn-default" for="L"> <input
+						</label> <label class="picksize btn btn-default" for="L"> <input
 							type="radio" value="L" autocomplete="off" data-se="0" name="size"
 							id="L">L
-						</label> <label class="btn btn-default" for="XL"> <input
+						</label> <label class="picksize btn btn-default" for="XL"> <input
 							type="radio" value="XL" autocomplete="off" data-se="0"
 							name="size" id="XL">XL
-						</label> <label class="btn btn-default" data-placement="top"
+						</label> <label class="picksize btn btn-default" data-placement="top"
 							for="XL"> <input type="radio" value="XXL" data-se="1" name="size"
 							id="XXL">2X
-						</label> <label class="btn btn-default" data-placement="top"
+						</label> <label class="picksize btn btn-default" data-placement="top"
 							for="XXXL"> <input type="radio" value="XXXL" data-se="1"
 							name="size" id="XXXL">3X
-						</label> <label class="btn btn-default" data-placement="top"
+						</label> 
+						<label class="picksize btn btn-default" data-placement="top"
 							for="XXXXL"> <input type="radio" value="XXXXL" data-se="1"
 							name="size" id="XXXXL">4X
 						</label>
@@ -127,9 +129,10 @@
 
 
 			<div class="form-group">
-					 <?php echo form_open('cart/ajax_add_to_cart', 'id="ajax_cart" class="form-horizontal"');?>
+					 
 							
-						<input type="hidden" name="cartkey"
+					<input id="sizeSelected" type="hidden" value="" name="sizeSelected">		
+					<input type="hidden" name="cartkey"
 					value="<?php echo $this->session->flashdata('cartkey');?>" /> 
 					<input
 					type="hidden" name="id" value="<?php echo $product->product_id?>" />
@@ -141,8 +144,9 @@
 									<i class="glyphicon glyphicon-triangle-right"></i>
 				</button>
 							
-					<?php echo form_close()?>
+					
 					</div>
+					<?php echo form_close()?>
 			<div class="visible-xs">
 
 				<h1>Jeb Bush 2016</h1>
