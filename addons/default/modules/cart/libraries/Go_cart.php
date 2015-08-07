@@ -714,7 +714,7 @@ class go_cart {
 			
 			// Lets calculate the total item quantity
 			$total_quantity = 0;
-
+			if(!empty($this->_cart_contents['items']))
 			foreach ($this->_cart_contents['items'] as $key => &$val)
 			{
 				// Apply any group discount

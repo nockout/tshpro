@@ -172,8 +172,8 @@ class Product_model extends Base_m
 	}
 	public function get_product($id){
 	
-		$subsql="( select data from ".$this->dbprefix("tshirt_arts") ." where id=id_art ) as arts";
-		$this->db->select(array("*","list_price as price",$subsql));
+	//	$subsql="( select data from ".$this->dbprefix("tshirt_arts") ." where id=id_art ) as arts";
+		$this->db->select(array("*","list_price as price"));
 		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id',"LEFT");
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
 		$this->db->where('deleted',0);
@@ -188,9 +188,9 @@ class Product_model extends Base_m
 			foreach ($images as $image)
 				$result->image[]=get_design_image_path("original",$image->id_image.'_'.$image->product_id.'.jpg');
 		}
-		if(!empty($result->arts)){
-			$result->arts=unserialize($result->arts);
-		}
+// 		if(!empty($result->arts)){
+// 			$result->arts=unserialize($result->arts);
+// 		}
 	
 		return $result;
 	}

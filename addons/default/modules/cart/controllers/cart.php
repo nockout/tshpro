@@ -5,8 +5,9 @@ class Cart extends Public_Controller {
 
 	public function  __construct (){
 		parent::__construct();
+		
+
 	
-		$this->load->library("go_cart");
 		$this->load->helper("currency");
 		$this->load->config('tdesign/tdesign');
 		$this->load->helper('tdesign/tdesign');
@@ -47,25 +48,27 @@ class Cart extends Public_Controller {
 		$this->load->model('product_model');
 
 		// Get a cart-ready product array
-		$product =(array) $this->product_model->get(intval($product_id));
+		$product =(array) $this->product_model->get_product(intval($product_id));
 		$product['id']=$product['product_id'];
 		
 		//if out of stock purchase is disabled, check to make sure there is inventory to support the cart.
 		if(!$this->config->item('allow_os_purchase') )
 		{
-			$stock	= $this->product_model->get($product_id);
+			//$stock	= $this->product_model->get($product_id);
 				
 			//loop through the products in the cart and make sure we don't have this in there already. If we do get those quantities as well
 			$items		= $this->go_cart->contents();
 			$qty_count	= $quantity;
 		
-			foreach($items as &$item)
-			{
-				
-				if(intval($item['id']) == intval($product_id))
+			if(!empty($items)){
+				foreach($items as &$item)
 				{
+				
+					if(intval($item['id']) == intval($product_id))
+					{
 					
 					$item ['quantity']= intval($qty_count) + $item['quantity'];
+					}
 				}
 			}
 			

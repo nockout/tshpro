@@ -6,10 +6,10 @@ class Checkout extends Public_Controller {
 	function __construct()
 	{
 		parent::__construct();
-       $this->load->library("go_cart");
-     	$this->load->helper('currency');
-       $this->lang->load(array("cart"));
-       $this->load->model(array("location_model"));
+      	 $this->load->library("go_cart");
+     	 $this->load->helper('currency');
+        $this->lang->load(array("cart"));
+        $this->load->model(array("location_model"));
 		/*make sure the cart isnt empty*/
 		if($this->go_cart->total_items()==0)
 		{
