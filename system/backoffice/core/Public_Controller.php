@@ -16,8 +16,8 @@ class Public_Controller extends MY_Controller
 	{
 		parent::__construct();
 
-		$this->benchmark->mark('public_controller_start');
-
+		$this->benchmark->mark('public_controller_start');	
+		
 		// Check redirects if GET and Not AJAX
 		if ( ! $this->input->is_ajax_request() and $_SERVER['REQUEST_METHOD'] == 'GET')
 		{
@@ -112,6 +112,10 @@ class Public_Controller extends MY_Controller
 		$this->template->server = $_SERVER;
 		$this->template->theme = $this->theme;
 
+		$this->load->library("go_cart");
+		$this->template->set("cart_total",$this->go_cart->total_items());
+		//
+	
 		$this->benchmark->mark('public_controller_end');
 	}
 }
