@@ -16,13 +16,27 @@ class Cart extends Public_Controller {
 	}
 	function index()
 	{
+		echo "<pre>";
+		print_r($this->go_cart->contents());
+		die;
 		//$this->template->set("test","test");
 	//	$data['gift_cards_enabled'] = $this->gift_cards_enabled;
 		//$data['homepage']			= true;
 
 	//	$this->temmplate->build('homepage', $data);
 	}
-
+	
+	function ajax_del_items(){
+		$item_id=$this->input->post("item_id");
+		if($item_id){
+			
+			($this->go_cart->_remove($item_id));
+			die($this->go_cart->_save_cart());
+		
+			
+		}
+		
+	}
 
 	function ajax_add_to_cart(){
 		// Get our inputs
@@ -272,6 +286,7 @@ class Cart extends Public_Controller {
 	 ***********************************************************/
 	function ajax_cart_items(){
 	
+		
 		die($this->load->view("cart_items",array("items"=>$this->go_cart->contents()),true));
 	}
 	

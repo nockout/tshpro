@@ -1,6 +1,6 @@
 <div class="container-fluid">
 <?php if(!empty($items)):?>
-	<?php foreach ($items as $item):?>
+	<?php foreach ($items as $key=>$item):?>
 	<?php ?>
 	<div class="row cartRowContent">
 		<div class="col-xs-3 cart-thumb">
@@ -22,7 +22,7 @@
 		</a>
 		</div>
 		<div class="col-xs-9 cart-cell">
-			<i onclick="chkCart(delItem, '1');"
+			<i  onclick="chkCart(this,'<?php echo $key?>');"
 				class="glyphicon glyphicon-remove pull-right text-danger"></i>
 				<?php echo $item['product']?> 
 				</br>

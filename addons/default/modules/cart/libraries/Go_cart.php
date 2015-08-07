@@ -233,7 +233,7 @@ class go_cart {
 		return TRUE;
 	}
 	
-	private function _remove($cartkey) 
+	public function _remove($cartkey) 
 	{
 		
 		if(!isset($this->_cart_contents['items'][$cartkey])) return false;
@@ -696,7 +696,7 @@ class go_cart {
 	 * @access	private
 	 * @return	bool
 	 */
-	private function _save_cart($recalculate=true)
+	public function _save_cart($recalculate=true)
 	{
 		
 		// Once in the check-out stage, we no longer need to keep recalculating totals

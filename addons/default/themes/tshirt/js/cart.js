@@ -1,4 +1,5 @@
 (function($) {
+
 	$(function() {
 
 		$("#cartToggleButton").on("click", function() {
@@ -21,11 +22,27 @@
 					$('#cartModal div.modal-body').html(respone.h);
 					$('#cartModal').modal('toggle');
 				},
-			 dataType: 'json'
+				dataType : 'json'
 			});
-			
+
 			ev.preventDefault();
-			return false; // avoid 
+			return false; // avoid
 		});
+
 	});
 })(jQuery);
+
+function chkCart(item, itemId) {
+	$(item).closest("div.cartRowContent").remove();
+	$.ajax({
+		type : "POST",
+		url : "cart/ajax_del_items",
+		data : {
+			"item_id" : itemId
+		}, // serializes the form's elements.
+		success : function(respone) {
+			return true;
+		},
+		dataType : 'json'
+	});
+}
