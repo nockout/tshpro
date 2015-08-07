@@ -109,9 +109,10 @@
 
 								<tbody>
 				<?php 	foreach ($this->go_cart->contents() as $cartkey=>$product):?>
+		
 				<tr>
 										<td><?php echo $product['quantity']?></td>
-										<td><?php echo $product['quantity']?></td>
+										<td><?php echo (!empty($product['sizeSelected']))?($product['sizeSelected']):""?></td>
 										<td><?php echo $product['product']?></td>
 										<td class="text-right">
 					<?php echo format_price($product['price']*$product['quantity'])?>

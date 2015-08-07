@@ -30,13 +30,9 @@
 					showcart();
 					return;
 
-				},
-
-				complete : function(data) {
-					// Handle the complete event
-					//	 response = jQuery.parseJSON(data);
-					showcart();
 				}
+
+			
 
 			});
 

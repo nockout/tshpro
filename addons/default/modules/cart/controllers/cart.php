@@ -53,6 +53,10 @@ class Cart extends Public_Controller {
 		$product_id		= $this->input->post('id');
 		$quantity 		= $this->input->post('quantity')?$this->input->post('quantity'):1;
 		$size 	= $this->input->post('sizeSelected');
+	
+		if($size){
+			$this->session-> set_userdata("sizeSelected",$size);
+		}
 		$this->load->model('product_model');
 		
 		// Get a cart-ready product array
@@ -74,7 +78,7 @@ class Cart extends Public_Controller {
 				foreach($items as &$item)
 				{
 				
-					if(intval($item['id']) == intval($product_id)&&$item['size']==$size)
+					if(intval($item['id']) == intval($product_id)&&$item['sizeSelected']==$size)
 					{
 					
 					$item ['quantity']= intval($qty_count) + $item['quantity'];

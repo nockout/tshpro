@@ -92,29 +92,31 @@
 				<div id="popsize" data-placement="top" data-toggle="popover" class="size-select"
 					aria-describedby="popover373976">
 				
+				<?php $siszeSelected=$this->session->userdata("sizeSelected")?>
 					<div data-toggle="buttons" class="btn-group">
 
 
-						<label class="picksize btn btn-default" for="S"> <input type="radio"
+						<label class="picksize <?php if($siszeSelected=="S"): ?> active <?php endif ?> btn btn-default" for="S"> <input type="radio"
 							value="S" autocomplete="off"
 							data-se="0" name="size" id="S">S
-						</label> <label class=" picksize btn btn-default" for="M"> <input
+						</label> <label class=" picksize <?php if($siszeSelected=="M"): ?> active <?php endif ?> btn btn-default " for="M"> <input
 							type="radio" value="M" autocomplete="off" data-se="0" name="size"
 							id="M">M
-						</label> <label class="picksize btn btn-default" for="L"> <input
+						</label> <label class="picksize <?php if($siszeSelected=="L"): ?> active <?php endif ?> btn btn-default" for="L"> <input
 							type="radio" value="L" autocomplete="off" data-se="0" name="size"
 							id="L">L
-						</label> <label class="picksize btn btn-default" for="XL"> <input
+						</label>
+						 <label class="picksize <?php if($siszeSelected=="XL"): ?> active <?php endif ?> btn btn-default" for="XL"> <input
 							type="radio" value="XL" autocomplete="off" data-se="0"
 							name="size" id="XL">XL
-						</label> <label class="picksize btn btn-default" data-placement="top"
-							for="XL"> <input type="radio" value="XXL" data-se="1" name="size"
+						</label> <label class="picksize <?php if($siszeSelected=="XXL"): ?> active <?php endif ?> btn btn-default" data-placement="top"
+							for="XXL"> <input type="radio" value="XXL" data-se="1" name="size"
 							id="XXL">2X
-						</label> <label class="picksize btn btn-default" data-placement="top"
+						</label> <label class="picksize <?php if($siszeSelected=="XXXL"): ?> active <?php endif ?> btn btn-default" data-placement="top"
 							for="XXXL"> <input type="radio" value="XXXL" data-se="1"
 							name="size" id="XXXL">3X
 						</label> 
-						<label class="picksize btn btn-default" data-placement="top"
+						<label class="picksize <?php if($siszeSelected=="XXXXL"): ?> active <?php endif ?> btn btn-default" data-placement="top"
 							for="XXXXL"> <input type="radio" value="XXXXL" data-se="1"
 							name="size" id="XXXXL">4X
 						</label>
@@ -131,7 +133,7 @@
 			<div class="form-group">
 					 
 							
-					<input id="sizeSelected" type="hidden" value="" name="sizeSelected">		
+					<input id="sizeSelected" type="hidden" value="<?php echo $siszeSelected ?> "  name="sizeSelected">		
 					<input type="hidden" name="cartkey"
 					value="<?php echo $this->session->flashdata('cartkey');?>" /> 
 					<input
