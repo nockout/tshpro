@@ -128,7 +128,8 @@ $status = array (
 					<?php foreach ($detail->items as $item):?>
 						<?php $productData=unserialize($item->contents)?>
 						<tr>
-							<td><?php $this->load->view("admin/partials/download",array("arts"=>$productData['arts']))?></td>
+	
+							<td><?php $this->load->view("admin/partials/download",array("arts"=>unserialize($item->arts->data)))?></td>
 							
 							<td class="collapse">
 							<?php if(!empty($productData['extra'])):?>

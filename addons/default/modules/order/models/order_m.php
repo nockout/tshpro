@@ -31,7 +31,19 @@ class Order_m extends MY_Model
 		
 		if(empty($order))
 			return;
+		
+		// get arts from product_id;
+		//$this->db->select()
 		$order->items=$this->db->where("order_id",intval($id))->get($this->_orderItem)->result();
+		if(!empty($order->items)){
+			
+			foreach ($order->items as &$item){
+				$contents=unserialize($item->contents);
+			
+				$item->arts=$this->db->select("data")->from('tshirt_arts')->where("id",$contents['id_art'])->get()->row();
+			}
+			
+		}
 		return $order;
 	}
 	public function save($param) {
