@@ -1,4 +1,4 @@
-<?php $this->load->helper("currency");?>
+
 <div style="padding-top: 10px;" class="container">
 
 	<h1 class="hidden-xs top_title"><?php echo $product->product?></h1>

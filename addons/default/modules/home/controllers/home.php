@@ -18,7 +18,7 @@ class Home extends Public_Controller
 
 		$this->lang->load("home");
 		
-
+		$this->load->helper("currency");
 	}
 
 
