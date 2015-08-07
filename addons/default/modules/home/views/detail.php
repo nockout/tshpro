@@ -130,7 +130,8 @@
 					 <?php echo form_open('cart/ajax_add_to_cart', 'id="ajax_cart" class="form-horizontal"');?>
 							
 						<input type="hidden" name="cartkey"
-					value="<?php echo $this->session->flashdata('cartkey');?>" /> <input
+					value="<?php echo $this->session->flashdata('cartkey');?>" /> 
+					<input
 					type="hidden" name="id" value="<?php echo $product->product_id?>" />
 
 				<button

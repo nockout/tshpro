@@ -29,31 +29,36 @@ class Cart extends Public_Controller {
 	
 	function ajax_del_items(){
 		$item_id=$this->input->post("item_id");
+		
 		if($item_id){
 			
 			($this->go_cart->_remove($item_id));
-			die($this->go_cart->_save_cart());
-		
+			($this->go_cart->_save_cart());
+			die("delete sucess");
 			
 		}
+		die;
 		
 	}
 
 	function ajax_add_to_cart(){
 		// Get our inputs
 		//$this->go_cart->destroy(false);
+	
 		$product_id		= $this->input->post('id');
 		$quantity 		= $this->input->post('quantity')?$this->input->post('quantity'):1;
 		$post_options 	= $this->input->post('option');
 		$this->load->model('product_model');
-
+		
 		// Get a cart-ready product array
-		$product =(array) $this->product_model->get_product(intval($product_id));
+		$product =(array) $this->product_model->get(intval($product_id));
+	
+		if(empty($product))
+			die("no product found");
 		$product['id']=$product['product_id'];
 		
 		//if out of stock purchase is disabled, check to make sure there is inventory to support the cart.
-		if(!$this->config->item('allow_os_purchase') )
-		{
+		
 			//$stock	= $this->product_model->get($product_id);
 				
 			//loop through the products in the cart and make sure we don't have this in there already. If we do get those quantities as well
@@ -71,13 +76,18 @@ class Cart extends Public_Controller {
 					}
 				}
 			}
+		
+			
 			
 			$this->go_cart->insert(array($product));
 			$html=$this->load->view("cart_items",array("items"=>$this->go_cart->contents()),true);
-			die(json_encode(array("t"=>$this->go_cart->total_items(),"h"=>$html)));
-		
-	}}
+	
+			echo json_encode(array("t"=>$this->go_cart->total_items()));
+			
+			die;
+	}
 
+	
 	function add_to_cart()
 	{
 		// Get our inputs

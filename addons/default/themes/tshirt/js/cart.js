@@ -3,26 +3,30 @@
 	$(function() {
 
 		$("#cartToggleButton").on("click", function() {
-
-			$('#cartModal').modal('toggle');
-			$.get("cart/ajax_cart_items", function(data) {
-				$('#cartModal div.modal-body').html(data);
-			});
+			showcart();
 		});
 
 		$("#ajax_cart").on("submit", function(ev) {
 
 			$.ajax({
 				type : "POST",
+				async : false,
+				dataType : 'json',
+
 				url : $(this).attr("action"),
 				data : $(this).serialize(), // serializes the form's elements.
-				success : function(respone) {
-					$('.cart_item_count').html(respone.t);
-					$('#checkout').removeAttr("disabled");
-					$('#cartModal div.modal-body').html(respone.h);
-					$('#cartModal').modal('toggle');
+				success : function(data) {
+					showcart();
+					return;
+
 				},
-				dataType : 'json'
+
+				complete : function(data) {
+					// Handle the complete event
+					//	 response = jQuery.parseJSON(data);
+					showcart();
+				}
+
 			});
 
 			ev.preventDefault();
@@ -31,16 +35,24 @@
 
 	});
 })(jQuery);
+function showcart() {
 
+	$('#cartModal').modal('toggle');
+	$.get("cart/ajax_cart_items", function(data) {
+		$('#cartModal div.modal-body').html(data);
+	});
+}
 function chkCart(item, itemId) {
 	$(item).closest("div.cartRowContent").remove();
 	$.ajax({
+		
 		type : "POST",
 		url : "cart/ajax_del_items",
 		data : {
 			"item_id" : itemId
 		}, // serializes the form's elements.
 		success : function(respone) {
+			showcart();
 			return true;
 		},
 		dataType : 'json'
