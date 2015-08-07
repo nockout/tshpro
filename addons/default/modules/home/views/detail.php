@@ -47,11 +47,11 @@
 					<div class="clearfix"></div>
 					
 					
-					
+						<div class="form-group">
 					<?php 
 					 
 					if(isset($relprd) && !empty($relprd)) : ?>
-				<div style="margin-bottom: 25px;" class="form-group">
+				    <div style="margin-bottom: 25px;" class="form-group">
 						<label for="Style">Style</label>
 						<select onchange="location = this.options[this.selectedIndex].value;" class="form-control" name="shirtTypes" id="shirtTypes">
 							<?php 
@@ -67,21 +67,74 @@
 					</div>
 					<?php endif;?>
 				
-
+						</div>
 					<div class="clearfix"></div>
-					
+					<div class="form-group">
+							
+							<button style="background:none; border:none; text-align:left; padding:8px 0px 8px 0px;" class=" text-primary" data-target="#sizeModal" type="button" data-toggle="modal">Sizing Chart</button>
+						
+								
+							<div data-placement="top" data-toggle="popover" class="size-select" aria-describedby="popover373976">
+							
+							
+							
+								
+								
+								<div data-toggle="buttons" class="btn-group">
+								
+								
+										<label class="btn btn-danger" for="S">
+											<input type="radio" value="S_MSJATzhTPl1NS09UXjZAMFlPKkU4V0REIAo=" autocomplete="off" data-se="0" name="size" id="S">S
+										</label>
+									
+										<label class="btn btn-danger" for="M">
+											<input type="radio" value="M_MSJATzhTPl1NS09UXjZAMFlPKkU4V0REIAo=" autocomplete="off" data-se="0" name="size" id="M">M
+										</label>
+									
+										<label class="btn btn-danger" for="L">
+											<input type="radio" value="L_MSJATzhTPl1NS09UXjZAMFlPKkU4V0REIAo=" autocomplete="off" data-se="0" name="size" id="L">L
+										</label>
+									
+										<label class="btn btn-danger" for="XL">
+											<input type="radio" value="XL_MSJATzhTPl1NS09UXjZAMFlPKkU4V0REIAo=" autocomplete="off" data-se="0" name="size" id="XL">XL
+										</label>
+									
+									<label class="btn btn-danger" title="+ $3" data-placement="top" for="XXL">
+									<input type="radio" value="XXL_MSIwIzhTPl1NS09UXjZAMFlPKkU4V0REIAo=" data-se="1" name="size" id="XXL">2X
+									</label>
+								
+									<label class="btn btn-danger" title="+ $3" data-placement="top" for="XXXL">
+									<input type="radio" value="XXXL_MSIwIzhTPl1NS09UXjZAMFlPKkU4V0REIAo=" data-se="1" name="size" id="XXXL">3X
+									</label>
+								
+									<label class="btn btn-danger" title="+ $3" data-placement="top" for="XXXXL">
+									<input type="radio" value="XXXXL_MSIwIzhTPl1NS09UXjZAMFlPKkU4V0REIAo=" data-se="1" name="size" id="XXXXL">4X
+									</label>
+								
+								
+								</div>
+								
+							</div>
+							
+							<div class="popover fade top in" id="popover373976" style="top: 131px; left: 114.5px; display: block;">
+							<div class="arrow" style="left: 50%;"></div>
+							<h3 style="white-space: nowrap;" class="popover-title">Error</h3>
+							<div style="" class="popover-content">Please select a size! </div>
+							</div>
+						</div>
 					
 				
-					
+					<div class="form-group">
 					 <?php echo form_open('cart/ajax_add_to_cart', 'id="ajax_cart" class="form-horizontal"');?>
 							
 						<input type="hidden" name="cartkey" value="<?php echo $this->session->flashdata('cartkey');?>" />
                    		<input type="hidden" name="id" value="<?php echo $product->product_id?>"/>
-						<div class="form-group">
-									<button class="btn btn-lg btn-block btn-xxl btn-success btn-bright  hidden-xs" name="submit" type="submit">Order &nbsp;&nbsp;<i class="fa fa-caret-right"></i></button>
-								</div>
+						
+									<button class="btn btn-lg btn-block btn-xxl btn-success btn-bright  hidden-xs" name="submit" type="submit"><?php echo lang("add_to_cart")?> &nbsp;&nbsp;
+									<i class="glyphicon glyphicon-triangle-right"></i></button>
+							
 					<?php echo form_close()?>
-					
+					</div>
 					<div class="visible-xs">
 					
 						<h1>Jeb Bush 2016</h1>
@@ -100,21 +153,7 @@
 						
 					</div>
 
-					<div class="hidden-xs">
-						
-				
-
-						<div class="clearfix"></div>		
-						
-						
-						
-						<br>
-						<br>
-						
-				
-						
-						
-					</div>
+			
 					
 					<br>
 					<div class="alt-bg alt-bg-pad visible-xs">
