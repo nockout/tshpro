@@ -24,7 +24,8 @@
 		<div class="col-xs-9 cart-cell">
 			<i  onclick="chkCart(this,'<?php echo $key?>');"
 				class="glyphicon glyphicon-remove pull-right text-danger"></i>
-				<?php echo $item['product']?> 
+				<?php $size=!empty($item['sizeSelected'])?($item['sizeSelected']):"";?>
+				<?php echo $item['product'] ."-".$size?> 
 				</br>
 			<strong> <?php echo format_price($item['list_price'])?></strong><br>
 			<strong> <?php echo lang("cart:quantity")?>:<?php echo ($item['quantity'])?></strong>
