@@ -1,3 +1,4 @@
+<?php $this->load->helper("currency");?>
 <div style="padding-top: 10px;" class="container">
 
 	<h1 class="hidden-xs top_title"><?php echo $product->product?></h1>
@@ -8,7 +9,7 @@
 	<div style="margin-bottom: 40px;" class="row">
 		<div class="col-sm-7  ">
 			<div class="productFrame">
-				<span class="priceshow"><?php echo $product->list_price?></span>
+				<span class="priceshow"><?php echo format_price($product->list_price)?></span>
 				<!-- 	<img width="13" height="8" class="btm-s" src=""> -->
 			
 					<?php
