@@ -72,11 +72,7 @@ class Admin extends Admin_Controller
 	 */
 	
 	public function save_images(){
-		//$this->load->model("product_m");
-		//$this->product_m->get_product_draft(23);
-		//die;
-	//	echo "<pre>";
-	//	print_r($_REQUEST);die;
+
 		if(!isset($_REQUEST['arts'])){
 			$this->session->set_flashdata("error","design:no_art_found");
 			redirect("admin/tdesign/create_design");

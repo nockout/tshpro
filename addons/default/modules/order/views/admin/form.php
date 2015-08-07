@@ -1,10 +1,13 @@
 
-<?php $status = array(
-		'0'  => lang("order:status_no_process"),
-		'1'    => lang("order:status_proceceed"),
-		'2'   => lang("order:status_cancel"),
-	
-);?>
+<?php
+
+$status = array (
+		'0' => lang ( "order:status_no_process" ),
+		'1' => lang ( "order:status_proceceed" ),
+		'2' => lang ( "order:status_cancel" ) 
+)
+;
+?>
 <section class="title">
 
 	<h4><?php echo ($title) ?></h4>
@@ -86,33 +89,27 @@
 							<div class="input">
 								<b><?php echo lang('order:country') ?></b>:<?php echo $detail->ship_country?> </div>
 						</li>
-						<li>
+						<li><label for="status"><?php echo lang('order:status_label') ?></label>
 
-<label for="status"><?php echo lang('order:status_label') ?></label>
-						
 							<div class="input">
 									
 								<?php echo form_dropdown("status",$status,set_value("status",$detail->status))?>
-								</div>
-						</li>
-						
+								</div></li>
+
 					</ul>
 
 				</fieldset>
 
 			</div>
 			<div class="one_full">
-			<fieldset>
-			<ul>
-			<li>
-							<label for="comment"><?php echo lang('order:comment') ?></label>
-					<div class="input">
-							<textarea  name="comment" style="" class="cke_wrapper"><?php echo $detail->notes?></textarea>
-							</div>
-							
-						</li>
-			</ul>
-			</fieldset>
+				<fieldset>
+					<ul>
+						<li><label for="comment"><?php echo lang('order:comment') ?></label>
+							<div class="input">
+								<textarea name="comment" style="" class="cke_wrapper"><?php echo $detail->notes?></textarea>
+							</div></li>
+					</ul>
+				</fieldset>
 			</div>
 			
 			<?php if(!empty($detail->items)):?>
@@ -123,7 +120,7 @@
 							<th></th>
 							<th><?php echo lang("item:image")?></th>
 							<th class="collapse"><?php echo lang("item:name")?></th>
-							<th ><?php echo lang("item:quantity")?></th>
+							<th><?php echo lang("item:quantity")?></th>
 							<th class="text-right"><?php echo lang("item:price")?></th>
 						</tr>
 					</thead>
@@ -132,8 +129,7 @@
 						<?php $productData=unserialize($item->contents)?>
 						<tr>
 							<td><?php $this->load->view("admin/partials/download",array("arts"=>$productData['arts']))?></td>
-							<?php 
-							?>
+							
 							<td class="collapse">
 							<?php if(!empty($productData['extra'])):?>
 							<?php $extras=unserialize($productData['extra']);?>
@@ -145,18 +141,18 @@
 							<?php endforeach;?>
 							<?php endif?>
 							</td>
-							
-							<td class="collapse"><?php echo $productData['product']?></td>
-						
+							<?php $size=isset($productData['sizeSelected'])?$productData['sizeSelected']:""?>
+							<td class="collapse"><?php echo $productData['product']."-".$size ?></td>
+
 
 							<td style="padding-top: 10px;"><?php echo $productData['quantity']?></td>
-								<td class="collapse text-right"><?php echo format_price($productData['subtotal'])?></td>
+							<td class="collapse text-right"><?php echo format_price($productData['subtotal'])?></td>
 						</tr>
 						
 						<?php endforeach;?>
 						<tr>
 							<td colspan=5 class="text-right"><h2><?php echo lang("order:total")?>:<?php echo format_price($detail->total);?></h2></td>
-					
+
 						</tr>
 					</tbody>
 				</table>

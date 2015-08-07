@@ -22,15 +22,19 @@
 			$.ajax({
 				type : "POST",
 				async : false,
-				dataType : 'json',
+				dataType : 'text',
 
 				url : $(this).attr("action"),
 				data : $(this).serialize(), // serializes the form's elements.
-				success : function(data) {
+				
+				complete : function(data) {
+					console.log(data);
+					$(".cart_item_count").html(data.responseText);
 					showcart();
 					return;
 
 				}
+				
 
 			
 

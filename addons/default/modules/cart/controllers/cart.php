@@ -1,13 +1,7 @@
-
 <?php
-
 class Cart extends Public_Controller {
-
 	public function  __construct (){
 		parent::__construct();
-		
-
-	
 		$this->load->helper("currency");
 		$this->load->config('tdesign/tdesign');
 		$this->load->helper('tdesign/tdesign');
@@ -85,18 +79,38 @@ class Cart extends Public_Controller {
 					}
 				}
 			}
-		
-			
-			
 			$this->go_cart->insert(array($product));
 			$html=$this->load->view("cart_items",array("items"=>$this->go_cart->contents()),true);
-	
-			echo json_encode(array("t"=>$this->go_cart->total_items()));
 			
-			die;
+			die($this->go_cart->total_items());
+// 			$json=array('t'=>$this->go_cart->total_items());
+// 			die(json_encode($json,JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
+// 			die;
 	}
 
-	
+	function jsonpp($json, $istr='  ')
+	{
+		$q = FALSE;
+		$result = '';
+		for($p=$i=0; isset($json[$p]); $p++)
+		{
+			if($json[$p] == '"' && ($p>0?$json[$p-1]:'') != '\\')
+			{
+				$q=!$q;
+			}
+			else if(in_array($json[$p], array('}', ']')) && !$q)
+			{
+				$result .= "\n".str_repeat($istr, --$i);
+			}
+			$result .= $json[$p];
+			if(in_array($json[$p], array(',', '{', '[')) && !$q)
+			{
+				$i += in_array($json[$p], array('{', '['));
+				$result .= "\n".str_repeat($istr, $i);
+			}
+		}
+		return $result;
+	}
 	function add_to_cart()
 	{
 		// Get our inputs
@@ -377,3 +391,4 @@ class Cart extends Public_Controller {
 		}
 	}
 }
+?>

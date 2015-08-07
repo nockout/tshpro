@@ -8,7 +8,7 @@
 			<?php if (isset($orders)&&count($orders)) : ?>
 				<?php echo $this->load->view('admin/partials/filters') ?>
 				
-				<?php echo form_open('admin/template/action') ?>
+				<?php echo form_open('admin/order/action') ?>
 				
 					<div id="filter-stage">
 						<?php echo $this->load->view('admin/tables/orders') ?>

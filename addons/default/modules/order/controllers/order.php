@@ -42,5 +42,8 @@ class Order extends Admin_Controller
 	{
 		
 	}
+	public function action(){
+		
+	}
 
 }

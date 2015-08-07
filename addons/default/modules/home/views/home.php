@@ -1,3 +1,6 @@
+
+	<h4 style="padding-top:1em;" class="text-primary text-uppercase">What's Hot</h4>
+
 	<?php 
 	if($products)
 	foreach ($products as $p):?>
@@ -8,8 +11,8 @@
 						<div class="price">					
 							
 								<strong><?php echo format_price($p->list_price)?></strong>			
+										 	<?php echo Asset::img("leftpsm.png","",$attr = array( "class"=>"btm-s", "width"=>"3", "height"=>"6"));?>
 							
-							<img src="/images/leftpsm.png" class="leftp" height="3" width="6">
 						</div>
 						<div class="frameit">
 							<a href="<?php echo base_url("home/product/$p->product_id")?>" border="0">
