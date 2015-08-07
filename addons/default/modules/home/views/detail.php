@@ -51,8 +51,13 @@
 					<?php 
 					 
 					if(isset($relprd) && !empty($relprd)) : ?>
+<<<<<<< HEAD
 				    <div style="margin-bottom: 25px;" class="form-group">
 						<label for="Style">Style</label>
+=======
+				<div style="margin-bottom: 25px;" class="form-group">
+						<label for="Style"><?php echo lang("product:style")?></label>
+>>>>>>> 7d201fb2d44d89d1db90218f71c5925832d662f7
 						<select onchange="location = this.options[this.selectedIndex].value;" class="form-control" name="shirtTypes" id="shirtTypes">
 							<?php 
 								foreach ($relprd as $rp):

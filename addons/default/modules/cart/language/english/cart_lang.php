@@ -17,7 +17,7 @@ $lang['cart:total']="Total";
 $lang['cart:place_order']="Place your order";
 $lang['cart:sub_total']="Sub total";
 $lang['cart:shipping_address']="Address";
-
+$lang['cart:add_to_cart']="Add to cart";
 $lang['address']="Address";
 $lang['phone']="Phone";
 $lang['city']="City";
