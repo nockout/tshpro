@@ -10,7 +10,7 @@
 		<div class="col-sm-7  ">
 			<div class="productFrame">
 				<span class="priceshow"><?php echo format_price($product->list_price)?></span>
-				<!-- 	<img width="13" height="8" class="btm-s" src=""> -->
+			 	<?php echo Asset::img("tag-btm.png","",$attr = array( "class"=>"btm-s", "width"=>"13", "height"=>"8"));?>
 			
 					<?php
 					$extra = $product->extra;
@@ -134,7 +134,7 @@
 			<div class="form-group">
 					 
 							
-					<input id="sizeSelected" type="hidden" value="<?php echo $siszeSelected ?> "  name="sizeSelected">		
+					<input id="sizeSelected" type="hidden" value="<?php echo $siszeSelected ?>"  name="sizeSelected">		
 					<input type="hidden" name="cartkey"
 					value="<?php echo $this->session->flashdata('cartkey');?>" /> 
 					<input

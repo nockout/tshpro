@@ -7,7 +7,7 @@
 					<div class="frameitWrapper">
 						<div class="price">					
 							
-								<strong>$<?php echo $p->list_price?></strong>			
+								<strong><?php echo format_price($p->list_price)?></strong>			
 							
 							<img src="/images/leftpsm.png" class="leftp" height="3" width="6">
 						</div>

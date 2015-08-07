@@ -13,7 +13,7 @@
 		$("#ajax_cart").on("submit", function(ev) {
 
 			var size=$("#sizeSelected").val();
-			if(!size){
+			if(!size.trim()){
 				
 				alert("Bạn phải chọn size");
 				return false;
