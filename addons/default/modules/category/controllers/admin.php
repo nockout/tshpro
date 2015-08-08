@@ -113,7 +113,11 @@ class Admin extends Admin_Controller
 			$save['lang'][CURRENT_LANGUAGE]['description']=$this->input->post("body");
 				
 			$id=$this->category_m->save($id,$save);
-			
+			if($id){
+				$this->session->set_flashdata("success",sprintf(lang("category:publish_success"),$this->input->post("title")));
+			}else{
+				$this->session->set_flashdata("error",sprintf(lang("category:publish_error"),$this->input->post("title")));
+			}
 		
 			if($this->input->post("btnAction")=="save_exit"){
 				redirect("admin/category/index/");

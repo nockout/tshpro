@@ -53,11 +53,11 @@ class Module_Category extends Module
 	public function admin_menu(&$menu)
 	{
 		
-		$menu['lang:cp:nav_template'] = array(
+		$menu['lang:cp:nav_category'] = array(
 			'lang:cp:nav_category'=> 'admin/category/',
 			
 		);
-	
+		add_admin_menu_place('lang:cp:nav_category', 1);
 	}
 
 	public function install()
