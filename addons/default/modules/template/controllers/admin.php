@@ -61,7 +61,7 @@ class Admin extends Admin_Controller
 	    parent::__construct();
 		    $this->lang->load('template');
 		    $this->load->helper('currency');
-		    $this->categories =array(1=>"Shirt",2=>"Phone");
+		   
 	}
 	public function check_price(){
 		$price=intval($this->input->post('price'));
@@ -116,12 +116,16 @@ class Admin extends Admin_Controller
 	public function index($page=0,$limit=6)
 	{
 		$this->load->library('tplate');
+		$this->load->model("category_model");
+		$categories=$this->category_model->get_option_categories(1);
+		
 		$templates=$this->tplate->get_templates(array(),$page,$limit);
 	
+		
 	    $pagination = create_pagination('admin/template/index', $templates['total'],$limit);
 		
 		
-		$this->template->set('categories', $this->categories );
+		$this->template->set('categories', $categories);
 	
  		$this->template->set('templates',$templates['objects']);
  		$this->template->set('pagination', $pagination);
