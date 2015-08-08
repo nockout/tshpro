@@ -13,7 +13,7 @@ class Checkout extends Public_Controller {
 		/*make sure the cart isnt empty*/
 		if($this->go_cart->total_items()==0)
 		{
-			redirect('cart/view_cart');
+			redirect('home');
 		}
 
 		/*is the user required to be logged in?*/

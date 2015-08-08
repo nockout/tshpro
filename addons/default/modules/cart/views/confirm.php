@@ -87,12 +87,7 @@
 			</div>
 
 			<div class="col-sm-5">
-				<div class="page-header">
-					<h1>
-						<img style="padding-top: 7px;" class="img-responsive"
-							src="https://seal.godaddy.com/images/3/en/siteseal_gd_3_h_l_m.gif">
-					</h1>
-				</div>
+				
 				<div class="panel panel-info">
 
 
