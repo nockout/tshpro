@@ -119,6 +119,7 @@ class Public_Controller extends MY_Controller
 		
 		
 		$this->template->set("categories",(array)$categories);
+		$this->lang->load("common");
 		//
 	
 		$this->benchmark->mark('public_controller_end');
