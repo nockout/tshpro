@@ -85,7 +85,7 @@
 				<?php if(!empty($product_id)):?>
 			
 					
-						<a  target="_blank" href="<?php echo site_url("tdesign/index/".$product_id)?>">
+						<a  target="_blank" href="<?php echo site_url("home/product/".$product_id)?>">
 						Preview
 						</a>
 		

@@ -112,19 +112,19 @@ class Product_model extends Base_m
 		$return=array();
 	
 		
-		if(!empty($objct)){
-			foreach ($objct as $o){
-				$images=$this->get_images($o->product_id);
+// 		if(!empty($objct)){
+// 			foreach ($objct as $o){
+// 				$images=$this->get_images($o->product_id);
 				
-				if(!empty($images)){
+// 				if(!empty($images)){
 						
 					
-					foreach ($images as $image)
+// 					foreach ($images as $image)
 						
-						$o->image[]=get_design_image_path("original",$image->id_image.'_'.$image->product_id.'.jpg');
-				}
-			}
-		}
+// 						$o->image[]=get_design_image_path("original",$image->id_image.'_'.$image->product_id.'.jpg');
+// 				}
+// 			}
+// 		}
 	
 		$result['objects']=$objct;
 		$result['total']=0;
@@ -138,6 +138,7 @@ class Product_model extends Base_m
 	}
 	public function get($id){
 		
+		$this->load->helper("tdesign");
 		$this->db->select(array("*","list_price as price"));
 		$this->db->join($this->_descriptions,$this->_table.'.product_id='.$this->_descriptions.'.product_id',"LEFT");
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
@@ -147,12 +148,12 @@ class Product_model extends Base_m
 	
 		$images=$this->get_images($id);
 	
-		if(!empty($images)){
+// 		if(!empty($images)){
 			
-			$this->load->helper('tdesign');
-			foreach ($images as $image)
-			$result->image[]=get_design_image_path("original",$image->id_image.'_'.$image->product_id.'.jpg');
-		}
+// 			$this->load->helper('tdesign');
+// 			foreach ($images as $image)
+// 			$result->image[]=get_design_image_path("original",$image->id_image.'_'.$image->product_id.'.jpg');
+// 		}
 	
 	
 		return $result;
