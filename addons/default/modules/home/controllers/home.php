@@ -21,14 +21,24 @@ class Home extends Public_Controller {
 	}
 	public function cate($cateID = null) {
 		if (! $cateID)
-			$cateID = 0;
+			$cateID = 1;
+		
+		$this->load->model ( 'category_model' );
+		$category=$this->category_model->get_category($cateID);
+	
+	
 		$this->load->model ( 'product_model' );
 		$product = $this->product_model->get_products ( array (
-				"cate" 
+				"cate_id"=>intval($cateID) 
 		) );
+	
+		$this->template->set("title",$category->category);
+		$this->template->set("currentCate",$category->category_id);
+		$this->template->set("currentCateName",$category->category);
+		$this->template->title ( $this->module_details ['name'] )->
+		set ( "products", $product ['objects'] )->
 		
-		$this->template->title ( $this->module_details ['name'] )->set ( "products", $product ['objects'] )->
-		build ( 'home' );
+		build ( 'category' );
 	}
 	public function index() {
 		$this->load->model ( 'product_model' );

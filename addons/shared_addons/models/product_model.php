@@ -8,6 +8,7 @@ class Product_model extends Base_m
 	protected  $_primary="product_id";
 	protected $lang_table="tshirt_product_descriptions";
 	protected $_descriptions="tshirt_product_descriptions";
+	protected $_category_products="tshirt_category_products";
 	protected $_viewAllgroups=array("admin","moderate");
 	protected $_cate_des='tshirt_category_descriptions';
 	protected $_images='tshirt_image';
@@ -96,13 +97,24 @@ class Product_model extends Base_m
 		
 	}
 	
-	public function get_products($params=array(),$offset=0,$limit=6){
+	public function get_products($params=array(),$offset=0,$limit=12){
 	
 		
+		
+		
+		
+		if($params['cate_id']!=1){
+			
+			// join table category_products;
+			$this->db->join($this->_category_products,"$this->_category_products.product_id=$this->_table.product_id");
+			$this->db->where_in("category_id",intval($params['cate_id']));
+		}
+		if(!empty($params['search_name'])){
+			$this->db->like('product',$params['search_name'] , 'before'); 
+		}
+		
 		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
-
-		$this->db->select("(SELECT username FROM ".(SITE_REF."_".$this->_users)." WHERE id=user_id LIMIT 1) AS user_name", FALSE);
-		$this->db->where($params);
+		
 		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id');
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
 		$this->db->where('deleted',0);
@@ -110,22 +122,7 @@ class Product_model extends Base_m
 		$this->db->order_by("avail_since","DESC");
 		$objct=$this->db->get($this->_table)->result();
 		$return=array();
-	
-		
-// 		if(!empty($objct)){
-// 			foreach ($objct as $o){
-// 				$images=$this->get_images($o->product_id);
-				
-// 				if(!empty($images)){
-						
-					
-// 					foreach ($images as $image)
-						
-// 						$o->image[]=get_design_image_path("original",$image->id_image.'_'.$image->product_id.'.jpg');
-// 				}
-// 			}
-// 		}
-	
+
 		$result['objects']=$objct;
 		$result['total']=0;
 		$query = $this->db->query('SELECT FOUND_ROWS() AS `Count`');

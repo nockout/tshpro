@@ -4,8 +4,7 @@
 	<?php 
 	if($products)
 	foreach ($products as $p):?>
-			<form name="sendtocollection" method="post" action="/AddtoGo.cfm">
-				<input name="mockupID" value="59650813" type="hidden">
+			
 				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
 					<div class="frameitWrapper">
 						<div class="price">					
@@ -39,6 +38,6 @@
 						
 					</div>
 				</div>
-			</form>
+		
 			
 	<?php endforeach; ?>			

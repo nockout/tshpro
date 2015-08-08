@@ -196,3 +196,6 @@ $lang['giftcard_already_applied']		= 'Your gift card is already applied';
 $lang['error_updating_cart']			= 'There was an error updating the cart!';
 $lang['not_enough_stock']				= 'The quantity requested for the "%s" product could not be added. We only have %d item(s) in stock.';
 $lang['address']="Adress";
+$lang['search_in_category']="Tìm trong danh mục";
+$lang['search_over']="Tìm trong tất cả danh mục";
+$lang['all']="Tất cả";

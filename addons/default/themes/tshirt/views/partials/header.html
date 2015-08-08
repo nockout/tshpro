@@ -10,18 +10,28 @@
 					</a> -->
 				</div>
 				<div class="col-sm-4 col-md-6 searchbarTopNav cart-checkoutHide">
-					<form onsubmit="return plsWaitSearch();" method="get"
+				<form  method="get"
 						action="/search/">
 						<input type="hidden" value="{{currentCate}}" name="cId" id="byCatSelect">
-						<input type="hidden" value="" name="cName" id="byCatName">
+						<input type="hidden" value="{{currentCateName}}" name="cName" id="byCatName">
 						<div class="input-group">
 							<div class="input-group-btn search-panel">
 								<button style="margin-right: -2px;" data-toggle="dropdown"
 									class="btn btn-default dropdown-toggle" type="button"
 									aria-expanded="false">
-									All <span class="caret"></span>
+											{{ if currentCateName }}
+												{{currentCateName}}
+													{{ else }}
+												{{helper:lang line="all"}}
+												{{ endif }}
+										
+									 <span class="caret">
+									</span>
 								</button>
 								<ul role="menu" class="dropdown-menu">
+									{{if currentCate}}
+									<li><a data-cid="{{ category_id }}" href="{{ url:site uri='home/cate/'}}">{{helper:lang line="all"}}</a></li>
+									{{endif}}
 									{{ categories }}
 									<li><a data-cid="{{ category_id }}" href="{{ url:site uri='home/cate/'}}/{{category_id}}">{{category}}</a></li>
 									{{ /categories }}
@@ -29,7 +39,7 @@
 								</ul>
 							</div>
 
-							<input type="text" placeholder="Search over 2 million designs"
+							<input type="text" placeholder="{{if currentCateName}} {{ helper:lang line="search_in_category" }} {{currentCateName}} {{else}} {{ helper:lang line="search_over" }} {{endif}}"
 								name="search" class="form-control"> <span
 								class="input-group-btn">
 								<button type="submit" class="btn btn-default"
@@ -51,6 +61,7 @@
 						</a>
 							<ul role="menu" class="dropdown-menu">
 	
+								<li><a data-cid="{{ category_id }}" href="{{ url:site uri='home/cate/'}}">{{helper:lang line="all"}}</a></li>
 									{{ categories }}
 									<li><a data-cid="{{ category_id }}" href="{{ url:site uri='home/cate/'}}/{{category_id}}">{{category}}</a></li>
 									{{ /categories }}
