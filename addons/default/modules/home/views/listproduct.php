@@ -1,6 +1,7 @@
+<?php 	if(!empty($products)):?>
 <?php 
-	if(!empty($products))
-	foreach ($products as $p):?>
+
+		foreach ($products as $p):?>
 			
 				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
 					<div class="frameitWrapper">
@@ -38,3 +39,4 @@
 		
 			
 	<?php endforeach; ?>			
+<?php endif?>

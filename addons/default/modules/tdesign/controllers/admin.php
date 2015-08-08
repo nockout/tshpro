@@ -28,11 +28,11 @@ class Admin extends Admin_Controller
 					'rules' => 'trim|required|numeric'
 			), 
 			
-			array(
-					'field' => 'body',
-					'label' => 'lang:design:description_label',
-					'rules' => 'trim|required'
-			),
+// 			array(
+// 					'field' => 'body',
+// 					'label' => 'lang:design:description_label',
+// 					'rules' => 'trim|required'
+// 			),
 			
 			array(
 					'field' => 'status',
@@ -299,7 +299,7 @@ class Admin extends Admin_Controller
 		$this->load->library('form_validation');
 		$data['categories']=$categories;
 		$data['product_id'] = '';
-	
+		
 		$data['slug'] = '';
 		$data['group_id'] = '';
 		$data['product'] = "";
@@ -361,7 +361,7 @@ class Admin extends Admin_Controller
 	 	
 			$data['slug'] =$product->slug;
 			$data['group_id'] = $product->group_id;
-	
+			$data['product'] = $product->product;
 			$data['cate_id']=!empty($cat)?$cat->category_id:"";
 			$data['product_code'] = $product->product_code;
 			$data['short_description'] = isset($product->short_description)?$product->short_description:"";
