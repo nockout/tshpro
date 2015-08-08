@@ -61,6 +61,7 @@ class Admin extends Admin_Controller
 	    parent::__construct();
 		    $this->lang->load('template');
 		    $this->load->helper('currency');
+		    $this->load->model("category_model");
 		   
 	}
 	public function check_price(){
@@ -116,7 +117,7 @@ class Admin extends Admin_Controller
 	public function index($page=0,$limit=6)
 	{
 		$this->load->library('tplate');
-		$this->load->model("category_model");
+
 		$categories=$this->category_model->get_option_categories(1);
 		
 		$templates=$this->tplate->get_templates(array(),$page,$limit);
@@ -147,7 +148,7 @@ class Admin extends Admin_Controller
 		$data['id_color'] ="";
 		$data['title']="";
 		$this->load->library('tplate');
-		$data['categories']=$this->categories;
+		$data['categories']=$this->category_model->get_option_categories(1);
 		$data['category_id']="";
 		$colors=$this->tplate->get_colors();
 

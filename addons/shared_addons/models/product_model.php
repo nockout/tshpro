@@ -103,7 +103,7 @@ class Product_model extends Base_m
 		
 		
 		
-		if($params['cate_id']!=1){
+		if(!empty($params['cate_id'])){
 			
 			// join table category_products;
 			$this->db->join($this->_category_products,"$this->_category_products.product_id=$this->_table.product_id");

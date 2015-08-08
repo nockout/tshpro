@@ -1,5 +1,5 @@
 <?php
-Class Category_m extends CI_Model
+Class Category_model extends CI_Model
 {
 
 	var $_table="tshirt_categories";
@@ -33,7 +33,7 @@ Class Category_m extends CI_Model
     	$this->db->select('*');
     	$this->db->join($this->_description,"$this->_table.category_id=$this->_description.category_id");
     	$this->db->order_by("$this->_table.position", 'ASC');
-    
+    	
     	//this will alphabetize them if there is no position
     	$this->db->order_by('category', 'ASC');
     

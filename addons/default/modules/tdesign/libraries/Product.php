@@ -79,17 +79,19 @@ class Product {
 		//get category
 	
 
-		$categorys='tshirt_template_categories';
-		$this->CI->db->select("*");
-		$this->CI->db->where("lang_code",CURRENT_LANGUAGE);
-		$cates=$this->CI->db->get($categorys)->result();
+// 		$categorys='tshirt_template_categories';
+// 		$this->CI->db->select("*");
+// 		$this->CI->db->where("lang_code",CURRENT_LANGUAGE);
+// 		$cates=$this->CI->db->get($categorys)->result();
 		
+		$this->CI->load->model("category_model");
+		$cates=$this->CI->category_model->get_categories(1);
 		if(empty($cates)){
 			return;
 		}
 		//$result=array();
 		foreach ($cates as $cate){
-		$tempaltes=	$this->get_template_by_category($cate->id_category);
+		$tempaltes=	$this->get_template_by_category($cate->category_id);
 		if($tempaltes)	{
 			foreach ($tempaltes as $t){
 				$t->images=$this->get_templates_images($t->id_template);

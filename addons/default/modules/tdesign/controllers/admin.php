@@ -62,7 +62,7 @@ class Admin extends Admin_Controller
 	{
 	    parent::__construct();
 	    $this->lang->load('design');
-	
+	    $this->load->model("category_model");
 	}
 
 	/**
