@@ -436,8 +436,12 @@ class Admin extends Admin_Controller
 		$this->load->model('product_m');
 		
 		if($id_template){
+		
+			ob_clean();
 			$product=$this->product_m->get_product_template($id_template);
-			die(json_encode(array("na"=>$product->name,"mp"=>$product->price_max,"p"=>$product->price,"idt"=>$id_template)));
+			die(json_encode(array("na"=>$product->name,"mp"=>$product->price_max,"p"=>$product->price,"idt"=>$id_template),true));
+			ob_flush();
+			exit();
 		}
 		
 		
