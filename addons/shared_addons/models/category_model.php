@@ -1,5 +1,5 @@
 <?php
-Class Category_model extends CI_Model
+Class Category_m extends CI_Model
 {
 
 	var $_table="tshirt_categories";
@@ -48,29 +48,7 @@ Class Category_model extends CI_Model
     
     	return $categories;
     }
-    function get_categories_tiered($admin = false)
-    {
-        if(!$admin) $this->db->where('enabled', 1);
-        
-        $this->db->order_by('position');
-        $this->db->order_by('name', 'ASC');
-        $categories = $this->db->get($this->_table)->result();
-        
-        $results    = array();
-        foreach($categories as $category) {
-
-            // Set a class to active, so we can highlight our current category
-            if($this->uri->segment(1) == $category->slug) {
-                $category->active = true;
-            } else {
-                $category->active = false;
-            }
-
-            $results[$category->parent_id][$category->id] = $category;
-        }
-        
-        return $results;
-    }
+   
     
     function get_category($id)
     {  	$this->db->select('*');
