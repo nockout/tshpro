@@ -97,18 +97,8 @@ class Product_model extends Base_m
 	}
 	
 	public function get_products($params=array(),$offset=0,$limit=6){
-		
-
-		//$this->db->select("*");
 	
-		if(!$this->allowViewAll()){
 		
-			$this->db->where('user_id',$this->current_user->user_id);	
-		}
-		
-	
-	
-
 		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
 
 		$this->db->select("(SELECT username FROM ".(SITE_REF."_".$this->_users)." WHERE id=user_id LIMIT 1) AS user_name", FALSE);
@@ -163,6 +153,20 @@ class Product_model extends Base_m
 			foreach ($images as $image)
 			$result->image[]=get_design_image_path("original",$image->id_image.'_'.$image->product_id.'.jpg');
 		}
+	
+	
+		return $result;
+	}
+	public function get_related($id_art,$id){
+	
+		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id',"LEFT");
+		$this->db->where('lang_code',CURRENT_LANGUAGE);
+		$this->db->where('deleted',0);
+		$this->db->where('id_art',$id_art);
+		
+	
+		$result =$this->db->get($this->_table)->result();
+		
 	
 	
 		return $result;

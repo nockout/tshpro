@@ -96,22 +96,20 @@ class Product_m extends Base_m
 		
 	}
 	
+
 	public function get_products($params=array(),$offset=0,$limit=6){
 		
 
-		//$this->db->select("*");
-		//if(!$this->allowViewAll()){
 		
-		//	$this->db->where('user_id',$this->current_user->user_id);	
-		//}
-		
-	
-	
 
 		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
 
 		//$this->db->select("(SELECT username FROM ".(SITE_REF."_".$this->_users)." WHERE id=user_id LIMIT 1) AS user_name", FALSE);
+		if(!empty($params['category_id'])){
+			//
+		}
 		$this->db->where($params);
+	
 		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id');
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
 		$this->db->where('deleted',0);

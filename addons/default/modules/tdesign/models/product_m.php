@@ -40,6 +40,23 @@ class Product_m extends Base_m
 		parent::__construct();
 		
 	}
+	public function save_category($product_id,$category_id){
+		if(!$product_id&&$category_id)
+		{
+			return;
+		}
+		$this->db->where("product_id",intval($product_id))->delete("tshirt_category_products");
+		return $this->db->insert("tshirt_category_products",array("product_id"=>intval($product_id),"category_id"=>intval($category_id)));
+	}
+	public function get_category_products($product_id){
+		if(!$product_id)
+		{
+			return;
+		}
+		$row=$this->db->where("product_id",intval($product_id))->get("tshirt_category_products")->row();
+		
+		return $row;
+	}
 	public function delete($id){
 		if(empty($id))
 			return;

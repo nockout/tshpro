@@ -55,7 +55,7 @@ class Public_Controller extends MY_Controller
 		}
 
 		// -- Navigation menu -----------------------------------
-		$this->load->model('pages/page_m');
+		$this->load->model(array('pages/page_m','category_model'));
 
 		// Load the current theme so we can set the assets right away
 		ci()->theme = $this->theme_m->get();
@@ -114,6 +114,11 @@ class Public_Controller extends MY_Controller
 
 		$this->load->library("go_cart");
 		$this->template->set("cart_total",$this->go_cart->total_items());
+		
+		$categories=$this->category_model->get_categories(1);
+		
+		
+		$this->template->set("categories",(array)$categories);
 		//
 	
 		$this->benchmark->mark('public_controller_end');

@@ -22,11 +22,11 @@ class Admin extends Admin_Controller
 					'rules' => 'trim|htmlspecialchars|required'
 			),
 		
-			/* array(
-					'field' => 'category_id',
+			 array(
+					'field' => 'cate_id',
 					'label' => 'lang:design:category_label',
 					'rules' => 'trim|required|numeric'
-			), */
+			), 
 			
 			array(
 					'field' => 'body',
@@ -289,10 +289,17 @@ class Admin extends Admin_Controller
 	public function form($id=null,$type="null"){
 		$id or redirect('admin/index');
 		
+		
+		$this->load->model(array("category_model","product_m"));
+		
+		$categories=$this->category_model->get_option_categories(1);
+		
 		$this->load->library('product');
 		$this->load->helper('currency');
 		$this->load->library('form_validation');
+		$data['categories']=$categories;
 		$data['product_id'] = '';
+	
 		$data['slug'] = '';
 		$data['group_id'] = '';
 		$data['product'] = "";
@@ -314,8 +321,7 @@ class Admin extends Admin_Controller
 				$product=$this->product->get_product($id);
 				if($product->status=="O"){
 					$extra=unserialize($product->extra);
-					//echo "<pre>";
-				//	print_r($extra);die;
+				
 					if(isset($extra['image'])){
 					
 						$product->image=$extra['image'];
@@ -344,21 +350,19 @@ class Admin extends Admin_Controller
 				$savelang['more_info'] = $product->more_info;
 				$savelang['search_words'] = $product->search_words;
 				$savelang['meta_description'] = $product->meta;
-				//   $savelang['lang']=$lang;
 				$this->product->save_lang($id, $lang, $savelang);
 				redirect($this->config->item('admin_folder') . '/tdesign/form/' . $id );
 			}
-			//set values to db values
+		
 			$data['product_id'] = $id;
-			//get name category
-	        $cat=$this->product->get_cate_fromproduct($product->cate_id);
+	
+	        $cat=$this->product_m->get_category_products($product->product_id);
 	        
-	       // die;
-			
+	 	
 			$data['slug'] =$product->slug;
 			$data['group_id'] = $product->group_id;
-			$data['product'] = isset($product->product)?$product->product:"";
-			$data['cate_name'] = $cat->name;
+	
+			$data['cate_id']=!empty($cat)?$cat->category_id:"";
 			$data['product_code'] = $product->product_code;
 			$data['short_description'] = isset($product->short_description)?$product->short_description:"";
 			$data['full_description'] =isset($product->full_description)?$product->full_description:"";
@@ -366,8 +370,7 @@ class Admin extends Admin_Controller
 			$data['list_price'] = $product->list_price;
 			$data['extra'] = $product->extra;
 			$data['product_code']=$product->product_code;
-			//echo "<pre>";
-			//print_r($product->extra);die;
+		
 			$data['images']=!empty($product->image)?$product->image:"";
 			$data['avail_since']=$product->avail_since;
 			$data['status']=$product->status;
@@ -394,14 +397,18 @@ class Admin extends Admin_Controller
 			$save['product_id'] = intval($id);
             $save['list_price'] =$this->input->post("list_price")?$this->input->post("list_price"):0;
             $save['status']=$this->input->post("status");
-            //$save['cate_id']=$this->input->post("category_id");
-            
+          
             $save['lang'][CURRENT_LANGUAGE]['product']=$this->input->post("title");
       
             $save['lang'][CURRENT_LANGUAGE]['search_words']=$this->input->post("keywords");
        
             $save['lang'][CURRENT_LANGUAGE]['full_description']=$this->input->post("body");
             $product_id=$this->product->save($id,$save);
+            if($category_id=$this->input->post("cate_id")){
+   				$this->product_m->save_category($product_id,$category_id);
+            	 
+            }
+            
             if( $product->status=="O"){
             	//generate image
             	$this->product->generate_image($product_id);

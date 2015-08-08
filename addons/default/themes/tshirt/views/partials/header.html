@@ -1,7 +1,5 @@
 <!-- Begin header -->
-
 <header>
-
 	{{ theme:partial name="cart" }}
 	<nav id="MainNav" class="navbar navbar-default shellOff">
 		<div class="container">
@@ -11,24 +9,22 @@
 						<img width="135" height="51" class="top-logo" alt="SunFrog Shirts Logo" src="/images/SunFrogShirts-Logo1.svg">
 					</a> -->
 				</div>
-
 				<div class="col-sm-4 col-md-6 searchbarTopNav cart-checkoutHide">
 					<form onsubmit="return plsWaitSearch();" method="get"
 						action="/search/">
-						<input type="hidden" value="0" name="cId" id="byCatSelect">
+						<input type="hidden" value="{{currentCate}}" name="cId" id="byCatSelect">
 						<input type="hidden" value="" name="cName" id="byCatName">
 						<div class="input-group">
 							<div class="input-group-btn search-panel">
-
 								<button style="margin-right: -2px;" data-toggle="dropdown"
 									class="btn btn-default dropdown-toggle" type="button"
 									aria-expanded="false">
-
 									All <span class="caret"></span>
 								</button>
 								<ul role="menu" class="dropdown-menu">
-
-
+									{{ categories }}
+									<li><a data-cid="{{ category_id }}" href="{{ url:site uri='home/cate/'}}/{{category_id}}">{{category}}</a></li>
+									{{ /categories }}
 
 								</ul>
 							</div>
@@ -45,7 +41,7 @@
 						</div>
 					</form>
 				</div>
-			
+
 				<div class="col-sm-4 hidden-xs cart-checkoutHide">
 					<ul class="nav navbar-nav ">
 						<li class="dropdown"><a aria-expanded="false" role="button"
@@ -54,25 +50,24 @@
 								<span class="caret"></span>
 						</a>
 							<ul role="menu" class="dropdown-menu">
-
-
-								<li><a href="#">Tshirt</a></li>
-								<li><a href="#">Shoes</a></li>
-
+	
+									{{ categories }}
+									<li><a data-cid="{{ category_id }}" href="{{ url:site uri='home/cate/'}}/{{category_id}}">{{category}}</a></li>
+									{{ /categories }}
 							</ul></li>
 						<li><a href="/Contact/">Help</a></li>
 					</ul>
 				</div>
 				<div class="clear-fix"></div>
-				
+
 				<button data-target="#cartModal"
-				class="navbar-btn navbar-right cart-checkoutHide cart-toggle"
+					class="navbar-btn navbar-right cart-checkoutHide cart-toggle"
 					type="button" id="cartToggleButton">
 					<span id="checkOutText"></span><span aria-hidden="true"
-					class="glyphicon glyphicon-shopping-cart"></span> <span
-					class="badge cart_item_count">{{cart_total}}</span>
+						class="glyphicon glyphicon-shopping-cart"></span> <span
+						class="badge cart_item_count">{{cart_total}}</span>
 				</button>
-				
+
 			</div>
 		</div>
 	</nav>
