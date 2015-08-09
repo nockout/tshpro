@@ -120,6 +120,7 @@ $status = array (
 							<th></th>
 							<th><?php echo lang("item:image")?></th>
 							<th class="collapse"><?php echo lang("item:name")?></th>
+							<th class="collapse"><?php echo lang("item:designer")?></th>
 							<th><?php echo lang("item:quantity")?></th>
 							<th class="text-right"><?php echo lang("item:price")?></th>
 						</tr>
@@ -144,7 +145,7 @@ $status = array (
 							</td>
 							<?php $size=isset($productData['sizeSelected'])?$productData['sizeSelected']:""?>
 							<td class="collapse"><?php echo $productData['product']."-".$size ?></td>
-
+								<td class="collapse"><?php echo !empty($item->designer)?$item->designer->username:"" ?></td>
 
 							<td style="padding-top: 10px;"><?php echo $productData['quantity']?></td>
 							<td class="collapse text-right"><?php echo format_price($productData['subtotal'])?></td>

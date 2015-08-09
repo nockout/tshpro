@@ -8,7 +8,7 @@
 		<div class="content">
 			<?php if (isset($categories)&&count($categories)) : ?>
 			
-				<?php echo $this->load->view('admin/partials/filters') ?>
+				<?php //echo $this->load->view('admin/partials/filters') ?>
 				
 				<?php echo form_open('admin/category/action') ?>
 				

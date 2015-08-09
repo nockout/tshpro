@@ -94,6 +94,8 @@ $lang['item:image']="Ảnh";
 $lang['item:name']="Tên sản phẩm";
 $lang['item:quantity']="Số lượng";
 $lang['item:price']="Giá";
+$lang['item:designer']="Designer";
+
 $lang['order:customer']="Khách hàng";
 $lang['order:status_no_process']="Chưa xử lý";
 $lang['order:status_proceceed']="Đã xử lý";

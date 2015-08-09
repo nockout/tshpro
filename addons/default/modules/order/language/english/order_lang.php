@@ -86,6 +86,7 @@ $lang['item:image']="Image";
 $lang['item:name']="Name";
 $lang['item:quantity']="Quantity";
 $lang['item:price']="Price";
+$lang['item:designer']="Designer";
 
 $lang['order:status_no_process']="No process";
 $lang['order:status_proceceed']="Proceed";

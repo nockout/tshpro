@@ -54,12 +54,18 @@ class Order_m extends MY_Model
 			
 			foreach ($order->items as &$item){
 				$contents=unserialize($item->contents);
-			
+				
 				$item->arts=$this->db->select("data")->from('tshirt_arts')->where("id",$contents['id_art'])->get()->row();
+				$item->designer=$this->get_designer($contents['user_id']);
 			}
 			
 		}
+	
+		
 		return $order;
+	}
+	private function get_designer($id){
+		return $this->db->where("id",intval($id))->get("users")->row();
 	}
 	public function save($param) {
 		if(empty($param))
