@@ -12,3 +12,4 @@
 */
 
 $lang['add_to_cart']="Thêm vào giỏ";
+$lang["all_search"]="Tất cả các kết quả cho \"%s\"";

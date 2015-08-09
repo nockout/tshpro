@@ -67,7 +67,29 @@ class Home extends Public_Controller {
 		set ( 'product', $product )->
 		build ( 'detail' );
 	}
-	public function category($slug = '') {
+	public function search($slug = '') {
+		$search=$this->input->get("search");
+		$cateID=intval($this->input->get("cId"));
+		$cateID=$cateID?$cateID:1;
+		$this->load->model ( 'category_model' );
+		$category=$this->category_model->get_category($cateID);
+		
+		
+		$this->load->model ( 'product_model' );
+		$product = $this->product_model->get_products ( array (
+				"cate_id"=>intval($cateID),
+				"search_name"=>$search
+		) );
+		
+		$this->template->set("title",sprintf(lang("all_search"),$search));
+		$this->template->set("currentCate",$category->category_id);
+		$this->template->set("currentCateName",$category->category);
+		$this->template->title ( sprintf(lang("all_search"),$search) )->
+		set ( "products", $product ['objects'] )->
+		
+		build ( 'search' );
+		
+		
 	}
 }
 
