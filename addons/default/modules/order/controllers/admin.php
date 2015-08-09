@@ -29,7 +29,7 @@ class Admin extends Admin_Controller
 	{
 	    parent::__construct();
 	    $this->lang->load('order');
-	    $this->load->helper("currency");
+	    $this->load->helper(array("currency",'tdesign'));
 	    $this->load->model("search_model");
 	}
 
@@ -91,7 +91,7 @@ class Admin extends Admin_Controller
 		
 		
 	}
-	public function index($code = 0, $by = 0, $way = "ASC", $page = 0,$limit=6)
+	public function index($code = 0,  $by = 0, $way = "ASC",$page = 0)
 	{
 		
 		
@@ -101,7 +101,7 @@ class Admin extends Admin_Controller
      
             $code = $this->search_model->record_term(json_encode($object));
             // echo $code;die;
-            redirect(site_url(array('admin', 'order',"index", $code, $by, $way, $page,$limit)));
+            redirect(site_url(array('admin', 'order',"index", $code,$by, $way ,$page)));
         }
         $term = array();
         if ($code) {
@@ -112,13 +112,14 @@ class Admin extends Admin_Controller
 		
 		$data['term']=$term;
 		$this->load->model('order_m');
-		$designs=$this->order_m->get_orders($data,$page,$limit);
+		
+		
 	
-	    $pagination = create_pagination('admin/order/index', $designs['total'],6);
-		$categories =array();	
-
-	
-		$this->template->set('categories',$categories);
+		$designs=$this->order_m->get_orders($data,$by,$way,$page,6);
+		
+		$pagination=panagition("admin/order/index/$code/$by/$way/",4,$designs['total'],$page,6);
+		
+		
 		$this->template->set("term",(array)$term);
  		$this->template->
  			set('orders',$designs['objects'])

@@ -48,7 +48,7 @@ function status($statusid) {
 		</tbody>
 </table>
 
-<?php  $this->load->view('admin/partials/pagination') ?>
+<?php  echo $pagination; ?>
 
 <br>
 

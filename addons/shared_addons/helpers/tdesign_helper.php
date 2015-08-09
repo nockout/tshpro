@@ -40,3 +40,29 @@ function resize_image($sourcePath, $desPath,$width=480,$height=480){
 	}
 	return false;
 }
+
+function panagition($url, $segment = 3, $total, $offset, $rows = 10) {
+    $CI = &get_instance();
+    $CI->load->library('pagination');
+    //  $this->load->library('pagination');
+
+    if (!$total)
+        return;
+    $config['base_url'] = $url;
+    $config['total_rows'] = $total;
+    $config['per_page'] = $rows;
+    $config['uri_segment'] = $segment;
+    $config['cur_page'] = $offset;
+    //   $config['page_query_string'] = TRUE;
+    // $config['use_page_numbers']=TRUE;
+  
+
+    $config['full_tag_open'] = '<div class="paginate"><div class="pagination">
+    		<ul class="">';
+    $config['full_tag_close'] = '</ul></div></div>';
+   
+
+    $CI->pagination->initialize($config);
+
+    return  $CI->pagination->create_links();
+}
