@@ -60,8 +60,8 @@ class Admin extends Admin_Controller
 	{
 	    parent::__construct();
 		    $this->lang->load('template');
-		    $this->load->helper('currency');
-		    $this->load->model("category_model");
+		    $this->load->helper(array('currency','tdesign'));
+		    $this->load->model(array("category_model","search_model"));
 		   
 	}
 	public function check_price(){
@@ -114,20 +114,34 @@ class Admin extends Admin_Controller
 		redirect('admin/template');
 	}
 	
-	public function index($page=0,$limit=6)
+	public function index($code = 0,  $by = 0, $way = "ASC",$page = 0)
 	{
 		$this->load->library('tplate');
 
+		
 		$categories=$this->category_model->get_option_categories(1);
 		
-		$templates=$this->tplate->get_templates(array(),$page,$limit);
+		
 	
+		if ($this->input->post('search')) {
 		
-	    $pagination = create_pagination('admin/template/index', $templates['total'],$limit);
+			$object = $this->input->post();
+			 
+			$code = $this->search_model->record_term(json_encode($object));
+			// echo $code;die;
+			redirect(site_url(array('admin', 'template',"index", $code,$by, $way ,$page)));
+		}
+		$term = array();
+		if ($code) {
 		
+			$term = json_decode($this->search_model->get_term($code));
+		}
+		$data['term']=$term;
 		
+		$templates=$this->tplate->get_templates($data,$by,$way,$page,6);
+		$this->template->set("term",(array)$term);
+	    $pagination=panagition("admin/template/index/$code/$by/$way/",4,$templates['total'],$page,3);
 		$this->template->set('categories', $categories);
-	
  		$this->template->set('templates',$templates['objects']);
  		$this->template->set('pagination', $pagination);
  		$this->template	->title($this->module_details['name']);;

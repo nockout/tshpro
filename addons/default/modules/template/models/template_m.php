@@ -57,22 +57,41 @@ class Template_m extends Base_m
 		$max_id=$max_id->group_id+1;
 		return $this->db->where_in('id_template',$ids)->update($this->_table,array("group_id"=>$max_id));
 	}
-	public function get_templates($params,$offset=0,$limit=6){
+	public function get_templates($params,$by="",$way="",$page=0,$limit=6){
 	
 
+		
+		
+		
 		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
 	
-		//$this->db->select("(select name from ".$this->db->dbprefix("tshirt_template_categories")." where id_category=id_category_default and lang_code='".CURRENT_LANGUAGE."') as cate_name");
+		if(!empty($params['term'])){
+				
+			$term=(array)$params['term'];
+			
+			if(!empty($term['f_keywords'])){
+				
+				$this->db->like('name', $term['f_keywords']);
+				
+			}
+			if(!empty($term['f_category'])){
+				$this->db->where('id_category_default', $term['f_category']);
+				
+			}
 		
-		$this->db->select("(select name from ".$this->db->dbprefix("tshirt_category_descriptions")." where category_id=id_category_default and lang_code='".CURRENT_LANGUAGE."') as cate_name");
+		}
+		
+	
+		
+		$this->db->select("(select category from ".$this->db->dbprefix("tshirt_category_descriptions")." where category_id=id_category_default and lang_code='".CURRENT_LANGUAGE."') as cate_name");
 		$this->db->join($this->lang_table,$this->lang_table.'.'.$this->_primary.'='.$this->_table.'.'.$this->_primary);
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
 		$this->db->where('deleted',0);
-		$this->db->offset($offset)->limit($limit);
+		$this->db->offset($page)->limit($limit);
 		$this->db->order_by("group_id");
-		//$this->db->order_by("position");
+		
 		$objct=$this->db->get($this->_table)->result();
-		//print_r($objct);die;
+	
 		$return=array();
 		$result['objects']=$objct;
 		$result['total']=0;
