@@ -29,3 +29,33 @@ div#footer ul  {
 	margin: 0 !important;
 	padding:0 !important;
 }
+div.col-sm-6.about-acyca ul li{
+	float:left;
+	display: inline-block;;;
+}
+.twitter {
+    background: rgba(0, 0, 0, 0) url("../img/icon-twitter.png") no-repeat scroll 0 -40px;
+}
+.email {
+    background: rgba(0, 0, 0, 0) url("../img/icon-email.png") no-repeat scroll 0 -40px;
+}
+.instagram {
+    background: rgba(0, 0, 0, 0) url("../img/icon-instagram.png") no-repeat scroll 0 -40px;
+}
+.pinterest {
+    background: rgba(0, 0, 0, 0) url("../img/icon-pinterest.png") no-repeat scroll 0 -40px;
+}
+.stumble {
+    background: rgba(0, 0, 0, 0) url("../img/icon-stumble.png") no-repeat scroll 0 -40px;
+}
+
+.facebook {
+    background: rgba(0, 0, 0, 0) url("../img/icon-facebook.png") no-repeat scroll 0 -40px;
+}
+.socialIcon {
+    float: left;
+    height: 37px;
+    margin-left: 5px;
+    transition: all 0.2s ease-in-out 0s;
+    width: 37px;
+}
