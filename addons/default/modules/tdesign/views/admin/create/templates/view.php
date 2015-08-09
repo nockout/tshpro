@@ -1,5 +1,4 @@
 <?php $pFront=$pFront1=$pBack=$pBack1=array('x'=>325,'y'=>329)?>
-<?php //echo "<pre>" ;print_r($templates);die;?>
 <?php if(isset($templates)&&count($templates)):?>
 <?php foreach ($templates as $t):?>
 		<?php if(empty($t->images)) 
@@ -26,13 +25,9 @@
 			$jsonFront1=json_encode($pFront1);
 			$jsonBack=json_encode($pBack);
 			$jsonBack1=json_encode($pBack1);
-			
 			$FRONT=array_shift($t->images);
 			$first_layer=array_shift($FRONT);
-	//		echo "<pre>";
-// 			print_r($t->images);die;
 			?>
-			
 			<div id="template_<?php echo $t->id_template?>" data='<?php echo json_encode(array("name"=>$name,'max_price'=>$t->price_max,"id_template"=>$t->id_template))?>'  class="fpd-product fpd-shadow-1" title="<?php echo $name?>" data-thumbnail="<?php echo $first_layer?>">
 	    			 
 	    			<img src="<?php echo $first_layer?>" title="<?php echo $name?>" data-parameters='<?php echo $jsonFront?>' />
@@ -57,10 +52,5 @@
 							</div>	
 						<?php endforeach;?>
 			</div>
-		
-			
-			
-		
-		
 <?php endforeach;?>
 <?php endif?>

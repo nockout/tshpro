@@ -135,7 +135,9 @@ jQuery(document)
 						var views=yourDesigner.getViewsDataURL();
 						var products=yourDesigner.getProduct(true);
 						
-						$.get( "admin/tdesign/templateinfo/"+products[0].title, function( data ) {
+						$.get( "admin/tdesign/templateinfo/"+products[0].title, function( data,status,xhr  ) {
+							console.log(status);
+							console.log(xhr);
 							var hmtl=[];
 							var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 							var views=yourDesigner.getViewsDataURL();

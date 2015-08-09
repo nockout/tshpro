@@ -30,6 +30,7 @@ class Admin extends Admin_Controller
 	    parent::__construct();
 	    $this->lang->load('order');
 	    $this->load->helper("currency");
+	    $this->load->model("search_model");
 	}
 
 	/**
@@ -54,7 +55,7 @@ class Admin extends Admin_Controller
 		$this->load->model('order_m');
 		$detail=$this->order_m->get($id);
 		$data['detail']=$detail;
-		//echo"<pre>";print_r(unserialize($detail->items[0]->contents));die;
+	
 		if(empty($detail)){
 			$this->session->set_flashdata("error",lang("order:no_order_found"));
 			redirect("admin/order/index");
@@ -90,16 +91,35 @@ class Admin extends Admin_Controller
 		
 		
 	}
-	public function index($page=0,$limit=6)
+	public function index($code = 0, $by = 0, $way = "ASC", $page = 0,$limit=6)
 	{
-		$this->load->model('order_m');
-		$designs=$this->order_m->get_orders(array(),$page,$limit);
 		
+		
+		if ($this->input->post('search')) {
 
+            $object = $this->input->post();
+     
+            $code = $this->search_model->record_term(json_encode($object));
+            // echo $code;die;
+            redirect(site_url(array('admin', 'order',"index", $code, $by, $way, $page,$limit)));
+        }
+        $term = array();
+        if ($code) {
+
+            $term = json_decode($this->search_model->get_term($code));
+        }
+      
+		
+		$data['term']=$term;
+		$this->load->model('order_m');
+		$designs=$this->order_m->get_orders($data,$page,$limit);
+	
 	    $pagination = create_pagination('admin/order/index', $designs['total'],6);
 		$categories =array();	
 
+	
 		$this->template->set('categories',$categories);
+		$this->template->set("term",(array)$term);
  		$this->template->
  			set('orders',$designs['objects'])
  			->set('pagination', $pagination)

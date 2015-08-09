@@ -13,7 +13,7 @@ $lang['design:design']                 = 'Design';
 $lang['design:designs']                   = 'Designs';
 $lang['design:price']="Price";
 $lang['design:arts']="Arts";
-
+$lang['design:style']="Styles";
 
 // labels
 $lang['design:description_label']="Description";

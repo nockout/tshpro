@@ -129,7 +129,7 @@ $status = array (
 						<?php $productData=unserialize($item->contents)?>
 						<tr>
 	
-							<td><?php $this->load->view("admin/partials/download",array("arts"=>unserialize($item->arts->data)))?></td>
+							<td><?php $this->load->view("admin/partials/download",array("arts"=>!empty($item->arts->data)?unserialize($item->arts->data):""))?></td>
 							
 							<td class="collapse">
 							<?php if(!empty($productData['extra'])):?>

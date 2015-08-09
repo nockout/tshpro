@@ -1,5 +1,4 @@
 <?php
-
 //main bar
 $layers_btn = isset($_POST['layersButton']) ? $_POST['layersButton'] : lang("design:manages_layer");
 $adds_btn = isset($_POST['addsButton']) ? $_POST['addsButton'] : 'Add Something';
@@ -70,10 +69,7 @@ $fb_select_album = isset($_POST['fbSelectAlbum']) ? $_POST['fbSelectAlbum'] : 'S
 //instagram
 $insta_feed_button = isset($_POST['instaFeedButton']) ? $_POST['instaFeedButton'] : 'My Feed';
 $insta_recent_images_button = isset($_POST['instaRecentImagesButton']) ? $_POST['instaRecentImagesButton'] : 'My Recent Images';
-
-
 ?>
-<!-- MAIN BAR -->
 <section class="fpd-main-bar fpd-clearfix fpd-primary-bg-color">
 
 	<!-- Left -->
@@ -88,20 +84,8 @@ $insta_recent_images_button = isset($_POST['instaRecentImagesButton']) ? $_POST[
 			<i class="fpd-icon-product"></i><span><?php echo $products_btn; ?></span>
 		</div>
 	</div>
-	<div class="fpd-right">
-		<div class="fpd-more fpd-btn fpd-dropdown" >
-			<i class="fpd-icon-more fpd-tooltip fpd-primary-text-color" title="<?php echo $more_btn; ?>"></i>
-			<div class="fpd-dropdown-menu fpd-shadow-1  fpd-scale-tr">
-			
-				<span id="saving_product" class="fpd-save-product fpd-btn"><?php echo $save_product; ?></span>
-				<span class="fpd-load-saved-products fpd-btn"><?php echo $load_saved_products; ?></span>
-			</div>
-			<a href="" download="" target="_blank" class="fpd-download-anchor" style="display: none;"></a> <!-- Hidden anchor -->
-		</div>
-
-	</div>
-	<!-- Right -->
-
+	
+	
 </section>
 
 <!-- SUB-BAR -->

@@ -26,8 +26,8 @@
 				
 				</fieldset>
 				<div class="buttons float-right padding-top">
-				<button type="button" class="" id="putinconllection" class=""><?php echo lang("design:apply_this_style")?></button> 
- 				<button type="button" class="" id="export" class=""><?php echo lang("design:save_all_design")?></button> 
+				<button type="button" class="" id="putinconllection" ><?php echo lang("design:apply_this_style")?></button> 
+ 				<button type="button" class="" id="export" ><?php echo lang("design:save_all_design")?></button> 
 				
 				</div>
 				<?php if(isset($art_id)):?>

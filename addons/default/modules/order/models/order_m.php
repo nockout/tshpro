@@ -8,12 +8,27 @@ class Order_m extends MY_Model
 	protected $_table = 'tshirt_orders';
 	protected $_orderItem='tshirt_order_items';
 
-	public function get_orders($params,$page=0,$limit=6){
+	public function get_orders($params,$by="",$way="",$page=0,$limit=6){
 		
 		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
-		if(!empty($params))
-		$this->db->where($params);
+		if(!empty($params['term'])){
+					
+			$term=(array)$params['term'];
+			if(!empty($term['status'])){
+				$this->db->where('status', $term['status']);
+			}
+			if(!empty($term['f_keywords'])){
+				$this->db->like('order_number', $term['f_keywords']);
+				$this->db->or_like('ship_phone', $term['f_keywords']); 
+				$this->db->or_like('ship_email', $term['f_keywords']);
+				$this->db->or_like('ship_phone', $term['f_keywords']);
+				$this->db->or_like("CONCAT(ship_firstname,' ', ship_lastname)",$term['f_keywords']);
+				
+			}
+			
 		
+		}
+		$this->db->select("CONCAT(ship_firstname,' ',ship_lastname) as fullname" ,false);
 		$this->db->offset($page)->limit($limit);
 		$object=$this->db->order_by("ordered_on","DESC")->get($this->_table)->result();
 		

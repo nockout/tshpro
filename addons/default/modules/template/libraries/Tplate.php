@@ -116,7 +116,10 @@ class Tplate {
 				}
 				$obj=new stdClass();
 				$obj->files=$files;
+				ob_clean();
 				print_r(json_encode($obj));
+				ob_flush();
+				
 				break;
 			case 'POST':
 				
@@ -164,8 +167,9 @@ class Tplate {
 						
 						$object= new stdClass();
 						$object->files=$files_return;
-						
+						ob_clean();
 						print_r(json_encode($object));
+						ob_flush();
 					}
 				}
 				break;
@@ -183,8 +187,11 @@ class Tplate {
 				if(file_exists($deltepath)){
 					@unlink($deltepath);
 				}
+				ob_clean();
+				ob_flush();
 				//echo json_encode($this->tools->set_notification('N', 'notice', 'Delete successfull'));
 				return;
+				
 				break;
 			default:
 				header('HTTP/1.1 405 Method Not Allowed');

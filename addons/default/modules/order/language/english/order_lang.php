@@ -75,7 +75,7 @@ $lang['order:name']="Name";
 $lang['order:phone']="Phone";
 $lang['order:mail']="Email";
 $lang['order:company']="Company";
-
+$lang['order:customer']="Customer";
 
 $lang['order:shipping_address1']="Address 1";
 $lang['order:shipping_address2']="Address 2";

@@ -19,6 +19,8 @@ function status($statusid) {
 
 
 			<th class="collapse"><?php echo lang('order:date_label') ?></th>
+			<th class="collapse"><?php echo lang('order:customer') ?></th>
+			<th class="collapse"><?php echo lang('order:phone') ?></th>
 			<th class="collapse"><?php echo lang('order:status_label') ?></th>
 			<th><?php echo lang('order:total') ?></th>
 			<th width="180"><?php echo lang('global:actions') ?></th>
@@ -31,6 +33,8 @@ function status($statusid) {
 			<td><?php echo form_checkbox('action_to[]', $order->id) ?></td>
 			<td class="collapse"><a href="<?php echo base_url("admin/order/form/".$order->id)?>" >#<?php  echo $order->order_number?></a></td>
 			<td class="collapse"><?php  echo date("d/m/y H:i:s",strtotime($order->ordered_on));?></td>
+				<td class="collapse"><?php  echo ($order->fullname)?></td>
+					<td class="collapse"><?php  echo ($order->phone)?></td>
 			<td class="collapse"><?php  echo status($order->status)?></td>
 			<td class="collapse"><?php  echo format_price($order->total)?></td>
 			<td style="padding-top: 10px;">
