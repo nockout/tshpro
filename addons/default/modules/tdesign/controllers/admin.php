@@ -54,7 +54,7 @@ class Admin extends Admin_Controller
 					'field' => 'keywords',
 					'label' => 'lang:global:keywords',
 					'rules' => 'trim'
-			),
+			)
 			
 			
 	);
@@ -62,7 +62,8 @@ class Admin extends Admin_Controller
 	{
 	    parent::__construct();
 	    $this->lang->load('design');
-	    $this->load->model("category_model");
+	    $this->load->helper(array("MY_String"));
+	    $this->load->model(array("category_model","Routes_model"));
 	}
 
 	/**
@@ -81,7 +82,7 @@ class Admin extends Admin_Controller
 			$this->session->set_flashdata("error","design:no_design_found");
 			redirect("admin/tdesign/create_design");
 		}
-		// create art products;
+
 		
 		$this->load->library('product');
 		$this->load->helper("tdesign");
@@ -126,17 +127,11 @@ class Admin extends Admin_Controller
 			
 			$products[]=$this->product->create_draft(array('group_id'=>$group_id,'id_art'=>intval($id_art),"raw_url"=>$files,"image"=>$urls,"name"=>$arr_base64_imgs['title'],"id_template"=>$arr_base64_imgs['id_template'],'price'=>$arr_base64_imgs['price']));
 		}
-	//	echo "<pre>";
-		//print_r($products);die;
 		if(empty($products)){
 			show_error("Service Currently Unvaiable");
 			return;
 		}
 		
-// 		if(count($products)==1){
-			
-// 			redirect("admin/tdesign/form/".$products[0]->product_id);
-// 		}
 		redirect("admin/tdesign/manage/arts");
 		
 		
@@ -274,10 +269,8 @@ class Admin extends Admin_Controller
 	{
 		$this->load->library('product');
 		$designs=$this->product->get_products(array(),$page,$limit);
-	
 	    $pagination = create_pagination('admin/tdesign/index', $designs['total'],6);
 		$categories =array();	
-	//	print_r($pagination);die;
 		$this->template->set('categories',$categories);
  		$this->template->
  			set('designs',$designs['objects'])
@@ -286,6 +279,7 @@ class Admin extends Admin_Controller
 			->build('admin/index');;
 
 	}
+	
 	public function form($id=null,$type="null"){
 		$id or redirect('admin/index');
 		
@@ -299,8 +293,8 @@ class Admin extends Admin_Controller
 		$this->load->library('form_validation');
 		$data['categories']=$categories;
 		$data['product_id'] = '';
-		
-		$data['slug'] = '';
+		$data['slug_id']="";
+		$data['slugurl']="";
 		$data['group_id'] = '';
 		$data['product'] = "";
 		$data['cate_id'] = '';
@@ -332,34 +326,9 @@ class Admin extends Admin_Controller
 			{
 				die("no design found");
 			}
-			
-			//if the product does not exist, redirect them to the product list with an error
-		
-			if (!$product) {
-				$product = $this->product->get_product($id);
-				if(!$product){
-					$this->session->set_flashdata('error', lang('error_not_found'));
-					redirect($this->config->item('admin_folder') . '/products');
-				}
-				
-				$savelang['shortname'] = $product->shortname;
-				$savelang['product'] = $product->product;
-				$savelang['product_id'] = $product->product_id;
-				$savelang['meta_title'] = $product->meta_title;
-				$savelang['full_description'] = $product->full_description;
-				$savelang['more_info'] = $product->more_info;
-				$savelang['search_words'] = $product->search_words;
-				$savelang['meta_description'] = $product->meta;
-				$this->product->save_lang($id, $lang, $savelang);
-				redirect($this->config->item('admin_folder') . '/tdesign/form/' . $id );
-			}
-		
 			$data['product_id'] = $id;
-	
 	        $cat=$this->product_m->get_category_products($product->product_id);
-	        
-	 	
-			$data['slug'] =$product->slug;
+			//$data['slug'] =$product->slug;
 			$data['group_id'] = $product->group_id;
 			$data['product'] = $product->product;
 			$data['cate_id']=!empty($cat)?$cat->category_id:"";
@@ -370,16 +339,19 @@ class Admin extends Admin_Controller
 			$data['list_price'] = $product->list_price;
 			$data['extra'] = $product->extra;
 			$data['product_code']=$product->product_code;
-		
+			$data['slug_id']=$product->slug_id;
+			$data['slugurl']=$product->slugurl;
 			$data['images']=!empty($product->image)?$product->image:"";
 			$data['avail_since']=$product->avail_since;
 			$data['status']=$product->status;
 			$data['arts']=$product->arts;
 			
-		
+			
 		}
+		$this->form_validation->set_rules('slugurl', 'lang:design:slug', 'trim|callback_checkslug['.$id.']');
 		$this->form_validation->set_rules($this->validation_rules);
-		
+
+		$this->form_validation->set_message('checkslug', lang('slug_exist'));
 		if ($this->form_validation->run() == FALSE) {
 				$this->template
 				->set('hours', array_combine($hours = range(0, 23), $hours))
@@ -394,26 +366,56 @@ class Admin extends Admin_Controller
 				->append_metadata($this->load->view('fragments/wysiwyg', array(), true))->build('admin/form');
 			
 		} else {
+			
+			$slug = $this->input->post('slugurl');
+			
+			if (empty($slug) || $slug == '') {
+				$slug = $this->input->post("title");
+			
+			}
+			$slug = create_slug($slug);
+		
+			
+			if ($id) {
+				$route_id = $product->slug_id;
+				if (!$this->Routes_model->check_slug_exist_product($slug, $product->slug_id)) {
+					$slug = $this->Routes_model->validate_slug($slug, $product->slug_id);
+					if (!$this->Routes_model->check_routes_by_id($product->slug_id)) {
+						$route['keyword'] = $slug;
+						$route_id = $this->Routes_model->save($route);
+					}
+				}
+			} else {
+				$slug = $this->Routes_model->validate_slug($slug);
+				$route['keyword'] = $slug;
+				$route_id = $this->Routes_model->save($route);
+			}
+			
+	
 			$save['product_id'] = intval($id);
             $save['list_price'] =$this->input->post("list_price")?$this->input->post("list_price"):0;
             $save['status']=$this->input->post("status");
-          
+         
+            $save['lang'][CURRENT_LANGUAGE]['slugurl']=$slug;
+            $save['lang'][CURRENT_LANGUAGE]['slug_id']=$route_id;
             $save['lang'][CURRENT_LANGUAGE]['product']=$this->input->post("title");
-      
             $save['lang'][CURRENT_LANGUAGE]['search_words']=$this->input->post("keywords");
-       
             $save['lang'][CURRENT_LANGUAGE]['full_description']=$this->input->post("body");
             $product_id=$this->product->save($id,$save);
             if($category_id=$this->input->post("cate_id")){
    				$this->product_m->save_category($product_id,$category_id);
             	 
             }
-            
-            if( $product->status=="O"){
-            	//generate image
-            	$this->product->generate_image($product_id);
-            }
+
           
+            $route['url_alias_id'] = $route_id;
+            $route['keyword'] = $slug;
+            $route['query'] = 'home/product/' . $id . '';
+            
+            $this->Routes_model->save($route);
+            
+            
+            
             if($product_id){
             	$this->session->set_flashdata("success",sprintf(lang("design:publish_success"),$this->input->post("title")));
             }else{
@@ -432,6 +434,31 @@ class Admin extends Admin_Controller
 		
 	
 	}
+	
+
+	function checkslug($field, $id) {
+		$this->load->library('product');
+		if ($field == "" || empty($field)) {
+			$slug=create_slug($field);
+			
+	
+		} else
+			$slug = create_slug($field);
+
+		if (intval($id)>0) {
+			$product =$this->product->get_product($id);
+			$slug_id = $product->slug_id;
+			if ($this->Routes_model->check_slug($slug, $slug_id)) {
+				return false;
+			}
+		} else {
+			if ($this->Routes_model->check_slug($slug)) {
+				return false;
+			}
+		}
+	}
+	
+	
 	function templateinfo($id_template=0){
 		$this->load->model('product_m');
 		

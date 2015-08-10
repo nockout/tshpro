@@ -103,14 +103,16 @@ class Product_model extends Base_m
 		
 		
 		
-		if(!empty($params['cate_id'])){
-			
+		if(!empty($params['cate_id']) && $params['cate_id']!=1){
+		
 			// join table category_products;
 			$this->db->join($this->_category_products,"$this->_category_products.product_id=$this->_table.product_id");
 			$this->db->where_in("category_id",intval($params['cate_id']));
 		}
 		if(!empty($params['search_name'])){
-			$this->db->like('product',$params['search_name'] , 'before'); 
+			
+			
+			$this->db->like('product',trim($params['search_name'])); 
 		}
 		
 		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);

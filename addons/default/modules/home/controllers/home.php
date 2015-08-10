@@ -41,14 +41,14 @@ class Home extends Public_Controller {
 		build ( 'category' );
 	}
 	public function index() {
+	
 		$this->load->model ( 'product_model' );
-		
 		$product = $this->product_model->get_products ();
 		$this->template->title ( $this->module_details ['name'] )->set ( "products", $product ['objects'] )->
-
 		build ( 'home' );
 	}
 	public function product($id = null) {
+		
 		$this->load->model ( 'product_model' );
 		$id or redirect ( "home" );
 		$product = $this->product_model->get ( $id );
@@ -68,6 +68,7 @@ class Home extends Public_Controller {
 		build ( 'detail' );
 	}
 	public function search($slug = '') {
+		
 		$search=$this->input->get("search");
 		$cateID=intval($this->input->get("cId"));
 		$cateID=$cateID?$cateID:1;
@@ -91,5 +92,7 @@ class Home extends Public_Controller {
 		
 		
 	}
+	
+	
 }
 

@@ -75,14 +75,7 @@ class Product {
 		return $result;
 	}
 	public function cate_templates($folders = array()) {
-		//$path = rtrim ( $this->CI->config->item ( 'files:path' ), DIRECTORY_SEPARATOR );
-		//get category
-	
 
-// 		$categorys='tshirt_template_categories';
-// 		$this->CI->db->select("*");
-// 		$this->CI->db->where("lang_code",CURRENT_LANGUAGE);
-// 		$cates=$this->CI->db->get($categorys)->result();
 		
 		$this->CI->load->model("category_model");
 		$cates=$this->CI->category_model->get_categories(1);

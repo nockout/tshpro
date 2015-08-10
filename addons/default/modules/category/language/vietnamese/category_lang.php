@@ -25,6 +25,7 @@ $lang["category:edit_title"]="Edit category";
 $lang["category:create_title"]="Create category";
 $lang["category:no_category_select_label"]="Select your category";
 $lang["category:no_color_select_label"]="Select your colors";
+$lang['slug_exist'] = 'Slug đã tồn tại';
 //tabs
 $lang['category:information']="Information";
 $lang['category:combinations']="Combinations";

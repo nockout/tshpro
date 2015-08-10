@@ -28,7 +28,7 @@ $lang["category:no_color_select_label"]="Select your colors";
 $lang['category:information']="Information";
 $lang['category:combinations']="Combinations";
 $lang['category:images']="Images";
-
+$lang['slug_exist'] = 'Url existed';
 //forms
 $lang['categorys:images']="Images";
 $lang['buttons:set_group']="Set group";

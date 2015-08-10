@@ -66,6 +66,17 @@
 				</li>
 				
 				<li>
+					<label for="slug"><?php echo lang('global:slug') ?> <span>*</span></label>
+					<div class="input"><?php echo form_input('slugurl', isset($slugurl)?($slugurl):"", 'maxlength="100" id="slug"') ?></div>
+				</li>
+					<li>
+					 
+					<div class="input"><?php echo form_hidden('slug_id', isset($slug_id)?($slug_id):"", 'maxlength="100" id="slug"') ?></div>
+				</li>
+				
+				
+				
+				<li>
 					<label for="status"><?php echo lang('design:status_label') ?></label>
 					
 					<div class="input">

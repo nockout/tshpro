@@ -17,6 +17,9 @@ $lang['design:design']                 = 'Design';
 $lang['design:designs']                   = 'Designs';
 $lang['design:price']="Price";
 $lang['design:arts']="Arts";
+$lang['design:slug']="Slug";
+$lang['slug_exist'] = 'Slug đã tồn tại';
+
 // labels
 $lang['design:description_label']="Miêu tả";
 $lang['design:designed_label']                   = 'Tên ';

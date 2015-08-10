@@ -14,7 +14,8 @@ $lang['design:designs']                   = 'Designs';
 $lang['design:price']="Price";
 $lang['design:arts']="Arts";
 $lang['design:style']="Styles";
-
+$lang['design:slug']="Slug";
+$lang['slug_exist'] = 'Slug exists';
 // labels
 $lang['design:description_label']="Description";
 $lang['design:designed_label']                   = 'Name';

@@ -48,7 +48,9 @@ class Admin extends Admin_Controller
 	{
 	    parent::__construct();
 	    $this->lang->load("category");
-	    $this->load->model("category_m");
+	    $this->load->model(array("category_m","Routes_model"));
+	    $this->load->helper(array("MY_string"));
+	    
 	     
 	}
 	
@@ -79,6 +81,8 @@ class Admin extends Admin_Controller
 		$data["timestamp"]="";
 		$data['status']="";
 		$data["description"]="";
+		$data['slugurl']="";
+		$data['slug_id']="";
 		if(intval($id)){
 			$category=$this->category_m->get_category($id);
 			$data['category']=$category->category;
@@ -87,10 +91,16 @@ class Admin extends Admin_Controller
 			$data["timestamp"]=$category->timestamp;
 			$data["description"]=$category->description;
 			
+			$data['slugurl']=$category->slugurl;
+			$data['slug_id']=$category->slug_id;
+			
 		}
 		
+		
+		$this->form_validation->set_rules('slugurl', 'lang:design:slug', 'trim|callback_checkslug['.$id.']');
 		$this->form_validation->set_rules($this->validation_rules);
 		
+		$this->form_validation->set_message('checkslug', lang('slug_exist'));
 		if ($this->form_validation->run() == FALSE) {
 			
 		
@@ -103,10 +113,36 @@ class Admin extends Admin_Controller
 		} else {
 			
 			
+			$slug = $this->input->post('slugurl');
+				
+			if (empty($slug) || $slug == '') {
+				$slug = $this->input->post("title");
+				$slug = create_slug($slug);
+			}
+				
+			
+				
+			if ($id) {
+				$route_id = $category->slug_id;
+				if (!$this->Routes_model->check_slug_exist_product($slug, $route_id)) {
+					$slug = $this->Routes_model->validate_slug($slug, $route_id);
+					if (!$this->Routes_model->check_routes_by_id($route_id)) {
+						$route['keyword'] = $slug;
+						$route_id = $this->Routes_model->save($route);
+					}
+				}
+			} else {
+				$slug = $this->Routes_model->validate_slug($slug);
+				$route['keyword'] = $slug;
+				$route_id = $this->Routes_model->save($route);
+			}
+			
+			
 			$save['category_id']=intval($id);
 			$save['parent_id']=1;
 			$save['status']=$this->input->post("status");
-			
+			$save['lang'][CURRENT_LANGUAGE]['slugurl']=$slug;
+			$save['lang'][CURRENT_LANGUAGE]['slug_id']=$route_id;
 			
 			
 			$save['lang'][CURRENT_LANGUAGE]['category']=$this->input->post("title");
@@ -119,6 +155,15 @@ class Admin extends Admin_Controller
 				$this->session->set_flashdata("error",sprintf(lang("category:publish_error"),$this->input->post("title")));
 			}
 		
+			
+			
+			$route['url_alias_id'] = $route_id;
+			$route['keyword'] = $slug;
+			$route['query'] = 'home/cate/' . $id . '';
+			
+			$this->Routes_model->save($route);
+			
+			
 			if($this->input->post("btnAction")=="save_exit"){
 				redirect("admin/category/index/");
 			}else{
@@ -128,7 +173,29 @@ class Admin extends Admin_Controller
 		}
 	}
 	
+	function checkslug($field, $id) {
+		
+		if ($field == "" || empty($field)) {
+			$slug=create_slug($field);
+				
 	
+		} else
+			$slug = create_slug($field);
+	
+		if (intval($id)>0) {
+			
+			
+			$cate=$this->category_m->get_category($id);
+			$slug_id = $cate->slug_id;
+			if ($this->Routes_model->check_slug($slug, $slug_id)) {
+				return false;
+			}
+		} else {
+			if ($this->Routes_model->check_slug($slug)) {
+				return false;
+			}
+		}
+	}
 	
 
 }
