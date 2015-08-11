@@ -8,6 +8,9 @@
 					<!-- <a href="/">
 						<img width="135" height="51" class="top-logo" alt="SunFrog Shirts Logo" src="/images/SunFrogShirts-Logo1.svg">
 					</a> -->
+						 <a href="home">
+						AYCA
+					</a> 
 				</div>
 				<div class="col-sm-4 col-md-6 searchbarTopNav cart-checkoutHide">
 				<form  method="get"
@@ -30,10 +33,10 @@
 								</button>
 								<ul role="menu" class="dropdown-menu">
 									{{if currentCate}}
-									<li><a data-cid="{{ category_id }}" href="{{ url:site uri='home/cate/'}}">{{helper:lang line="all"}}</a></li>
+									<li><a data-cid="{{ category_id }}" href="{{ url:site uri=slugurl}}">{{helper:lang line="all"}}</a></li>
 									{{endif}}
 									{{ categories }}
-									<li><a data-cid="{{ category_id }}" href="{{ url:site uri='home/cate/'}}/{{category_id}}">{{category}}</a></li>
+									<li><a data-cid="{{ category_id }}" href="{{ url:site uri=slugurl}}">{{category}}</a></li>
 									{{ /categories }}
 
 								</ul>
@@ -61,9 +64,9 @@
 						</a>
 							<ul role="menu" class="dropdown-menu">
 	
-								<li><a data-cid="{{ category_id }}" href="{{ url:site uri='home/cate/'}}">{{helper:lang line="all"}}</a></li>
+								<li><a data-cid="{{ category_id }}" href="{{ url:site uri=slugurl}}">{{helper:lang line="all"}}</a></li>
 									{{ categories }}
-									<li><a data-cid="{{ category_id }}" href="{{ url:site uri='home/cate/'}}/{{category_id}}">{{category}}</a></li>
+									<li><a data-cid="{{ category_id }}" href="{{ url:site uri=slugurl}}">{{category}}</a></li>
 									{{ /categories }}
 							</ul></li>
 						<li><a href="/Contact/">Help</a></li>

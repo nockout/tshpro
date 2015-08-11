@@ -422,7 +422,7 @@ class Admin extends Admin_Controller
             	$this->session->set_flashdata("error",sprintf(lang("design:publish_error"),$this->input->post("title")));
             }
             if($this->input->post("btnAction")=="save_exit"){
-            	redirect("admin/tdesign/index/");
+            	redirect("admin/tdesign/manage/index/".intval($product->id_art));
             }else{
             	redirect("admin/tdesign/form/".intval($id));
             }

@@ -42,8 +42,8 @@
 			style="height: 0px;"></div>
 		<!-- This is used in sunfrog.js -->
 		<div class="col-xs-3 cart-thumb">
-			<img width="93" height="105" class="img-responsive thumbnail"
-				src="/images/empty-cart-shirt.svg">
+		<?php echo Asset::img("empty-cart-shirt.svg", "",array("width"=>"93", "height"=>"105","class"=>"img-responsive thumbnail")); ?>
+		
 		</div>
 		<div class="col-xs-7 cart-cell text-center">
 			<br> <strong class="text-danger"> Your cart is empty! <br> Quick put
