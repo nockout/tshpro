@@ -41,6 +41,7 @@ class Product_model extends Base_m
 		parent::__construct();
 		
 	}
+	
 	public function delete($id){
 		if(empty($id))
 			return;
@@ -80,7 +81,13 @@ class Product_model extends Base_m
 			
 		}
 	}
+	public function updateTotalView($id){
+		if(empty($id))
+			return;
+		$this->db->set('total_view', '`total_view`+ 1', FALSE);
 	
+		return $this->db->where("product_id",intval($id))->update($this->_table);
+	}
 	public function auto_delete($id){
 		if(empty($id))
 			return ;

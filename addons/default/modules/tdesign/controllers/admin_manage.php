@@ -37,7 +37,7 @@ class Admin_Manage extends Admin_Controller
 			$arts=$object['objects'];
 		}
 		$this->load->helper(array("currency",'tdesign'));
-		$pagination=panagition("admin/tdesign/manage/arts/$code/$by/$way/",7,$object['total'],$page,8);
+		$pagination=panagition("admin/tdesign/manage/arts/$code/$by/$way/",8,$object['total'],$page,8);
 		
 		$this->template->
 		set('arts',$arts)

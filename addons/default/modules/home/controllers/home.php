@@ -52,6 +52,7 @@ class Home extends Public_Controller {
 		$this->load->model ( 'product_model' );
 		$id or redirect ( "home" );
 		$product = $this->product_model->get ( $id );
+		$this->product_model->updateTotalView($id);
 		if (empty ( $product ))
 			redirect ( "home" );
 		

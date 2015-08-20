@@ -16,7 +16,7 @@
 			} 
 			?>
 			
-	<li class="one_quarter art_list ">
+	<li class="one_quarter art_item ">
 			<center>
 		<?php foreach ($data as $img):?>
 		<?php if(file_exists($img)):?>
@@ -27,7 +27,7 @@
 		<?php echo anchor("admin/tdesign/manage/index/".$art->id,lang("design:mockup"),array("class"=>'btn gray'))?>
 		</center>
 		<center>
-		<h5 id="activity"><span class="success">Views:&nbsp;<span class=""><?php echo $art->total_view?></span> </span>
+		<h5 id="activity"><span class="success">Views:&nbsp;<span class=""><?php echo intval($art->total_view)?></span> </span>
 		&nbsp;&nbsp;&nbsp;
 		<span class="success"><span class="success">Sales:&nbsp<span class="">0</span>  </span></h5>
 		</center>

@@ -257,7 +257,6 @@ class Product_m extends Base_m
 		$this->db->offset($offset)->limit($limit);
 		$this->db->order_by("add_time","DESC");
 		$objct=$this->db->get("tshirt_arts")->result();
-		//print_r($objct);die;
 		$return=array();
 		$result['objects']=$objct;
 		$result['total']=0;
