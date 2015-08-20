@@ -38,9 +38,11 @@ jQuery(document)
 								    resizeToH: 1200,
 									scale: "0.6",
 									autoSelect: true,
-									draggable : true,*/boundingBox:true,
+									draggable : true,*/
+									boundingBox:true,
 						    		x:0,
-						    		y:0,autoCenter : true,
+						    		y:0,
+						    		autoCenter : true,
 						    		scale: "0.6",
 										//Allows to set the z-index of an element, -1 means it will be added on the stack of layers
 									
@@ -120,7 +122,7 @@ jQuery(document)
 									unlock: 'Unlock',
 									remove: 'Remove',
 									outOfContainmentAlert: 'Move it in his containment!',
-									uploadedDesignSizeAlert: "<?php echo lang("design:invalid_mockup_size")?>",
+									uploadedDesignSizeAlert: "<?php echo lang("template:invalid_mockup_size")?>",
 									initText: "<?php echo lang("template:init_design")?>",
 									myUploadedImgCat: "Your uploaded images",
 									moveUp: 'Move Up',
@@ -128,9 +130,17 @@ jQuery(document)
 								}
 							}).data('fancy-product-designer');
 
-					
+					$('#clothing-designer').on("elementAdded",function(event,object){
+							$(".fpd-context-dialog").hide();
+							//$("#clothing-designer").fancyProductDesigner.closeDialog();
+						});
 					$('button#putinconllection').on("click",function() {
-	
+
+						var art=yourDesigner.getCustomElements();
+						if(!art.length){
+								alert("<?php echo lang("design:empty_art")?>");
+									return;
+							};
 						var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 						var views=yourDesigner.getViewsDataURL();
 						var products=yourDesigner.getProduct(true);
@@ -141,25 +151,22 @@ jQuery(document)
 							var hmtl=[];
 							var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 							var views=yourDesigner.getViewsDataURL();
-							
-							//console.log(data);
-							
-							//price=parseInt(price.replace(/\s+/g, ''));
-							//var products=yourDesigner.getProduct(true);
 							if(!products)
 								return;
 							var price=parseInt(data.p);
-							//var name=products[0].title;
 							var max_price=parseInt(data.mp);
-							//console.log(max_price);
 							if(views.length){
 								hmtl.push("<tr><td style='width: 30px' align='left'>");
 								hmtl.push("<img style='width:80px;height:80px' src='"+views[0]+"'></td>");
 								hmtl.push("<td style='position:relative'>");
 								hmtl.push("<i style='top:0;right:0;position:absolute; font-size: 1.3em;cursor: pointer' class='x_row pointer fpd-btn  fpd-icon-remove'></i>");
-								hmtl.push("<input type='hidden'  maxlength='100' value='"+data.idt+"' name=products["+product+"][id_template]>");
-								hmtl.push("<input type='text' id='title' maxlength='100' value='"+data.na+"' name=products["+product+"][title]>");	
-								hmtl.push("<div id='slider"+product+"'>");
+								hmtl.push("<input type='hidden'  value='"+data.idt+"' name=products["+product+"][id_template]>");
+								hmtl.push("<label'><?php echo lang("design:designed_label")?></label>");
+								hmtl.push("<input type='text' class='name' id='title' style='width:90%' value='"+data.na+"' name=products["+product+"][title]>");	
+								hmtl.push("<label id='label0'><?php echo lang("design:description_label")?></label>");
+								hmtl.push("<textarea class='des' style='width:90%;'  name=products["+product+"][description]>");	
+								hmtl.push("</textarea><br/>");
+								hmtl.push("<div style='width:95%;' id='slider"+product+"'>");
 								hmtl.push("</div>");
 								hmtl.push("<input type='hidden' id='price"+product+"' maxlength='100' value='"+price+"' name=products["+product+"][price]>");
 								hmtl.push(" <p><label id='label"+product+"' >Price:"+price+"</label>");
@@ -207,14 +214,16 @@ jQuery(document)
 						
 						return;
 					});
+
+				
 					$('button#export').on("click",function() {
 						var hmtl=[];
 						var art=yourDesigner.getCustomElements();
 						if(!art.length){
-								alert("Your art is empty");
+								alert("<?php echo lang("design:empty_art")?>");
 									return;
 							}else{
-								var value="";
+								
 								for(i=0;i<art.length;i++){
 									if(art[i].element.type=="image"){
 										value=(art[i].element.source);
@@ -230,30 +239,28 @@ jQuery(document)
 						}
 						hmtl.push("</td></tr>");
 						$("#yourdesigns").append(hmtl.join(""));
+						var check=true;
+						$('#save_image input.name, #save_image textarea.des').each(
+							    function(index){  
+							        var input = $(this);
+							        console.log(input.val());
+							      	if(!input.val()){
+							      		check=false;
+							      		return;
+								      }
+							    }
+							);
+						
+						if(!check){
+							alert("<?php echo lang("design:inputall")?>");
+							return;
+						}
+						
 						var postt = $( "#save_image" ).submit();
 						
                          
 					});
-					//console.log($(".fpd-views-related > .fpd-item"));
-					//return;
-// 					$(".fpd-views-related > .fpd-item").on("click",function(){
-// 								yourDesigner.addProduct(objectView);
-// 								yourDesigner.loadProduct(objectView);
-// 						});
-					
-// 					$("#slider").slider({
-// 					    range: "min",
-// 					    value: 1,
-// 					    step: 1000,
-// 					    min: 0,
-// 					    max: 5000000,
-// 					    slide: function(event, ui) {
-// 					     //	alert("Aaaa");
-// 					    }
-// 					});
-					
-										
-			// upload image
+		
 			document.getElementById('design-upload').onchange = function(e) {
 				if (window.FileReader) {
 					var reader = new FileReader();

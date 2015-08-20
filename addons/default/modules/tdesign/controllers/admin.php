@@ -107,11 +107,8 @@ class Admin extends Admin_Controller
 			$names=array();
 			if(empty($arr_base64_imgs["images"]))
 				continue;
-			//print_r($arr_base64_imgs);die;
 			foreach ($arr_base64_imgs["images"] as $image){
-				
 				$base64_str = substr($image, strpos($image, ",")+1);	
-			//decode base64 string
 				$decoded = base64_decode($base64_str);
 				$name= "temp".uniqid(). '.png';
 				$file=UPLOAD_PATH.'../design/templates/' .$name;
@@ -125,7 +122,7 @@ class Admin extends Admin_Controller
 				$urls[]=get_design_image_path("templates",$tempname);
 			}
 			
-			$products[]=$this->product->create_draft(array('group_id'=>$group_id,'id_art'=>intval($id_art),"raw_url"=>$files,"image"=>$urls,"name"=>$arr_base64_imgs['title'],"id_template"=>$arr_base64_imgs['id_template'],'price'=>$arr_base64_imgs['price']));
+			$products[]=$this->product->create_draft(array('group_id'=>$group_id,'id_art'=>intval($id_art),"raw_url"=>$files,"image"=>$urls,"name"=>$arr_base64_imgs['title'],"id_template"=>$arr_base64_imgs['id_template'],"description"=>$arr_base64_imgs['description'],'price'=>$arr_base64_imgs['price']));
 		}
 		if(empty($products)){
 			show_error("Service Currently Unvaiable");
@@ -269,7 +266,7 @@ class Admin extends Admin_Controller
 	{
 		$this->load->library('product');
 		$designs=$this->product->get_products(array(),$page,$limit);
-	    $pagination = create_pagination('admin/tdesign/index', $designs['total'],6);
+	   	$pagination=panagition("admin/order/index/$code/$by/$way/",4,$designs['total'],$page,6);
 		$categories =array();	
 		$this->template->set('categories',$categories);
  		$this->template->
@@ -313,22 +310,16 @@ class Admin extends Admin_Controller
 		if ($id) {
 		
 				$product=$this->product->get_product($id);
-				if($product->status=="O"){
-					$extra=unserialize($product->extra);
+				$extra=unserialize($product->extra);
+				$product->image=$extra['image'];
 				
-					if(isset($extra['image'])){
-					
-						$product->image=$extra['image'];
-					}
-					
-				}
 			if(empty($product))
 			{
 				die("no design found");
 			}
+			
 			$data['product_id'] = $id;
 	        $cat=$this->product_m->get_category_products($product->product_id);
-			//$data['slug'] =$product->slug;
 			$data['group_id'] = $product->group_id;
 			$data['product'] = $product->product;
 			$data['cate_id']=!empty($cat)?$cat->category_id:"";

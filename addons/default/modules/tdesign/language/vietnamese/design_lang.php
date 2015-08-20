@@ -18,6 +18,8 @@ $lang['design:designs']                   = 'Designs';
 $lang['design:price']="Price";
 $lang['design:arts']="Arts";
 $lang['design:slug']="Slug";
+$lang['design:empty_art']="Vui lòng upload logo của bạn trước ";
+$lang['design:inputall']="Vui lòng nhập tất cả các trường tên và miêu tả";
 $lang['slug_exist'] = 'Slug đã tồn tại';
 
 // labels

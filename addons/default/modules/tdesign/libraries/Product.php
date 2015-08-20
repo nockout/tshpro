@@ -24,8 +24,34 @@ class Product {
 		
 		return $design;
 	}
-	public function create_new_art($art=array()){
-		return $this->CI->Product_m->create_art($art);
+	public function create_new_art($arts=array()){
+		
+		$result=$this->upload_arts($arts);
+		if(!$result)
+			return false ;
+		
+		return $this->CI->Product_m->create_art(array('data'=>serialize($result)));
+	}
+	public function upload_arts($arts=array()){
+		if(empty($arts['data']))
+				return;
+		$arts_data=unserialize($arts['data']);
+		$files=array();
+		$names=array();
+		foreach ($arts_data as  $image){
+			
+		
+				$base64_str = substr($image, strpos($image, ",")+1);
+				$decoded = base64_decode($base64_str);
+				$name= "temp".uniqid(). '.png';
+				$file=UPLOAD_PATH.'../arts/' .$name;
+				$files[] = $file;
+				$names[]=$name;
+				$result = file_put_contents($file, $decoded);
+			
+			
+		}
+		return $files;
 	}
 	public function get_options($type_product = null) {
 		if (! $type_product)

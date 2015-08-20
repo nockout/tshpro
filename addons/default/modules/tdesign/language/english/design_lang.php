@@ -15,6 +15,8 @@ $lang['design:price']="Price";
 $lang['design:arts']="Arts";
 $lang['design:style']="Styles";
 $lang['design:slug']="Slug";
+$lang['design:empty_art']="Your art is empty";
+$lang['design:inputall']="Please input all field";
 $lang['slug_exist'] = 'Slug exists';
 // labels
 $lang['design:description_label']="Description";

@@ -150,9 +150,9 @@ class Product_m extends Base_m
 		if(!$this->allowViewAll()){
 			$this->db->where("user_id",$this->current_user->user_id);
 		}
-		if($row=$this->is_draft($id)){
+		/* if($row=$this->is_draft($id)){
 			return $row;
-		}
+		} */
 		$subsql="( select data from ".$this->dbprefix("tshirt_arts") ." where id=id_art ) as arts";
 		$this->db->select(array("*",$subsql));
 		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id',"LEFT");
@@ -186,7 +186,7 @@ class Product_m extends Base_m
 					$this->_default_fields['extra']=serialize($extra);
 				}
 				unset($this->_default_fields['product_id']);
-				$this->_default_fields['status']="O";
+				$this->_default_fields['status']="D";
 				$this->_default_fields['avail_since']=Date("Y-m-d H:i:s");
 				$this->_default_fields['cate_id']=1;
 				$this->_default_fields['id_art']=$extra['id_art'];
@@ -196,6 +196,7 @@ class Product_m extends Base_m
 				$this->db->insert($this->_table,$this->_default_fields);
 				$insert_id = $this->db->insert_id();
 				$lang[CURRENT_LANGUAGE]['product']=isset($extra['name'])?$extra['name']:"";
+				$lang[CURRENT_LANGUAGE]['full_description']=isset($extra['description'])?htmlentities($extra['description']):"";
 				if($insert_id){
 						$this->save_lang($insert_id,CURRENT_LANGUAGE,$lang[CURRENT_LANGUAGE]);
 				}
@@ -220,16 +221,7 @@ class Product_m extends Base_m
 		}else{
 			$this->db->where("product_id",intval($id))->update($this->_table,$save);
 		}
-		///if($status=="D"){
-		
-			//create new description;
-			//if(isset($lang[CURRENT_LANGUAGE])){
 		$this->save_lang($id,CURRENT_LANGUAGE,$lang[CURRENT_LANGUAGE]);
-			//}
-		
-		//}else{
-			
-		//}
 		return $id;
 	}
 	public function put_live($id,$data){
@@ -239,7 +231,7 @@ class Product_m extends Base_m
 		return $this->db->where('product_id',intval($id))->where("status","D")->get($this->_table)->row();
 	}
 	public function get_product_draft($id){
-		//echo $id;die;
+	
 		if(!$this->allowViewAll()){
 			$this->db->where("user_id",$this->current_user->user_id);
 		}
@@ -256,10 +248,11 @@ class Product_m extends Base_m
 			$this->db->where('user_id',$this->current_user->user_id);
 		}	
 	
-		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
-
-		$this->db->select("(SELECT username FROM ".(SITE_REF."_".$this->_users)." WHERE id=user_id LIMIT 1) AS user_name", FALSE);
 	
+		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
+		
+		$this->db->select("(SELECT username FROM ".(SITE_REF."_".$this->_users)." WHERE id=user_id LIMIT 1) AS user_name", FALSE);
+		$this->db->select("(SELECT sum(total_view) FROM ".(SITE_REF."_".$this->_table)." WHERE id_art=id ) AS total_view", FALSE);
 		$this->db->where('deleted',0);
 		$this->db->offset($offset)->limit($limit);
 		$this->db->order_by("add_time","DESC");

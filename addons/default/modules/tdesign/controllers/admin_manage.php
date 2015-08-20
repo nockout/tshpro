@@ -20,9 +20,7 @@ class Admin_Manage extends Admin_Controller
 	    parent::__construct();
 	    $this->lang->load('design');
 	    $this->load->model('product_m');
-	    //$this->load->model('groups/group_m');
-	  //  $this->lang->load('permissions');
-	   // $this->lang->load('groups/group');
+	 
 	}
 
 	/**
@@ -31,16 +29,19 @@ class Admin_Manage extends Admin_Controller
 	 * Shows a list of the groups.
 	 */
 	
-	public function arts($page=0,$limit=12){
+	public function arts($code = 0,  $by = 0, $way = "ASC",$page = 0){
 	
-		$object=$this->product_m->get_arts(array(),$page,$limit);
+		$object=$this->product_m->get_arts(array(),$page,8);
 		$arts="";
 		if(!empty($object)){
 			$arts=$object['objects'];
 		}
+		$this->load->helper(array("currency",'tdesign'));
+		$pagination=panagition("admin/tdesign/manage/arts/$code/$by/$way/",7,$object['total'],$page,8);
 		
 		$this->template->
 		set('arts',$arts)
+		->set('pagination',$pagination)
 		->append_css("module::designer.css")
 		->title(lang("design:arts"))
 		->build('admin/arts');
@@ -56,11 +57,7 @@ class Admin_Manage extends Admin_Controller
 		if(!empty($artobj)){
 			$arts=unserialize($artobj->data);
 		}
-		//echo "<pre>";
-	//	print_r($arts);die;
-		//echo "<pre[>";
 		$designs='';
-		//print_r($objects);die;
 		if(!empty($objects)){
 			$designs=$objects['objects'];
 		}
