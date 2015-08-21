@@ -1297,7 +1297,7 @@ class go_cart {
 		}
 		
 		// touch free shipping coupon
-		if($this->_cart_contents['free_shipping_coupon'])
+		if(!empty($this->_cart_contents['free_shipping_coupon']))
 		{
 			$this->CI->Coupon_model->touch_coupon($this->_cart_contents['free_shipping_coupon']);
 		}

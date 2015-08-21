@@ -249,6 +249,7 @@ Class order_model extends CI_Model
 				$save['contents']	= $item;
 				
 				$item				= unserialize($item);
+				$save['id_art']=$item['id_art'];
 				$save['product_id'] = $item['id'];
 				$save['quantity'] 	= $item['quantity'];
 				$save['order_id']	= $id;
@@ -258,7 +259,7 @@ Class order_model extends CI_Model
 		
 		return $order_number;
 		
-		return $order_number;
+	
 
 	}
 	

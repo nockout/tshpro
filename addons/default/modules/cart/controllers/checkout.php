@@ -135,6 +135,7 @@ class Checkout extends Public_Controller {
 		
 			$order_id = $this->go_cart->save_order();
 			 $this->go_cart->destroy();
+			 die;
 // 			$this->session->set_flashdata("success","Order đã được tạo thành công");
 
 			redirect("cart/thank_you");

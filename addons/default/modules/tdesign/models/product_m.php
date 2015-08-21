@@ -253,6 +253,7 @@ class Product_m extends Base_m
 		
 		$this->db->select("(SELECT username FROM ".(SITE_REF."_".$this->_users)." WHERE id=user_id LIMIT 1) AS user_name", FALSE);
 		$this->db->select("(SELECT sum(total_view) FROM ".(SITE_REF."_".$this->_table)." WHERE id_art=id ) AS total_view", FALSE);
+		$this->db->select("(SELECT sum(quantity) FROM ".$this->db->escape((SITE_REF."_"."tshirt_order_items"))." WHERE id_art=".(SITE_REF."_"."tshirt_arts").".id ) AS total_sale", FALSE);
 		$this->db->where('deleted',0);
 		$this->db->offset($offset)->limit($limit);
 		$this->db->order_by("add_time","DESC");
@@ -262,6 +263,7 @@ class Product_m extends Base_m
 		$result['total']=0;
 		$query = $this->db->query('SELECT FOUND_ROWS() AS `Count`');
         $result['total']= $query->row()->Count;
+       
         return $result;
 	}
 	public function find_art_by_id($art_id){

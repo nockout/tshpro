@@ -4,7 +4,7 @@ class Cart extends Public_Controller {
 		parent::__construct();
 		$this->load->helper("currency");
 		$this->load->config('tdesign/tdesign');
-		$this->load->helper('tdesign/tdesign');
+		$this->load->helper('tdesign');
 		$this->load->helper('formatting');
 		$this->lang->load(array('common',"cart"));
 		
