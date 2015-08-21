@@ -27,9 +27,9 @@
 		<?php echo anchor("admin/tdesign/manage/index/".$art->id,lang("design:mockup"),array("class"=>'btn gray'))?>
 		</center>
 		<center>
-		<h5 id="activity"><span class="success">Views:&nbsp;<span class=""><?php echo intval($art->total_view)?></span> </span>
+		<h5 id="activity"><span class="success"><?php echo lang("design:views")?>:&nbsp;<span class=""><?php echo intval($art->total_view)?></span> </span>
 		&nbsp;&nbsp;&nbsp;
-		<span class="success"><span class="success">Sales:&nbsp<span class=""><?php echo intval($art->total_sale)?></span>  </span></h5>
+		<span class="success"><span class="success"><?php echo lang("design:sale")?>:&nbsp<span class=""><?php echo intval($art->total_sale)?></span>  </span></h5>
 		</center>
 	</li>
 	<?php endforeach;?>	

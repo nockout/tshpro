@@ -18,6 +18,10 @@ $lang['design:slug']="Slug";
 $lang['design:empty_art']="Your art is empty";
 $lang['design:inputall']="Please input all field";
 $lang['slug_exist'] = 'Slug exists';
+$lang["design:views"]="Views";
+$lang["design:sale"]="Sales";
+$lang["design:artis"]="Artis";
+$lang["design:link"]="Link";
 // labels
 $lang['design:description_label']="Description";
 $lang['design:designed_label']                   = 'Name';

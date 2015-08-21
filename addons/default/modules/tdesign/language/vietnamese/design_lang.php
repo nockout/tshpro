@@ -21,7 +21,10 @@ $lang['design:slug']="Slug";
 $lang['design:empty_art']="Vui lòng upload logo của bạn trước ";
 $lang['design:inputall']="Vui lòng nhập tất cả các trường tên và miêu tả";
 $lang['slug_exist'] = 'Slug đã tồn tại';
-
+$lang["design:views"]="Views";
+$lang["design:sale"]="Sales";
+$lang["design:artis"]="Artis";
+$lang["design:link"]="Link";
 // labels
 $lang['design:description_label']="Miêu tả";
 $lang['design:designed_label']                   = 'Tên ';
