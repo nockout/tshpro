@@ -54,14 +54,7 @@ class Cart extends Public_Controller {
 		$this->load->model('product_model');
 		
 		// Get a cart-ready product array
-		$product =(array) $this->product_model->get(intval($product_id));
-	
-		if(empty($product))
-			die("no product found");
-		$product['id']=$product['product_id'];
-		$product['sizeSelected']=	$size;
-		
-		
+		$product="";
 		
 		//if out of stock purchase is disabled, check to make sure there is inventory to support the cart.
 		
@@ -70,7 +63,7 @@ class Cart extends Public_Controller {
 			//loop through the products in the cart and make sure we don't have this in there already. If we do get those quantities as well
 			$items		= $this->go_cart->contents();
 			$qty_count	= $quantity;
-		
+			$is_exist=false;
 			if(!empty($items)){
 				foreach($items as &$item)
 				{
@@ -78,15 +71,28 @@ class Cart extends Public_Controller {
 					if((intval($item['id']) == intval($product_id))&&$item['sizeSelected']==$size)
 					{
 					
-					$item ['quantity']= intval($qty_count) + $item['quantity'];
-					$product=$item;
-					break;
+						$item ['quantity']= intval($qty_count) + $item['quantity'];
+						$is_exist=true;
 					}
 				}
+				$this->go_cart->_cart_contents['items']=$items;
+				$this->go_cart->_save_cart(true);
+				//$this->go_cart->update_cart($product['cartkey'],$product['quantity']);
+				//$this->go_cart->_save_cart(true);
+			}
+			if(!($is_exist)){
+				$product =(array) $this->product_model->get(intval($product_id));
+				
+				if(empty($product))
+					die("no product found");
+				$product['id']=$product['product_id'];
+				$product['sizeSelected']=	$size;
+				$product['quantity']=$quantity;
+				$this->go_cart->insert(array($product));
 			}
 			
-			$this->go_cart->insert(array($product));
-			$this->go_cart->_save_cart(true);
+			
+			
 			$html=$this->load->view("cart_items",array("items"=>$this->go_cart->contents()),true);
 			
 			die($this->go_cart->total_items());

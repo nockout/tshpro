@@ -255,7 +255,7 @@ class go_cart {
 		return true;
 	}
 	
-	private function _update($cartkey, $quantity)
+	public function _update($cartkey, $quantity)
 	{
 		//on update clear the payments & shipping
 		$this->clear_payment();
