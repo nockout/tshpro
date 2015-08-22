@@ -13,3 +13,5 @@
 
 $lang['add_to_cart']="Thêm vào giỏ";
 $lang["all_search"]="Tất cả các kết quả cho \"%s\"";
+$lang["product:size"]="Size";
+$lang["product:quantity"]="Số lượng";

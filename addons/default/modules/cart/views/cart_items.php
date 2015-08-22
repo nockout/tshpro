@@ -11,8 +11,7 @@
 						$extra=unserialize($extra);
 					}
 					$first="";
-					//echo "<pre>";
-					//print_r($extra);die;
+				
 					if(!empty($extra['image'])):?>
 						<?php $first=array_shift($extra['image']);?>
 					<?php endif?>
@@ -27,7 +26,7 @@
 				<?php $size=!empty($item['sizeSelected'])?($item['sizeSelected']):"";?>
 				<?php echo $item['product'] ."-".$size?> 
 				</br>
-			<strong> <?php echo format_price($item['list_price'])?></strong><br>
+			<strong> <?php echo format_price($item['list_price']*$item['quantity'])?></strong><br>
 			<strong> <?php echo lang("cart:quantity")?>:<?php echo ($item['quantity'])?></strong>
 		</div>
 

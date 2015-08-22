@@ -45,9 +45,9 @@ class Cart extends Public_Controller {
 		//$this->go_cart->destroy(false);
 	
 		$product_id		= $this->input->post('id');
-		$quantity 		= $this->input->post('quantity')?$this->input->post('quantity'):1;
+		$quantity 		= ( $this->input->post('quantity') && (intval($this->input->post('quantity')>0) )) ? $this->input->post('quantity') :1;
 		$size 	= $this->input->post('sizeSelected');
-	
+		
 		if($size){
 			$this->session-> set_userdata("sizeSelected",$size);
 		}
@@ -60,6 +60,9 @@ class Cart extends Public_Controller {
 			die("no product found");
 		$product['id']=$product['product_id'];
 		$product['sizeSelected']=	$size;
+		
+		
+		
 		//if out of stock purchase is disabled, check to make sure there is inventory to support the cart.
 		
 			//$stock	= $this->product_model->get($product_id);
@@ -72,14 +75,18 @@ class Cart extends Public_Controller {
 				foreach($items as &$item)
 				{
 				
-					if(intval($item['id']) == intval($product_id)&&$item['sizeSelected']==$size)
+					if((intval($item['id']) == intval($product_id))&&$item['sizeSelected']==$size)
 					{
 					
 					$item ['quantity']= intval($qty_count) + $item['quantity'];
+					$product=$item;
+					break;
 					}
 				}
 			}
+			
 			$this->go_cart->insert(array($product));
+			$this->go_cart->_save_cart(true);
 			$html=$this->load->view("cart_items",array("items"=>$this->go_cart->contents()),true);
 			
 			die($this->go_cart->total_items());

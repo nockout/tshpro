@@ -28,7 +28,7 @@
 				data : $(this).serialize(), // serializes the form's elements.
 				
 				complete : function(data) {
-					console.log(data);
+			
 					$(".cart_item_count").html(data.responseText);
 					showcart();
 					return;

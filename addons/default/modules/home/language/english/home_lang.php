@@ -3,3 +3,5 @@
 
 $lang['add_to_cart']="Add to cart";
 $lang["all_search"]="All result for %s";
+$lang["product:size"]="All result for %s";
+$lang["product:quantity"]="Quantity";

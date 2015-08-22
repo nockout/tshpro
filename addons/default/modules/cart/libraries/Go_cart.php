@@ -170,7 +170,7 @@ class go_cart {
 		
 		
 		//record the quantity
-		$quantity	= isset($item['fixed_quantity'])&&($item['fixed_quantity']==0) ? $item['quantity'] : 1;
+		$quantity	= isset($item['quantity']) ? $item['quantity'] : 1;
 		
 		//remove quantity from the row ID hash this will enable us to add
 		//the same item twice without having it appear twice due to quantity differences
