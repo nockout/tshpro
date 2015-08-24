@@ -93,10 +93,10 @@
 						<?php //echo form_dropdown('created_on_minute', $minutes, date('i', ltrim(strtotime($avail_since), '0'))) ?>
 					</div>
 				</li>
-				<?php if(!empty($product_id)):?>
+				<?php if(!empty($slugurl)):?>
 			
 					
-						<a  target="_blank" href="<?php echo site_url("home/product/".$product_id)?>">
+						<a  target="_blank" href="<?php echo site_url($slugurl)?>">
 						Preview
 						</a>
 		
@@ -140,7 +140,8 @@
 <input type="hidden" name="row_edit_id" value="<?php if ($this->method != 'create'): echo $product_id; endif; ?>" />
 
 <div class="buttons">
-	<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel'))) ?>
+	<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit'))) ?>
+	<?php echo anchor("admin/tdesign/manage/index/".$id_art, lang('buttons:cancel'), 'class="btn gray cancel"');?>
 </div>
 
 <?php echo form_close() ?>

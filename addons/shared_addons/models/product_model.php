@@ -127,6 +127,7 @@ class Product_model extends Base_m
 		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id');
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
 		$this->db->where('deleted',0);
+		$this->db->where('status',"A");
 		$this->db->offset($offset)->limit($limit);
 		$this->db->order_by("avail_since","DESC");
 		$objct=$this->db->get($this->_table)->result();

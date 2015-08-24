@@ -13,7 +13,7 @@ class Product_m extends Base_m
 	protected $_images='tshirt_image';
 	protected $_default_fields = array(
 						'product_id'=>null, 
-		 				'product_code'=>"FFFFF", 
+		 				'product_code'=>"", 
 		 				'product_type'=>"P", 
 		 				'status'=>"D", 
 		 				'user_id'=>0, 

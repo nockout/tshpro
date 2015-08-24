@@ -265,6 +265,7 @@ class Admin extends Admin_Controller
 	public function index($page=0,$limit=6)
 	{
 		$this->load->library('product');
+		$this->load->helper("tdesign");
 		$designs=$this->product->get_products(array(),$page,$limit);
 	   	$pagination=panagition("admin/order/index/$code/$by/$way/",4,$designs['total'],$page,6);
 		$categories =array();	
@@ -307,6 +308,8 @@ class Admin extends Admin_Controller
 		$data['keywords']="";
 		$data['product_categories'] =array();
 		$data['arts']="";
+		$data['id_art']="";
+		$data['slugurl']="";
 		if ($id) {
 		
 				$product=$this->product->get_product($id);
@@ -336,6 +339,8 @@ class Admin extends Admin_Controller
 			$data['avail_since']=$product->avail_since;
 			$data['status']=$product->status;
 			$data['arts']=$product->arts;
+			$data['id_art']=$product->id_art;
+			$data['slugurl']=$product->slugurl;
 			
 			
 		}
