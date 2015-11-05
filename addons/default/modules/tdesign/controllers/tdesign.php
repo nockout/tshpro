@@ -25,8 +25,8 @@ class Tdesign extends Public_Controller
 		$product=$this->product_m->get($id);
 		if(empty($product))
 			redirect("home");
-		echo "<pre>";
-		print_r($product);die;
+		/* echo "<pre>";
+		print_r($product);die; */
 		if($product->id_art){
 			$relatePro=$this->product_m->get();
 		}

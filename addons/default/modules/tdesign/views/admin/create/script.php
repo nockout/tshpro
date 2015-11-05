@@ -43,7 +43,7 @@ jQuery(document)
 						    		x:0,
 						    		y:0,
 						    		autoCenter : true,
-						    		scale: "0.6",
+						    		scale: "1.0",
 										//Allows to set the z-index of an element, -1 means it will be added on the stack of layers
 									
 								},
@@ -57,7 +57,7 @@ jQuery(document)
 							        minH:1200,
 							        maxW: 3600,
 							        maxH: 3600,
-							        scale: 0.6,							       
+							        scale: 0.5,							       
 									autoCenter : true,
 									boundingBox : "Base",
 									resizable : true,

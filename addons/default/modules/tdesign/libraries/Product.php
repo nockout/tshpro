@@ -44,7 +44,7 @@ class Product {
 				$base64_str = substr($image, strpos($image, ",")+1);
 				$decoded = base64_decode($base64_str);
 				$name= "temp".uniqid(). '.png';
-				$file=UPLOAD_PATH.'../arts/' .$name;
+				$file=UPLOAD_PATH.'../design/arts/' .$name;
 				$files[] = $file;
 				$names[]=$name;
 				$result = file_put_contents($file, $decoded);
