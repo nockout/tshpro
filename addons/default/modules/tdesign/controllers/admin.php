@@ -119,7 +119,7 @@ class Admin extends Admin_Controller
 			$urls=array();
 			
 			foreach ($names as $tempname){
-				$urls[]=get_design_image_path("templates",$tempname);
+				$urls[]=get_design_image_path("designs",$tempname);
 			}
 			
 			$products[]=$this->product->create_draft(array('group_id'=>$group_id,'id_art'=>intval($id_art),"raw_url"=>$files,"image"=>$urls,"name"=>$arr_base64_imgs['title'],"id_template"=>$arr_base64_imgs['id_template'],"description"=>$arr_base64_imgs['description'],'price'=>$arr_base64_imgs['price']));
@@ -160,7 +160,7 @@ class Admin extends Admin_Controller
 		
 	
 		$name= "temp".uniqid(). '.png';
-		$file = UPLOAD_PATH.'../design/templates/' .$name;
+		$file = UPLOAD_PATH.'../design/designs/' .$name;
 		$result = file_put_contents($file, $decoded);
 		
 		
@@ -229,7 +229,7 @@ class Admin extends Admin_Controller
 				$this->session->set_flashdata("error",sprintf(lang("design:delete_error"),""));
 			}
 		}
-		redirect('admin/tdesign/index');
+		redirect('admin/tdesign/manage/index');
 	}
 	public function auto_delete($id){
 		$this->load->library('product');
@@ -247,7 +247,7 @@ class Admin extends Admin_Controller
 		 	}
 		 	
 		  };
-		redirect('admin/tdesign/index');
+		redirect('admin/tdesign/manage/index');
 	}
 	public function sidebar(){
 		$this->lang->load("templates");
@@ -262,13 +262,14 @@ class Admin extends Admin_Controller
 		$this->product->generate_folder();
 		ECHO "DONE";
 	}
-	public function index($page=0,$limit=6)
+	public function index($page=0,$limit=6,$code="",$by="id",$way="DESC")
 	{
 		$this->load->library('product');
 		$this->load->helper("tdesign");
 		$designs=$this->product->get_products(array(),$page,$limit);
-	   	$pagination=panagition("admin/order/index/$code/$by/$way/",4,$designs['total'],$page,6);
+	   	$pagination=panagition("admin/order/index/$code?by=$by&way=$way/",4,$designs['total'],$page,6);
 		$categories =array();	
+		
 		$this->template->set('categories',$categories);
  		$this->template->
  			set('designs',$designs['objects'])
