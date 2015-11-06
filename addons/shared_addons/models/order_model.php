@@ -250,9 +250,25 @@ Class order_model extends CI_Model
 				
 				$item				= unserialize($item);
 				$save['id_art']=$item['id_art'];
+				$save['id_art']=$item['id_art'];
 				$save['product_id'] = $item['id'];
 				$save['quantity'] 	= $item['quantity'];
 				$save['order_id']	= $id;
+				
+				
+				$save['user_id']=$item['user_id'];
+				$save['price']=$item['price'];
+				
+				// differenc price = list_price-origin price
+				$dif_price=(floatval($item['price'])-floatval($item['min_price']));
+				if($dif_price<0)
+					$dif_price=0;
+				$this->load->model("Settings_model");
+				$gc_setting = $this->Settings_model->get_settings('gocart');
+				$dif_price+=!empty($gc_setting['default_profit'])?intval($gc_setting['default_profit']):0;
+				
+				$save['dif_price']=$dif_price;
+				
 				$this->db->insert('tshirt_order_items', $save);
 			}
 		}

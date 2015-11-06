@@ -45,7 +45,7 @@ class Admin extends Admin_Controller
 					'rules' => 'trim|required'
 			),
 			 array(
-					'field' => 'list_price',
+					'field' => 'price',
 					'label' => 'lang:design:price',
 					'rules' => 'trim|numeric|required'
 			), 
@@ -304,6 +304,7 @@ class Admin extends Admin_Controller
 		$data['full_description'] = '';
 		$data['search_words'] = '';
 		$data['list_price'] = '';
+		$data['price'] = '';
 		$data['extra'] = '';
 		$data['product_code']="";
 		$data['keywords']="";
@@ -331,7 +332,7 @@ class Admin extends Admin_Controller
 			$data['short_description'] = isset($product->short_description)?$product->short_description:"";
 			$data['full_description'] =isset($product->full_description)?$product->full_description:"";
 			$data['keywords'] = isset($product->search_words)?$product->search_words:"";
-			$data['list_price'] = $product->list_price;
+			$data['price'] = $product->price;
 			$data['extra'] = $product->extra;
 			$data['product_code']=$product->product_code;
 			$data['slug_id']=$product->slug_id;
@@ -390,7 +391,7 @@ class Admin extends Admin_Controller
 			
 	
 			$save['product_id'] = intval($id);
-            $save['list_price'] =$this->input->post("list_price")?$this->input->post("list_price"):0;
+            $save['price'] =$this->input->post("price")?$this->input->post("price"):0;
             $save['status']=$this->input->post("status");
          
             $save['lang'][CURRENT_LANGUAGE]['slugurl']=$slug;

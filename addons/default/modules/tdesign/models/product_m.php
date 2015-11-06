@@ -17,7 +17,8 @@ class Product_m extends Base_m
 		 				'product_type'=>"P", 
 		 				'status'=>"D", 
 		 				'user_id'=>0, 
-		 				'list_price'=>0, 
+		 				'min_price'=>0, 
+						'price'=>0, 
 		 				'amount'=>0,
 						'weight'=>0, 
 		 				'length'=>0, 
@@ -185,24 +186,55 @@ class Product_m extends Base_m
 				if(!empty($extra)){
 					$this->_default_fields['extra']=serialize($extra);
 				}
+				
 				unset($this->_default_fields['product_id']);
 				$this->_default_fields['status']="D";
 				$this->_default_fields['avail_since']=Date("Y-m-d H:i:s");
 				$this->_default_fields['cate_id']=1;
 				$this->_default_fields['id_art']=$extra['id_art'];
 				$this->_default_fields['id_template']=$extra['id_template'];
-				$this->_default_fields['list_price']=isset($extra['price'])?$extra['price']:"";
+				$this->_default_fields['price']=isset($extra['price'])?$extra['price']:0;
+				
+				//list price is min_price of template 
+				
+				$this->_default_fields['min_price']=$this->get_template_price($extra['id_template']);
+				
 				$this->_default_fields['user_id']=$this->current_user->id;
 				$this->db->insert($this->_table,$this->_default_fields);
+				// save product code
+		
+				
+				//
+				
+				
 				$insert_id = $this->db->insert_id();
+				
+				if(empty($insert_id))
+					return;
+				$productcode=sprintf("%04d%09d",$this->current_user->id,$insert_id);
+				$data = array(
+						'product_code' => $productcode,
+						
+				);
+				
+				$this->db->where('product_id', $insert_id);
+				$this->db->update($this->_table, $data);
+			
 				$lang[CURRENT_LANGUAGE]['product']=isset($extra['name'])?$extra['name']:"";
 				$lang[CURRENT_LANGUAGE]['full_description']=isset($extra['description'])?htmlentities($extra['description']):"";
 				if($insert_id){
 						$this->save_lang($insert_id,CURRENT_LANGUAGE,$lang[CURRENT_LANGUAGE]);
 				}
+				
 				return $this->get_product_draft($insert_id);
 							
 	
+	}
+	public function get_template_price($id){
+		$row=$this->db->select("price")->from("tshirt_template")->where('id_template',intval($id))->get()->row();
+		if(!empty($row))
+			return $row->price;
+		return 0;
 	}
 	public function save($id,$save){
 		if(empty($save)){

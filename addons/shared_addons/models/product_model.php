@@ -146,7 +146,7 @@ class Product_model extends Base_m
 	public function get($id){
 		
 		$this->load->helper("tdesign");
-		$this->db->select(array("*","list_price as price"));
+		$this->db->select(array("*"));
 		$this->db->join($this->_descriptions,$this->_table.'.product_id='.$this->_descriptions.'.product_id',"LEFT");
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
 		$this->db->where('deleted',0);

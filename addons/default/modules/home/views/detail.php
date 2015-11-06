@@ -9,7 +9,7 @@
 	<div style="margin-bottom: 40px;" class="row">
 		<div class="col-sm-7  ">
 			<div class="productFrame">
-				<span class="priceshow"><?php echo format_price($product->list_price)?></span>
+				<span class="priceshow"><?php echo format_price($product->price)?></span>
 			 	<?php echo Asset::img("tag-btm.png","",$attr = array( "class"=>"btm-s", "width"=>"13", "height"=>"8"));?>
 			
 					<?php
@@ -69,7 +69,7 @@
 							?>
 							<option
 							<?php if($rp->product_id==$product->product_id)echo 'selected=""'?>
-							value="<?php echo site_url("home/product/".$rp->product_id)?>"><?php echo $rp->product."-".$rp->list_price?></option>
+							value="<?php echo site_url("home/product/".$rp->product_id)?>"><?php echo $rp->product."-".$rp->price?></option>
 							
 							<?php endforeach;?>
 									

@@ -26,7 +26,7 @@
 				<?php $size=!empty($item['sizeSelected'])?($item['sizeSelected']):"";?>
 				<?php echo $item['product'] ."-".$size?> 
 				</br>
-			<strong> <?php echo format_price($item['list_price']*$item['quantity'])?></strong><br>
+			<strong> <?php echo format_price($item['price']*$item['quantity'])?></strong><br>
 			<strong> <?php echo lang("cart:quantity")?>:<?php echo ($item['quantity'])?></strong>
 		</div>
 

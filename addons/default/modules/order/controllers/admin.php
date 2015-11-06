@@ -40,7 +40,12 @@ class Admin extends Admin_Controller
 	 */
 	
 	
-		
+	
+	function action(){
+		echo "<pre>";
+		print_r($_POST);die;
+	}
+	
 	public function check_status(){
 		$status=$this->input->post("status");
 		$comment=$this->input->post("comment");

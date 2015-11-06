@@ -37,7 +37,6 @@ class Home extends Public_Controller {
 		$this->template->set("currentCateName",$category->category);
 		$this->template->title ( $this->module_details ['name'] )->
 		set ( "products", $product ['objects'] )->
-		
 		build ( 'category' );
 	}
 	public function index() {
@@ -64,9 +63,7 @@ class Home extends Public_Controller {
 			$this->template->set ( 'relprd', $relatePro );
 		}
 		
-		$this->template->title ( $this->module_details ['name'] )->
-		set ( 'product', $product )->
-		build ( 'detail' );
+		$this->template->title ( $this->module_details ['name'] )->set ( 'product', $product )->build ( 'detail' );
 	}
 	public function search($slug = '') {
 		
@@ -87,9 +84,7 @@ class Home extends Public_Controller {
 		$this->template->set("currentCate",$category->category_id);
 		$this->template->set("currentCateName",$category->category);
 		$this->template->title ( sprintf(lang("all_search"),$search) )->
-		set ( "products", $product ['objects'] )->
-		
-		build ( 'search' );
+		set ( "products", $product ['objects'] )->build( 'search' );
 		
 		
 	}

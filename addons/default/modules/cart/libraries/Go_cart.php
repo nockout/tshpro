@@ -39,6 +39,7 @@ class go_cart {
 	
 	var $gift_cards_enabled = false;
 	
+	var $gc_setting=array();
 	function __construct() 
 	{
 		$this->CI =& get_instance();
@@ -55,7 +56,7 @@ class go_cart {
 			$this->_init_properties();
 		}
 		
-		$gc_setting = $this->CI->Settings_model->get_settings('gift_cards');
+		$this->gc_setting = $this->CI->Settings_model->get_settings('gocart');
 // 		if(@$gc_setting['enabled']==1)
 // 		{
 // 			$this->gift_cards_enabled = true;
@@ -1198,7 +1199,7 @@ class go_cart {
 		$save['coupon_discount']	= $this->_cart_contents['coupon_discount'];
 		$save['subtotal']			= $this->_cart_contents['cart_subtotal'];
 		$save['total']				= $this->_cart_contents['cart_total'];
-		
+		$save['profit']				= !empty($this->gc_setting['default_profit'])?floatval($this->gc_setting['default_profit']):0;
 		//store the payment info
 		//it's up to the payment method to remove any sensitive data from the array before this time
 		if(!empty($this->_cart_contents['payment']['description']))

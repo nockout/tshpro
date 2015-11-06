@@ -37,7 +37,6 @@ class Checkout extends Public_Controller {
 				redirect('cart/view_cart');
 			}
 		}
-		/* Set no caching
 	
 		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); 
@@ -45,7 +44,7 @@ class Checkout extends Public_Controller {
 		header("Cache-Control: post-check=0, pre-check=0", false);
 		header("Pragma: no-cache");
 	
-		*/
+		
 		$this->load->library('form_validation');
 	}
 
@@ -134,8 +133,8 @@ class Checkout extends Public_Controller {
 		
 		
 			$order_id = $this->go_cart->save_order();
-			 $this->go_cart->destroy();
-			 die;
+			$this->go_cart->destroy();
+			
 // 			$this->session->set_flashdata("success","Order đã được tạo thành công");
 
 			redirect("cart/thank_you");
@@ -145,135 +144,7 @@ class Checkout extends Public_Controller {
 		
 	}
 
-	function step_1bk()
-	{
-		$data['customer']	= $this->go_cart->customer();
-
-		if(isset($data['customer']['id']))
-		{
-			$data['customer_addresses'] = $this->Customer_model->get_address_list($data['customer']['id']);
-		}
-
-		/*require a billing address*/
-		$this->form_validation->set_rules('address_id', 'Billing Address ID', 'numeric');
-		$this->form_validation->set_rules('firstname', 'lang:address_firstname', 'trim|required|max_length[32]');
-		$this->form_validation->set_rules('lastname', 'lang:address_lastname', 'trim|required|max_length[32]');
-		$this->form_validation->set_rules('email', 'lang:address_email', 'trim|required|valid_email|max_length[128]');
-		$this->form_validation->set_rules('phone', 'lang:address_phone', 'trim|required|max_length[32]');
-		$this->form_validation->set_rules('company', 'lang:address_company', 'trim|max_length[128]');
-		$this->form_validation->set_rules('address1', 'lang:address1', 'trim|required|max_length[128]');
-		$this->form_validation->set_rules('address2', 'lang:address2', 'trim|max_length[128]');
-		$this->form_validation->set_rules('city', 'lang:address_city', 'trim|required|max_length[128]');
-		$this->form_validation->set_rules('country_id', 'lang:address_country', 'trim|required|numeric');
-		$this->form_validation->set_rules('use_shipping', 'lang:ship_to_address', '');
-		
-		// Relax the requirement for countries without zones
-// 		if($this->Location_model->has_zones($this->input->post('country_id')))
-// 		{
-// 			$this->form_validation->set_rules('zone_id', 'lang:address_state', 'trim|required|numeric');
-// 		} else {
-// 			$this->form_validation->set_rules('zone_id', 'lang:address_state'); // will be empty
-// 		}
-		
-			
-		/*if there is post data, get the country info and see if the zip code is required*/
-// 		if($this->input->post('country_id'))
-// 		{
-// 			$country = $this->Location_model->get_country($this->input->post('country_id'));
-// 			if((bool)$country->zip_required)
-// 			{
-// 				$this->form_validation->set_rules('zip', 'Zip', 'trim|required|max_length[10]');
-// 			}
-// 		}
-// 		else
-// 		{
-// 			$this->form_validation->set_rules('zip', 'Zip', 'trim|max_length[10]');
-// 		}
-
-		if ($this->form_validation->run() == false)
-		{
-			$data['address_form_prefix']	= 'bill';
-
-			// Since we don't store this value, first check if there is an incoming value from the form
-			//  If not, determine if it's already the case
-			//  If so, check the incoming post value
-			if($this->input->post('use_shipping')===false && isset($data['customer']['bill_address']))
-			{
-				$data['use_shipping'] = ($data['customer']['bill_address'] == @$data['customer']['ship_address']);
-			} else if($this->input->post('use_shipping')=='yes') {
-				$data['use_shipping'] = true;
-			} else {
-				$data['use_shipping'] = false;
-			}
-			$this->template->set( $data);
-			$this->template->build('checkout/address_form', $data);
-		}
-		else
-		{
-			/*load any customer data to get their ID (if logged in)*/
-			$customer				= $this->go_cart->customer();
-
-			$customer['bill_address']['company']		= $this->input->post('company');
-			$customer['bill_address']['firstname']	= $this->input->post('firstname');
-			$customer['bill_address']['lastname']		= $this->input->post('lastname');
-			$customer['bill_address']['email']		= $this->input->post('email');
-			$customer['bill_address']['phone']		= $this->input->post('phone');
-			$customer['bill_address']['address1']		= $this->input->post('address1');
-			$customer['bill_address']['address2']	= $this->input->post('address2');
-			$customer['bill_address']['city']			= $this->input->post('city');
-			$customer['bill_address']['zip']			= $this->input->post('zip');
-
-			/* get zone / country data using the zone id submitted as state*/
-			$country								= $this->Location_model->get_country(set_value('country_id'));
-			if($this->Location_model->has_zones($country->id))
-			{
-				$zone									= $this->Location_model->get_zone(set_value('zone_id'));
-
-				$customer['bill_address']['zone']			= $zone->code;  /*  save the state for output formatted addresses */
-			} else {
-				$customer['bill_address']['zone'] 		= '';
-			}
-			$customer['bill_address']['country']		= $country->name; /*  some shipping libraries require country name */
-			$customer['bill_address']['country_code']   = $country->iso_code_2; /*  some shipping libraries require the code */ 
-			$customer['bill_address']['zone_id']		= $this->input->post('zone_id');  /*  use the zone id to populate address state field value */
-			$customer['bill_address']['country_id']		= $this->input->post('country_id');
-
-			/* for guest customers, load the billing address data as their base info as well */
-			if(empty($customer['id']))
-			{
-				$customer['company']	= $customer['bill_address']['company'];
-				$customer['firstname']	= $customer['bill_address']['firstname'];
-				$customer['lastname']	= $customer['bill_address']['lastname'];
-				$customer['phone']		= $customer['bill_address']['phone'];
-				$customer['email']		= $customer['bill_address']['email'];
-			}
-
-			if(!isset($customer['group_id']))
-			{
-				$customer['group_id'] = 1; /* default group */
-			}
-
-			// Use as shipping address
-			if($this->input->post('use_shipping')=='yes')
-			{
-				$customer['ship_address']	= $customer['bill_address'];
-			}
-			
-			/* save customer details*/
-			$this->go_cart->save_customer($customer);
-
-
-			if($this->input->post('use_shipping')=='yes')
-			{
-				/*send to the next form*/
-				redirect('checkout/step_2');	
-			} else {
-				redirect('checkout/shipping_address');
-			}
-			
-		}
-	}
-
+	
 	function shipping_address()
 	{
 		$data['customer']	= $this->go_cart->customer();

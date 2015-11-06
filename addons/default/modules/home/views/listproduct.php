@@ -7,7 +7,7 @@
 					<div class="frameitWrapper">
 						<div class="price">					
 							
-								<strong><?php echo format_price($p->list_price)?></strong>			
+								<strong><?php echo format_price($p->price)?></strong>			
 										 	<?php echo Asset::img("leftpsm.png","",$attr = array( "class"=>"btm-s", "width"=>"3", "height"=>"6"));?>
 							
 						</div>
@@ -30,7 +30,8 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12 text-center">
-								<strong style="font-size:12px;" class="text-info"><?php echo $p->product?></strong>
+							
+									<a href="<?php echo base_url($p->slugurl)?>" border="0"><strong style="font-size:12px;" class="text-info"><?php echo $p->product?></strong></a>
 							</div>
 						</div>
 						
