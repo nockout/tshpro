@@ -1128,9 +1128,13 @@ class go_cart {
 	
 	public function calculate_shipping_cost(){
 		$this->CI->load->model('location_model');
-		$customer					= $this->_cart_contents['customer'];
+		$customer= $this->_cart_contents['customer'];
 		
-		$ship						= $customer['ship_address'];
+		
+		// reset 
+		 $this->_cart_contents['shipping']['price']=0;
+		
+		$ship= $customer['ship_address'];
 		//
 		$quantiyFreeship=!empty($this->gc_setting['free_shipping_flag'])?intval($this->gc_setting['free_shipping_flag']):0;
 		$totalProducts=$shippingCost=0;
@@ -1148,7 +1152,7 @@ class go_cart {
 		$this->_cart_contents['shipping']['price']=!empty($ship_zone)?floatval($ship_zone->price):0;
 	
 		// recaculate cart_total;
-		$this->_cart_contents['cart_total']+=$this->_cart_contents['shipping']['price'];
+		//$this->_cart_contents['cart_total']+=$this->_cart_contents['shipping']['price'];
 		return $this->_cart_contents['shipping']['price'];
 		
 	}
@@ -1228,6 +1232,11 @@ class go_cart {
 		$save['coupon_discount']	= $this->_cart_contents['coupon_discount'];
 		$save['subtotal']			= $this->_cart_contents['cart_subtotal'];
 		$save['total']				= $this->_cart_contents['cart_total'];
+		
+		
+		$save['total']+=$this->_cart_contents['shipping']['price'];
+		
+		
 		$save['profit']				= !empty($this->gc_setting['default_profit'])?floatval($this->gc_setting['default_profit']):0;
 		//store the payment info
 		//it's up to the payment method to remove any sensitive data from the array before this time

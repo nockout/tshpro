@@ -67,11 +67,7 @@ class Checkout extends Public_Controller {
 	function step_1(){
 		
 		$data['customer']	= $this->go_cart->customer();
-		//$cities=$this->location_model->get_provinces();
-		//$data['cities']=array_merge(array(""=>lang("cart:select_province")),$cities);
 		$shipping_zones=$this->location_model->get_shipping_zones();
-		//echo "<pre>";
-		//print_r($shipping_zones);die;
 		$data['zones']=array_merge(array("0"=>lang("cart:select_province")),$shipping_zones);
 		
 		

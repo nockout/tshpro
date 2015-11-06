@@ -34,7 +34,26 @@ class Cart extends Public_Controller {
 		die;
 		
 	}
+	function get_shipping_fee(){
+		if($this->input->is_ajax_request()){
+			$zoneid=$this->input->get('zone');
+			$this->load->model(array('location_model','Settings_model'));
+			$gc_setting = $this->Settings_model->get_settings('gocart');
+			$quantiyFreeship=!empty($gc_setting['free_shipping_flag'])?intval($gc_setting['free_shipping_flag']):0;
+			$totalItems= $this->go_cart->total_items();
+			if($totalItems>=$quantiyFreeship){
+				$shipping=0;
+			}else{
+				
+				$ship_zone=$this->location_model->zone_information(intval($zoneid));
+				$shipping=!empty($ship_zone)?floatval($ship_zone->price):0;
+			}
 
+			$total=format_price($this->go_cart->total()+$shipping);
+			$shipping=(format_price($shipping));
+			die(json_encode(array("s"=>$shipping,"t"=>$total)));
+		}
+	}
 	function setSize(){
 		if($size=$this->input->post("size")){
 			$this->session->set_userdata("size",$size);

@@ -27,129 +27,137 @@
 				<div class="row shpInfoSlct">
 					<div class="col-sm-7">
 						<div class="form-group row">
-							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:email")?></label> 
-							 <div class="col-lg-10 col-sm-12">
-							<input
-								type="text" class="form-control" placeholder="<?php echo lang("cart:email")?>"
-								value="" name="email" id="email">
-								</div>
+							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:email")?></label>
+							<div class="col-lg-10 col-sm-12">
+								<input type="text" class="form-control"
+									placeholder="<?php echo lang("cart:email")?>" value=""
+									name="email" id="email">
+							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:first_name")?></label>
-							 <div class="col-lg-10 col-sm-12"> <input
-								type="text" value="" class="form-control"
-								placeholder="<?php echo lang("cart:first_name")?>" id="name"
-								name="first_name">	</div>
+							<div class="col-lg-10 col-sm-12">
+								<input type="text" value="" class="form-control"
+									placeholder="<?php echo lang("cart:first_name")?>" id="name"
+									name="first_name">
+							</div>
 						</div>
-						
+
 						<div class="form-group row">
 							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:shipping_address")?></label>
-							 <div class="col-lg-10 col-sm-12"><textarea type="text" value="" class="form-control"
-								placeholder="<?php echo lang("cart:shipping_address")?>" id="address"
-								name="address"></textarea>
-								</div>
+							<div class="col-lg-10 col-sm-12">
+								<textarea type="text" value="" class="form-control"
+									placeholder="<?php echo lang("cart:shipping_address")?>"
+									id="address" name="address"></textarea>
+							</div>
 						</div>
 
 						<div class="row form-group ">
-						
+
 							<div class="col-xs-12">
 
-								<div  class="form-group ">
-									<label class="col-lg-2 col-sm-12"><?php echo lang("cart:shipping_zones")?></label> 
-									<div class="col-lg-10 col-sm-12"><?php echo form_dropdown('zone_id', $zones, set_value("zone_id"),' class="form-control"');?>
+								<div class="form-group ">
+									<label class="col-lg-2 col-sm-12"><?php echo lang("cart:shipping_zones")?></label>
+									<div class="col-lg-10 col-sm-12"><?php echo form_dropdown('zone_id', $zones, set_value("zone_id"),'id="zones" class="form-control"');?>
 									</div>
 								</div>
-							
+
 							</div>
 
 						</div>
 						<div class="form-group row">
-							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:phone")?></label> 
-							<div class="col-lg-10 col-sm-12"><input type="text" value=""
-								class="form-control" placeholder="<?php echo lang("phone")?>" id="phone" name="phone">
+							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:phone")?></label>
+							<div class="col-lg-10 col-sm-12">
+								<input type="text" value="" class="form-control"
+									placeholder="<?php echo lang("phone")?>" id="phone"
+									name="phone">
 							</div>
 						</div>
 						<div class="form-group row">
-						<div class=" col-lg-10 col-lg-offset-2  col-sm-12">
-							<input type="submit" value="<?php echo lang("cart:place_order")?>"
-								class="btn btn-success btn-lg btn-xxl btn-block"
-								name="submitWait" id="plsWt2">
+							<div class=" col-lg-10 col-lg-offset-2  col-sm-12">
+								<input type="submit"
+									value="<?php echo lang("cart:place_order")?>"
+									class="btn btn-success btn-lg btn-xxl btn-block"
+									name="submitWait" id="plsWt2">
 
+							</div>
 						</div>
-						</div>
-						
+
 
 
 					</div>
-	<div class="col-sm-5">
-				
-				<div class="panel panel-info">
+					<div class="col-sm-5">
+
+						<div class="panel panel-info">
 
 
-					<div class="panel-heading">
-						<h3 class="panel-title"><?php echo lang("cart:order_sumary")?></h3>
-					</div>
-					<div class="panel-body">
+							<div class="panel-heading">
+								<h3 class="panel-title"><?php echo lang("cart:order_sumary")?></h3>
+							</div>
+							<div class="panel-body">
 
 
-						<div id="getShipTDBox">
+								<div id="getShipTDBox">
 
 
-							<table class="table table-condensed">
+									<table class="table table-condensed">
 
-								<tbody>
+										<tbody>
 				<?php 	foreach ($this->go_cart->contents() as $cartkey=>$product):?>
 		
 				<tr>
-										<td><?php echo $product['quantity']?></td>
-										<td><?php echo (!empty($product['sizeSelected']))?($product['sizeSelected']):""?></td>
-										<td><?php echo $product['product']?></td>
-										<td class="text-right">
+												<td><?php echo $product['quantity']?></td>
+												<td><?php echo (!empty($product['sizeSelected']))?($product['sizeSelected']):""?></td>
+												<td><?php echo $product['product']?></td>
+												<td class="text-right">
 					<?php echo format_price($product['price']*$product['quantity'])?>
 					</td>
-									</tr>
+											</tr>
 				<?php endforeach;?>
 				
 						
 					
 			
 				<tr>
-										<td colspan="3"><?php echo lang("cart:sub_total")?></td>
-										<td class="text-right"><?php  echo format_price($this->go_cart->total())?></td>
-									</tr>
+												<td colspan="3"><?php echo lang("cart:sub_total")?></td>
+												<td class="text-right"><?php  echo format_price($this->go_cart->total())?></td>
+											</tr>
 
 
 
 
 
+											<tr class=" ">
+												<td colspan="3"><?php echo lang("cart:shipping_fee")?></td>
+												<td class="text-right" id="shipping_frame"><?php  echo format_price(0)?></td>
+											</tr>
+
+											<tr class="text-info bg-info">
+												<td colspan="3"><?php echo lang("cart:total")?></td>
+												<td class="text-right" id="total_frame"><?php  echo format_price($this->go_cart->total())?></td>
+											</tr>
 
 
-									<tr class="text-info bg-info">
-										<td colspan="3"><?php echo lang("cart:total")?></td>
-										<td class="text-right"><?php  echo format_price($this->go_cart->total())?></td>
-									</tr>
+										</tbody>
+									</table>
 
+								</div>
 
-								</tbody>
-							</table>
-
+								<h5>How quickly will I get my shirt?</h5>
+								<p>Your shirt will ship out within 5 days of placing your order!</p>
+							</div>
 						</div>
 
-						<h5>How quickly will I get my shirt?</h5>
-						<p>Your shirt will ship out within 5 days of placing your order!</p>
+
+
 					</div>
-				</div>
-
-
-
-			</div>
 
 				</div>
 
 
 			</div>
 
-		
+
 		</form>
 
 	</div>

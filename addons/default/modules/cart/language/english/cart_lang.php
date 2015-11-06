@@ -22,7 +22,7 @@ $lang['cart:add_to_cart']="Add to cart";
 $lang['cart:phone']="Phone";
 $lang['cart:zone']="Zone";
 $lang['cart:order_sumary']="Order Summary";
-
+$lang['cart:shipping_fee']="Shipping";
 
 
 $lang['address']="Address";
