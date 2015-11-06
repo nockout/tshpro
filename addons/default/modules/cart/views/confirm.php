@@ -14,10 +14,10 @@
 
 	<div class="row">
 
-		<form accept-charset="UTF-8" method="post"
+		<form accept-charset="UTF-8" method="post" class="form-horizontal"
 			action="<?php echo base_url("cart/checkout/")?>"
 			name="productpurchase" id="productpurchase">
-			<div class="col-sm-7">
+			<div class="col-sm-12">
 				<div class="page-header">
 					<h1>
 						<?php echo lang("cart:title_contact_info")?> <small>| <?php echo lang("cart:title:checkout")?></small>
@@ -25,74 +25,69 @@
 				</div>
 
 				<div class="row shpInfoSlct">
-					<div class="col-sm-8">
-						<div class="form-group has-feedback">
-							<label class="ielabel"><?php echo lang("cart:email")?></label> <input
+					<div class="col-sm-7">
+						<div class="form-group row">
+							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:email")?></label> 
+							 <div class="col-lg-10 col-sm-12">
+							<input
 								type="text" class="form-control" placeholder="<?php echo lang("cart:email")?>"
 								value="" name="email" id="email">
+								</div>
 						</div>
-						<div class="form-group has-feedback">
-							<label class="ielabel"><?php echo lang("cart:first_name")?></label> <input
+						<div class="form-group row">
+							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:first_name")?></label>
+							 <div class="col-lg-10 col-sm-12"> <input
 								type="text" value="" class="form-control"
 								placeholder="<?php echo lang("cart:first_name")?>" id="name"
-								name="first_name">
+								name="first_name">	</div>
 						</div>
-						<div class="form-group has-feedback">
-							<label class="ielabel"><?php echo lang("cart:address")?></label> <input
-								type="text" value="" class="form-control"
-								placeholder="<?php echo lang("cart:last_name")?>" id="name"
-								name="last_name">
-						</div>
-						<div class="form-group has-feedback">
-							<label class="ielabel"><?php echo lang("shipping_address")?></label>
-							<input type="text" value="" class="form-control"
+						
+						<div class="form-group row">
+							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:shipping_address")?></label>
+							 <div class="col-lg-10 col-sm-12"><textarea type="text" value="" class="form-control"
 								placeholder="<?php echo lang("cart:shipping_address")?>" id="address"
-								name="address">
+								name="address"></textarea>
+								</div>
 						</div>
 
-						<div class="row">
+						<div class="row form-group ">
 						
 							<div class="col-xs-12">
 
-								<div style="display: Block;" class="form-group has-feedback">
-									<label class="ielabel"><?php echo lang("city")?></label> 
-									<?php echo form_dropdown('city', $cities, set_value("city"),'autocomplete="off" class="form-control"');?>
-									
+								<div  class="form-group ">
+									<label class="col-lg-2 col-sm-12"><?php echo lang("cart:shipping_zones")?></label> 
+									<div class="col-lg-10 col-sm-12"><?php echo form_dropdown('zone_id', $zones, set_value("zone_id"),' class="form-control"');?>
+									</div>
 								</div>
 							
 							</div>
 
 						</div>
-						<div class="form-group has-feedback">
-							<label class="ielabel"><?php echo lang("cart:phone")?></label> 
-							<input type="text" value=""
+						<div class="form-group row">
+							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:phone")?></label> 
+							<div class="col-lg-10 col-sm-12"><input type="text" value=""
 								class="form-control" placeholder="<?php echo lang("phone")?>" id="phone" name="phone">
+							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group row">
+						<div class=" col-lg-10 col-lg-offset-2  col-sm-12">
 							<input type="submit" value="<?php echo lang("cart:place_order")?>"
 								class="btn btn-success btn-lg btn-xxl btn-block"
 								name="submitWait" id="plsWt2">
 
 						</div>
-
-
+						</div>
+						
 
 
 					</div>
-
-
-				</div>
-
-
-			</div>
-
-			<div class="col-sm-5">
+	<div class="col-sm-5">
 				
 				<div class="panel panel-info">
 
 
 					<div class="panel-heading">
-						<h3 class="panel-title">Order Summary</h3>
+						<h3 class="panel-title"><?php echo lang("cart:order_sumary")?></h3>
 					</div>
 					<div class="panel-body">
 
@@ -148,6 +143,13 @@
 
 
 			</div>
+
+				</div>
+
+
+			</div>
+
+		
 		</form>
 
 	</div>

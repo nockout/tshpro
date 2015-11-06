@@ -38,7 +38,7 @@ class Checkout extends Public_Controller {
 			}
 		}
 	
-		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+	 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); 
 		header("Cache-Control: no-store, no-cache, must-revalidate"); 
 		header("Cache-Control: post-check=0, pre-check=0", false);
@@ -54,19 +54,37 @@ class Checkout extends Public_Controller {
 		//$this->template->set("test","test");
 		$this->step_1();
 	}
+	function checking_shipping_zone($id_zone="")
+	{
+		
+		$zone=$this->location_model->zone_information(intval($id_zone));
+		
+		if(empty($zone))
+			return;
+		
+		return true;
+	}
 	function step_1(){
-
+		
 		$data['customer']	= $this->go_cart->customer();
-		$cities=$this->location_model->get_provinces();
-		$data['cities']=array_merge(array(""=>lang("cart:select_province")),$cities);
+		//$cities=$this->location_model->get_provinces();
+		//$data['cities']=array_merge(array(""=>lang("cart:select_province")),$cities);
+		$shipping_zones=$this->location_model->get_shipping_zones();
+		//echo "<pre>";
+		//print_r($shipping_zones);die;
+		$data['zones']=array_merge(array("0"=>lang("cart:select_province")),$shipping_zones);
+		
+		
+		
+		
 		
 		$this->form_validation->set_rules('first_name', 'lang:cart:first_name', 'trim|required|max_length[32]');
-		$this->form_validation->set_rules('last_name', 'lang:cart:last_name', 'trim|required|max_length[32]');
+		//$this->form_validation->set_rules('last_name', 'lang:cart:last_name', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('email', 'lang:cart:email', 'trim|required|valid_email|max_length[128]');
 		$this->form_validation->set_rules('phone', 'lang:phone', 'trim|required|max_length[32]');	
 		$this->form_validation->set_rules('address', 'lang:address', 'trim|required|max_length[128]');
-		$this->form_validation->set_rules('city', 'lang:city', 'trim|required|max_length[128]');
-			
+	/* 	$this->form_validation->set_rules('city', 'lang:city', 'trim|required|max_length[128]'); */
+		$this->form_validation->set_rules('zone_id', 'lang:zone', 'trim|required|callback_checking_shipping_zone');
 		if ($this->form_validation->run() == false)
 		{
 
@@ -75,7 +93,7 @@ class Checkout extends Public_Controller {
 		}
 		else
 		{
-		
+	
 			/*load any customer data to get their ID (if logged in)*/
 			$customer				= $this->go_cart->customer();
 		
@@ -129,8 +147,9 @@ class Checkout extends Public_Controller {
 				
 				 	
 			/* save customer details*/
-			$this->go_cart->save_customer($customer);
 		
+			$this->go_cart->save_customer($customer);
+			$this->go_cart->calculate_shipping_cost();
 		
 			$order_id = $this->go_cart->save_order();
 			$this->go_cart->destroy();

@@ -1124,10 +1124,39 @@ class go_cart {
 	}
 	
 	// This saves the confirmed order 
+	
+	
+	public function calculate_shipping_cost(){
+		$this->CI->load->model('location_model');
+		$customer					= $this->_cart_contents['customer'];
+		
+		$ship						= $customer['ship_address'];
+		//
+		$quantiyFreeship=!empty($this->gc_setting['free_shipping_flag'])?intval($this->gc_setting['free_shipping_flag']):0;
+		$totalProducts=$shippingCost=0;
+		
+		foreach ($this->_cart_contents['items'] as $item){
+			$totalProducts+=$item['quantity'];
+		}
+	
+		if($totalProducts>=$quantiyFreeship){
+			$this->_cart_contents['shipping']['price']=0;
+			return $this->_cart_contents['shipping']['price'];
+		}
+		
+		$ship_zone=$this->CI->location_model->zone_information($ship['zone_id']);
+		$this->_cart_contents['shipping']['price']=!empty($ship_zone)?floatval($ship_zone->price):0;
+	
+		// recaculate cart_total;
+		$this->_cart_contents['cart_total']+=$this->_cart_contents['shipping']['price'];
+		return $this->_cart_contents['shipping']['price'];
+		
+	}
 	function save_order() {
 
 		$this->CI->load->model('order_model');
 		$this->CI->load->model('Product_model');
+	
 		
 		//prepare our data for being inserted into the database
 		$save	= array();

@@ -10,14 +10,21 @@ $lang['cart:title:checkout']="Check out";
 
 
 
-$lang['cart:first_name']="First Name";
+$lang['cart:first_name']="First & Last Name";
 $lang['cart:last_name']="Last Name";
 $lang['cart:email']="Email";
 $lang['cart:total']="Total";
 $lang['cart:place_order']="Place your order";
 $lang['cart:sub_total']="Sub total";
 $lang['cart:shipping_address']="Address";
+$lang['cart:shipping_zones']="Shipping ";
 $lang['cart:add_to_cart']="Add to cart";
+$lang['cart:phone']="Phone";
+$lang['cart:zone']="Zone";
+$lang['cart:order_sumary']="Order Summary";
+
+
+
 $lang['address']="Address";
 $lang['phone']="Phone";
 $lang['city']="City";
