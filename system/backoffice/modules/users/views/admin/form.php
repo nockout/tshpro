@@ -37,6 +37,14 @@
 								<?php echo form_input('username', $member->username, 'id="username"') ?>
 							</div>
 						</li>
+							
+							
+						<li>
+							<label for="display_name"><?php echo lang('profile_display_name') ?> <span>*</span></label>
+							<div class="input">
+								<?php echo form_input('display_name', $display_name, 'id="display_name"') ?>
+							</div>
+						</li>
 	
 						<li>
 							<label for="group_id"><?php echo lang('user:group_label') ?></label>
@@ -70,12 +78,6 @@
 				<fieldset>
 					<ul>
 	
-						<li>
-							<label for="display_name"><?php echo lang('profile_display_name') ?> <span>*</span></label>
-							<div class="input">
-								<?php echo form_input('display_name', $display_name, 'id="display_name"') ?>
-							</div>
-						</li>
 	
 						<?php foreach($profile_fields as $field): ?>
 						<li>
