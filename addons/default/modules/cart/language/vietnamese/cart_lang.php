@@ -31,6 +31,10 @@ $lang['cart:sub_total']="Sub total";
 $lang['cart:shipping_address']="Địa chỉ";
 $lang['cart:select_province']="Thành phố";
 $lang['cart:add_to_cart']="Thêm vào giỏ";
+$lang['cart:shipping_zones']="Khu vực ";
+$lang['cart:phone']="Điện thoại";
+$lang['cart:order_sumary']="Thông tin đơn hàng";
+$lang['cart:shipping_fee']="Phí vận chuyển";
 //message
 $lang['cart:title_contact_info']="Thông tin liên hệ";
 $lang['cart:title:checkout']="Thanh toán";
