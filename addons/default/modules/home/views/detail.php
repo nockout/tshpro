@@ -37,7 +37,15 @@
 				<div class="clearfix"></div>
 
 			</div>
-
+			<?php if(!empty($user)):?>
+			<a class="artistlink hidden-xs"
+				title="Click to see more designs by 1miliondollar"
+				href="<?php echo site_url($user->username)?>">
+				<button class="btn btn-default" type="button">
+					<i class="fa fa-user"></i> Designer: <strong><?php echo $user->username?></strong>
+				</button>
+			</a>
+			<?php endif?>
 			<div class="explain hidden-xs">
 				<p>
 					<strong>Design Description:</strong>
@@ -62,14 +70,14 @@
 
 				
 					<label for="Style"><?php echo lang("product:style")?></label> <select
-						onchange="location = this.options[this.selectedIndex].value;"
-						class="form-control" name="shirtTypes" id="shirtTypes">
+					onchange="location = this.options[this.selectedIndex].value;"
+					class="form-control" name="shirtTypes" id="shirtTypes">
 							<?php
 						foreach ( $relprd as $rp ) :
 							?>
 							<option
-							<?php if($rp->product_id==$product->product_id)echo 'selected=""'?>
-							value="<?php echo site_url("home/product/".$rp->product_id)?>"><?php echo $rp->product."-".$rp->price?></option>
+						<?php if($rp->product_id==$product->product_id)echo 'selected=""'?>
+						value="<?php echo site_url("home/product/".$rp->product_id)?>"><?php echo $rp->product."-".$rp->price?></option>
 							
 							<?php endforeach;?>
 									
@@ -82,22 +90,20 @@
 				
 						</div>
 			<div class="clearfix"></div>
-			
+
 			<div class="form-group">
-				
-					<label for="Style"><?php echo lang("product:quantity")?></label> 
-					<select
-						class="form-control" name="quantity" id="">
+
+				<label for="Style"><?php echo lang("product:quantity")?></label> <select
+					class="form-control" name="quantity" id="">
 							<?php for( $i=1; $i<=30; $i++):?>
 							<option value="<?php echo $i;?>"><?php echo $i?></option>
 							<?php endfor;?>	
 					</select>
-				
-					<button
+
+				<button
 					style="background: none; border: none; text-align: left; padding: 8px 0px 8px 0px;"
 					class=" text-primary" data-target="#sizeModal" type="button"
-					data-toggle="modal">Sizing Chart
-					</button>
+					data-toggle="modal">Sizing Chart</button>
 
 
 				<div id="popsize" data-placement="top" data-toggle="popover"

@@ -155,10 +155,6 @@ class Admin extends Admin_Controller
 	
 		//create png from decoded base 64 string and save the image in the parent folder
 	
-	
-	
-		
-	
 		$name= "temp".uniqid(). '.png';
 		$file = UPLOAD_PATH.'../design/designs/' .$name;
 		$result = file_put_contents($file, $decoded);
@@ -372,19 +368,19 @@ class Admin extends Admin_Controller
 			
 			}
 			$slug = create_slug($slug);
-		
 			
 			if ($id) {
 				$route_id = $product->slug_id;
 				if (!$this->Routes_model->check_slug_exist_product($slug, $product->slug_id)) {
-					$slug = $this->Routes_model->validate_slug($slug, $product->slug_id);
+					$slug = $this->Routes_model->validate_slug($slug, $product->slug_id,false);
 					if (!$this->Routes_model->check_routes_by_id($product->slug_id)) {
 						$route['keyword'] = $slug;
+						$route['oid'] = $id;
 						$route_id = $this->Routes_model->save($route);
 					}
 				}
 			} else {
-				$slug = $this->Routes_model->validate_slug($slug);
+				$slug = $this->Routes_model->validate_slug($slug,false, $count = false);
 				$route['keyword'] = $slug;
 				$route_id = $this->Routes_model->save($route);
 			}
@@ -409,7 +405,7 @@ class Admin extends Admin_Controller
             $route['url_alias_id'] = $route_id;
             $route['keyword'] = $slug;
             $route['query'] = 'home/product/' . $id . '';
-            
+            $route['oid']=$id;
             $this->Routes_model->save($route);
             
             

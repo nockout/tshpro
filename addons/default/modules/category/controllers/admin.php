@@ -128,12 +128,15 @@ class Admin extends Admin_Controller
 					$slug = $this->Routes_model->validate_slug($slug, $route_id);
 					if (!$this->Routes_model->check_routes_by_id($route_id)) {
 						$route['keyword'] = $slug;
+						$route['entity']='category';
+						$route['oid']=$id;
 						$route_id = $this->Routes_model->save($route);
 					}
 				}
 			} else {
 				$slug = $this->Routes_model->validate_slug($slug);
 				$route['keyword'] = $slug;
+				$route['entity']='category';
 				$route_id = $this->Routes_model->save($route);
 			}
 			
@@ -160,7 +163,7 @@ class Admin extends Admin_Controller
 			$route['url_alias_id'] = $route_id;
 			$route['keyword'] = $slug;
 			$route['query'] = 'home/cate/' . $id . '';
-			
+			$route['oid'] = $id;
 			$this->Routes_model->save($route);
 			
 			

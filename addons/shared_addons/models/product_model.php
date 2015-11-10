@@ -106,10 +106,6 @@ class Product_model extends Base_m
 	
 	public function get_products($params=array(),$offset=0,$limit=12){
 	
-		
-		
-		
-		
 		if(!empty($params['cate_id']) && $params['cate_id']!=1){
 		
 			// join table category_products;
@@ -122,6 +118,15 @@ class Product_model extends Base_m
 			$this->db->like('product',trim($params['search_name'])); 
 		}
 		
+		if(!empty($params['user_id'])){
+				
+				
+			$this->db->where('user_id',trim($params['user_id']));
+		}
+		
+		if(!empty($params['order'])){
+			$this->db->order_by($params['order'], $params['way']); ;
+		}
 		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
 		
 		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id');
@@ -137,8 +142,7 @@ class Product_model extends Base_m
 		$result['total']=0;
 		$query = $this->db->query('SELECT FOUND_ROWS() AS `Count`');
         $result['total']= $query->row()->Count;
-          
-	
+    
 		return $result;
 		
 	

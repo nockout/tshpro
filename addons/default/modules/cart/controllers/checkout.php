@@ -148,6 +148,8 @@ class Checkout extends Public_Controller {
 			$this->go_cart->calculate_shipping_cost();
 		
 			$order_id = $this->go_cart->save_order();
+			
+			// send mail 
 			$this->go_cart->destroy();
 			
 // 			$this->session->set_flashdata("success","Order đã được tạo thành công");
