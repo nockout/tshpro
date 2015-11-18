@@ -17,6 +17,12 @@ class Order_m extends MY_Model
 			if(!empty($term['status'])){
 				$this->db->where('status', $term['status']);
 			}
+			if(!empty($term['group_status'])){
+				
+				$this->db->where_in('status', $term['group_status']);
+			}
+			
+			
 			if(!empty($term['f_keywords'])){
 				$this->db->like('order_number', $term['f_keywords']);
 				$this->db->or_like('ship_phone', $term['f_keywords']); 
@@ -28,10 +34,13 @@ class Order_m extends MY_Model
 			
 		
 		}
+		
+		
+		
 		$this->db->select("CONCAT(ship_firstname,' ',ship_lastname) as fullname" ,false);
 		$this->db->offset($page)->limit($limit);
 		$object=$this->db->order_by("ordered_on","DESC")->get($this->_table)->result();
-		
+	//	print_r($this->db->get_compiled_select);die;
 	
 		$result['objects']=$object;
 		$result['total']=0;
@@ -61,11 +70,17 @@ class Order_m extends MY_Model
 			
 		}
 	
-		
+		$zone=$this->get_shipzone($order->ship_zone_id);
+		if($zone)
+			$order->shipzone=$zone->name;
 		return $order;
 	}
 	private function get_designer($id){
 		return $this->db->where("id",intval($id))->get("users")->row();
+	}
+	private function get_shipzone($zone_id){
+		return  $this->db->where("id",intval($zone_id))->get("tshirt_shipping_zones")->row();
+		
 	}
 	public function save($param) {
 		if(empty($param))

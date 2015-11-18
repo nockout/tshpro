@@ -79,6 +79,7 @@ $lang['order:customer']="Customer";
 
 $lang['order:shipping_address1']="Address 1";
 $lang['order:shipping_address2']="Address 2";
+$lang['order:shipping_fee']="Shipping Fee";
 $lang['order:city']="City";
 $lang['order:country']="Country";
 
@@ -89,7 +90,8 @@ $lang['item:price']="Price";
 $lang['item:designer']="Designer";
 
 $lang['order:status_no_process']="No process";
+$lang['order:status_manufactoring']="Manufactoring";
 $lang['order:status_proceceed']="Proceed";
 $lang['order:status_cancel']="Cancel";
-$lang['order:comment']="Chú thích";
+$lang['order:comment']="Comment";
 

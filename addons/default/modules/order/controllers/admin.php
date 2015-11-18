@@ -3,8 +3,14 @@
  * Permissions controller
  *
  * @author		PyroCMS Dev Team
- * @package 	PyroCMS\Core\Modules\Permissions\Controllers
+ * @package 	PyroCMS\Core\Modules\Order\Controllers
  */
+ 
+define('ORDER_STATUS_NO_PROCESS', 0);
+define('ORDER_STATUS_MANUFACTORING', 1);
+define('ORDER_STATUS_PROCEED', 2);
+define('ORDER_STATUS_CANCEL', 3);
+
 class Admin extends Admin_Controller
 {
 
@@ -55,10 +61,38 @@ class Admin extends Admin_Controller
 		return true;
 		
 	}
+	
+	private function _statusByGroup($group){
+	
+		$status=array(
+				ORDER_STATUS_NO_PROCESS=>lang("ORDER_STATUS_NO_PROCESS"),
+				ORDER_STATUS_MANUFACTORING=>lang("ORDER_STATUS_MANUFACTORING"),
+				ORDER_STATUS_PROCEED=>lang("ORDER_STATUS_PROCEED"),
+				ORDER_STATUS_CANCEL=>lang("ORDER_STATUS_CANCEL"),
+		);
+		switch ($group) {
+			case "manufacturer" :
+				$status=array(
+				ORDER_STATUS_MANUFACTORING=>lang("ORDER_STATUS_MANUFACTORING"),
+				ORDER_STATUS_PROCEED=>lang("ORDER_STATUS_PROCEED"));
+				break;
+			
+				
+		}
+		return $status;
+	}
 	public function form($id=null){
+		
+		
+		
+		
 		$id or redirect("admin/order/index");
 		$this->load->model('order_m');
+		
+		
 		$detail=$this->order_m->get($id);
+		
+		
 		$data['detail']=$detail;
 	
 		if(empty($detail)){
@@ -70,8 +104,13 @@ class Admin extends Admin_Controller
 		
 		if ($this->form_validation->run() == FALSE) {
 			
+			$statuses=$this->_statusByGroup($this->current_user->group);
 			
-			$this->template->set($data)->title(lang("order:order"))
+		/* 	foreach ($statuses as $key=>$val){
+				
+			} */
+			
+			$this->template->set($data)->title(lang("order:order"))->set('status',$statuses)
 			->set("title",lang("order:order_title"))
 			->build('admin/form');
 		}else{
@@ -115,11 +154,12 @@ class Admin extends Admin_Controller
         }
       
 		
-		$data['term']=$term;
+		$data['term']=(array)$term;
 		$this->load->model('order_m');
 		
+		$data['term']['group_status']=array_keys($this->_statusByGroup($this->current_user->group));
+		$status=$this->_statusByGroup($this->current_user->group);
 		
-	
 		$designs=$this->order_m->get_orders($data,$by,$way,$page,6);
 		
 		$pagination=panagition("admin/order/index/$code/$by/$way/",4,$designs['total'],$page,6);
@@ -128,6 +168,7 @@ class Admin extends Admin_Controller
 		$this->template->set("term",(array)$term);
  		$this->template->
  			set('orders',$designs['objects'])
+ 			->set('status',$statuses)
  			->set('pagination', $pagination)
  			->title($this->module_details['name'])
 			->build('admin/index');;

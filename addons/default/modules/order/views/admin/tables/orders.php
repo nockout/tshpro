@@ -3,11 +3,13 @@
 function status($statusid) {
 	switch ($statusid) {
 		case 0 :
-			return lang("order:status_no_process");
+			return lang ( "order:status_no_process" );
 		case 1 :
-			return lang("order:status_proceceed");
+			return lang ( "order:status_manufactoring" );
 		case 2 :
-			return lang("order:status_cancel");
+			return lang ( "order:status_proceceed" );
+		case 3 :
+			return lang ( "order:status_cancel" );
 	}
 }
 ?>
@@ -31,17 +33,18 @@ function status($statusid) {
 			<?php foreach ($orders as $order) : ?>
 				<tr>
 			<td><?php echo form_checkbox('action_to[]', $order->id) ?></td>
-			<td class="collapse"><a href="<?php echo base_url("admin/order/form/".$order->id)?>" >#<?php  echo $order->order_number?></a></td>
+			<td class="collapse"><a
+				href="<?php echo base_url("admin/order/form/".$order->id)?>">#<?php  echo $order->order_number?></a></td>
 			<td class="collapse"><?php  echo date("d/m/y H:i:s",strtotime($order->ordered_on));?></td>
-			<td class="collapse"><?php  echo ($order->fullname)?></td>
+			<td class="collapse"><?php  echo ($order->firstname).($order->lastname)?></td>
 			<td class="collapse"><?php  echo ($order->phone)?></td>
 			<td class="collapse"><?php  echo status($order->status)?></td>
 			<td class="collapse"><?php  echo format_price($order->total)?></td>
-			<td style="padding-top: 10px;">
-			 
-		<a href="<?php echo site_url('admin/order/form/' . $order->id) ?>" title="<?php echo lang('global:edit')?>" class="button"><?php echo lang('global:edit')?></a>
-					
-					
+			<td style="padding-top: 10px;"><a
+				href="<?php echo site_url('admin/order/form/' . $order->id) ?>"
+				title="<?php echo lang('global:edit')?>" class="button"><?php echo lang('global:view')?></a>
+
+
 			</td>
 		</tr>
 			<?php endforeach ?>

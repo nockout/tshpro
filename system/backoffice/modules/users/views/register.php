@@ -1,48 +1,101 @@
-<h2 class="page-title" id="page_title"><?php echo lang('user:register_header') ?></h2>
+<div id="maincontentWrap">
 
-<p>
-	<span id="active_step"><?php echo lang('user:register_step1') ?></span> -&gt;
-	<span><?php echo lang('user:register_step2') ?></span>
-</p>
 
-<?php if ( ! empty($error_string)):?>
-<!-- Woops... -->
-<div class="error-box">
-	<?php echo $error_string;?>
+	<div class="container">
+		<div class="page-header">
+			<h1 class="text-center"><?php echo lang('user:register_header')?></h1>
+		</div>
+		<?php if ( ! empty($error_string)):?>
+
+				<div class="error-box">
+					<?php echo $error_string;?>
+				</div>
+		<?php endif?>
+	<?php echo form_open('register', array('id' => 'register'))?>
+		<div class="col-sm-6 col-sm-offset-3">
+			<div class="explain">
+				<img class="img-responsive center-block"
+					src="<?php echo Asset::get_filepath_img('aff-design-share-sell.png')?>">
+				<h3 class="text-center">Design. Share. Profit.</h3>
+			
+			
+					
+					<div class="form-group">
+					<label class="required" for="first_name"><?php echo lang('global:first_last_name')?> </label>
+					<?php $pl=lang('global:first_last_name');?>
+					<?php echo form_input('first_name',set_value('first_name'),"placeholder='$pl' class='form-control'")?>
+					</div>
+					<div class="form-group">
+					<label class="required" for="first_name"><?php echo lang('global:user_name')?> </label>
+					<?php $pl=lang('global:user_name');?>
+					<?php echo form_input('user_name',set_value('user_name'),"placeholder='$pl' class='form-control'")?>
+					</div>
+		
+						<div class="form-group">
+					<label  class="required" for="email">
+						<?php echo lang('global:email') ?></label>
+						<?php echo form_input('email',set_value('email'),"placeholder='artist@example.com' class='form-control'")?>
+					</div>
+				
+			
+
+				<div class="form-group">
+					<label class="required" for="password"><?php echo lang('global:password') ?></label>
+						<?php $pl=lang('global:password');?>
+					<?php echo form_password('password',set_value('password'),"placeholder='$pl' class='form-control'")?>
+			
+				</div>
+				<div  class="form-group">
+					<label class="required"><?php echo lang('global:confirm_password');$pl=lang('global:confirm_password') ?></label> 
+						<?php echo form_password('confirm',set_value('confirm'),"placeholder='$pl' class='form-control'")?>
+					
+				</div>
+		
+					
+				<div class="form-group row">
+					<div class="col-lg-6 col-xl-12">
+					<?php echo $cap['image']?>
+					 </div>
+					<div class="col-lg-6 col-xl-12">
+					 
+					<input type="text" class="form-control" id="capText" name="capText">
+					<small><em>* <?php echo lang('global:captcha_remind')?></em></small>
+					</div>
+						
+				</div>
+				<div class="form-group">
+					<div class="checkbox">
+						<label> 
+						<input type="checkbox" value="1" name="terms" id="terms">
+						<?php $anchor= anchor(site_url('term'),lang('global:term_conditional'))?>
+							<?php echo sprintf(lang('global:read_and_agree'),$anchor,Settings::get('site_name') )?>
+								
+						</label>
+					</div>
+					<center>
+					
+						<a class="btn btn-default"
+							href="<?php site_url('chinh-sach-bao-mat')?>"
+							target="_blank"><i class="fa fa-eye"></i> <?php echo lang('global:privacy_policy')?>.</a><br>
+						<br>
+					</center>
+					<input type="hidden" value="01140823EA51828C6B2B754FAE288688"
+						name="randValue">
+					<div class="col-sm-8 col-sm-offset-2">
+						<input type="submit" value="<?php echo lang('global:sign_up')?>"
+							class="btn btn-success btn-lg btn-block" name="submit">
+					</div>
+					<div class="clearfix"></div>
+				</div>
+
+
+
+			</div>
+		</div>
+<?php echo form_close()?>
+
+	</div>
+
+
+
 </div>
-<?php endif;?>
-
-<?php echo form_open('register', array('id' => 'register')) ?>
-<ul>
-	
-	<?php if ( ! Settings::get('auto_username')): ?>
-	<li>
-		<label for="username"><?php echo lang('user:username') ?></label>
-		<input type="text" name="username" maxlength="100" value="<?php echo $_user->username ?>" />
-	</li>
-	<?php endif ?>
-	
-	<li>
-		<label for="email"><?php echo lang('global:email') ?></label>
-		<input type="text" name="email" maxlength="100" value="<?php echo $_user->email ?>" />
-		<?php echo form_input('d0ntf1llth1s1n', ' ', 'class="default-form" style="display:none"') ?>
-	</li>
-	
-	<li>
-		<label for="password"><?php echo lang('global:password') ?></label>
-		<input type="password" name="password" maxlength="100" />
-	</li>
-
-	<?php foreach($profile_fields as $field) { if($field['required'] and $field['field_slug'] != 'display_name') { ?>
-	<li>
-		<label for="<?php echo $field['field_slug'] ?>"><?php echo (lang($field['field_name'])) ? lang($field['field_name']) : $field['field_name'];  ?></label>
-		<div class="input"><?php echo $field['input'] ?></div>
-	</li>
-	<?php } } ?>
-
-	
-	<li>
-		<?php echo form_submit('btnSubmit', lang('user:register_btn')) ?>
-	</li>
-</ul>
-<?php echo form_close() ?>

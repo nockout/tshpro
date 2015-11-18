@@ -1,11 +1,13 @@
 
 <?php
 
-$status = array (
+/* $status = array (
 		'0' => lang ( "order:status_no_process" ),
-		'1' => lang ( "order:status_proceceed" ),
-		'2' => lang ( "order:status_cancel" ) 
-)
+		'1'	=> lang ( "order:status_manufactoring"),
+		'2' => lang ( "order:status_proceceed" ),
+		'3' => lang ( "order:status_cancel" ) ,
+		
+) */
 ;
 ?>
 <section class="title">
@@ -42,7 +44,7 @@ $status = array (
 
 
 							<div class="input">
-								<b><?php echo lang('order:mail') ?></b>:<?php $detail->email?> </div>
+								<b><?php echo lang('order:mail') ?></b>:<?php echo $detail->email?> </div>
 						</li>
 						<li>
 
@@ -69,6 +71,13 @@ $status = array (
 
 
 							<div class="input">
+								<b><?php echo lang('order:shipping_zone') ?></b>:<?php echo !empty($detail->shipzone)?$detail->shipzone:""?> </div>
+						</li>
+											
+						<li>
+
+
+							<div class="input">
 								<b><?php echo lang('order:shipping_address1') ?></b>:<?php echo $detail->ship_address1?> </div>
 						</li>
 						<li>
@@ -77,24 +86,16 @@ $status = array (
 							<div class="input">
 								<b><?php echo lang('order:shipping_address2') ?></b>:<?php echo $detail->ship_address2?> </div>
 						</li>
-						<li>
-
-
-							<div class="input">
-								<b><?php echo lang('order:city') ?></b>:<?php echo $detail->ship_city?> </div>
-						</li>
-						<li>
-
-
-							<div class="input">
-								<b><?php echo lang('order:country') ?></b>:<?php echo $detail->ship_country?> </div>
-						</li>
+							
+							
+					
 						<li><label for="status"><?php echo lang('order:status_label') ?></label>
 
 							<div class="input">
 									
 								<?php echo form_dropdown("status",$status,set_value("status",$detail->status))?>
-								</div></li>
+								</div>
+						</li>
 
 					</ul>
 
@@ -153,8 +154,13 @@ $status = array (
 						
 						<?php endforeach;?>
 						<tr>
-							<td colspan=5 class="text-right"><h2><?php echo lang("order:total")?>:<?php echo format_price($detail->total);?></h2></td>
-
+							<td colspan=5 class="text-right"><h2><?php echo lang("order:shipping_fee")?></h2></td>
+							<td  class="text-right"><h2><?php echo format_price($detail->shipping);?></h2></td>
+						</tr>
+						<tr>
+						
+							<td colspan=5 class="text-right"><h2><?php echo lang("order:total")?></h2></td>
+							<td  class="text-right"><h2><?php echo format_price($detail->total);?></h2></td>
 						</tr>
 					</tbody>
 				</table>

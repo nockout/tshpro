@@ -87,6 +87,10 @@ $lang['order:company']="Công ty";
 
 $lang['order:shipping_address1']="Địa chỉ 1";
 $lang['order:shipping_address2']="Địa chỉ 2";
+$lang['order:shipping_fee']="Phí vận chuyển";
+$lang['order:shipping_zone']="Khu vực vận chuyển";
+
+
 $lang['order:city']="Thành Phố";
 $lang['order:country']="Quốc gia";
 
@@ -97,9 +101,11 @@ $lang['item:price']="Giá";
 $lang['item:designer']="Designer";
 
 $lang['order:customer']="Khách hàng";
-$lang['order:status_no_process']="Chưa xử lý";
-$lang['order:status_proceceed']="Đã xử lý";
-$lang['order:status_cancel']="Huỷ Đơn Hàng";
+$lang['ORDER_STATUS_NO_PROCESS']="Chưa xử lý";
+$lang['ORDER_STATUS_MANUFACTORING']="Bộ phận sản xuất";
+$lang['ORDER_STATUS_PROCEED']="Đã xử lý";
+$lang['ORDER_STATUS_CANCEL']="Huỷ Đơn Hàng";
+
 $lang['order:comment']="Chú thích";
 
 

@@ -62,7 +62,18 @@ $lang['global:demo_restrictions'] 		= 'Some features on this page have been disa
 $lang['login_error_label'] 				= 'Lỗi đăng nhập';
 $lang['forgot_password_label'] 			= 'Quên mật khẩu ?';
 $lang['global:email'] 					= 'E-mail';
+$lang['global:user_name'] 				= 'Nick Name';
 $lang['global:password'] 				= 'Mật khẩu';
+$lang['global:confirm_password'] 				= 'Nhập lại Mật khẩu';
+$lang['global:term_conditional'] 				= 'những điều kiện và điều khoản';
+$lang['global:read_and_agree'] 				= 'Tôi đã đọc và đồng ý với %s của %s';
+$lang['global:captcha_remind'] 				= 'Vui lòng nhập những kí tự ở hình bên trái';
+$lang['global:privacy_policy'] 				= 'Chính sách bảo mật';
+$lang['global:sign_up'] 				= 'Đăng ký';
+$lang['_valid_captcha'] 				= 'Bạn đã nhập sai mã bảo mật , vui lòng nhập lại';
+
+
+
 $lang['login_label'] 					= 'Đăng nhập';
 
 $lang['help_label'] 					= 'Trợ giúp';
@@ -111,10 +122,12 @@ $lang['global:themes']					= 'Themes'; #translate
 $lang['global:field_types']				= 'Field Types'; #translate
 $lang['global:plugins']					= 'Plugins'; #translate
 $lang['global:plugin']					= 'Plugin'; #translate
-
+$lang['global:first_last_name']					= 'Họ và tên';
 $lang['global:options']					= 'Options'; #translate
 $lang['global:plain-text']				= 'Plain Text'; #translate
 
 $lang['design:create']					= 'New Design';
 $lang['design:manage']					= 'Manage Designs';
+
+
 /* End of file global_lang.php */

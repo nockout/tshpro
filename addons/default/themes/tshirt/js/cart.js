@@ -2,6 +2,9 @@
 
 	$(function() {
 
+		$("img.lazy").lazyload({
+		    effect : "fadeIn"
+		});
 		$("#cartToggleButton").on("click", function() {
 			showcart();
 		});

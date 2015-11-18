@@ -4,8 +4,9 @@
 	$status=array(
 			""=>lang(""),
 			0=> lang("order:status_no_process"),
-			1=> lang("order:status_proceceed"),
-			2=> lang("order:status_cancel")
+			1=> lang("order:status_manufactoring"),
+			2=> lang("order:status_proceceed"),
+			3=> lang("order:status_cancel")
 	);
 	
 
