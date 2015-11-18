@@ -105,6 +105,8 @@ $lang['ORDER_STATUS_NO_PROCESS']="Chưa xử lý";
 $lang['ORDER_STATUS_MANUFACTORING']="Bộ phận sản xuất";
 $lang['ORDER_STATUS_PROCEED']="Đã xử lý";
 $lang['ORDER_STATUS_CANCEL']="Huỷ Đơn Hàng";
+$lang['ORDER_STATUS_CLOSED']="Đóng";
+
 
 $lang['order:comment']="Chú thích";
 

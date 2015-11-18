@@ -10,6 +10,9 @@ define('ORDER_STATUS_NO_PROCESS', 0);
 define('ORDER_STATUS_MANUFACTORING', 1);
 define('ORDER_STATUS_PROCEED', 2);
 define('ORDER_STATUS_CANCEL', 3);
+define('ORDER_STATUS_CLOSED', 4);
+
+
 
 class Admin extends Admin_Controller
 {
@@ -34,6 +37,8 @@ class Admin extends Admin_Controller
 	public function __construct()
 	{
 	    parent::__construct();
+	    Events::trigger('save_order',array());
+	    
 	    $this->lang->load('order');
 	    $this->load->helper(array("currency",'tdesign'));
 	    $this->load->model("search_model");
@@ -55,7 +60,7 @@ class Admin extends Admin_Controller
 	public function check_status(){
 		$status=$this->input->post("status");
 		$comment=$this->input->post("comment");
-		if($status==2 && empty($comment)){
+		if($status==ORDER_STATUS_CANCEL && empty($comment)){
 			return false;
 		}
 		return true;
@@ -69,6 +74,7 @@ class Admin extends Admin_Controller
 				ORDER_STATUS_MANUFACTORING=>lang("ORDER_STATUS_MANUFACTORING"),
 				ORDER_STATUS_PROCEED=>lang("ORDER_STATUS_PROCEED"),
 				ORDER_STATUS_CANCEL=>lang("ORDER_STATUS_CANCEL"),
+				ORDER_STATUS_CLOSED=>lang("ORDER_STATUS_CLOSED"),
 		);
 		switch ($group) {
 			case "manufacturer" :
@@ -123,6 +129,11 @@ class Admin extends Admin_Controller
 			$this->session->set_flashdata("success",lang("order:save_success"));
 			else 
 				$this->session->set_flashdata("success",lang("order:edit_error"));
+			
+			//fire events when order update
+			Events::trigger('order_update', array('id'=>$id));
+			
+			
 			
 			if($this->input->post("btnAction")=="save_exit"){
 				redirect("admin/order/");

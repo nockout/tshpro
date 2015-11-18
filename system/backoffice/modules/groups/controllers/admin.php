@@ -13,7 +13,7 @@ class Admin extends Admin_Controller
 	/**
 	 * Constructor method
 	 */
-	var $permanently_group=array('user', 'admin','artis','affiliate','moderate');
+	var $permanently_group=array('user', 'admin','artist','affiliate','moderate','sale','manufacturer');
 	public function __construct()
 	{
 		parent::__construct();

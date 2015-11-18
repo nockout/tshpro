@@ -34,6 +34,7 @@ class Order extends Admin_Controller
 // 		->set('posts', $posts['entries'])
 // 		->set('pagination', $posts['pagination'])
 		->build('home');
+		
 	}
 
 
