@@ -3,13 +3,13 @@
 function status($statusid) {
 	switch ($statusid) {
 		case 0 :
-			return lang ( "order:status_no_process" );
+			return lang ( "ORDER_STATUS_NO_PROCESS" );
 		case 1 :
-			return lang ( "order:status_manufactoring" );
+			return lang ( "ORDER_STATUS_MANUFACTORING" );
 		case 2 :
-			return lang ( "order:status_proceceed" );
+			return lang ( "ORDER_STATUS_PROCEED" );
 		case 3 :
-			return lang ( "order:status_cancel" );
+			return lang ( "ORDER_STATUS_CANCEL" );
 	}
 }
 ?>

@@ -168,7 +168,7 @@ class Admin extends Admin_Controller
 		$this->template->set("term",(array)$term);
  		$this->template->
  			set('orders',$designs['objects'])
- 			->set('status',$statuses)
+ 			->set('status',$status)
  			->set('pagination', $pagination)
  			->title($this->module_details['name'])
 			->build('admin/index');;

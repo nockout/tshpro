@@ -1,13 +1,13 @@
 <fieldset id="filters">
 	<legend><?php echo lang('global:filters') ?></legend>
 	<?php 
-	$status=array(
+/* 	$status=array(
 			""=>lang(""),
 			0=> lang("order:status_no_process"),
 			1=> lang("order:status_manufactoring"),
 			2=> lang("order:status_proceceed"),
 			3=> lang("order:status_cancel")
-	);
+	); */
 	
 
 	?>
