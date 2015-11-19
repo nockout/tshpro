@@ -1,13 +1,19 @@
 
 <?php
 
-/* $status = array (
-		'0' => lang ( "order:status_no_process" ),
-		'1'	=> lang ( "order:status_manufactoring"),
-		'2' => lang ( "order:status_proceceed" ),
-		'3' => lang ( "order:status_cancel" ) ,
-		
-) */
+function status($statusid) {
+	switch ($statusid) {
+		case 0 :
+			return lang("ORDER_STATUS_NO_PROCESS");
+		case 1 :
+			return lang("ORDER_STATUS_MANUFACTORING");
+		case 2 :
+			return lang("ORDER_STATUS_PROCEED");
+		case 3 :
+			return lang("ORDER_STATUS_CANCEL");
+			
+	}
+}
 ;
 ?>
 <section class="title">
@@ -91,10 +97,17 @@
 					
 						<li><label for="status"><?php echo lang('order:status_label') ?></label>
 
+							<?php if($detail->status==ORDER_STATUS_MANUFACTORING):?>
 							<div class="input">
+							
 									
 								<?php echo form_dropdown("status",$status,set_value("status",$detail->status))?>
 								</div>
+							<?php else:?>
+								:<?php echo status($detail->status);?>
+							
+						
+							<?php endif?>
 						</li>
 
 					</ul>
@@ -167,9 +180,13 @@
 
 			</div>
 			<?php endif?>
+			
+			
 			<div class="clearfix"></div>
+			<?php if($detail->status==ORDER_STATUS_MANUFACTORING):?>
 			<div class="buttons">
 			<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel')))?>
+			<?php endif?>
 		</div>
 	<?php echo form_close()?>
 </div>
