@@ -80,7 +80,8 @@ class Admin extends Admin_Controller
 			case "manufacturer" :
 				$status=array(
 				ORDER_STATUS_MANUFACTORING=>lang("ORDER_STATUS_MANUFACTORING"),
-				ORDER_STATUS_PROCEED=>lang("ORDER_STATUS_PROCEED"));
+				ORDER_STATUS_PROCEED=>lang("ORDER_STATUS_PROCEED")
+				);
 				break;
 			
 				
@@ -89,16 +90,9 @@ class Admin extends Admin_Controller
 	}
 	public function form($id=null){
 		
-		
-		
-		
 		$id or redirect("admin/order/index");
 		$this->load->model('order_m');
-		
-		
 		$detail=$this->order_m->get($id);
-		
-		
 		$data['detail']=$detail;
 	
 		if(empty($detail)){
@@ -109,16 +103,21 @@ class Admin extends Admin_Controller
 		$this->form_validation->set_rules($this->validation_rules);
 		
 		if ($this->form_validation->run() == FALSE) {
-			
 			$statuses=$this->_statusByGroup($this->current_user->group);
-			
-		/* 	foreach ($statuses as $key=>$val){
-				
-			} */
-			
 			$this->template->set($data)->title(lang("order:order"))->set('status',$statuses)
-			->set("title",lang("order:order_title"))
-			->build('admin/form');
+			->set("title",lang("order:order_title"));
+			
+			$group=$this->current_user->group;
+			
+			
+			if($group=='manufacturer'){
+				$this->template->build('admin/form_manu');
+			}else{
+				$this->template->build('admin/form');
+			}
+			
+			
+			
 		}else{
 			$save['id']=$id;
 			$save['notes']=$this->input->post("comment");
@@ -130,11 +129,9 @@ class Admin extends Admin_Controller
 			else 
 				$this->session->set_flashdata("success",lang("order:edit_error"));
 			
-			//fire events when order update
+
 			Events::trigger('order_update', array('id'=>$id));
-			
-			
-			
+
 			if($this->input->post("btnAction")=="save_exit"){
 				redirect("admin/order/");
 			

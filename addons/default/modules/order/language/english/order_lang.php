@@ -89,9 +89,13 @@ $lang['item:quantity']="Quantity";
 $lang['item:price']="Price";
 $lang['item:designer']="Designer";
 
-$lang['order:status_no_process']="No process";
-$lang['order:status_manufactoring']="Manufactoring";
-$lang['order:status_proceceed']="Proceed";
-$lang['order:status_cancel']="Cancel";
 $lang['order:comment']="Comment";
 
+
+
+$lang['order:customer']="Khách hàng";
+$lang['ORDER_STATUS_NO_PROCESS']="NO PROCEED";
+$lang['ORDER_STATUS_MANUFACTORING']="MANUFACTURER";
+$lang['ORDER_STATUS_PROCEED']="PROCEED";
+$lang['ORDER_STATUS_CANCEL']="CANCEL";
+$lang['ORDER_STATUS_CLOSED']="CLOSED";

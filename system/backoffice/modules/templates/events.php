@@ -52,15 +52,19 @@ class Events_Templates {
             $subject = array_key_exists($lang, $templates) ? $templates[$lang]->subject : $templates['en']->subject ;
             $subject = $this->ci->parser->parse_string($subject, $data, true);
 
+          
             $body = array_key_exists($lang, $templates) ? $templates[$lang]->body : $templates['en']->body ;
             $body = $this->ci->parser->parse_string($body, $data, true);
-
+            
             $this->ci->email->from($from, $from_name);
             $this->ci->email->reply_to($reply_to);
             $this->ci->email->to($to);
+       
             $this->ci->email->subject($subject);
             $this->ci->email->message($body);
-			
+            $this->ci->email->set_mailtype("html");
+            $this->ci->email->set_crlf('\n');
+       
 			// To send attachments simply pass an array of file paths in Events::trigger('email')
 			// $data['attach'][] = /path/to/file.jpg
 			// $data['attach'][] = /path/to/file.zip
@@ -71,8 +75,9 @@ class Events_Templates {
 					$this->ci->email->attach($attachment);
 				}
 			}
-
+			;
 			return (bool) $this->ci->email->send();
+		/* 	 echo $this->ci->email->print_debugger(); */
         }
 
         //return false if we can't find the necessary templates

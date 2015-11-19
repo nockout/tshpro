@@ -3,13 +3,14 @@
 function status($statusid) {
 	switch ($statusid) {
 		case 0 :
-			return lang ( "ORDER_STATUS_NO_PROCESS" );
+			return lang("ORDER_STATUS_NO_PROCESS");
 		case 1 :
-			return lang ( "ORDER_STATUS_MANUFACTORING" );
+			return lang("ORDER_STATUS_MANUFACTORING");
 		case 2 :
-			return lang ( "ORDER_STATUS_PROCEED" );
+			return lang("ORDER_STATUS_PROCEED");
 		case 3 :
-			return lang ( "ORDER_STATUS_CANCEL" );
+			return lang("ORDER_STATUS_CANCEL");
+			
 	}
 }
 ?>
@@ -38,7 +39,7 @@ function status($statusid) {
 			<td class="collapse"><?php  echo date("d/m/y H:i:s",strtotime($order->ordered_on));?></td>
 			<td class="collapse"><?php  echo ($order->firstname).($order->lastname)?></td>
 			<td class="collapse"><?php  echo ($order->phone)?></td>
-			<td class="collapse"><?php  echo status($order->status)?></td>
+			<td class="collapse"><?php  echo status($order->status);?></td>
 			<td class="collapse"><?php  echo format_price($order->total)?></td>
 			<td style="padding-top: 10px;"><a
 				href="<?php echo site_url('admin/order/form/' . $order->id) ?>"
