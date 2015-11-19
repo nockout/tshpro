@@ -159,7 +159,7 @@ function status($statusid) {
 							</td>
 							<?php $size=isset($productData['sizeSelected'])?$productData['sizeSelected']:""?>
 							<td class="collapse"><?php echo $productData['product']."-".$size ?></td>
-								<td class="collapse"><?php echo !empty($item->designer)?$item->designer->username:"" ?></td>
+							<td class="collapse"><?php echo !empty($item->designer)?$item->designer->username:"" ?></td>
 
 							<td style="padding-top: 10px;"><?php echo $productData['quantity']?></td>
 							<td class="collapse text-right"><?php echo format_price($productData['subtotal'])?></td>

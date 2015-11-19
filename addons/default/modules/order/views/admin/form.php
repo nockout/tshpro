@@ -168,8 +168,10 @@
 			</div>
 			<?php endif?>
 			<div class="clearfix"></div>
+			<?php if($detail->status!=ORDER_STATUS_CLOSED):?>
 			<div class="buttons">
 			<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel')))?>
+			<?php endif;?>
 		</div>
 	<?php echo form_close()?>
 </div>

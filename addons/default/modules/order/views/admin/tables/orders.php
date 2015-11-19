@@ -10,6 +10,8 @@ function status($statusid) {
 			return lang("ORDER_STATUS_PROCEED");
 		case 3 :
 			return lang("ORDER_STATUS_CANCEL");
+			case 4 :
+				return lang("ORDER_STATUS_CLOSED");
 			
 	}
 }
