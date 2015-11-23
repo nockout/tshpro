@@ -52,7 +52,7 @@ class Admin extends Admin_Controller
 		
 		$trans=$this->trans_m->get_trans($data,$by,$way,$page,ITEM_PER_PAGE);
 		
-		$pagination=panagition("admin/transaction/index/$code/$by/$way/",7,$designs['total'],$page,ITEM_PER_PAGE);
+		$pagination=panagition("admin/transaction/index/$code/$by/$way/",7,$trans['total'],$page,ITEM_PER_PAGE);
 		$this->template->set("term",(array)$term);
 		$this->template->
 		set('trans',$trans['objects'])
