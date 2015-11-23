@@ -69,5 +69,5 @@ $lang['cp:nav_mockup']					= 'Mockup';
 $lang['cp:nav_template']					= 'Template';
 $lang['cp:nav_order']					= 'Orders';
 $lang['cp:nav_category']					= 'Category';
-
+$lang['cp:nav_transaction']				='Transaction';
 /* End of file admin_lang.php */

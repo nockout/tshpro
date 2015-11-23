@@ -62,4 +62,5 @@ $lang['cp:nav_mockup']					= 'Mẫu thiết kế';
 $lang['cp:nav_template']					= 'Sản phẩm';
 $lang['cp:nav_order']					= 'Đơn hàng';
 $lang['cp:nav_category']					= 'Danh mục';
+$lang['cp:nav_transaction']				='Giao dịch';
 /* End of file admin_lang.php */

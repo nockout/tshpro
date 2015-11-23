@@ -121,6 +121,8 @@ class Order_m extends MY_Model
 			$inserts[] = array (
 					'user_id' => $item->user_id,
 					'order_id' => $idOrder,
+					'quantity' => $item->quantity,
+					'id_art' => $item->id_art,
 					'description' => sprintf('Order #%s',$order->order_number), 
 					'amount'=>$item->earn,
 					'date_added'=>$order->ordered_on
@@ -142,7 +144,7 @@ class Order_m extends MY_Model
 		
 		$this->db->where('order_id',intval($idOrder));
 		$this->db->select(array('*','sum(dif_price*quantity) as earn'));
-		$this->db->group_by('user_id');
+		$this->db->group_by('id_art');
 	
 		$items=$this->db->get('tshirt_order_items')->result();
 		
