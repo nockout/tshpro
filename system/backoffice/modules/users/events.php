@@ -10,11 +10,39 @@ class Events_Users
 		$this->ci->load->model(array('Routes_model'));
 		$this->ci->load->library('Ion_auth');
 		$this->Routes_model=$this->ci->Routes_model;
-		Events::register('user_updated', array($this, 'run'));
-	}
-
 	
-	public function run($id)
+		Events::register('user_updated', array($this, 'run_update'));
+		Events::register('post_user_register', array($this, 'run_created'));
+	}
+	public function run_created($id){
+
+		if(empty($id)){
+			return;
+		}
+		
+		
+		$user=(array)$this->ci->ion_auth->get_user(intval($id));
+		
+		if(empty($user))
+			return;
+		$data=array('code'=>uniqid(),
+				'bank_name'=>$this->ci->input->post('bank_name'),
+				'bank_branch_number'=>$this->ci->input->post('bank_branch_number'),
+				'bank_swift_code'=>$this->ci->input->post('bank_swift_code'),
+				'bank_account_name'=>$this->ci->input->post('bank_account_name'),
+				'bank_account_number'=>$this->ci->input->post('bank_account_number')
+				
+				
+		);
+		
+	
+		return	$this->ci->db->where('id',$id)->update('users',$data);
+		
+		
+		
+	}
+	
+	public function run_update($id)
 	{
 		if(empty($id)){
 			return;
@@ -45,7 +73,15 @@ class Events_Users
 			}
 		
 		
-		
+			$data=array(
+					'bank_name'=>$this->ci->input->post('bank_name'),
+					'bank_branch_number'=>$this->ci->input->post('bank_branch_number'),
+					'bank_swift_code'=>$this->ci->input->post('bank_swift_code'),
+					'bank_account_name'=>$this->ci->input->post('bank_account_name'),
+					'bank_account_number'=>$this->ci->input->post('bank_account_number')
+			
+			
+			);
 		return ;
 	}
 

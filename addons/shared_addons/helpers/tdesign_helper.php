@@ -66,3 +66,6 @@ function panagition($url, $segment = 3, $total, $offset, $rows = 10) {
 
     return  $CI->pagination->create_links();
 }
+function unique_tracking_id(){
+	return uniqid();
+}
