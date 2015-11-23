@@ -89,11 +89,18 @@ $lang['order:shipping_address1']="Địa chỉ 1";
 $lang['order:shipping_address2']="Địa chỉ 2";
 $lang['order:shipping_fee']="Phí vận chuyển";
 $lang['order:shipping_zone']="Khu vực vận chuyển";
+$lang['order:artis_commission']='Hoa hồng cho Designer';
+$lang['order:send_commission']='Chuyển hoa hồng';
+$lang['order:del_commission']='Xóa hoa hồng';
+$lang['order:delete_comission_success']='Xóa hoa hồng thành công';
 
 
+
+$lang['order:artis']='Artis';
+$lang['order:detail']='Chi tiết';
 $lang['order:city']="Thành Phố";
 $lang['order:country']="Quốc gia";
-
+$lang['order:shipping']='Vận Chuyển';
 $lang['item:image']="Ảnh";
 $lang['item:name']="Tên sản phẩm";
 $lang['item:quantity']="Số lượng";

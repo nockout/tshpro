@@ -82,7 +82,8 @@ $lang['order:shipping_address2']="Address 2";
 $lang['order:shipping_fee']="Shipping Fee";
 $lang['order:city']="City";
 $lang['order:country']="Country";
-
+$lang['order:shipping_zone']="Shipping Zone";
+$lang['order:shipping']='Shipping';
 $lang['item:image']="Image";
 $lang['item:name']="Name";
 $lang['item:quantity']="Quantity";
@@ -90,9 +91,15 @@ $lang['item:price']="Price";
 $lang['item:designer']="Designer";
 
 $lang['order:comment']="Comment";
+$lang['order:artis_commission']='Artis\'s Commision';
+$lang['order:send_commission']='Send Comission';
+$lang['order:del_commission']='Delete Comission';
+$lang['order:send_comission_success']='Send commision successfully';
+$lang['order:delete_comission_success']='Delete commision successfully';
 
 
-
+$lang['order:artis']='Artis';
+$lang['order:detail']='Detail';
 $lang['order:customer']="Khách hàng";
 $lang['ORDER_STATUS_NO_PROCESS']="NO PROCEED";
 $lang['ORDER_STATUS_MANUFACTORING']="MANUFACTURER";

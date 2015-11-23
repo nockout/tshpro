@@ -29,26 +29,27 @@
 						<div class="form-group row">
 							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:email")?></label>
 							<div class="col-lg-10 col-sm-12">
-								<input type="text" class="form-control"
-									placeholder="<?php echo lang("cart:email")?>" value=""
-									name="email" id="email">
+							
+								<?php echo form_input('email',set_value('email'),'class="form-control"
+									placeholder="'. lang("cart:email").'" id="email"');?>	
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:first_name")?></label>
+							<label class="col-lg-2 col-sm-12"><?php echo lang("global:first_last_name")?></label>
 							<div class="col-lg-10 col-sm-12">
-								<input type="text" value="" class="form-control"
-									placeholder="<?php echo lang("cart:first_name")?>" id="name"
-									name="first_name">
+							<?php echo form_input('first_name',set_value('first_name'),'class="form-control"
+									placeholder="'. lang("global:first_last_name").'" id="first_name"');?>	
+								
 							</div>
 						</div>
 
 						<div class="form-group row">
 							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:shipping_address")?></label>
 							<div class="col-lg-10 col-sm-12">
-								<textarea type="text" value="" class="form-control"
-									placeholder="<?php echo lang("cart:shipping_address")?>"
-									id="address" name="address"></textarea>
+							
+								<?php echo form_textarea('address',set_value('address'),'class="form-control"
+									placeholder="'. lang("cart:shipping_address").'" id="address"');?>
+								
 							</div>
 						</div>
 
@@ -68,9 +69,9 @@
 						<div class="form-group row">
 							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:phone")?></label>
 							<div class="col-lg-10 col-sm-12">
-								<input type="text" value="" class="form-control"
-									placeholder="<?php echo lang("phone")?>" id="phone"
-									name="phone">
+								<?php echo form_input('phone',set_value('phone'),'class="form-control"
+									placeholder="'. lang("phone").'" id="phone"');?>
+								
 							</div>
 						</div>
 						<div class="form-group row">

@@ -88,11 +88,37 @@ class Admin extends Admin_Controller
 		}
 		return $status;
 	}
+	public function sendcommission(){
+		if($this->input->is_ajax_request()){
+		
+			$idOrder=intval($this->input->get('id'));
+			$this->load->model('order_m');
+		
+			$commisions=$this->order_m->add_artis_commision($idOrder);
+			
+			echo json_encode(array('message'=>lang('order:send_comission_success')));
+		}
+	}
+	public function delcommission(){
+		if($this->input->is_ajax_request()){
+	
+			$idOrder=intval($this->input->get('id'));
+			$this->load->model('order_m');
+	
+			$commisions=$this->order_m->remove_artis_commision($idOrder);
+				
+			echo json_encode(array('message'=>lang('order:send_comission_success')));
+		}
+	}
 	public function form($id=null){
 		
 		$id or redirect("admin/order/index");
 		$this->load->model('order_m');
 		$detail=$this->order_m->get($id);
+		$commisions=$this->order_m->get_artist_commission($id);
+	
+		$data=array('commisions'=>$commisions,'order_id'=>intval($id),'isSendArtistComission'=>$this->order_m->_isSendArtisComission($id));
+		$data['artis_commisions']=$this->template->load_view('admin/artis_commission',$data,true);
 		$data['detail']=$detail;
 	
 		if(empty($detail)){

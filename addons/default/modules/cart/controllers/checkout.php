@@ -68,8 +68,11 @@ class Checkout extends Public_Controller {
 		
 		$data['customer']	= $this->go_cart->customer();
 		$shipping_zones=$this->location_model->get_shipping_zones();
-		$data['zones']=array_merge(array("0"=>lang("cart:select_province")),$shipping_zones);
 		
+		$data['zones']=(array(""=>lang("cart:select_province")));
+		foreach ($shipping_zones as $key=>$zone){
+			$data['zones'][$key]=$zone;
+		}
 		
 		
 		
@@ -80,7 +83,7 @@ class Checkout extends Public_Controller {
 		$this->form_validation->set_rules('phone', 'lang:phone', 'trim|required|max_length[32]');	
 		$this->form_validation->set_rules('address', 'lang:address', 'trim|required|max_length[128]');
 	/* 	$this->form_validation->set_rules('city', 'lang:city', 'trim|required|max_length[128]'); */
-		$this->form_validation->set_rules('zone_id', 'lang:zone', 'trim|required|callback_checking_shipping_zone');
+		$this->form_validation->set_rules('zone_id', 'lang:cart:select_province', 'trim|required');
 		if ($this->form_validation->run() == false)
 		{
 
