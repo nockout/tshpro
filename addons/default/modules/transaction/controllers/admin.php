@@ -8,7 +8,7 @@
 
 
 
-define('ITEM_PER_PAGE', 10);
+define('ITEM_PER_PAGE', 12);
 class Admin extends Admin_Controller
 {
 
@@ -40,7 +40,7 @@ class Admin extends Admin_Controller
 		
 			$code = $this->search_model->record_term(json_encode($object));
 			// echo $code;die;
-			redirect(site_url(array('admin', 'order',"index", $code,$by, $way ,$page)));
+			redirect(site_url(array('admin', 'transaction',"index", $code,$by, $way ,$page)));
 		}
 		$term = array();
 		if ($code) {
@@ -70,7 +70,7 @@ class Admin extends Admin_Controller
 		
 			$code = $this->search_model->record_term(json_encode($object));
 			// echo $code;die;
-			redirect(site_url(array('admin', 'order',"index", $code,$by, $way ,$page)));
+			redirect(site_url(array('admin', 'transaction',"index", $code,$by, $way ,$page)));
 		}
 		$term = array();
 		if ($code) {
@@ -80,8 +80,8 @@ class Admin extends Admin_Controller
 		$data['term']=(array)$term;
 		$this->load->model('trans_m');
 		
-		$data['user_id']=$this->current_user->id;
-		$trans=$this->trans_m->get_trans($data,$by,$way,$page,ITEM_PER_PAGE);
+		$userid=$this->current_user->id;
+		$trans=$this->trans_m->get_artis_trans($userid,$data,$by,$way,$page,ITEM_PER_PAGE);
 		
 		$pagination=panagition("admin/transaction/index/$code/$by/$way/",7,$trans['total'],$page,ITEM_PER_PAGE);
 		$this->template->set("term",(array)$term);
