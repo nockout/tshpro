@@ -50,14 +50,13 @@ class Admin extends Admin_Controller
 		$data['term']=(array)$term;
 		$this->load->model('trans_m');
 		
-		$data['user_id']=$this->current_user->id;
 		$trans=$this->trans_m->get_trans($data,$by,$way,$page,ITEM_PER_PAGE);
 		
-		$pagination=panagition("admin/transaction/index/$code/$by/$way/",4,$designs['total'],$page,ITEM_PER_PAGE);
+		$pagination=panagition("admin/transaction/index/$code/$by/$way/",7,$designs['total'],$page,ITEM_PER_PAGE);
 		$this->template->set("term",(array)$term);
 		$this->template->
 		set('trans',$trans['objects'])
-		->set('status',$status)
+		
 		->set('pagination', $pagination)
 		->title($this->module_details['name'])
 		->build('admin/index');;
