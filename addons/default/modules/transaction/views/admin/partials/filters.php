@@ -26,7 +26,7 @@
 				?>
 				<?php echo form_input($data) ?>
 			
-				<?php echo anchor("admin/order" , lang('buttons:cancel'), 'class="button red"') ?>
+				<?php echo anchor("admin/transaction" , lang('buttons:cancel'), 'class="button red"') ?>
 			</li>
 		</ul>
 	<?php echo form_close() ?>
