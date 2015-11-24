@@ -57,5 +57,6 @@ $route['user/(:any)']	                    = 'users/view/$1';
 $route['my-profile']	                    = 'users/index';
 $route['edit-profile']	                    = 'users/edit';
 $route['sitemap.xml']                       = 'sitemap/xml';
+$route['users/login']	                    = 'admin/login';
 
 /* End of file routes.php */

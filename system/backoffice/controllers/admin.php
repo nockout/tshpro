@@ -68,6 +68,7 @@ class Admin extends Admin_Controller
 			$redirect = $this->session->userdata('admin_redirect');
 			$this->session->unset_userdata('admin_redirect');
 
+			//redirect($redirect ? $redirect : 'admin');
 			redirect($redirect ? $redirect : 'admin');
 		}
 

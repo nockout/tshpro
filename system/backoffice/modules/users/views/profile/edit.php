@@ -1,67 +1,75 @@
-<h2 id="page_title" class="page-title">
-	<?php echo ($this->current_user->id !== $_user->id) ?
-					sprintf(lang('user:edit_title'), $_user->display_name) :
-					lang('profile_edit') ?>
-</h2>
-<div>
+<div id="maincontentWrap">
+	<div class="container">
+		<div class="page-header">
+			<h2 id="page_title" class="text-center page-title">
+				<?php echo ($this->current_user->id !== $_user->id) ? sprintf ( lang ( 'user:edit_title' ), $_user->display_name ) : lang ( 'profile_edit' )?>
+			</h2>
+		</div>
+
+		<div>
 	<?php if (validation_errors()):?>
-	<div class="error-box">
+	<div class="error-box alert alert-danger">
 		<?php echo validation_errors();?>
 	</div>
 	<?php endif;?>
 
 	<?php echo form_open_multipart('', array('id'=>'user_edit'));?>
-
-	<fieldset id="profile_fields">
-		<legend><?php echo lang('user:details_section') ?></legend>
-		<ul>
-			<li>
-				<label for="display_name"><?php echo lang('profile_display_name') ?></label>
-				<div class="input">
-				<?php echo form_input(array('name' => 'display_name', 'id' => 'display_name', 'value' => set_value('display_name', $display_name))) ?>
-				</div>
-			</li>
+<div class="col-sm-6 ">
+				<div class="explain">
+					<fieldset id="profile_fields">
+						<legend><?php echo lang('user:details_section') ?></legend>
+						
+						<div class="form-group">
+					<label class="required" for="first_name"><?php echo lang('global:user_name')?> </label>
+					<?php $pl=lang('global:user_name');?>
+					<?php echo form_input('username',set_value('username'),"id='username' placeholder='$pl' class='form-control'")?>
+					</div>
+						
+						<div class="form-group">
+						<label for="display_name" class="required"><?php echo lang('profile_display_name') ?></label>
+							
+						<?php echo form_input(array('name' => 'display_name', 'class'=>" form-control",'id' => 'display_name', 'value' => set_value('display_name', $display_name)))?>
+						</div>
 
 			<?php foreach($profile_fields as $field): ?>
 				<?php if($field['input']): ?>
-					<li>
-						<label for="<?php echo $field['field_slug'] ?>">
+					<div class="form-group">
+					<label for="<?php echo $field['field_slug'] ?>" class="required">
 							<?php echo (lang($field['field_name'])) ? lang($field['field_name']) : $field['field_name'];  ?>
-							<?php if ($field['required']) echo '<span>*</span>' ?>
+							
 						</label>
 
-						<?php if($field['instructions']) echo '<p class="instructions">'.$field['instructions'].'</p>' ?>
+						<?php if($field['instructions']) echo '<p class="instructions">'.$field['instructions'].'</p>'?>
+						<?php if($field['field_type']=='text' || $field['field_type']=='url'):?>
+						<?php echo   form_input(array('name' => $field['field_slug'], 'class'=>" form-control",'id' => $field['field_slug'], 'value' => set_value($field['field_slug'], $field['value'])));?>
+						<?php elseif($field['field_type']=='textarea'):?>
+						<?php echo   form_textarea(array('name' => $field['field_slug'], 'class'=>" form-control",'id' => $field['field_slug'], 'value' => set_value($field['field_slug'], $field['value'])));?>
+						<?php else:?>
+						<?php ;echo $field['input']?>
+						<?php endif?>
 						
-						<div class="input">
-							<?php echo $field['input'] ?>
-						</div>
-					</li>
+							
+						
+					</div>
 				<?php endif ?>
 			<?php endforeach ?>
-		</ul>
-	</fieldset>
+				
+				
 
-	<fieldset id="user_names">
-		<legend><?php echo lang('global:email') ?></legend>
-		<ul>
-			<li>
-				<label for="email"><?php echo lang('global:email') ?></label>
-				<div class="input">
-					<?php echo form_input('email', $_user->email) ?>
-				</div>
-			</li>
-		</ul>
-	</fieldset>
+					<div class="form-group">
+					
+						<label for="email"><?php echo lang('global:email') ?></label>
+								
+					<?php echo form_input('email', $_user->email,'class=" form-control"')?>
+				
+					</div>
 
-	<fieldset id="user_password">
-		<legend><?php echo lang('user:password_section') ?></legend>
-		<ul>
-			<li class="float-left spacer-right">
-				<label for="password"><?php echo lang('global:password') ?></label><br/>
-				<?php echo form_password('password', '', 'autocomplete="off"') ?>
-			</li>
-		</ul>
-	</fieldset>
+					
+						
+			<div class="form-group"><label for="password"><?php echo lang('global:password') ?></label><br />
+				<?php echo form_password('password', '', 'autocomplete="off" class=" form-control"')?>
+			</div>
+					
 
 	<?php if (Settings::get('api_enabled') and Settings::get('api_user_keys')): ?>
 		
@@ -82,20 +90,23 @@
 		
 	});
 	</script>
-		
-	<fieldset>
-		<legend><?php echo lang('profile_api_section') ?></legend>
-		
-		<ul>
-			<li <?php $api_key or print('style="display:none"') ?>><?php echo sprintf(lang('api:key_message'), '<span id="api_key">'.$api_key.'</span>') ?></li>
-			<li>
-				<input type="button" id="generate_api_key" value="<?php echo lang('api:generate_key') ?>" />
-			</li>
-		</ul>
-	
-	</fieldset>
+
+					<fieldset>
+						<legend><?php echo lang('profile_api_section') ?></legend>
+
+						<ul>
+							<li <?php $api_key or print('style="display:none"') ?>><?php echo sprintf(lang('api:key_message'), '<span id="api_key">'.$api_key.'</span>') ?></li>
+							<li><input type="button" id="generate_api_key"
+								value="<?php echo lang('api:generate_key') ?>" /></li>
+						</ul>
+
+					</fieldset>
 	<?php endif ?>
 
-	<?php echo form_submit('', lang('profile_save_btn')) ?>
+	<?php echo form_submit('', lang('profile_save_btn'))?>
 	<?php echo form_close() ?>
+	</div>
+			</div>
+		</div>
+	</div>
 </div>
