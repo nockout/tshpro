@@ -35,7 +35,8 @@ $lang['user:registred_title']                  = 'Tài khoản đã đăng ký';
 // labels
 $lang['user:edit_title']                       = 'Sửa tài khoản "%s"';
 $lang['user:details_label']                    = 'Chi tiết';
-$lang['user:first_name_label']                 = 'Tên';
+$lang['user:first_name_label']                 = 'Họ và tên';
+$lang['profile_full_name']         = 'Họ và tên';
 $lang['user:last_name_label']                  = 'Họ';
 $lang['user:group_label']                      = 'Nhóm';
 $lang['user:activate_label']                   = 'Kích hoạt';
@@ -92,7 +93,8 @@ $lang['user:registration_disabled']            = 'Sorry, but the user registrati
 
 // -- Settings ---------------------------------------------------------------------------------------------
 
-$lang['user:details_section']                  = 'Tên';
+$lang['user:details_section']                  = 'Thông tin cá nhân';
+$lang['user:details_signin']                  = 'Thông tin đăng nhập';
 $lang['user:password_section']                 = 'Đổi mật khẩu';
 $lang['user:other_settings_section']           = 'Các thiết lập khác';
 
@@ -181,7 +183,7 @@ $lang['profile_female_label']         = 'Nữ';
 
 $lang['profile_not_set_up']           = 'Tài khoản này chưa được thiết lập hồ sơ.';
 
-$lang['profile_edit']                 = 'Sửa hồ sơ của bạn';
+$lang['profile_edit']                 = 'Thông tin cá nhân';
 
 $lang['profile_personal_section']     = 'Cá nhân';
 

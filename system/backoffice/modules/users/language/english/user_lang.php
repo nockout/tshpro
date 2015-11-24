@@ -82,6 +82,8 @@ $lang['user:registration_disabled']            = 'Sorry, but the user registrati
 // -- Settings ---------------------------------------------------------------------------------------------
 
 $lang['user:details_section']                  = 'Name';
+$lang['user:details_signin']                  = 'Thông tin đăng nhập';
+
 $lang['user:password_section']                 = 'Change password';
 $lang['user:other_settings_section']           = 'Other settings';
 
@@ -177,6 +179,7 @@ $lang['profile_edit']                 = 'Edit your profile';
 $lang['profile_personal_section']     = 'Personal';
 
 $lang['profile_display_name']         = 'Display Name';
+$lang['profile_full_name']         = 'Your Full Name';
 $lang['profile_dob']                  = 'Date of Birth';
 $lang['profile_dob_day']              = 'Day';
 $lang['profile_dob_month']            = 'Month';
@@ -192,7 +195,7 @@ $lang['profile_contact_section']      = 'Contact';
 $lang['profile_phone']                = 'Phone';
 $lang['profile_mobile']               = 'Mobile';
 $lang['profile_address']              = 'Address';
-$lang['profile_address_line1']        = 'Line #1';
+$lang['profile_address_line1']        = 'Địa chỉ #1';
 $lang['profile_address_line2']        = 'Line #2';
 $lang['profile_address_line3']        = 'Town/City';
 $lang['profile_address_postcode']     = 'Post/Zip Code';

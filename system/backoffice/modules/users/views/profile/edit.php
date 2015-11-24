@@ -14,27 +14,17 @@
 	<?php endif;?>
 
 	<?php echo form_open_multipart('', array('id'=>'user_edit'));?>
-<div class="col-sm-6 ">
-				<div class="explain">
-					<fieldset id="profile_fields">
-						<legend><?php echo lang('user:details_section') ?></legend>
-						
-						<div class="form-group">
-					<label class="required" for="first_name"><?php echo lang('global:user_name')?> </label>
-					<?php $pl=lang('global:user_name');?>
-					<?php echo form_input('username',set_value('username'),"id='username' placeholder='$pl' class='form-control'")?>
-					</div>
-						
-						<div class="form-group">
-						<label for="display_name" class="required"><?php echo lang('profile_display_name') ?></label>
-							
-						<?php echo form_input(array('name' => 'display_name', 'class'=>" form-control",'id' => 'display_name', 'value' => set_value('display_name', $display_name)))?>
-						</div>
 
+
+				<div class=" col-sm-6 col-lg-6 col-sm-6">
+					<fieldset id="profile_fields">
+						<h2 class="organe"><?php echo lang('user:details_section') ?></h2>
+						
+				
 			<?php foreach($profile_fields as $field): ?>
 				<?php if($field['input']): ?>
 					<div class="form-group">
-					<label for="<?php echo $field['field_slug'] ?>" class="required">
+					<label for="<?php echo $field['field_slug'] ?>" >
 							<?php echo (lang($field['field_name'])) ? lang($field['field_name']) : $field['field_name'];  ?>
 							
 						</label>
@@ -53,9 +43,12 @@
 					</div>
 				<?php endif ?>
 			<?php endforeach ?>
-				
-				
-
+		</fieldset>
+		</div>
+	<div class=" col-sm-6 col-lg-6 col-sm-6 ">			
+	<h2 class="organe"><?php echo lang('user:details_signin') ?></h2>
+						
+					
 					<div class="form-group">
 					
 						<label for="email"><?php echo lang('global:email') ?></label>
@@ -63,7 +56,19 @@
 					<?php echo form_input('email', $_user->email,'class=" form-control"')?>
 				
 					</div>
-
+					
+						
+						<div class="form-group">
+						<label for="display_name" class="required"><?php echo lang('profile_display_name') ?></label>
+							
+						<?php echo form_input(array('name' => 'display_name', 'class'=>" form-control",'id' => 'display_name', 'value' => set_value('display_name', $display_name)))?>
+						</div>
+					
+						<div class="form-group">
+					<label class="required" for="first_name"><?php echo lang('global:user_name')?> </label>
+					<?php $pl=lang('global:user_name');?>
+					<?php echo form_input('username',set_value('username'),"id='username' placeholder='$pl' class='form-control'")?>
+					</div>
 					
 						
 			<div class="form-group"><label for="password"><?php echo lang('global:password') ?></label><br />
@@ -92,7 +97,7 @@
 	</script>
 
 					<fieldset>
-						<legend><?php echo lang('profile_api_section') ?></legend>
+					<h2 class="organe"><?php echo lang('profile_api_section') ?></h2>
 
 						<ul>
 							<li <?php $api_key or print('style="display:none"') ?>><?php echo sprintf(lang('api:key_message'), '<span id="api_key">'.$api_key.'</span>') ?></li>
@@ -101,11 +106,13 @@
 						</ul>
 
 					</fieldset>
+					
+		</div>				
 	<?php endif ?>
 
-	<?php echo form_submit('', lang('profile_save_btn'))?>
+	<?php echo form_submit('', lang('profile_save_btn'),'class="btn btn-lg btn-success center-block"')?>
 	<?php echo form_close() ?>
-	</div>
+
 			</div>
 		</div>
 	</div>
