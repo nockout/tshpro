@@ -308,6 +308,7 @@ class Admin extends Admin_Controller
 		$data['arts']="";
 		$data['id_art']="";
 		$data['slugurl']="";
+		$data['is_gc']="";
 		if ($id) {
 		
 				$product=$this->product->get_product($id);
@@ -339,7 +340,8 @@ class Admin extends Admin_Controller
 			$data['arts']=$product->arts;
 			$data['id_art']=$product->id_art;
 			$data['slugurl']=$product->slugurl;
-			
+			$data['is_gc']=$product->is_gc;
+		
 			
 		}
 		$this->form_validation->set_rules('slugurl', 'lang:design:slug', 'trim|callback_checkslug['.$id.']');
@@ -389,7 +391,8 @@ class Admin extends Admin_Controller
 			$save['product_id'] = intval($id);
             $save['price'] =$this->input->post("price")?$this->input->post("price"):0;
             $save['status']=$this->input->post("status");
-         
+            $save['is_gc'] = $this->input->post("is_gc")?0:1;
+         	
             $save['lang'][CURRENT_LANGUAGE]['slugurl']=$slug;
             $save['lang'][CURRENT_LANGUAGE]['slug_id']=$route_id;
             $save['lang'][CURRENT_LANGUAGE]['product']=$this->input->post("title");

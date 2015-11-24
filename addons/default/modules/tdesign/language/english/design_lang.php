@@ -109,7 +109,7 @@ $lang['design:template_upload_sucessfull']            = 'Your template file uplo
 $lang['design:disabled_after'] 				= 'Designing comments after %s has been disabled.';
 $lang['design:twitter_Designed']                 = 'Designed "%s" %s';
 $lang['design:no_origin_size_set']                  = 'No original size be set.Pleas,contact administrator to repair it ';
-
+$lang['design:display_front_end']='Display Homepage';
 // date
 $lang['design:archive_date_format']		= "%B %Y";
 $lang['design:your_design']='Styles';

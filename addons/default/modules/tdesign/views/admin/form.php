@@ -94,14 +94,19 @@
 					</div>
 				</li>
 				<?php if(!empty($slugurl)):?>
-			
+		
 					
 						<a  target="_blank" href="<?php echo site_url($slugurl)?>">
 						Preview
 						</a>
-		
+						
+						
+						
+			
 				<?php endif?>
-
+			
+					<?php echo form_checkbox('is_gc',set_value('is_gc',$is_gc),$is_gc)?>
+						<label><?php echo lang('design:display_front_end') ?></label>
 				</ul>
 		
 	</fieldset>
