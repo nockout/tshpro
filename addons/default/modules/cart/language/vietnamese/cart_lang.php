@@ -16,12 +16,13 @@ $lang['cart:checkout']="Checkout";
 $lang['cart:remove_item']="Xoá";
 $lang['cart:continue_shipping']="Trở lại";
 $lang['cart:finish']="Hoàn thành";
-
-
+$lang['cart:payment']="Phương thức thanh toán";
+$lang['cart:just_buy']='Bạn vừa mua';
+$lang['cart:order_code']='Mã đơn hàng :';
 $lang['address']="Địa chỉ";
 $lang['phone']="Số điện thoại";
 $lang['city']="Thành phố";
-
+$lang['cart:thank_you']='Cám ơn bạn đã mua hàng tại : %s';
 $lang['cart:first_name']="Họ";
 $lang['cart:last_name']="Tên ";
 $lang['cart:email']="Email";

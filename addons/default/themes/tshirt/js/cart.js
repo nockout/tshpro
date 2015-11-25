@@ -47,17 +47,7 @@
 			return false; // avoid
 		});
 		
-		$("#zones").on("change", function(ev) {
-		
-			var data="?zone="+$(this).val();
-			$.get("cart/get_shipping_fee"+data, function(res) {
-				var object=$.parseJSON(res);
-				if(object){
-					$("#shipping_frame").html(object.s);
-					$("#total_frame").html(object.t);
-				}
-			});
-		});
+	
 
 	});
 })(jQuery);

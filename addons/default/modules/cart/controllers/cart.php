@@ -36,11 +36,18 @@ class Cart extends Public_Controller {
 	}
 	function get_shipping_fee(){
 		if($this->input->is_ajax_request()){
+			///$this->go_cart->clear_shipping();
 			$zoneid=$this->input->get('zone');
 			$this->load->model(array('location_model','Settings_model'));
 			$gc_setting = $this->Settings_model->get_settings('gocart');
 			$quantiyFreeship=!empty($gc_setting['free_shipping_flag'])?intval($gc_setting['free_shipping_flag']):0;
 			$totalItems= $this->go_cart->total_items();
+			
+			
+			// update shipping fee
+			$this->go_cart->total_items();
+			
+			
 			if($totalItems>=$quantiyFreeship){
 				$shipping=0;
 			}else{
@@ -229,7 +236,21 @@ class Cart extends Public_Controller {
 	}
 
 	function thank_you(){
-		$this->template->build('thank_you');
+		
+		
+		$id=$this->session->flashdata('last_order_id');
+		
+		$this->load->model('order_m');
+		$order=$this->order_m->get_order_by_code($id);
+		
+		
+	
+		$data=array(
+			'order'=>$order,
+			'items'=>!empty($order->items)?$order->items:""
+		);
+		$this->template->build('thank_you',
+				$data);
 	}
 	function update_cart($redirect = false)
 	{

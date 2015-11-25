@@ -62,7 +62,7 @@ class Admin extends Admin_Controller
 	{
 	    parent::__construct();
 	    $this->lang->load('design');
-	    $this->load->helper(array("MY_String"));
+	    $this->load->helper(array("MY_string"));
 	    $this->load->model(array("category_model","Routes_model"));
 	}
 

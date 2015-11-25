@@ -25,7 +25,7 @@
 				</div>
 
 				<div class="row shpInfoSlct">
-					<div class="col-sm-7">
+					<div class="col-sm-6 col-lg-6 col-md-6">
 						<div class="form-group row">
 							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:email")?></label>
 							<div class="col-lg-10 col-sm-12">
@@ -59,7 +59,7 @@
 
 								<div class="form-group ">
 									<label class="col-lg-2 col-sm-12"><?php echo lang("cart:shipping_zones")?></label>
-									<div class="col-lg-10 col-sm-12"><?php echo form_dropdown('zone_id', $zones, set_value("zone_id"),'id="zones" class="form-control"');?>
+									<div class="col-lg-10 col-sm-12"><?php echo form_dropdown('zone_id', $zones, set_value("zone_id"),'autocomplete="off" id="zones" class="form-control"');?>
 									</div>
 								</div>
 
@@ -87,7 +87,7 @@
 
 
 					</div>
-					<div class="col-sm-5">
+					<div class="col-sm-6">
 
 						<div class="panel panel-info">
 
@@ -108,8 +108,19 @@
 		
 				<tr>
 												<td><?php echo $product['quantity']?></td>
-												<td><?php echo (!empty($product['sizeSelected']))?($product['sizeSelected']):""?></td>
-												<td><?php echo $product['product']?></td>
+												<td>
+												<?php $inforProduct=unserialize($product['extra'])?>
+												
+												<?php if(!empty($inforProduct['image'])):?>
+												
+												<img class="img-responsive" width="90" height="90" src="<?php echo $inforProduct['image'][0]?>" />
+												<?php endif?>
+												</td>
+												<td><?php 
+												$size=(!empty($product['sizeSelected']))?($product['sizeSelected']):"";
+												echo sprintf("%s-%s",$product['product'],$size);
+												?></td>
+												
 												<td class="text-right">
 					<?php echo format_price($product['price']*$product['quantity'])?>
 					</td>
@@ -125,19 +136,47 @@
 											</tr>
 
 
-
+				
 
 
 											<tr class=" ">
 												<td colspan="3"><?php echo lang("cart:shipping_fee")?></td>
 												<td class="text-right" id="shipping_frame"><?php  echo format_price(0)?></td>
 											</tr>
+											
 
+								<script>
+								(function($) {
+
+									$(function() {
+										$("#zones").on("change", function(ev) {
+											
+											var data="?zone="+$(this).val();
+											$.get("cart/get_shipping_fee"+data, function(res) {
+												var object=$.parseJSON(res);
+												
+												if(object){
+													$("#shipping_frame").html(object.s);
+													$("#total_frame").html(object.t);
+												}
+											});
+										});
+
+										})
+								})(jQuery);					
+
+								</script>
+											<tr>
+												<td colspan="3"><?php echo lang("cart:payment")?></td>
+												<td class="text-right" id=""><?php $payment=$this->go_cart->payment_method();echo $payment['description']?></td>
+											</tr>
+											
 											<tr class="text-info bg-info">
 												<td colspan="3"><?php echo lang("cart:total")?></td>
 												<td class="text-right" id="total_frame"><?php  echo format_price($this->go_cart->total())?></td>
 											</tr>
-
+											
+											
 
 										</tbody>
 									</table>

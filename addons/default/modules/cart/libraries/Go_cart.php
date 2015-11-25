@@ -1242,13 +1242,16 @@ class go_cart {
 		//it's up to the payment method to remove any sensitive data from the array before this time
 		if(!empty($this->_cart_contents['payment']['description']))
 		{
+			$save['payment_code']	= $this->_cart_contents['payment']['module'];
 			$save['payment_info']	= $this->_cart_contents['payment']['description'];
 		}
 		else
 		{
 			//also set the description to '' so we don't get errors anywhere else.
 			//we may want to review this later and see if there is a better way from having it even come to this.
+			
 			$this->_cart_contents['payment']['description']	= '';
+			$save['payment_code']	= '';
 			$save['payment_info']	= '';
 		}
 		

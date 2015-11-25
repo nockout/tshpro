@@ -66,6 +66,16 @@ class Checkout extends Public_Controller {
 	}
 	function step_1(){
 		
+		//set default payment
+		
+		$payment=$this->get_payment(1);
+			
+		$this->go_cart->set_payment($payment['code'],$payment['name']);
+		
+		
+		
+		
+		///
 		$data['customer']	= $this->go_cart->customer();
 		$shipping_zones=$this->location_model->get_shipping_zones();
 		
@@ -147,6 +157,8 @@ class Checkout extends Public_Controller {
 				 	
 			/* save customer details*/
 		
+			
+			
 			$this->go_cart->save_customer($customer);
 			$this->go_cart->calculate_shipping_cost();
 		
@@ -155,7 +167,7 @@ class Checkout extends Public_Controller {
 			// send mail 
 			$this->go_cart->destroy();
 			
-// 			$this->session->set_flashdata("success","Order đã được tạo thành công");
+			$this->session->set_flashdata("last_order_id",$order_id);
 
 			redirect("cart/thank_you");
 		
@@ -164,6 +176,9 @@ class Checkout extends Public_Controller {
 		
 	}
 
+	private function get_payment($id){
+		return array('code'=>'cod','name'=>'Thanh toán khi giao hàng (Cod)');
+	}
 	
 	function shipping_address()
 	{

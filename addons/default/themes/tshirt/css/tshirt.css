@@ -12,7 +12,9 @@ margin-bottom: 1em;
     overflow: hidden;
     position: relative;
 }
-
+h2.organe{
+	color: #f6911e;
+}
 #MainNav{
 	z-index:1010 !important;
 }

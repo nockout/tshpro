@@ -7,9 +7,9 @@ $lang['cart:finish']="Finish";
 
 $lang['cart:title_contact_info']="Contact Information";
 $lang['cart:title:checkout']="Check out";
-
-
-
+$lang['cart:payment']="Payment method";
+$lang['cart:just_buy']='You have just ordered';
+$lang['cart:order_code']='Order Id:';
 $lang['cart:first_name']="First & Last Name";
 $lang['cart:last_name']="Last Name";
 $lang['cart:email']="Email";
@@ -23,7 +23,7 @@ $lang['cart:phone']="Phone";
 $lang['cart:zone']="Zone";
 $lang['cart:order_sumary']="Order Summary";
 $lang['cart:shipping_fee']="Shipping";
-
+$lang['cart:thank_you']='Thank you for purchasing order at  : %s';
 
 $lang['address']="Address";
 $lang['phone']="Phone";

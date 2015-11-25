@@ -1,321 +1,183 @@
-<?php
-Class order_m extends CI_Model
+<?php defined('BASEPATH') or exit('No direct script access allowed');
+/**
+ * @author  PyroCMS Dev Team
+ * @package PyroCMS\Core\Modules\Blog\Models
+ */
+class Order_m extends MY_Model
 {
-	function __construct()
-	{
-		parent::__construct();
-	}
-	
-	function get_gross_monthly_sales($year)
-	{
-		$this->db->select('SUM(coupon_discount) as coupon_discounts');
-		$this->db->select('SUM(gift_card_discount) as gift_card_discounts');
-		$this->db->select('SUM(subtotal) as product_totals');
-		$this->db->select('SUM(shipping) as shipping');
-		$this->db->select('SUM(tax) as tax');
-		$this->db->select('SUM(total) as total');
-		$this->db->select('YEAR(ordered_on) as year');
-		$this->db->select('MONTH(ordered_on) as month');
-		$this->db->group_by(array('MONTH(ordered_on)'));
-		$this->db->order_by("ordered_on", "desc");
-		$this->db->where('YEAR(ordered_on)', $year);
+	protected $_table = 'tshirt_orders';
+	protected $_orderItem='tshirt_order_items';
+
+	public function get_orders($params,$by="",$way="",$page=0,$limit=6){
 		
-		return $this->db->get('tshirt_orders')->result();
-	}
-	
-	function get_sales_years()
-	{
-		$this->db->order_by("ordered_on", "desc");
-		$this->db->select('YEAR(ordered_on) as year');
-		$this->db->group_by('YEAR(ordered_on)');
-		$records	= $this->db->get('tshirt_orders')->result();
-		$years		= array();
-		foreach($records as $r)
-		{
-			$years[]	= $r->year;
+		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
+		if(!empty($params['term'])){
+					
+			$term=(array)$params['term'];
+			if(!empty($term['status'])){
+				$this->db->where('status', $term['status']);
+			}
+			if(!empty($term['group_status'])){
+				
+				$this->db->where_in('status', $term['group_status']);
+			}
+			
+			
+			if(!empty($term['f_keywords'])){
+				$this->db->like('order_number', $term['f_keywords']);
+				$this->db->or_like('ship_phone', $term['f_keywords']); 
+				$this->db->or_like('ship_email', $term['f_keywords']);
+				$this->db->or_like('ship_phone', $term['f_keywords']);
+				$this->db->or_like("CONCAT(ship_firstname,' ', ship_lastname)",$term['f_keywords']);
+				
+			}
+			
+		
 		}
-		return $years;
-	}
+		
+		
+		
+		$this->db->select("CONCAT(ship_firstname,' ',ship_lastname) as fullname" ,false);
+		$this->db->offset($page)->limit($limit);
+		$object=$this->db->order_by("ordered_on","DESC")->get($this->_table)->result();
+	//	print_r($this->db->get_compiled_select);die;
 	
-	function get_orders($search=false, $sort_by='', $sort_order='DESC', $limit=0, $offset=0)
-	{			
-		if ($search)
-		{
-			if(!empty($search->term))
-			{
-				//support multiple words
-				$term = explode(' ', $search->term);
-
-				foreach($term as $t)
-				{
-					$not		= '';
-					$operator	= 'OR';
-					if(substr($t,0,1) == '-')
-					{
-						$not		= 'NOT ';
-						$operator	= 'AND';
-						//trim the - sign off
-						$t		= substr($t,1,strlen($t));
-					}
-
-					$like	= '';
-					$like	.= "( `order_number` ".$not."LIKE '%".$t."%' " ;
-					$like	.= $operator." `bill_firstname` ".$not."LIKE '%".$t."%'  ";
-					$like	.= $operator." `bill_lastname` ".$not."LIKE '%".$t."%'  ";
-					$like	.= $operator." `ship_firstname` ".$not."LIKE '%".$t."%'  ";
-					$like	.= $operator." `ship_lastname` ".$not."LIKE '%".$t."%'  ";
-					$like	.= $operator." `status` ".$not."LIKE '%".$t."%' ";
-					$like	.= $operator." `notes` ".$not."LIKE '%".$t."%' )";
-
-					$this->db->where($like);
-				}	
-			}
-			if(!empty($search->start_date))
-			{
-				$this->db->where('ordered_on >=',$search->start_date);
-			}
-			if(!empty($search->end_date))
-			{
-				//increase by 1 day to make this include the final day
-				//I tried <= but it did not function. Any ideas why?
-				$search->end_date = date('Y-m-d', strtotime($search->end_date)+86400);
-				$this->db->where('ordered_on <',$search->end_date);
+		$result['objects']=$object;
+		$result['total']=0;
+		$query = $this->db->query('SELECT FOUND_ROWS() AS `Count`');
+		$result['total']= $query->row()->Count;
+		
+		return $result;
+	}
+	public function get_order_by_code($orderCode){
+		$order=$this->db->where('order_number',($orderCode))->get($this->_table)->row();
+		if(empty($order))
+			return;
+		return $this->get($order->id);
+	}
+	public function get($id){
+		
+		$order=$this->db->where('id',intval($id))->get($this->_table)->row();
+		
+		if(empty($order))
+			return;
+		
+		// get arts from product_id;
+		//$this->db->select()
+		$order->items=$this->db->where("order_id",intval($id))->get($this->_orderItem)->result();
+		if(!empty($order->items)){
+			
+			foreach ($order->items as &$item){
+				$contents=unserialize($item->contents);
+				
+				$item->arts=$this->db->select("data")->from('tshirt_arts')->where("id",$contents['id_art'])->get()->row();
+				$item->designer=$this->get_designer($contents['user_id']);
 			}
 			
 		}
-		
-		if($limit>0)
-		{
-			$this->db->limit($limit, $offset);
-		}
-		if(!empty($sort_by))
-		{
-			$this->db->order_by($sort_by, $sort_order);
-		}
-		
-		return $this->db->get('tshirt_orders')->result();
-	}
 	
-	function get_orders_count($search=false)
-	{			
-		if ($search)
-		{
-			if(!empty($search->term))
-			{
-				//support multiple words
-				$term = explode(' ', $search->term);
-
-				foreach($term as $t)
-				{
-					$not		= '';
-					$operator	= 'OR';
-					if(substr($t,0,1) == '-')
-					{
-						$not		= 'NOT ';
-						$operator	= 'AND';
-						//trim the - sign off
-						$t		= substr($t,1,strlen($t));
-					}
-
-					$like	= '';
-					$like	.= "( `order_number` ".$not."LIKE '%".$t."%' " ;
-					$like	.= $operator." `bill_firstname` ".$not."LIKE '%".$t."%'  ";
-					$like	.= $operator." `bill_lastname` ".$not."LIKE '%".$t."%'  ";
-					$like	.= $operator." `ship_firstname` ".$not."LIKE '%".$t."%'  ";
-					$like	.= $operator." `ship_lastname` ".$not."LIKE '%".$t."%'  ";
-					$like	.= $operator." `status` ".$not."LIKE '%".$t."%' ";
-					$like	.= $operator." `notes` ".$not."LIKE '%".$t."%' )";
-
-					$this->db->where($like);
-				}	
-			}
-			if(!empty($search->start_date))
-			{
-				$this->db->where('ordered_on >=',$search->start_date);
-			}
-			if(!empty($search->end_date))
-			{
-				$this->db->where('ordered_on <',$search->end_date);
-			}
-			
-		}
-		
-		return $this->db->count_all_results('tshirt_orders');
-	}
-
-	
-	
-	//get an individual customers orders
-	function get_customer_orders($id, $offset=0)
-	{
-		$this->db->join('tshirt_order_items', 'tshirt_order_items.id = tshirt_order_items.order_id');
-		$this->db->order_by('ordered_on', 'DESC');
-		return $this->db->get_where('tshirt_orders', array('customer_id'=>$id), 15, $offset)->result();
-	}
-	
-	function count_customer_orders($id)
-	{
-		$this->db->where(array('customer_id'=>$id));
-		return $this->db->count_all_results('tshirt_orders');
-	}
-	
-	function get_order($id)
-	{
-		$this->db->where('id', $id);
-		$result 			= $this->db->get('orders');
-		
-		$order				= $result->row();
-		$order->contents	= $this->get_items($order->id);
-		
+		$zone=$this->get_shipzone($order->ship_zone_id);
+		if($zone)
+			$order->shipzone=$zone->name;
 		return $order;
 	}
-	
-	function get_items($id)
-	{
-		$this->db->select('order_id, contents');
-		$this->db->where('order_id', $id);
-		$result	= $this->db->get('tshirt_order_items');
+	private function get_designer($id){
+		return $this->db->where("id",intval($id))->get("users")->row();
+	}
+	private function get_shipzone($zone_id){
+		return  $this->db->where("id",intval($zone_id))->get("tshirt_shipping_zones")->row();
 		
-		$items	= $result->result_array();
-		
-		$return	= array();
-		$count	= 0;
-		foreach($items as $item)
-		{
-
-			$item_content	= unserialize($item['contents']);
-			
-			//remove contents from the item array
-			unset($item['contents']);
-			$return[$count]	= $item;
-			
-			//merge the unserialized contents with the item array
-			$return[$count]	= array_merge($return[$count], $item_content);
-			
-			$count++;
-		}
-		return $return;
 	}
 	
-	function delete($id)
-	{
-		$this->db->where('id', $id);
-		$this->db->delete('orders');
+	public function get_artist_commission($id){
+		if(empty($id))
+			return;
 		
-		//now delete the order items
-		$this->db->where('order_id', $id);
-		$this->db->delete('tshirt_order_items');
-	}
-	
-	function save_order($data, $contents = false)
-	{
-		if (isset($data['id']))
-		{
-			
-			$this->db->where('id', $data['id']);
-			$this->db->update('orders', $data);
-			$id = $data['id'];
-			
-			// we don't need the actual order number for an update
-			$order_number = $id;
-		}
-		else
-		{
-			$data['order_number']= date('U');
-			$this->db->insert('tshirt_orders', $data);
-			$id = $this->db->insert_id();
-			
-			//create a unique order number
-			//unix time stamp + unique id of the order just submitted.
-			//$order	= array('order_number'=> date('U').$id);
-			
-			//update the order with this order id
-			//$this->db->where('id', $id);
-			//$this->db->update('tshirt_orders', $order);
-						
-			//return the order id we generated
-			$order_number = $data['order_number'];
-		}
-		
-		//if there are items being submitted with this order add them now
-		if($contents)
-		{
-			// clear existing order items
-			$this->db->where('order_id', $id)->delete('tshirt_order_items');
-			// update order items
-			foreach($contents as $item)
-			{
-				$save				= array();
-				$save['contents']	= $item;
-				
-				$item				= unserialize($item);
-				$save['product_id'] = $item['id'];
-				$save['quantity'] 	= $item['quantity'];
-				$save['order_id']	= $id;
-				$this->db->insert('tshirt_order_items', $save);
-			}
-		}
-		
-		return $order_number;
-
-	}
-	
-	function get_best_sellers($start, $end)
-	{
-		if(!empty($start))
-		{
-			$this->db->where('ordered_on >=', $start);
-		}
-		if(!empty($end))
-		{
-			$this->db->where('ordered_on <',  $end);
-		}
-		
-		// just fetch a list of order id's
-		$orders	= $this->db->select('id')->get('tshirt_orders')->result();
-		
-		$items = array();
-		foreach($orders as $order)
-		{
-			// get a list of product id's and quantities for each
-			$order_items	= $this->db->select('product_id, quantity')->where('order_id', $order->id)->get('tshirt_order_items')->result_array();
-			
-			foreach($order_items as $i)
-			{
-				
-				if(isset($items[$i['product_id']]))
-				{
-					$items[$i['product_id']]	+= $i['quantity'];
+		$this->db->select(array('*','sum(dif_price*quantity) as earn'));
+		$this->db->group_by('user_id');
+		$this->db->where('order_id',intval($id));
+		$comissions=$this->db->get('tshirt_order_items')->result();
+		$this->load->model('users/Ion_auth_model','Ion_auth');
+		if(!empty($comissions)){
+			foreach ($comissions as $com){
+					$com->user_info=$this->Ion_auth->get_user($com->user_id)->row();
 				}
-				else
-				{
-					$items[$i['product_id']]	= $i['quantity'];
-				}
-				
-			}
 		}
-		arsort($items);
-		
-		// don't need this anymore
-		unset($orders);
-		
-		$return	= array();
-		foreach($items as $key=>$quantity)
-		{
-			$product				= $this->db->where('id', $key)->get('products')->row();
-			if($product)
-			{
-				$product->quantity_sold	= $quantity;
-			}
-			else
-			{
-				$product = (object) array('sku'=>'Deleted', 'name'=>'Deleted', 'quantity_sold'=>$quantity);
-			}
-			
-			$return[] = $product;
-		}
-		
-		return $return;
+		return $comissions;
 	}
 	
+	public function add_artis_commision($idOrder){
+		//remove comission first;
+		
+		if(empty($idOrder))
+			return;
+	
+		$this->remove_artis_commision($idOrder);	
+		$items=$this->_artis_orderItem($idOrder);
+		$order=$this->get($idOrder);
+		
+	
+		
+		if(empty($idOrder) || empty($order))
+			return;
+		
+	
+		$inserts=array();
+		foreach ( $items as $item ) {
+			$inserts[] = array (
+					'user_id' => $item->user_id,
+					'order_id' => $idOrder,
+					'quantity' => $item->quantity,
+					'id_art' => $item->id_art,
+					'description' => sprintf('Order #%s',$order->order_number), 
+					'amount'=>$item->earn,
+					'date_added'=>$order->ordered_on
+			);
+		}
+		if(!empty($inserts))
+		{
+			
+			$this->db->insert_batch('artis_commision_transaction', $inserts);
+		}
+		
+		//
+		return true;
+	}
+	private function _artis_orderItem($idOrder){
+
+		if(empty($idOrder))
+			return;
+		
+		$this->db->where('order_id',intval($idOrder));
+		$this->db->select(array('*','sum(dif_price*quantity) as earn'));
+		$this->db->group_by('id_art');
+	
+		$items=$this->db->get('tshirt_order_items')->result();
+		
+		return $items;
+	}
+	public function _isSendArtisComission($idOrder){
+		return $this->db->where('order_id',intval($idOrder))->count_all_results('artis_commision_transaction');
+	}
+	public function remove_artis_commision($idOrder){
+	
+		if(empty($idOrder))
+			return;
+		$idOrder=intval($idOrder);
+		return $this->db->where('order_id',intval($idOrder))->delete('artis_commision_transaction');
+		
+		
+	}
+	public function save($param) {
+		if(empty($param))
+			return;
+		$id="";
+		if(!empty($param['id'])){
+			$id=intval($param['id']);
+			$this->db->where("id",intval($param['id']))->update($this->_table,$param);
+	
+		}
+		return $id;
+	}
+
 }
