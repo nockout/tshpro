@@ -65,6 +65,7 @@ jQuery(function($){
 
 				start : function(e, ui){
 					// Grab our desired width from the widget area list
+					console.log(pyro.widgets);
 					var width = pyro.widgets.$instances.width() - 22;
 
 					// Setup our new dragging object

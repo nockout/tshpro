@@ -23,7 +23,6 @@ class Home extends Public_Controller {
 	public function index() {
 	
 		$this->load->model ( 'product_model' );
-	
 		$product = $this->product_model->get_products (array(),0,40);
 		$this->template->title ( $this->module_details ['name'] )->set ( "products", $product ['objects'] )->
 		build ( 'home' );

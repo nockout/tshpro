@@ -1,6 +1,8 @@
 
-	<h4 style="padding-top:1em;" class="text-primary text-uppercase">What's Hot</h4>
 
+
+	
+	<h4 style="padding-top:1em;" class="text-primary text-uppercase">What's Hot</h4>
 	<?php 
 	if($products)
 	foreach ($products as $p):?>
