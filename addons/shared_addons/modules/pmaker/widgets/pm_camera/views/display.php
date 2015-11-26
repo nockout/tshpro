@@ -1,3 +1,5 @@
+
+<?php  $id=$options['widget']['instance_title']?>
 <?php if( $options['type']=="slideshow"):?>
 <?php $i=0;?>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -46,12 +48,12 @@
   </div>
 
   <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+  <a class="left carousel-control <?php echo $id?>" href="#carousel-example-generic" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  <a class="right carousel-control <?php echo $id?>" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right " aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
 </div>
@@ -62,7 +64,7 @@
     background: rgba(0, 0, 0, 0)  repeat fixed center top;
     color: #fff;
     padding-top: 30px;
-    left: 5% !important;
+    left: 0% !important;
    
 }
 </style>
@@ -81,7 +83,7 @@ $('.carousel').carousel({
 
 	
 ?>
-<?php $id=uniqid()?>
+
 <div class="container no-padding">
     <div class="col-md-12 no-padding bx-viewport">
     	
@@ -105,8 +107,8 @@ $('.carousel').carousel({
                		<?php endforeach;?>
                 
                 </div>
-             	<a class="left carousel-control" href="#myCarousel<?php echo $id?>" data-slide="prev">‹</a>
-                <a class="right carousel-control" href="#myCarousel<?php echo $id?>" data-slide="next">›</a>
+             	<a class="left carousel-control <?php echo $id?>" href="#myCarousel<?php echo $id?>" data-slide="prev">‹</a>
+                <a class="right carousel-control <?php echo $id?>" href="#myCarousel<?php echo $id?>" data-slide="next">›</a>
             </div>
             <!--/myCarousel-->
 
@@ -131,10 +133,10 @@ $(document).ready(function() {
 <style>
 
 .carousel-control {
-	left: -12px;
+	left: -25px;
 }
 .carousel-control.right {
-	right: -12px;
+	right: -25px;
 }
 
 .carousel-indicators {
@@ -164,11 +166,10 @@ background: #333333;
 
 .carousel-control {
     position: absolute;
-    top: 40%;
-    left: 15px;
+   
     width: 40px;
     height: 40px;
-    margin-top: -20px;
+    margin-top: 0;
     font-size: 60px;
     font-weight: 100;
     line-height: 30px;
@@ -182,6 +183,18 @@ background: #333333;
     opacity: 0.5; 
     filter: alpha(opacity=50);
    
+}
+.carousel-control.popular{
+		top:35%;
+}
+.carousel-control.frontend{
+		top:50%;
+}
+.carousel-control.frontend.left{
+		left:10%;
+}
+.carousel-control.frontend.right{
+		right:10%;
 }
 </style>
 <?php endif?>

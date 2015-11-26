@@ -2,7 +2,8 @@
 
 
 	
-	<h4 style="padding-top:1em;" class="text-primary text-uppercase">What's Hot</h4>
+	<h4 class="text-primary text-uppercase" style="padding-top: 1em;">What's Hot</h4>
+	<div class="row">
 	<?php 
 	if($products)
 	foreach ($products as $p):?>
@@ -43,3 +44,4 @@
 		
 			
 	<?php endforeach; ?>			
+		</div>
