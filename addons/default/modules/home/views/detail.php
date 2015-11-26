@@ -2,9 +2,7 @@
 <div style="padding-top: 10px;" class="container">
 
 	<h1 class="hidden-xs top_title"><?php echo $product->product?></h1>
-	<a class="artistlink hidden-xs"
-		title="Click to see more designs by Fanbuild" href="/Fanbuild/"><i
-		class="fa fa-user"></i> Fanbuild</a>
+	
 
 	<div style="margin-bottom: 40px;" class="row">
 		<div class="col-sm-7  ">
