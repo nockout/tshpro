@@ -23,7 +23,7 @@
 							  
 							?>
 							<div class="frontThumb">
-								<img style="display: block;" src="<?php echo isset($image['image'][0]) ? $image['image'][0]:''?>" data-original="<?php echo isset($image['image'][0]) ? $image['image'][0]:''?>"
+								<img style="display: block;" src="images/holder-img.svg" data-original="<?php echo isset($image['image'][0]) ? $image['image'][0]:''?>"
 								 class="img-responsive lazy" alt="<?php echo $p->product?>" title="<?php echo $p->product?>" height="391" width="391">
 								
 
