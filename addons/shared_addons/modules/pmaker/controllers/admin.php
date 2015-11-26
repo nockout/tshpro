@@ -382,11 +382,11 @@ class Admin extends Admin_Controller
                 $slide= $this->pmslide_m->get_slide($slide_id);
                 
                 $validation_rule = array( 
-                    array(
+                   /*  array(
                         'field' => 'html',
                         'label' => lang('pm:html_lable'),
                         'rules' => 'required|trim'
-                    ),
+                    ), */
                     array(
                         'field' => 'showcaption',
                         'label' => lang('pm:show_caption'),

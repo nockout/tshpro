@@ -93,7 +93,7 @@ $('.carousel').carousel({
                     <div class="item <?php if($key==0) echo "active"?>">
                         <div class="row">
                         	<?php foreach ($group as $file):?>
-                            <div class="col-sm-3"><a href="#">
+                            <div class="col-sm-3"><a href="<?php echo $file->link?>">
                             <img src="<?php echo site_url('files/large/'.$file->filename);?>" alt="Image" class="img-responsive">
                             </a>
                             </div>
