@@ -5,6 +5,7 @@ Class Category_m extends Base_m
 
 	var $_table="tshirt_categories";
 	var $_description="tshirt_category_descriptions";
+	var $_cat_products='tshirt_category_products';
 	protected  $_primary="category_id";
 	protected $lang_table="tshirt_category_descriptions";
     function get_categories($parent = false)
@@ -141,13 +142,26 @@ Class Category_m extends Base_m
 		return $id;
     }
     
+
+    
     function delete($id)
     {
+    	if(!intval($id))
+    		return;
+    	// set category to home;
+    	
+    	$this->db->where('category_id', $id);
+    	$this->db->update($this->_cat_products,array('category_id'=>1));
+    	
+    	//
         $this->db->where('category_id', $id);
         $this->db->delete($this->_table);
         
-        //delete references to this category in the product to category table
         $this->db->where('category_id', $id);
-        $this->db->delete('category_products');
+        $this->db->delete($this->_description);
+        
+        //delete references to this category in the product to category table
+      //  $this->db->where('category_id', $id);
+       // $this->db->delete('category_products');
     }
 }

@@ -72,7 +72,17 @@ class Admin extends Admin_Controller
 
 		
 	}
+	public function action(){
 		
+		
+		redirect('admin/category');
+	}
+	public function delete($id=null){
+		if(!empty($id)){
+			$categories=$this->category_m->delete(intval($id));
+		}
+		redirect('admin/category');
+	}	
 
 	public function form($id=null){
 		$data['category']="";
