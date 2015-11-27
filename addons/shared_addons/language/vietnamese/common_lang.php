@@ -199,10 +199,12 @@ $lang['address']="Adress";
 $lang['search_in_category']="Tìm trong danh mục";
 $lang['search_over']="Tìm trong tất cả danh mục";
 $lang['all']="Tất cả";
-
+$lang['popular']='Mẫu thiết kê đẹp nhất';
+$lang['artis_feature']='Nhà thiết kế tốt nhất'	;	
 $lang['global:sort_by']='Sắp xếp';
 $lang['global:bestseller']='Bán chạy nhất';
 $lang['sort:newest']='Mới nhất';
 $lang['global:mostpopular']='Xem nhiều nhất';
 $lang['global:go']="Tìm";
 $lang['global:search_for']='Tìm %s ...';
+$lang['category']='Danh mục';

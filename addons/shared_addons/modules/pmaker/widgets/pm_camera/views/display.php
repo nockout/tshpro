@@ -1,5 +1,6 @@
 
-<?php  $id=$options['widget']['instance_title']?>
+<?php  $id=str_replace(' ','-', $options['widget']['instance_title']);?>
+
 <?php if( $options['type']=="slideshow"):?>
 <?php $i=0;?>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">

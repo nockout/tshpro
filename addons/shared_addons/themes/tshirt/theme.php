@@ -52,9 +52,9 @@ class Theme_Tshirt extends Theme {
 		if ($this->module == '' && $this->method != 'login' && $this->method != 'help')
 		{
 			// don't bother fetching the data if it's turned off in the theme
-			if ($this->theme_options->tshirt_analytics_graph == 'yes')		self::get_analytics();
+			/* if ($this->theme_options->tshirt_analytics_graph == 'yes')		self::get_analytics();
 			if ($this->theme_options->tshirt_news_feed == 'yes')			self::get_rss_feed();
-			if ($this->theme_options->tshirt_recent_comments == 'yes')		self::get_recent_comments();
+			if ($this->theme_options->tshirt_recent_comments == 'yes')		self::get_recent_comments(); */
 		}
 	}
 	

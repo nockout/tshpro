@@ -200,10 +200,12 @@ $lang['address']="Adress";
 $lang['search_in_category']="Search in";
 $lang['search_over']="Search over categories";
 $lang['all']="All";
-
+$lang['popular']='Popular';
+$lang['artis_feature']='Artis Feature'	;
 $lang['global:sort_by']='Sort by';
 $lang['global:bestseller']='Best seller';
 $lang['sort:newest']='Newest';
 $lang['global:mostpopular']='Most popular';
 $lang['global:go']="Go";
 $lang['global:search_for']='';
+$lang['category']='Category';
