@@ -1,5 +1,5 @@
-<script type="text/javascript" src="<?php echo BASE_URL?>addons/default/themes/tshirt/js/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="<?php echo BASE_URL?>addons/default/themes/tshirt/js/ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL?>addons/shared_addons/themes/tshirt/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL?>addons/shared_addons/themes/tshirt/js/ckeditor/adapters/jquery.js"></script>
 <script type="text/javascript">
 
 	var instance;
