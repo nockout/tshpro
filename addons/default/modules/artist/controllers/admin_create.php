@@ -175,6 +175,5 @@ class Admin_Create extends Admin_Controller {
 		
 		$this->create ();
 		
-		// print($this->current_user->group);di
 	}
 }
