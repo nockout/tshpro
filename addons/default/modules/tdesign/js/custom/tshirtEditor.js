@@ -2,14 +2,10 @@ var canvas;
 var tshirts = new Array(); //prototype: [{style:'x',color:'white',front:'a',back:'b',price:{tshirt:'12.95',frontPrint:'4.99',backPrint:'4.99',total:'22.47'}}]
 var a;
 var b;
-var b_url;
-var a_url;
 var line1;
 var line2;
 var line3;
 var line4;
-var currentShirt={front:"",back:""};
-
  	$(document).ready(function() {
 		//setup front side canvas 
  		canvas = new fabric.Canvas('tcanvas', {
@@ -17,7 +13,6 @@ var currentShirt={front:"",back:""};
 		  selection: true,
 		  selectionBorderColor:'blue'
 		});
- 				
  		canvas.on({
 			 'object:moving': function(e) {		  	
 			    e.target.opacity = 0.5;
@@ -28,56 +23,6 @@ var currentShirt={front:"",back:""};
 			 'object:selected':onObjectSelected,
 			 'selection:cleared':onSelectedCleared
 		 });
- 		
- 		// set first Child;
- 		var firstChidld=$("#productlist ").find("tr:first");
- 		if(firstChidld){
- 			currentShirt.front=$(firstChidld).find('img.front').attr("src");
- 			currentShirt.back=$(firstChidld).find('img.back').attr("src");
- 		}
- 		
- 		$("#bulksave").click(function(){
- 			alert("aaaa");
- 		});
- 		
- 		
- 		$('#category').chosen().change(function(){
- 		
- 			 $("#category").attr('disabled', true).trigger("liszt:updated");
- 			 var service = $(this).val();
- 			var formData = new FormData();					
- 		
-			formData.append( 'csrf_hash_name', $.cookie('default_csrf_cookie_name'))
-			formData.append('id',$(this).val());
-			$.ajax({
-				url : SITE_URL+"admin/artist/pickcategory", // Change name according to your php script to handle uploading on server
-				type : 'post',
-				data : formData,
-				dataType : 'json',						
-				processData: false,
-				contentType: false,
-				error : function(request){
-					/*ajax_msg(false, 'An error has occured while uploading photo.'); 			*/					
-				},
-				success : function(json){
-					if(json.status=="success" && json.html!=""){
-						
-						$( "#template" ).empty();
-						$('#template').html(json.html);
-						
-						// bind event for alt tag
-						$( ".alt" ).bind('click',pickTemplate);
-					     
-					}else{
-						
-					}
-				},
-				progress: function(e) {
-					
-				}
-			});					
- 		});
- 		
 		// piggyback on `canvas.findTarget`, to fire "object:over" and "object:out" events
  		canvas.findTarget = (function(originalFn) {
 		  return function() {
@@ -108,9 +53,8 @@ var currentShirt={front:"",back:""};
 		  //e.target.setFill('green');
 		  //canvas.renderAll();
 		});
-		 	
- 		// render first child;
- 			document.getElementById('add-text').onclick = function() {
+		 		 	 
+		document.getElementById('add-text').onclick = function() {
 			var text = $("#text-string").val();
 		    var textSample = new fabric.Text(text, {
 		      left: fabric.util.getRandomInt(0, 200),
@@ -135,9 +79,6 @@ var currentShirt={front:"",back:""};
 		    	  canvas.renderAll();
 		      }
 	  	});
-	  	
-	  	
-	  	
 	  	$(".img-polaroid").click(function(e){
 	  		var el = e.target;
 	  		/*temp code*/
@@ -330,55 +271,47 @@ var currentShirt={front:"",back:""};
 		   document.getElementById("shirtDiv").style.backgroundColor = color;		   
 	   });
 	   
-	   $('.alt').click(pickTemplate);
-	   
-	   $('#flip').click(flip);	   
+	   $('#flip').click(
+		   function() {			   
+			   	if ($(this).attr("data-original-title") == "Show Back View") {
+			   		$(this).attr('data-original-title', 'Show Front View');			        		       
+			        $("#tshirtFacing").attr("src","img/crew_back.png");			        
+			        a = JSON.stringify(canvas);
+			        canvas.clear();
+			        try
+			        {
+			           var json = JSON.parse(b);
+			           canvas.loadFromJSON(b);
+			        }
+			        catch(e)
+			        {}
+			        
+			    } else {
+			    	$(this).attr('data-original-title', 'Show Back View');			    				    	
+			    	$("#tshirtFacing").attr("src","img/crew_front.png");			    	
+			    	b = JSON.stringify(canvas);
+			    	canvas.clear();
+			    	try
+			        {
+			           var json = JSON.parse(a);
+			           canvas.loadFromJSON(a);			           
+			        }
+			        catch(e)
+			        {}
+			    }		
+			   	canvas.renderAll();
+			   	setTimeout(function() {
+			   		canvas.calcOffset();
+			    },200);			   	
+        });	   
 	   $(".clearfix button,a").tooltip();
-	   line1 = new fabric.Line([0,0,200,0], {"stroke":"#fff", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	   line2 = new fabric.Line([199,0,200,399], {"stroke":"#fff", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	   line3 = new fabric.Line([0,0,0,400], {"stroke":"#fff", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	   line4 = new fabric.Line([0,400,200,399], {"stroke":"#fff", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	   line1 = new fabric.Line([0,0,200,0], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	   line2 = new fabric.Line([199,0,200,399], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	   line3 = new fabric.Line([0,0,0,400], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	   line4 = new fabric.Line([0,400,200,399], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
 	 });//doc ready
 	 
-
- 	var flip=function (){
- 		//console.log(a_url);
- 		//console.log(b_url);
-		   	if ($('#shirtDiv').attr("state") == "Back") {
-		   	//	$(this).attr('data-original-title', 'Show Front View');	
-		   		$("#shirtDiv").attr('state', 'Front');
-		        $("#tshirtFacing").attr("src",BASE_URL	+currentShirt.front);			        
-		        a = JSON.stringify(canvas);
-		        canvas.clear();
-		      
-		        try
-		        {
-		           var json = JSON.parse(b);
-		           canvas.loadFromJSON(b);
-		        }
-		        catch(e)
-		        {}
-		        
-		    } else {
-		    	$("#shirtDiv").attr('state', 'Back');			    				    	
-		    	$("#tshirtFacing").attr("src",BASE_URL	+currentShirt.back);			    	
-		    	b = JSON.stringify(canvas);
-		    	canvas.clear();
-		     
-		    	try
-		        {
-		           var json = JSON.parse(a);
-		           canvas.loadFromJSON(a);			           
-		        }
-		        catch(e)
-		        {}
-		    }		
-		   	canvas.renderAll();
-		   	setTimeout(function() {
-		   		canvas.calcOffset();
-		    },200);			   	
-   
- 	}
+	 
 	 function getRandomNum(min, max) {
 	    return Math.random() * (max - min) + min;
 	 }
@@ -420,24 +353,3 @@ var currentShirt={front:"",back:""};
 			  activeObject.applyFilters(canvas.renderAll.bind(canvas));
 		  }	        
 	 }
-	 var pickTemplate= function(e){
-		 $('.alt').removeClass('active'); 
-		 var _this=$(e);
-		 var imageFront=($(this).find('img.front'));
-		 var imageBack=($(this).find('img.back'));
-	
-		 
-		 a_url=$(imageFront).attr('src');
-		 b_url=$(imageBack).attr('src');
-		 
-		 currentShirt.front=a_url;
-		 currentShirt.back=b_url;
-		 $("#tshirtFacing").attr("src",a_url);	
-		
-		 $(this).addClass('active');
-	 }
-	 
-	
-	 // render first child()
-	 
-	 

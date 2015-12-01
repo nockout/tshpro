@@ -7,7 +7,7 @@
 		<div class="content">
 		
 			<?php if ($designs) : ?>
-			<?php //echo $this->load->view('admin/tables/moredesign') ?>
+			<?php echo $this->load->view('admin/tables/moredesign') ?>
 				<?php echo $this->load->view('admin/partials/filters') ?>
 			
 				<?php echo form_open('admin/tdesign/action') ?>

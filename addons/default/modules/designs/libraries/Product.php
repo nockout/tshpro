@@ -100,11 +100,11 @@ class Product {
 		
 		return $result;
 	}
-	public function cate_templates($cateId=1) {
+	public function cate_templates($folders = array()) {
 
 		
 		$this->CI->load->model("category_model");
-		$cates=$this->CI->category_model->get_categories($cateId);
+		$cates=$this->CI->category_model->get_categories(1);
 		if(empty($cates)){
 			return;
 		}
@@ -118,10 +118,10 @@ class Product {
 			$cate->templates=$tempaltes;
 			}
 		}
-		
+	
 		return $cates;
 	}
-	public function get_template_by_category($id_category){
+	private function get_template_by_category($id_category){
 		//echo $id_category;
 		$tplate_table='tshirt_template';
 		$tplate_table_lang="tshirt_template_lang";
@@ -148,7 +148,7 @@ class Product {
 		return $this->CI->db->get($cat)->row();
 	}
 	
-	public function get_templates_images($template_id){
+	private function get_templates_images($template_id){
 		$path=UPLOAD_PATH.'../template/';
 		$imga_table="tshirt_template_image";
 		if(empty($template_id))

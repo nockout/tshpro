@@ -2,14 +2,10 @@ var canvas;
 var tshirts = new Array(); //prototype: [{style:'x',color:'white',front:'a',back:'b',price:{tshirt:'12.95',frontPrint:'4.99',backPrint:'4.99',total:'22.47'}}]
 var a;
 var b;
-var b_url;
-var a_url;
 var line1;
 var line2;
 var line3;
 var line4;
-var currentShirt={front:"",back:""};
-
  	$(document).ready(function() {
 		//setup front side canvas 
  		canvas = new fabric.Canvas('tcanvas', {
@@ -17,7 +13,6 @@ var currentShirt={front:"",back:""};
 		  selection: true,
 		  selectionBorderColor:'blue'
 		});
- 				
  		canvas.on({
 			 'object:moving': function(e) {		  	
 			    e.target.opacity = 0.5;
@@ -28,56 +23,6 @@ var currentShirt={front:"",back:""};
 			 'object:selected':onObjectSelected,
 			 'selection:cleared':onSelectedCleared
 		 });
- 		
- 		// set first Child;
- 		var firstChidld=$("#productlist ").find("tr:first");
- 		if(firstChidld){
- 			currentShirt.front=$(firstChidld).find('img.front').attr("src");
- 			currentShirt.back=$(firstChidld).find('img.back').attr("src");
- 		}
- 		
- 		$("#bulksave").click(function(){
- 			alert("aaaa");
- 		});
- 		
- 		
- 		$('#category').chosen().change(function(){
- 		
- 			 $("#category").attr('disabled', true).trigger("liszt:updated");
- 			 var service = $(this).val();
- 			var formData = new FormData();					
- 		
-			formData.append( 'csrf_hash_name', $.cookie('default_csrf_cookie_name'))
-			formData.append('id',$(this).val());
-			$.ajax({
-				url : SITE_URL+"admin/artist/pickcategory", // Change name according to your php script to handle uploading on server
-				type : 'post',
-				data : formData,
-				dataType : 'json',						
-				processData: false,
-				contentType: false,
-				error : function(request){
-					/*ajax_msg(false, 'An error has occured while uploading photo.'); 			*/					
-				},
-				success : function(json){
-					if(json.status=="success" && json.html!=""){
-						
-						$( "#template" ).empty();
-						$('#template').html(json.html);
-						
-						// bind event for alt tag
-						$( ".alt" ).bind('click',pickTemplate);
-					     
-					}else{
-						
-					}
-				},
-				progress: function(e) {
-					
-				}
-			});					
- 		});
- 		
 		// piggyback on `canvas.findTarget`, to fire "object:over" and "object:out" events
  		canvas.findTarget = (function(originalFn) {
 		  return function() {
@@ -108,9 +53,8 @@ var currentShirt={front:"",back:""};
 		  //e.target.setFill('green');
 		  //canvas.renderAll();
 		});
-		 	
- 		// render first child;
- 			document.getElementById('add-text').onclick = function() {
+		 		 	 
+		document.getElementById('add-text').onclick = function() {
 			var text = $("#text-string").val();
 		    var textSample = new fabric.Text(text, {
 		      left: fabric.util.getRandomInt(0, 200),
@@ -124,7 +68,7 @@ var currentShirt={front:"",back:""};
 	  		  hasRotatingPoint:true
 		    });		    
             canvas.add(textSample);	
-            canvas.item(canvas.item.length-1).hasRotatingPoint = true;    
+            canvas.item(canvas.item.length-1).hasRotatingPoint = true; 
             $("#texteditor").css('display', 'block');
             $("#imageeditor").css('display', 'block');
 	  	};
@@ -136,30 +80,53 @@ var currentShirt={front:"",back:""};
 		      }
 	  	});
 	  	
+	  	$("#phoneTypes").change(function(e){
+	  		debugger;
+	  		if($(this).val() == "1"){
+	  			$("#phoneDiv").css('height','590');
+	  			$("#phone")[0].src = "img/phones/iphone5A.png";
+	  			//$("#borderMask")[0].src = "img/phones/iphone5Mask.png";
+				line1 = new fabric.Line([0,0,225,0], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+				line2 = new fabric.Line([224,0,225,450], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+				line3 = new fabric.Line([0,0,0,450], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+				line4 = new fabric.Line([0,450,225,449], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	  		}
+	  		else if ($(this).val() == "2"){
+	  			$("#phoneDiv").css('height','540');
+	  			$("#phone")[0].src = "img/phones/iPhone4A.png";
+	  			//$("#borderMask")[0].src = "img/phones/iphone4Mask.png";
+	  			line1 = new fabric.Line([0,20,220,20], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+				line2 = new fabric.Line([220,20,220,420], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+				line3 = new fabric.Line([0,20,0,420], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+				line4 = new fabric.Line([0,420,220,420], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	  		}
+	  		else if ($(this).val() == "3"){	  		
+	  			$("#phoneDiv").css('height','535');
+	  			$("#phone")[0].src = "img/phones/GalaxyS3A.png";
+	  			//$("#borderMask")[0].src = "img/phones/GalaxyS3Mask.png";	
+	  			line1 = new fabric.Line([0,30,225,30], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+				line2 = new fabric.Line([224,30,225,400], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+				line3 = new fabric.Line([0,30,0,400], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+				line4 = new fabric.Line([0,400,225,400], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	  		}
+	  	});
 	  	
-	  	
+	  	line1 = new fabric.Line([0,0,225,0], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+		line2 = new fabric.Line([224,0,225,450], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+		line3 = new fabric.Line([0,0,0,450], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+		line4 = new fabric.Line([0,450,225,449], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+		
 	  	$(".img-polaroid").click(function(e){
-	  		var el = e.target;
-	  		/*temp code*/
-	  		var offset = 50;
-	        var left = fabric.util.getRandomInt(0 + offset, 200 - offset);
-	        var top = fabric.util.getRandomInt(0 + offset, 400 - offset);
-	        var angle = fabric.util.getRandomInt(-20, 40);
-	        var width = fabric.util.getRandomInt(30, 50);
-	        var opacity = (function(min, max){ return Math.random() * (max - min) + min; })(0.5, 1);
-	        
-	  		fabric.Image.fromURL(el.src, function(image) {
-		          image.set({
-		            left: left,
-		            top: top,
-		            angle: 0,
-		            padding: 10,
-		            cornersize: 10,
-	      	  		hasRotatingPoint:true
-		          });
-		          //image.scale(getRandomNum(0.1, 0.25)).setCoords();
-		          canvas.add(image);
-		        });
+	  		var el = e.target;	  		
+	  		var design = $(this).attr("src");
+	  		$('#phoneDiv').css({
+				'backgroundImage': 'url(' + design +')',
+				'backgroundRepeat': 'no-repeat',
+				'backgroundPosition': 'top center',
+				'background-size': '100% 100%'
+					
+			});
+		 //  document.getElementById("phoneDiv").style.backgroundImage="url("+ design +")";
 	  	});	  		  
 	  document.getElementById('remove-selected').onclick = function() {		  
 		    var activeObject = canvas.getActiveObject(),
@@ -327,58 +294,13 @@ var currentShirt={front:"",back:""};
 	   
 	   $('.color-preview').click(function(){
 		   var color = $(this).css("background-color");
-		   document.getElementById("shirtDiv").style.backgroundColor = color;		   
+		   document.getElementById("phoneDiv").style.backgroundColor = color;		   
 	   });
-	   
-	   $('.alt').click(pickTemplate);
-	   
-	   $('#flip').click(flip);	   
-	   $(".clearfix button,a").tooltip();
-	   line1 = new fabric.Line([0,0,200,0], {"stroke":"#fff", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	   line2 = new fabric.Line([199,0,200,399], {"stroke":"#fff", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	   line3 = new fabric.Line([0,0,0,400], {"stroke":"#fff", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	   line4 = new fabric.Line([0,400,200,399], {"stroke":"#fff", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
+	   	   	   
+	   $(".clearfix button,a").tooltip();	  
 	 });//doc ready
 	 
-
- 	var flip=function (){
- 		//console.log(a_url);
- 		//console.log(b_url);
-		   	if ($('#shirtDiv').attr("state") == "Back") {
-		   	//	$(this).attr('data-original-title', 'Show Front View');	
-		   		$("#shirtDiv").attr('state', 'Front');
-		        $("#tshirtFacing").attr("src",BASE_URL	+currentShirt.front);			        
-		        a = JSON.stringify(canvas);
-		        canvas.clear();
-		      
-		        try
-		        {
-		           var json = JSON.parse(b);
-		           canvas.loadFromJSON(b);
-		        }
-		        catch(e)
-		        {}
-		        
-		    } else {
-		    	$("#shirtDiv").attr('state', 'Back');			    				    	
-		    	$("#tshirtFacing").attr("src",BASE_URL	+currentShirt.back);			    	
-		    	b = JSON.stringify(canvas);
-		    	canvas.clear();
-		     
-		    	try
-		        {
-		           var json = JSON.parse(a);
-		           canvas.loadFromJSON(a);			           
-		        }
-		        catch(e)
-		        {}
-		    }		
-		   	canvas.renderAll();
-		   	setTimeout(function() {
-		   		canvas.calcOffset();
-		    },200);			   	
-   
- 	}
+	 
 	 function getRandomNum(min, max) {
 	    return Math.random() * (max - min) + min;
 	 }
@@ -392,13 +314,13 @@ var currentShirt={front:"",back:""};
 	    	$("#texteditor").css('display', 'block');
 	    	$("#text-string").val(selectedObject.getText());	    	
 	    	$('#text-fontcolor').miniColors('value',selectedObject.fill);
-	    	$('#text-strokecolor').miniColors('value',selectedObject.strokeStyle);	
+	    	$('#text-strokecolor').miniColors('value',selectedObject.strokeStyle);	 
 	    	$("#imageeditor").css('display', 'block');
 	    }
 	    else if (selectedObject && selectedObject.type === 'image'){
 	    	//display image editor
 	    	$("#texteditor").css('display', 'none');	
-	    	$("#imageeditor").css('display', 'block');
+	    	$("#imageeditor").css('display', 'block');	    	
 	    }
 	  }
 	 function onSelectedCleared(e){
@@ -415,29 +337,8 @@ var currentShirt={front:"",back:""};
 	  }
 	 function removeWhite(){
 		  var activeObject = canvas.getActiveObject();
-		  if (activeObject && activeObject.type === 'image') {			  
+		  if (activeObject && activeObject.type === 'image') {	    	  
 			  activeObject.filters[2] =  new fabric.Image.filters.RemoveWhite({hreshold: 100, distance: 10});//0-255, 0-255
 			  activeObject.applyFilters(canvas.renderAll.bind(canvas));
 		  }	        
 	 }
-	 var pickTemplate= function(e){
-		 $('.alt').removeClass('active'); 
-		 var _this=$(e);
-		 var imageFront=($(this).find('img.front'));
-		 var imageBack=($(this).find('img.back'));
-	
-		 
-		 a_url=$(imageFront).attr('src');
-		 b_url=$(imageBack).attr('src');
-		 
-		 currentShirt.front=a_url;
-		 currentShirt.back=b_url;
-		 $("#tshirtFacing").attr("src",a_url);	
-		
-		 $(this).addClass('active');
-	 }
-	 
-	
-	 // render first child()
-	 
-	 
