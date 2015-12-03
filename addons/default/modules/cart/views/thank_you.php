@@ -15,7 +15,13 @@
 				</td>
 
 			</tr>
-
+					<tr>
+								<td class="text-left" colspan="2">
+										<a href="<?php echo site_url()?>" ><i class="fa  fa-arrow-left"></i>&nbsp;<?php echo lang('cart:return_home')?></a>
+										
+									</td>
+									<td class="text-right" colspan="2"><a href="home" class=""><?php echo lang('cart:continue_shopping')?>&nbsp;<i class="fa  fa-arrow-right"></i></a></td>
+								</tr>
 		</tbody>
 
 	</table>
@@ -100,11 +106,17 @@
 								
 									<?php $tag_a='<a href="'.site_url('home').'"><span class="text-warning">'.Settings::get('site_name').'</span></a>'?>
 									<td class="text-left" colspan="4"><h5><?php echo sprintf(lang("cart:thank_you"),$tag_a)?></h5>
-
+										
 									</td>
-
+									
 								</tr>
-
+								<tr>
+								<td class="text-left" colspan="2">
+										<a href="home" ><i class="fa  fa-arrow-left"></i><?php lang('cart:return_home')?></a>
+										
+									</td>
+									<td class="text-right" colspan="2"><a href="" class=""><i class="fa  fa-arrow-right"></i><?php lang('cart:continue_shopping')?></a></td>
+								</tr>
 							</tbody>
 
 						</table>

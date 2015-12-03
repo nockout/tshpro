@@ -70,6 +70,7 @@ class Admin extends Admin_Controller
 	private function _statusByGroup($group){
 	
 		$status=array(
+				""=>lang("ORDER_STATUS_ALL"),
 				ORDER_STATUS_NO_PROCESS=>lang("ORDER_STATUS_NO_PROCESS"),
 				ORDER_STATUS_MANUFACTORING=>lang("ORDER_STATUS_MANUFACTORING"),
 				ORDER_STATUS_PROCEED=>lang("ORDER_STATUS_PROCEED"),
@@ -79,6 +80,7 @@ class Admin extends Admin_Controller
 		switch ($group) {
 			case "manufacturer" :
 				$status=array(
+				""=>lang("ORDER_STATUS_ALL"),
 				ORDER_STATUS_MANUFACTORING=>lang("ORDER_STATUS_MANUFACTORING"),
 				ORDER_STATUS_PROCEED=>lang("ORDER_STATUS_PROCEED")
 				);

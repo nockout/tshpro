@@ -106,3 +106,6 @@ $lang['ORDER_STATUS_MANUFACTORING']="MANUFACTURER";
 $lang['ORDER_STATUS_PROCEED']="PROCEED";
 $lang['ORDER_STATUS_CANCEL']="CANCEL";
 $lang['ORDER_STATUS_CLOSED']="CLOSED";
+$lang['ORDER_STATUS_ALL']="ALL";
+$lang['order:from']='From';
+$lang['order:to']="To";

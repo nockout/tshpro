@@ -23,11 +23,13 @@ $lang['cart:phone']="Phone";
 $lang['cart:zone']="Zone";
 $lang['cart:order_sumary']="Order Summary";
 $lang['cart:shipping_fee']="Shipping";
-$lang['cart:thank_you']='Thank you for purchasing order at  : %s';
-
+$lang['cart:thank_you']='Thank you for purchasing order at  : %s . We will contact you within 24 hours';
+$lang['cart:return_home']="Return Home";
+$lang['cart:continue_shopping']="Continue Shopping";
 $lang['address']="Address";
 $lang['phone']="Phone";
 $lang['city']="City";
 $lang['cart:select_province']="Select Province";
 $lang['cart:notice']="* Notice";
 $lang['cart:desc_shipping_zone']="";
+$lang['invalid_phone']="Invalid Phone";

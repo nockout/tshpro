@@ -22,7 +22,7 @@ $lang['cart:order_code']='Mã đơn hàng :';
 $lang['address']="Địa chỉ";
 $lang['phone']="Số điện thoại";
 $lang['city']="Thành phố";
-$lang['cart:thank_you']='Cám ơn bạn đã mua hàng tại : %s';
+$lang['cart:thank_you']='Cám ơn bạn đã mua hàng tại : %s. Trong vòng 24 giờ sẽ có nhân viên gọi điện thoại cho bạn để xác nhận đơn hàng';
 $lang['cart:first_name']="Họ";
 $lang['cart:last_name']="Tên ";
 $lang['cart:email']="Email";
@@ -36,11 +36,15 @@ $lang['cart:shipping_zones']="Khu vực nhận hàng ";
 $lang['cart:phone']="Điện thoại di động";
 $lang['cart:order_sumary']="Thông tin đơn hàng";
 $lang['cart:shipping_fee']="Phí vận chuyển";
+$lang['cart:return_home']="Quay trở lại trang chủ";
+$lang['cart:continue_shopping']="Tiếp tục mua hàng";
 //message
 $lang['cart:title_contact_info']="Thông tin liên hệ";
 $lang['cart:title:checkout']="Thanh toán";
 $lang['cart:message:remove_item']="Bạn muốn xoá sản phẩm này khỏi giỏ hàng ?";
 $lang['cart:notice']="Lưu ý";
+$lang['cart:invalid_phone']="Số điện thoại không hợp lệ";
+
 $lang['cart:desc_shipping_zone']="Phí vận chuyển sẽ tuỳ thuộc vào khu vực nhận hàng của quý khách.
 								<ol>
 								<li>TP HO CHI MINH khu vực 1: phí vận chuyển 0đ</li>

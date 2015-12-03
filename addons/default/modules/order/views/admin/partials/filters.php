@@ -11,6 +11,17 @@
 	
 
 	?>
+		<script>
+	$(function() {
+		$.datepicker.formatDate( "dd/mm/yy" );
+		$( "#from" ).datepicker({
+			dateFormat: "dd/mm/yy"
+		});
+		$( "#to" ).datepicker({
+			dateFormat: "dd/mm/yy"
+		});
+	});
+	</script>
 	<?php echo form_open('', '', array('f_module' => $module_details['slug'])) ?>
 		<ul>
 			
@@ -24,7 +35,14 @@
 				<label for="f_category"><?php echo lang('order:status_label') ?></label>
 				<?php echo form_dropdown('status', $status, set_value("status",!empty($term['status'])?$term['status']:"")) ?>
 			</li>
-		
+			<li class="">
+				<label for="f_category"><?php echo lang('order:from') ?></label>
+					<?php echo form_input('from', set_value("from",!empty($term['from'])? $term['from']:"") , 'id="from" style="width: 55%;"') ?>
+			</li>
+				<li class="">
+				<label for="f_category"><?php echo lang('order:to') ?></label>
+					<?php echo form_input('to', set_value("to",!empty($term['to'])? $term['to']:"") , 'id="to" style="width: 55%;"') ?>
+			</li>
 			<li class="">
 				<?php 
 				$data = array(

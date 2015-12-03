@@ -64,6 +64,13 @@ class Checkout extends Public_Controller {
 		
 		return true;
 	}
+	function valid_phone($phone){
+		if (!preg_match("/^(84|0)(1\d{9}|9\d{8})$/", $phone)) {   
+			$this->form_validation->set_message('valid_phone', lang('cart:invalid_phone'));
+				return false;
+		}
+		return true;
+	}
 	function step_1(){
 		
 		//set default payment
@@ -90,7 +97,7 @@ class Checkout extends Public_Controller {
 		$this->form_validation->set_rules('first_name', 'lang:cart:first_name', 'trim|required|max_length[32]');
 		//$this->form_validation->set_rules('last_name', 'lang:cart:last_name', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('email', 'lang:cart:email', 'trim|required|valid_email|max_length[128]');
-		$this->form_validation->set_rules('phone', 'lang:phone', 'trim|required|max_length[32]');	
+		$this->form_validation->set_rules('phone', 'lang:phone', 'trim|required|max_length[32]|callback_valid_phone');	
 		$this->form_validation->set_rules('address', 'lang:address', 'trim|required|max_length[128]');
 	/* 	$this->form_validation->set_rules('city', 'lang:city', 'trim|required|max_length[128]'); */
 		$this->form_validation->set_rules('zone_id', 'lang:cart:select_province', 'trim|required');

@@ -38,7 +38,7 @@ function status($statusid) {
 			<td><?php echo form_checkbox('action_to[]', $order->id) ?></td>
 			<td class="collapse"><a
 				href="<?php echo base_url("admin/order/form/".$order->id)?>">#<?php  echo $order->order_number?></a></td>
-			<td class="collapse"><?php  echo date("d/m/y H:i:s",strtotime($order->ordered_on));?></td>
+			<td class="collapse"><?php  echo date("d/m/Y H:i:s",strtotime($order->ordered_on));?></td>
 			<td class="collapse"><?php  echo ($order->firstname).($order->lastname)?></td>
 			<td class="collapse"><?php  echo ($order->phone)?></td>
 			<td class="collapse"><?php  echo status($order->status);?></td>

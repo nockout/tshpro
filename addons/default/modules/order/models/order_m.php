@@ -21,14 +21,39 @@ class Order_m extends MY_Model
 				
 				$this->db->where_in('status', $term['group_status']);
 			}
+			if(!empty($term['from'])){
+					
+				$from=$term['from'];
+				$myDateTime = DateTime::createFromFormat('d/m/Y', $from);
+				$from = $myDateTime->format('Y-m-d 00:00:00');
+			
+				
+				
+				$this->db->where('ordered_on >=', $from);
+				
+				
+				if(!empty($term['to']))
+				{	$to=$term['to'];
+			
+					$myDateTime = DateTime::createFromFormat('d/m/Y', $to);
+					$to = $myDateTime->format('Y-m-d 23:59:59');
+				}
+				else 
+					$to=date('Y-m-d h:i:s');
+				
+				
+				$this->db->where('ordered_on <=', $to);
+			
+			}
 			
 			
 			if(!empty($term['f_keywords'])){
+				
 				$this->db->like('order_number', $term['f_keywords']);
 				$this->db->or_like('ship_phone', $term['f_keywords']); 
 				$this->db->or_like('ship_email', $term['f_keywords']);
 				$this->db->or_like('ship_phone', $term['f_keywords']);
-				$this->db->or_like("CONCAT(ship_firstname,' ', ship_lastname)",$term['f_keywords']);
+				$this->db->or_like("ship_firstname",$term['f_keywords']);
 				
 			}
 			

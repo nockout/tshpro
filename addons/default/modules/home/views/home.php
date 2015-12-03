@@ -1,7 +1,4 @@
 
-
-
-	
 	<h4 class="text-primary text-uppercase" style="padding-top: 1em;">What's Hot</h4>
 	<div class="row">
 	<?php 
