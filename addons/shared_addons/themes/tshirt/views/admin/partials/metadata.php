@@ -9,6 +9,9 @@ Asset::js('jquery/jquery.colorbox.js');
 Asset::js('jquery/jquery.cooki.js');
 Asset::js('jquery/jquery.slugify.js');
 
+Asset::js('jquery/jquery.ui.widget.js');
+Asset::js('jquery/jquery.ui.datepicker.js');
+Asset::js('jquery/jquery.slugify.js');
 Asset::js(array('codemirror/codemirror.js',
 	'codemirror/mode/css/css.js',
 	'codemirror/mode/htmlmixed/htmlmixed.js',

@@ -85,7 +85,16 @@
 		</div>
 		
 	</nav>
-	 {{ if { url:segments segment="1" } == '' OR  { url:segments segment="1" } == 'home' }}
+	 {{ if { url:segments segment="1" } == '' }}
+	 	<div class="shellOff">
+	       
+               
+     
+                   {{ widgets:instance id="2"}}
+            
+               
+	</div>
+	 {{ elseif { url:segments segment="1" } == 'home'  }}
 	<div class="shellOff">
 	       
                
