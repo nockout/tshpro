@@ -29,3 +29,5 @@ $lang['address']="Address";
 $lang['phone']="Phone";
 $lang['city']="City";
 $lang['cart:select_province']="Select Province";
+$lang['cart:notice']="* Notice";
+$lang['cart:desc_shipping_zone']="";

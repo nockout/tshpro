@@ -26,17 +26,17 @@
 
 				<div class="row shpInfoSlct">
 					<div class="col-sm-6 col-lg-6 col-md-6">
-						<div class="form-group row">
-							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:email")?></label>
-							<div class="col-lg-10 col-sm-12">
+						<div class="form-group row"> 
+							<label class="col-lg-3 col-sm-12 required"><?php echo lang("cart:email")?></label>
+							<div class="col-lg-9 col-sm-12">
 							
 								<?php echo form_input('email',set_value('email'),'class="form-control"
 									placeholder="'. lang("cart:email").'" id="email"');?>	
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-lg-2 col-sm-12"><?php echo lang("global:first_last_name")?></label>
-							<div class="col-lg-10 col-sm-12">
+							<label class="col-lg-3 col-sm-12 required"><?php echo lang("global:first_last_name")?></label>
+							<div class="col-lg-9 col-sm-12">
 							<?php echo form_input('first_name',set_value('first_name'),'class="form-control"
 									placeholder="'. lang("global:first_last_name").'" id="first_name"');?>	
 								
@@ -44,8 +44,8 @@
 						</div>
 
 						<div class="form-group row">
-							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:shipping_address")?></label>
-							<div class="col-lg-10 col-sm-12">
+							<label class="col-lg-3 col-sm-12 required"><?php echo lang("cart:shipping_address")?></label>
+							<div class="col-lg-9 col-sm-12">
 							
 								<?php echo form_textarea('address',set_value('address'),'class="form-control"
 									placeholder="'. lang("cart:shipping_address").'" id="address"');?>
@@ -58,8 +58,8 @@
 							<div class="col-xs-12">
 
 								<div class="form-group ">
-									<label class="col-lg-2 col-sm-12"><?php echo lang("cart:shipping_zones")?></label>
-									<div class="col-lg-10 col-sm-12"><?php echo form_dropdown('zone_id', $zones, set_value("zone_id"),'autocomplete="off" id="zones" class="form-control"');?>
+									<label class="col-lg-3 col-sm-12 required"><?php echo lang("cart:shipping_zones")?></label>
+									<div class="col-lg-9 col-sm-12"><?php echo form_dropdown('zone_id', $zones, set_value("zone_id"),'autocomplete="off" id="zones" class="form-control"');?>
 									</div>
 								</div>
 
@@ -67,15 +67,15 @@
 
 						</div>
 						<div class="form-group row">
-							<label class="col-lg-2 col-sm-12"><?php echo lang("cart:phone")?></label>
-							<div class="col-lg-10 col-sm-12">
+							<label class="col-lg-3 col-sm-12 required"><?php echo lang("cart:phone")?></label>
+							<div class="col-lg-9 col-sm-12">
 								<?php echo form_input('phone',set_value('phone'),'class="form-control"
 									placeholder="'. lang("phone").'" id="phone"');?>
 								
 							</div>
 						</div>
 						<div class="form-group row">
-							<div class=" col-lg-10 col-lg-offset-2  col-sm-12">
+							<div class=" col-lg-9 col-lg-offset-3  col-sm-12 required">
 								<input type="submit"
 									value="<?php echo lang("cart:place_order")?>"
 									class="btn btn-success btn-lg btn-xxl btn-block"
@@ -183,13 +183,16 @@
 
 								</div>
 
-								<h5>How quickly will I get my shirt?</h5>
-								<p>Your shirt will ship out within 5 days of placing your order!</p>
 							</div>
 						</div>
-
-
-
+							<div class="panel panel-info">
+						<div class=" panel-body">
+						<h5 class="text-danger"><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;<?php echo lang('cart:notice')?></h5>	
+							
+							<?php echo lang('cart:desc_shipping_zone')?>	
+													</div>
+						</div>
+						</div>
 					</div>
 
 				</div>

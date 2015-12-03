@@ -33,10 +33,22 @@ $lang['cart:shipping_address']="Địa chỉ";
 $lang['cart:select_province']="Chọn khu vực nhận hàng";
 $lang['cart:add_to_cart']="Thêm vào giỏ";
 $lang['cart:shipping_zones']="Khu vực nhận hàng ";
-$lang['cart:phone']="Điện thoại";
+$lang['cart:phone']="Điện thoại di động";
 $lang['cart:order_sumary']="Thông tin đơn hàng";
 $lang['cart:shipping_fee']="Phí vận chuyển";
 //message
 $lang['cart:title_contact_info']="Thông tin liên hệ";
 $lang['cart:title:checkout']="Thanh toán";
 $lang['cart:message:remove_item']="Bạn muốn xoá sản phẩm này khỏi giỏ hàng ?";
+$lang['cart:notice']="Lưu ý";
+$lang['cart:desc_shipping_zone']="Phí vận chuyển sẽ tuỳ thuộc vào khu vực nhận hàng của quý khách.
+								<ol>
+								<li>TP HO CHI MINH khu vực 1: phí vận chuyển 0đ</li>
+								<li>TP HO CHI MINH khu vực 2: phí vận chuyển 20.000đ</p>
+								<li>TP HO CHI MINH khu vực 3: phí vận chuyển 20.000đ</p>
+								<li>Miền đông & miền tây nam bộ: phí vận chuyển 30.000đ</p>
+								<li>Tây Nguyên: phí vận chuyển 40.000đ</p>
+								<li>Miền trung: phí vận chuyển 50.000đ</p>
+								</ol>
+								<i><i class='fa fa-exclamation-triangle'></i><span class='text-danger'> Nếu đơn hàng từ 5 sản phẩm trở lên quý khách sẽ được miễn phí vận chuyển </span> </i>"
+								;
