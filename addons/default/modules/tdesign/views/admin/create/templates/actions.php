@@ -389,13 +389,14 @@ $insta_recent_images_button = isset($_POST['instaRecentImagesButton']) ? $_POST[
 					<div class="fpd-add-image fpd-btn-raised fpd-secondary-bg-color fpd-secondary-text-color">
 						<i class="fpd-icon-file-upload"></i><span><?php echo $add_image_btn; ?></span>
 					</div>
-					<div class="fpd-add-text fpd-btn-raised fpd-secondary-bg-color fpd-secondary-text-color">
+				<!-- <div class="fpd-add-text fpd-btn-raised fpd-secondary-bg-color fpd-secondary-text-color">
 						<i class="fpd-icon-text-format"></i><span><?php echo $add_text_btn; ?></span>
 						<div class="fpd-input-text fpd-clearfix fpd-trans">
 							<input type="text" placeholder="<?php echo $enter_text; ?>" />
 							<span class="fpd-btn"><i class="fpd-icon-done"></i></span>
 						</div>
-					</div>
+					</div> -->
+					
 					<div class="fpd-add-facebook-photo fpd-btn-raised fpd-secondary-bg-color fpd-secondary-text-color">
 						<i class="fpd-icon-facebook"></i><span><?php echo $add_fb_btn; ?></span>
 					</div>
