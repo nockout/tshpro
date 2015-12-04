@@ -141,8 +141,21 @@ class Tplate {
 								
 									if(file_exists($file_path)){
 										
-									if($file_path !== $new_file_path)
-										 @copy($file_path, $new_file_path);
+									if($file_path !== $new_file_path){
+									//	 @copy($file_path, $new_file_path);
+									
+										$config['image_library'] = 'gd2';
+										$config['source_image']	= $file_path;
+										$config['new_image'] = $new_file_path;
+										
+										$config['maintain_ratio'] = TRUE;
+										$config['height']	= 485;
+										
+										$this->CI->load->library('image_lib' ); 
+										$resizer=new CI_Image_lib();
+										$resizer->initialize($config);
+										$resizer->resize();
+									}
 									}
 								}
 						
