@@ -7,7 +7,7 @@ $lang['profile_user_basic_data_label']  		= 'Basic Data';
 $lang['profile_company']         	  			= 'Company'; 
 $lang['profile_updated_on']           			= 'Updated On';
 $lang['user:profile_fields_label']	 		 	= 'Profile Fields';
-
+$lang['user:payment_fields_label']	 		 	= 'Payment Detail'; #translate`
 $lang['user:register_header']                  = 'Registration';
 $lang['user:register_step1']                   = '<strong>Step 1:</strong> Register';
 $lang['user:register_step2']                   = '<strong>Step 2:</strong> Activate';
@@ -209,4 +209,8 @@ $lang['profile_edit_error']           = 'An error occurred.';
 // -- Buttons ------------------------------------------------------------------------------------------------
 
 $lang['profile_save_btn']             = 'Save profile';
+
+$lang['bank:bank_name']='Bank';
+$lang['bank:bank_account_name']='Account name';
+$lang['bank:bank_account_number']='Account Number';
 /* End of file user_lang.php */

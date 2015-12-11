@@ -5,12 +5,6 @@
  * @author		PyroCMS Dev Team
  * @package 	PyroCMS\Core\Modules\Order\Controllers
  */
- 
-define('ORDER_STATUS_NO_PROCESS', 0);
-define('ORDER_STATUS_MANUFACTORING', 1);
-define('ORDER_STATUS_PROCEED', 2);
-define('ORDER_STATUS_CANCEL', 3);
-define('ORDER_STATUS_CLOSED', 4);
 
 
 
@@ -38,7 +32,7 @@ class Admin extends Admin_Controller
 	{
 	    parent::__construct();
 	    Events::trigger('save_order',array());
-	    
+		$this->load->config('tdesign');
 	    $this->lang->load('order');
 	    $this->load->helper(array("currency",'tdesign'));
 	    $this->load->model("search_model");

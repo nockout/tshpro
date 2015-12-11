@@ -1081,7 +1081,7 @@ class Users extends Public_Controller
 
 			if ($this->ion_auth->update_user($user->id, $user_data, $profile_data) !== false)
 			{
-				Events::trigger('post_user_update');
+				Events::trigger('post_user_update',$user->id);
 				$this->session->set_flashdata('success', $this->ion_auth->messages());
 			}
 			else

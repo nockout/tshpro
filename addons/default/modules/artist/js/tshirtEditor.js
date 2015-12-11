@@ -37,7 +37,20 @@ var currentShirt={front:"",back:""};
  		}
  		
  		$("#bulksave").click(function(){
- 			alert("aaaa");
+ 			
+ 			if (!fabric.Canvas.supports('toDataURL')) {
+ 				  alert('This browser doesn\'t provide means to serialize canvas to an image');
+ 				}
+ 				else {
+ 				  // 
+ 					//var json = JSON.parse(a);
+ 					//canvas.loadFromJSON(a);
+ 					window.open(canvas.toDataURL('png'));
+ 					
+ 					//var json = JSON.parse(b);
+ 					//canvas.loadFromJSON(a);
+ 				 // window.open(canvas.toDataURL('png'));
+ 				}
  		});
  		
  		

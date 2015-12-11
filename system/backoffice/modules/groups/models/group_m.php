@@ -95,7 +95,7 @@ class Group_m extends MY_Model
 	public function update($id = 0, $input = array(), $skip_validation = false)
 	{
 		return parent::update($id, array(
-			'name'			=> $input['name'],
+			/* 'name'			=> $input['name']?:"", */
 			'description'	=> $input['description']
 		));
 	}

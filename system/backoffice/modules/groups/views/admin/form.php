@@ -19,7 +19,7 @@
 					<label for="description"><?php echo lang('groups:name');?> <span>*</span></label>
 					<div class="input"><?php echo form_input('description', $group->description);?></div>
 				</li>
-				
+				<?php if ($this->method == 'add'): ?>
 				<li class="even">
 					<label for="name"><?php echo lang('groups:short_name');?> <span>*</span></label>
 					
@@ -34,6 +34,7 @@
 					
 					</div>
 				</li>
+				<?php endif;?>
 		    </ul>
 		
 		</div>

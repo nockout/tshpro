@@ -196,7 +196,7 @@
 		      <div class="well">
 		     
 				<button type="button" class="btn btn-large btn-block btn-success" name="bulksave" id="bulksave">Save <i class="icon-briefcase icon-white"></i></button>
-		  		      		       		   
+		  		<a href="" class="save">Image</a>   		       		   
 		    </div>
 		</div>
 

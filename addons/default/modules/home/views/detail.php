@@ -1,5 +1,5 @@
 
-<div style="padding-top: 10px;" class="container">
+
 
 	<h1 class="hidden-xs top_title"><?php echo $product->product?></h1>
 	
@@ -169,67 +169,11 @@
 
 			</div>
 					<?php echo form_close()?>
-			<div class="visible-xs">
-
-				<h1>Jeb Bush 2016</h1>
-				<a class="artistlink" title="Click to see more designs by Fanbuild"
-					href="/Fanbuild/"><i class="fa fa-user"></i> Fanbuild</a>
-				<p>For those voting and support Jeb Bush in the 2016 Presidential
-					race!</p>
-
-				<hr>
-
-				<div data-url="https://www.sunfrog.com/Jeb-Bush-2016.html"
-					data-bubbles="top" data-style="icons"
-					class="don-share visible-xs don-bubble-top">
-					<div class="don-share-facebook">
-						<a title="Share on Facebook" target="_blank"
-							href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.sunfrog.com%2FJeb-Bush-2016.html"><span
-							class="don-btn don-btn-facebook don-btn-ico"><i
-								class="don-ico-facebook"></i></span><span class="don-count">0</span></a>
-					</div>
-					<div class="don-share-pinterest">
-						<a title="Share on Pinterest" target="_blank"
-							href="http://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.sunfrog.com%2FJeb-Bush-2016.html&amp;media=//images.sunfrogshirts.com/2015/07/29/Jeb-Bush-2016.jpg&amp;description=Jeb%20Bush%202016"><span
-							class="don-btn don-btn-pinterest don-btn-ico"><i
-								class="don-ico-pinterest"></i></span><span class="don-count">0</span></a>
-					</div>
-					<div class="don-share-twitter">
-						<a title="Share on Twitter" target="_blank"
-							href="https://twitter.com/share?url=https%3A%2F%2Fwww.sunfrog.com%2FJeb-Bush-2016.html&amp;text=Jeb%20Bush%202016"><span
-							class="don-btn don-btn-twitter don-btn-ico"><i
-								class="don-ico-twitter"></i></span><span class="don-count">0</span></a>
-					</div>
-					<div class="don-share-google">
-						<a title="Share on Google+" target="_blank"
-							href="https://plus.google.com/share?url=https%3A%2F%2Fwww.sunfrog.com%2FJeb-Bush-2016.html"><span
-							class="don-btn don-btn-google don-btn-ico"><i
-								class="don-ico-google"></i></span><span class="don-count">0</span></a>
-					</div>
-
-				</div>
-
-			</div>
-
+			
 
 
 			<br>
-			<div class="alt-bg alt-bg-pad visible-xs">
-
-				<div class="col-xs-6">
-					<a href="/returns/"> <img width="296" height="66"
-						class="img-responsive cen-sm" alt="100% Satisfaction Guaranteed!"
-						src="/images/satisfaction.svg">
-					</a>
-				</div>
-
-				<div class="col-xs-6">
-					<img width="209" height="66" class="img-responsive cen-sm"
-						alt="Printed in the USA" src="/images/printed-in-us.svg">
-				</div>
-
-				<div class="clearfix"></div>
-			</div>
+			
 			<br>
 
 		</div>
@@ -242,17 +186,21 @@
 
 			<?php //echo $this->load->view("alsolike")?>
 		
-		<div data-colorscheme="light" data-width="100%"
-		data-order-by="reverse_time" data-numposts="5"
-		data-href="https://www.sunfrog.com/Jeb-Bush-2016.html"
-		class="fb-comments fb_iframe_widget fb_iframe_widget_fluid"
-		fb-xfbml-state="rendered">
-		<span style="height: 176px; width: 1140px;"><iframe
-				id="f30ec97af312fbe" name="f1bd557df0de048" scrolling="no"
-				style="border: medium none; overflow: hidden; height: 176px; width: 1140px;"
-				title="Facebook Social Plugin" class="fb_ltr"
-				src="https://www.facebook.com/plugins/comments.php?api_key=842113255878673&amp;channel_url=https%3A%2F%2Fs-static.ak.facebook.com%2Fconnect%2Fxd_arbiter%2F4B2NplaqNF3.js%3Fversion%3D41%23cb%3Df292d8b60a93854%26domain%3Dwww.sunfrog.com%26origin%3Dhttps%253A%252F%252Fwww.sunfrog.com%252Ff549dfdf42942%26relation%3Dparent.parent&amp;colorscheme=light&amp;href=https%3A%2F%2Fwww.sunfrog.com%2FJeb-Bush-2016.html&amp;locale=en_US&amp;numposts=5&amp;order_by=reverse_time&amp;sdk=joey&amp;skin=light&amp;version=v2.3&amp;width=100%25"></iframe></span>
-	</div>
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.5&appId=1636047256649849";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-comments" data-href="<?php echo current_url();;?>" data-numposts="5"></div>
+
+			</div>
+		</div>
 
 
 
@@ -262,9 +210,4 @@
 
 
 
-	<span style="display: none;" id="productPagePull">Jeb-Bush-2016.html</span>
-	<span style="display: none;" id="productImgPull">2015/07/29/md_Jeb-Bush-2016.jpg</span>
-	<span style="display: none;" id="productTitlePull">Jeb Bush 2016</span>
 
-
-</div>

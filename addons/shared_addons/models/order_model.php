@@ -37,64 +37,75 @@ Class order_model extends CI_Model
 		return $years;
 	}
 	
-	function get_orders($search=false, $sort_by='', $sort_order='DESC', $limit=0, $offset=0)
-	{			
-		if ($search)
-		{
-			if(!empty($search->term))
-			{
-				//support multiple words
-				$term = explode(' ', $search->term);
-
-				foreach($term as $t)
-				{
-					$not		= '';
-					$operator	= 'OR';
-					if(substr($t,0,1) == '-')
-					{
-						$not		= 'NOT ';
-						$operator	= 'AND';
-						//trim the - sign off
-						$t		= substr($t,1,strlen($t));
-					}
-
-					$like	= '';
-					$like	.= "( `order_number` ".$not."LIKE '%".$t."%' " ;
-					$like	.= $operator." `bill_firstname` ".$not."LIKE '%".$t."%'  ";
-					$like	.= $operator." `bill_lastname` ".$not."LIKE '%".$t."%'  ";
-					$like	.= $operator." `ship_firstname` ".$not."LIKE '%".$t."%'  ";
-					$like	.= $operator." `ship_lastname` ".$not."LIKE '%".$t."%'  ";
-					$like	.= $operator." `status` ".$not."LIKE '%".$t."%' ";
-					$like	.= $operator." `notes` ".$not."LIKE '%".$t."%' )";
-
-					$this->db->where($like);
-				}	
+	public function get_orders($params,$by="",$way="",$page=0,$limit=6){
+	
+		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
+		if(!empty($params['term'])){
+				
+			$term=(array)$params['term'];
+			if(!empty($term['status'])){
+				$this->db->where('status', $term['status']);
 			}
-			if(!empty($search->start_date))
-			{
-				$this->db->where('ordered_on >=',$search->start_date);
+			if(!empty($term['group_status'])){
+	
+				$this->db->where_in('status', $term['group_status']);
 			}
-			if(!empty($search->end_date))
-			{
-				//increase by 1 day to make this include the final day
-				//I tried <= but it did not function. Any ideas why?
-				$search->end_date = date('Y-m-d', strtotime($search->end_date)+86400);
-				$this->db->where('ordered_on <',$search->end_date);
+			if(!empty($term['from'])){
+					
+				$from=$term['from'];
+				$myDateTime = DateTime::createFromFormat('d/m/Y', $from);
+				$from = $myDateTime->format('Y-m-d 00:00:00');
+					
+	
+	
+				$this->db->where('ordered_on >=', $from);
+	
+	
+				if(!empty($term['to']))
+				{	$to=$term['to'];
+					
+				$myDateTime = DateTime::createFromFormat('d/m/Y', $to);
+				$to = $myDateTime->format('Y-m-d 23:59:59');
+				}
+				else
+					$to=date('Y-m-d h:i:s');
+	
+	
+				$this->db->where('ordered_on <=', $to);
+					
 			}
-			
+				
+				
+			if(!empty($term['f_keywords'])){
+	
+				$this->db->like('order_number', $term['f_keywords']);
+				$this->db->or_like('ship_phone', $term['f_keywords']);
+				$this->db->or_like('ship_email', $term['f_keywords']);
+				$this->db->or_like('ship_phone', $term['f_keywords']);
+				$this->db->or_like("ship_firstname",$term['f_keywords']);
+	
+			}
+				
+	
 		}
-		
-		if($limit>0)
-		{
-			$this->db->limit($limit, $offset);
-		}
-		if(!empty($sort_by))
-		{
-			$this->db->order_by($sort_by, $sort_order);
-		}
-		
-		return $this->db->get($this->_table)->result();
+	
+	
+	
+		$this->db->select("CONCAT(ship_firstname,' ',ship_lastname) as fullname" ,false);
+		$this->db->offset($page)->limit($limit);
+		$object=$this->db->order_by("ordered_on","DESC")->get($this->_table)->result();
+		//	print_r($this->db->get_compiled_select);die;
+	
+		$result['objects']=$object;
+		$result['total']=0;
+		$query = $this->db->query('SELECT FOUND_ROWS() AS `Count`');
+		$result['total']= $query->row()->Count;
+	
+		return $result;
 	}
+	
+	
+	
 	
 	function get_orders_count($search=false)
 	{			
@@ -335,6 +346,20 @@ Class order_model extends CI_Model
 		}
 		
 		return $return;
+	}
+		public function analys_order(){
+		$analys['total']=self::get_statictis();
+		$analys['new']=self::get_statictis(array('status'=>0));
+		$analys['manufacturer']=self::get_statictis(array('status'=>1));
+		// get 
+		return $analys;
+	}
+	 function get_statictis($params=array()){
+		if(!empty($params)){
+			$this->db->where($params);
+		}
+		
+		return $this->db->count_all_results($this->_table);
 	}
 	
 }

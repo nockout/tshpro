@@ -70,4 +70,24 @@ $lang['cp:nav_template']					= 'Template';
 $lang['cp:nav_order']					= 'Orders';
 $lang['cp:nav_category']					= 'Category';
 $lang['cp:nav_transaction']				='Transaction';
+
+
+$lang['ORDER_STATUS_NO_PROCESS']="NO PROCEED";
+$lang['ORDER_STATUS_MANUFACTORING']="MANUFACTURER";
+$lang['ORDER_STATUS_PROCEED']="PROCEED";
+$lang['ORDER_STATUS_CANCEL']="CANCEL";
+$lang['ORDER_STATUS_CLOSED']="CLOSED";
+$lang['ORDER_STATUS_ALL']="ALL";
+
+$lang['cp:order_analys']='Order Analytics';
+$lang['cp:status']="Status";
+$lang['cp:date']='Date';
+$lang['cp:art_statictis']='Art Analytics';
+$lang['cp:art']='Total Arts';
+$lang['cp:new_art']='New';
+$lang['cp:order_id']='Order ID';
+$lang['cp:not_approve']='Not Approval';
+$lang['cp:last_order']='Latest Order';
+$lang['cp:total_order']='Total Order';
+
 /* End of file admin_lang.php */

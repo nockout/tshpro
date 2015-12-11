@@ -18,6 +18,7 @@
 			<ul class="tab-menu">
 				<li><a href="#user-basic-data-tab"><span><?php echo lang('profile_user_basic_data_label') ?></span></a></li>
 				<li><a href="#user-profile-fields-tab"><span><?php echo lang('user:profile_fields_label') ?></span></a></li>
+				<li><a href="#user-payment-fields-tab"><span><?php echo lang('user:payment_fields_label') ?></span></a></li>
 			</ul>
 	
 			<!-- Content tab -->
@@ -90,6 +91,43 @@
 							</div>
 						</li>
 						<?php endforeach ?>
+	
+					</ul>
+				</fieldset>
+			</div>
+			<div class="form_inputs" id="user-payment-fields-tab">
+	
+				<fieldset>
+					<ul>
+	
+	
+						<li>
+							<label for="<?php echo lang('bank:bank_name') ;?>">
+								<?php echo lang('bank:bank_name') ;  ?>
+
+							</label>
+							<div class="input">
+									<?php echo form_input('bank_name',  $member->bank_name, 'id="bank_name"') ?>
+							</div>
+						</li>
+						<li>
+							<label for="<?php echo lang('bank:bank_account_name') ; ?>">
+								<?php echo lang('bank:bank_account_name') ;  ?>
+
+							</label>
+							<div class="input">
+									<?php echo form_input('bank_account_name', $member->bank_account_name, 'id="bank_account_name"') ?>
+							</div>
+						</li>
+						<li>
+							<label for="<?php echo lang('bank:bank_account_number') ?>">
+								<?php echo lang('bank:bank_account_number') ;  ?>
+
+							</label>
+							<div class="input">
+									<?php echo form_input('bank_account_number', $member->bank_account_number, 'id="bank_account_number"') ?>
+							</div>
+						</li>
 	
 					</ul>
 				</fieldset>

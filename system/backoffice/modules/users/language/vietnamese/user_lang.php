@@ -18,6 +18,9 @@ $lang['profile_user_basic_data_label']  		= 'Basic Data'; #translate
 $lang['profile_company']         	  			= 'Company'; #translate
 $lang['profile_updated_on']           			= 'Updated On'; #translate
 $lang['user:profile_fields_label']	 		 	= 'Profile Fields'; #translate`
+$lang['user:payment_fields_label']	 		 	= 'Payment Detail'; #translate`
+
+
 
 $lang['user:register_header']                  = 'Đăng ký';
 $lang['user:register_step1']                   = '<strong>Bước 1:</strong> Đăng ký';
@@ -228,4 +231,12 @@ $lang['profile_edit_error']           = 'Có lỗi xảy ra.';
 // -- Buttons ------------------------------------------------------------------------------------------------
 
 $lang['profile_save_btn']             = 'Lưu hồ sơ';
+
+
+
+// -- bank 
+
+$lang['bank:bank_name']='Ngân hàng';
+$lang['bank:bank_account_name']='Tên tài khoản';
+$lang['bank:bank_account_number']='Số tài khoản';
 /* End of file user_lang.php */

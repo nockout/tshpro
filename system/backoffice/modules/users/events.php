@@ -13,6 +13,7 @@ class Events_Users
 	
 		Events::register('user_updated', array($this, 'run_update'));
 		Events::register('post_user_register', array($this, 'run_created'));
+		Events::register('post_user_update', array($this, 'run_update'));
 	}
 	public function run_created($id){
 
@@ -43,18 +44,18 @@ class Events_Users
 	}
 	
 	public function run_update($id)
-	{
+	{	
 		if(empty($id)){
 			return;
 		}
 
-		
+	
 		$user=$this->ci->ion_auth->get_user(intval($id));
 
 		if(empty($user))
 			return;
 		$slug=$user->username;
-
+		
 			if (! $this->Routes_model->check_routes_by_oid ( $id,'user' )) {
 				$route ['keyword'] = 'home/'.$slug;
 				$route ['entity'] = 'user';
@@ -82,7 +83,7 @@ class Events_Users
 			
 			
 			);
-		return ;
+		return	$this->ci->db->where('id',$id)->update('users',$data);
 	}
 
 }

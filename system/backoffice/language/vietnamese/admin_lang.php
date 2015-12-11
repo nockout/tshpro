@@ -63,4 +63,24 @@ $lang['cp:nav_template']					= 'Sản phẩm';
 $lang['cp:nav_order']					= 'Đơn hàng';
 $lang['cp:nav_category']					= 'Danh mục';
 $lang['cp:nav_transaction']				='Giao dịch';
+
+
+$lang['ORDER_STATUS_NO_PROCESS']="Chưa xử lý";
+$lang['ORDER_STATUS_MANUFACTORING']="Bộ phận sản xuất";
+$lang['ORDER_STATUS_PROCEED']="Đã xử lý";
+$lang['ORDER_STATUS_CANCEL']="Huỷ Đơn Hàng";
+$lang['ORDER_STATUS_CLOSED']="Đóng";
+$lang['ORDER_STATUS_ALL']="Tất cả";
+
+
+$lang['cp:order_analys']='Thống kê đơn hàng';
+$lang['cp:status']="Trạng thái";
+$lang['cp:date']='Ngày tạo';
+$lang['cp:art_statictis']='Thống kê Mẫu';
+$lang['cp:art']='Tổng số Mẫu';
+$lang['cp:new_art']='Mẫu mới';
+$lang['cp:order_id']=' ID';
+$lang['cp:not_approve']='Chưa phê duyệt';
+$lang['cp:last_order']='Đơn hàng mới nhất';
+$lang['cp:total_order']='Tổng số đơn hàng';
 /* End of file admin_lang.php */

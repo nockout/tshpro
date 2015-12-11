@@ -240,7 +240,7 @@ jQuery(document)
 						hmtl.push("</td></tr>");
 						$("#yourdesigns").append(hmtl.join(""));
 						var check=true;
-						$('#save_image input.name, #save_image textarea.des').each(
+						$('#save_image input.name').each(
 							    function(index){  
 							        var input = $(this);
 							        console.log(input.val());

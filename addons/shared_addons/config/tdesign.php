@@ -15,3 +15,10 @@ $config ['admin_folder']='admin';
 $config ['DEFAULT_LANG']='en';
 
 $config['template_extension']='.png';
+
+
+define('ORDER_STATUS_NO_PROCESS', 0);
+define('ORDER_STATUS_MANUFACTORING', 1);
+define('ORDER_STATUS_PROCEED', 2);
+define('ORDER_STATUS_CANCEL', 3);
+define('ORDER_STATUS_CLOSED', 4);

@@ -179,11 +179,12 @@ class Admin extends Admin_Controller
 		$this->lang->load("templates");;
 		
 		$templates=$this->product->cate_templates();
-
+		//echo "<pre>";
+		//print_r($templates);die;
 		$template_cache=$this->load->view("admin/create/templates/template",array('templates'=>$templates),TRUE);
+
 		
-		
-		
+	
 		$this->template->append_js(array("module::fancy_design/jquery.min.js",
 				"module::fancy_design/jquery-ui.min.js",
 				"module::fancy_design/bootstrap.min.js",

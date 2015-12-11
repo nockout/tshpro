@@ -58,9 +58,9 @@ jQuery(document).ready(function () {
 						        
 						  		fabric.Image.fromURL(call_back_url, function(image) {
 							          image.set({
-							        	stroke: '#fff',//stroke: '#333', strokeWidth: 3, strokeDashArray: [5, 10],
-							      	  	strokeWidth: 3,
-							      	  	strokeDashArray: [5, 5],  
+							        	//stroke: '#fff',//stroke: '#333', strokeWidth: 3, strokeDashArray: [5, 10],
+							      	  //	strokeWidth: 3,
+							      	  	//strokeDashArray: [5, 5],  
 							            left: left,
 							            top: top,
 							            angle: 0,

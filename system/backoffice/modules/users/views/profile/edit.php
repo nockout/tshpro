@@ -14,7 +14,41 @@
 	<?php endif;?>
 
 	<?php echo form_open_multipart('', array('id'=>'user_edit'));?>
-
+		
+		<div class="col-sm-12 col-lg-6 col-md-6">
+			<label class="control-label">&nbsp;</label>
+				
+					<div class="plain-white well">
+					<h4 class="text-info"><?php echo lang('user:payment_fields_label') ?></h4>	
+					<div class="form-group">
+					
+						<label for="<?php echo lang('bank:bank_name') ;  ?>">	<?php echo lang('bank:bank_name') ;  ?></label>
+								
+					<?php echo form_input('bank_name',  $_user->bank_name, 'id="bank_name" class=" form-control"') ?>
+				
+					</div>
+					<div class="form-group">
+					
+						<label for="<?php echo lang('bank:bank_account_name') ;  ?>">	<?php echo lang('bank:bank_account_name') ;  ?></label>
+								
+					<?php echo form_input('bank_account_name',  $_user->bank_account_name, 'id="bank_account_name" class=" form-control"') ?>
+				
+					</div>
+					<div class="form-group">
+					
+						<label for="<?php echo lang('bank:bank_account_number') ;  ?>">	<?php echo lang('bank:bank_account_number') ;  ?></label>
+								
+					<?php echo form_input('bank_account_number',  $_user->bank_account_number, 'id="bank_account_number"  class=" form-control"') ?>
+				
+					</div>
+					
+				
+					
+				</div>
+	
+				<div class="clearfix"></div>
+			</div>
+<div class="clearfix"></div>
 
 				<div class=" col-sm-6 col-lg-6 col-sm-6">
 					<fieldset id="profile_fields">
@@ -43,6 +77,9 @@
 					</div>
 				<?php endif ?>
 			<?php endforeach ?>
+			
+			
+			
 		</fieldset>
 		</div>
 	<div class=" col-sm-6 col-lg-6 col-sm-6 ">			
@@ -74,6 +111,8 @@
 			<div class="form-group"><label for="password"><?php echo lang('global:password') ?></label><br />
 				<?php echo form_password('password', '', 'autocomplete="off" class=" form-control"')?>
 			</div>
+			
+			
 					
 
 	<?php if (Settings::get('api_enabled') and Settings::get('api_user_keys')): ?>
@@ -97,6 +136,7 @@
 	</script>
 
 					<fieldset>
+					
 					<h2 class="organe"><?php echo lang('profile_api_section') ?></h2>
 
 						<ul>
@@ -109,7 +149,7 @@
 					
 		</div>				
 	<?php endif ?>
-
+				
 	<?php echo form_submit('', lang('profile_save_btn'),'class="btn btn-lg btn-success center-block"')?>
 	<?php echo form_close() ?>
 

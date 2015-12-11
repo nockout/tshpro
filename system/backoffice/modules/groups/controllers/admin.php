@@ -123,11 +123,25 @@ class Admin extends Admin_Controller
 			}
 			else
 			{
+				
+				$this->validation_rules = array(
+					/* 	array(
+								'field' => 'name',
+								'label' => lang('groups:name'),
+								'rules' => 'trim|required|max_length[100]'
+						), */
+						array(
+								'field' => 'description',
+								'label' => lang('groups:description'),
+								'rules' => 'trim|required|max_length[250]'
+						)
+				);
 				$this->form_validation->set_rules($this->validation_rules);
 			}
 
 			if ($this->form_validation->run())
 			{
+				
 				if ($success = $this->group_m->update($id, $this->input->post()))
 				{
 					// Fire an event. A group has been updated.
@@ -136,7 +150,7 @@ class Admin extends Admin_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('error', sprintf(lang('groups:edit_error'), $this->input->post('name')));
+					$this->session->set_flashdata('error', sprintf(lang('groups:edit_error'), $this->input->post('description')));
 				}
 
 				redirect('admin/groups');

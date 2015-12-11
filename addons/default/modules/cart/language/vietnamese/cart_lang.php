@@ -45,14 +45,10 @@ $lang['cart:message:remove_item']="Bạn muốn xoá sản phẩm này khỏi gi
 $lang['cart:notice']="Lưu ý";
 $lang['cart:invalid_phone']="Số điện thoại không hợp lệ";
 
-$lang['cart:desc_shipping_zone']="Phí vận chuyển sẽ tuỳ thuộc vào khu vực nhận hàng của quý khách.
+$lang['cart:desc_shipping_zone']="
 								<ol>
-								<li>TP HO CHI MINH khu vực 1: phí vận chuyển 0đ</li>
-								<li>TP HO CHI MINH khu vực 2: phí vận chuyển 20.000đ</p>
-								<li>TP HO CHI MINH khu vực 3: phí vận chuyển 20.000đ</p>
-								<li>Miền đông & miền tây nam bộ: phí vận chuyển 30.000đ</p>
-								<li>Tây Nguyên: phí vận chuyển 40.000đ</p>
-								<li>Miền trung: phí vận chuyển 50.000đ</p>
-								</ol>
-								<i><i class='fa fa-exclamation-triangle'></i><span class='text-danger'> Nếu đơn hàng từ 5 sản phẩm trở lên quý khách sẽ được miễn phí vận chuyển </span> </i>"
+								<li>TP HCM KV 3 : Hóc Môn, Củ Chi, Nhà Bè, Thủ Đức, Bình Chánh, Cần Giờ</li>
+								<li>TP HCM KV 1 : Quận 3, Quận 4,</li>
+								<li>TP HCM KV 2 : Các quận còn lại</li>
+								</ol>"
 								;
