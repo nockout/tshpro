@@ -113,3 +113,4 @@ $lang['design:display_front_end']='Display Homepage';
 // date
 $lang['design:archive_date_format']		= "%B %Y";
 $lang['design:your_design']='Styles';
+$lang['design:arrove']='Approve';

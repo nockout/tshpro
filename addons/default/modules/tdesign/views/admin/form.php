@@ -56,9 +56,16 @@
 					<div class="input">
 				
 					<?php echo form_dropdown('cate_id', array(""=>lang('design:no_category_select_label')) + $categories, set_value("cate_id",$cate_id)) ?>
-					
 					<?php  //echo form_input('cate_name',set_value("cate_name",$cate_name),'readonly=true') ?>
 					</div>
+				</li>
+					<li>
+					<label for="status"><?php echo lang('design:status_label') ?></label>
+					
+					<div class="input">
+					<?php echo form_dropdown('status', array(""=>lang(""), 'A' => lang('design:status_A_label'),'D' => lang('design:status_D_label')), set_value("status",$status)) ?></div>
+				
+					
 				</li>
 					<li>
 					<label for="price"><?php echo lang('design:price') ?> </label>
@@ -75,15 +82,7 @@
 				</li>
 				
 				
-				
-				<li>
-					<label for="status"><?php echo lang('design:status_label') ?></label>
-					
-					<div class="input">
-					<?php echo form_dropdown('status', array(""=>lang(""), 'A' => lang('design:status_A_label'),'D' => lang('design:status_D_label')), set_value("status",$status)) ?></div>
-				
-					
-				</li>
+			
 				<li class="date-meta">
 					<label><?php echo lang('design:date_label') ?></label>
 	
@@ -131,7 +130,10 @@
 						<label for="keywords"><?php echo lang('global:keywords') ?></label>
 						<div class="input"><?php echo form_input('keywords', isset($keywords)?htmlspecialchars_decode($keywords):"", 'id="keywords"') ?></div>
 					</li>
-				
+					<li>
+					 <label for="slug">Color<span></span></label>
+					<div class="input"><?php echo form_input('color', isset($color)?($color):"", 'maxlength="100" id="color"') ?></div>
+					</li>
 			</ul>
 			</fieldset>
 		</div>

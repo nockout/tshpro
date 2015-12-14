@@ -70,7 +70,7 @@ class Home extends Public_Controller {
 			redirect ( "home" );
 		
 		if ($product->id_art) {
-			$relatePro = $this->product_model->get_related ( $product->id_art, $id );
+			$relatePro = $this->product_model->find_art_by_id ( $product->id_art, $id );
 			$this->template->set ( 'relprd', $relatePro );
 		}
 		

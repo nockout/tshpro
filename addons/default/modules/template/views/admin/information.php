@@ -26,7 +26,17 @@
 
 
 				</li>
-
+				<li>
+				<div id="full">
+				
+				</div>
+				</li>
+				<li>
+				<label for="color"><?php echo lang('template:color') ?></label>
+				<div class="input">
+				
+				<?php echo form_input('color', set_value('color',$color), 'maxlength="100" id="color"') ?></div>
+				</li>
 
 
 			</ul>
@@ -65,8 +75,8 @@
 		 	  	var hex=color.toHexString();
 	 		   var html=[];
 	 		   html.push('<div class="pickercolors" style="background:'+hex+'">'); 
-	 		  html.push('<input type="hidden" class="pickercolors" value="'+hex+'"  name="colors[]"></div>');
-	 		 
+	 		//  html.push('<input type="text" class="pickercolors" value="'+hex+'"  name="colors[]"></div>');
+	 		 	$("#color").val(color);
 	 		   $("#colors_groups").append(html.join(""));
 	 		  $('.pickercolors').bind("click",function(){
 	 				$(this).remove();

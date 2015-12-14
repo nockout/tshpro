@@ -159,7 +159,7 @@ class Admin extends Admin_Controller
 		$data['timestamp'] = 0;
 		$data['status'] ="";
 		$data['price'] = "";
-		$data['id_color'] ="";
+		$data['color'] ="";
 		$data['title']="";
 		$this->load->library('tplate');
 		$data['categories']=$this->category_model->get_option_categories(1);
@@ -204,7 +204,7 @@ class Admin extends Admin_Controller
 			$data['price'] =$tplate->price;
 			$data['timestamp']=$tplate->timestamp;
 			$data['status']=$tplate->status;
-			$data['id_color']=$tplate->color;
+			$data['color']=$tplate->color;
 			$data['category_id']=$tplate->id_category_default;
 		
 			if($tplate->colors_groups){
@@ -240,7 +240,7 @@ class Admin extends Admin_Controller
             $save['price_max'] =$this->input->post("price_max")?$this->input->post("price_max"):"";
             $save['status']=$this->input->post("status");
             $save['id_category_default']=$this->input->post("category_id");
-            $save['color']=$this->input->post("id_color");
+            $save['color']=$this->input->post("color");
             $save['colors_groups']=serialize($this->input->post('colors'));
             if(!$save['id_template'])
             $save['timestamp']=date('Y-m-d H:i:s');

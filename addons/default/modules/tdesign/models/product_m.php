@@ -194,11 +194,11 @@ class Product_m extends Base_m
 				$this->_default_fields['id_art']=$extra['id_art'];
 				$this->_default_fields['id_template']=$extra['id_template'];
 				$this->_default_fields['price']=isset($extra['price'])?$extra['price']:0;
-				
+				//$this->_default_fields['color']=isset($extra['color'])?$extra['color']:"";
 				//list price is min_price of template 
 				
 				$this->_default_fields['min_price']=$this->get_template_price($extra['id_template']);
-				
+				$this->_default_fields['color']=$this->get_color($extra['id_template']);
 				$this->_default_fields['user_id']=$this->current_user->id;
 				$this->db->insert($this->_table,$this->_default_fields);
 				// save product code
@@ -214,6 +214,7 @@ class Product_m extends Base_m
 				$productcode=sprintf("%04d%09d",$this->current_user->id,$insert_id);
 				$data = array(
 						'product_code' => $productcode,
+						//'color' => $productcode,
 						
 				);
 				
@@ -229,6 +230,12 @@ class Product_m extends Base_m
 				return $this->get_product_draft($insert_id);
 							
 	
+	}
+	public function get_color($id){
+		$row=$this->db->select("color")->from("tshirt_template")->where('id_template',intval($id))->get()->row();
+		if(!empty($row))
+			return $row->color;
+		return 0;
 	}
 	public function get_template_price($id){
 		$row=$this->db->select("price")->from("tshirt_template")->where('id_template',intval($id))->get()->row();

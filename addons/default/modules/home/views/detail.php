@@ -1,9 +1,5 @@
 
-
-
 	<h1 class="hidden-xs top_title"><?php echo $product->product?></h1>
-	
-
 	<div style="margin-bottom: 40px;" class="row">
 		<div class="col-sm-7  ">
 			<div class="productFrame">
@@ -15,14 +11,13 @@
 					if ($extra) {
 						$extra = unserialize ( $extra );
 					}
-					// echo "<pre>";
-					// print_r($extra);die;
 					if (! empty ( $extra ['image'] )) :
 						?>
 						<?php $first=array_shift($extra['image']);?>
 				
 						<a data-theimage="<?php echo array_shift($extra['image'])?>"
-					data-target="#imageModal" data-toggle="modal"> <img width="651"
+					data-target="#imageModal" data-toggle="modal">
+					 <img width="651"
 					height="651" class="img-responsive lg_view"
 					alt="<?php echo $product->product?>" src="<?php echo $first?>">
 
@@ -67,7 +62,8 @@
 						?>
 
 				
-					<label for="Style"><?php echo lang("product:style")?></label> <select
+					<label for="Style"><?php echo lang("product:style")?></label> 
+					<select
 					onchange="location = this.options[this.selectedIndex].value;"
 					class="form-control" name="shirtTypes" id="shirtTypes">
 							<?php
@@ -109,8 +105,6 @@
 				
 				<?php $siszeSelected=$this->session->userdata("sizeSelected")?>
 					<div data-toggle="buttons" class="btn-group">
-
-
 						<label
 							class="picksize <?php if($siszeSelected=="S"): ?> active <?php endif ?> btn btn-default"
 							for="S"> <input type="radio" value="S" autocomplete="off"

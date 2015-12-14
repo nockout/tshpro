@@ -31,13 +31,13 @@ class Admin_Manage extends Admin_Controller
 	
 	public function arts($code = 0,  $by = 0, $way = "ASC",$page = 0){
 	
-		$object=$this->product_m->get_arts(array(),$page,8);
+		$object=$this->product_m->get_arts(array(),$page,10);
 		$arts="";
 		if(!empty($object)){
 			$arts=$object['objects'];
 		}
 		$this->load->helper(array("currency",'tdesign'));
-		$pagination=panagition("admin/tdesign/manage/arts/$code/$by/$way/",8,$object['total'],$page,8);
+		$pagination=panagition("admin/tdesign/manage/arts/$code/$by/$way/",8,$object['total'],$page,10);
 		
 		$this->template->
 		set('arts',$arts)
@@ -72,7 +72,46 @@ class Admin_Manage extends Admin_Controller
  			->title($this->module_details['name'])
 			->build('admin/index');
 	}
-	
+	public function action(){
+		$action=$this->input->post('submit');
+		$this->load->model('art_model');
+		$ids=$this->input->post('action_to');
+		
+		switch ($action){
+			case "activate":
+				
+				$this->art_model->statusall($ids,1);
+				break;
+				case "disable":
+				
+					$this->art_model->statusall($ids,0);
+					break;
+			case "delete":
+				$this->art_model->deleteall($ids);
+					break;
+				
+		}
+		$this->load->library('user_agent');
+		if ($this->agent->is_referral())
+		{
+			redirect ($this->agent->referrer());
+		}
+		redirect('admin/tdesign/manage/arts'); 
+		/* if ($id = $this->streams->entries->insert_entry($_POST, 'blog', 'blogs', array('created'), $extra))
+			{
+				
+				$this->session->set_flashdata('success', sprintf($this->lang->line('blog:post_add_success'), $this->input->post('title')));
+
+			
+			}
+			else
+			{
+				$this->session->set_flashdata('error', lang('blog:post_add_error'));
+			}
+
+			
+			 redirect('admin/tdesign/manage/arts); */
+	}
 	
 	
 }

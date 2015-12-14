@@ -115,3 +115,4 @@ $lang['design:display_front_end']='Hiển thị Homepage';
 // date
 $lang['design:archive_date_format']		= "%B %Y";
 $lang['design:your_design']='Designs';
+$lang['design:arrove']='Duyệt';

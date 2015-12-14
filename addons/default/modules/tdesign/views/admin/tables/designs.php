@@ -4,6 +4,7 @@
 				<th width="20"><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all')) ?></th>
 				<th><?php echo lang('design:designed_label') ?></th>
 				<th><?php echo lang('design:link') ?></th>
+				<th>Color</th>
 				<th class="collapse"><?php echo lang('design:category_label') ?></th>
 				<th class="collapse"><?php echo lang('design:date_label') ?></th>
 				<th class="collapse"><?php echo lang('design:artis') ?></th>
@@ -18,6 +19,7 @@
 					<td><?php echo form_checkbox('action_to[]', $design->product_id) ?></td>
 					<td><?php echo $design->product?></td>
 					<td class="collapse"><?php  echo site_url($design->slugurl)?></td>
+					<td class="collapse"><?php if($design->color):?><div style="width:30px;height:30px;background-color: <?php echo $design->color?>"></div> <?php endif?></td>
 					<td class="collapse"><?php  echo $design->cate_name?></td>
 					<td class="collapse"><?php echo format_date($design->avail_since) ?></td>
 					<td class="collapse">

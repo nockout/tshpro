@@ -4,7 +4,7 @@
 			<tr>
 				<th width="20"><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all')) ?></th>
 				<th><?php echo lang('global:title') ?></th>
-				<th><?php echo lang('template:group') ?></th>
+				<th><?php echo lang('template:color') ?></th>
 				<th class="collapse"><?php echo lang('template:category_label') ?></th>
 				<th class="collapse"><?php echo lang('template:date_label') ?></th>
 			
@@ -18,7 +18,7 @@
 				<tr>
 					<td><?php echo form_checkbox('action_to[]', $template->id_template) ?></td>
 					<td class="collapse"><?php  echo $template->name?></td>
-					<td class="collapse"><?php  echo $template->group_id?></td>
+					<td class="collapse"><?php if($template->color) :?><div style="width: 30px;height: 30px;background-color: <?php  echo  $template->color?>"></div> <?php endif?> </td>
 					<td class="collapse"><?php  echo $template->cate_name?></td>
 					<td class="collapse"><?php echo format_date($template->timestamp) ?></td>				
 					<td><?php echo lang('template:'.$template->status.'_label') ?></td>

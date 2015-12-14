@@ -292,6 +292,7 @@ class Admin extends Admin_Controller
 		$data['slug_id']="";
 		$data['slugurl']="";
 		$data['group_id'] = '';
+		$data['color']='';
 		$data['product'] = "";
 		$data['cate_id'] = '';
 		$data['status'] = "";
@@ -333,6 +334,7 @@ class Admin extends Admin_Controller
 			$data['price'] = $product->price;
 			$data['extra'] = $product->extra;
 			$data['product_code']=$product->product_code;
+			$data['color']=$product->color;
 			$data['slug_id']=$product->slug_id;
 			$data['slugurl']=$product->slugurl;
 			$data['images']=!empty($product->image)?$product->image:"";
@@ -393,7 +395,7 @@ class Admin extends Admin_Controller
             $save['price'] =$this->input->post("price")?$this->input->post("price"):0;
             $save['status']=$this->input->post("status");
             $save['is_gc'] = $this->input->post("is_gc")?0:1;
-         	
+            $save['color'] = $this->input->post("color")?$this->input->post("color"):"";
             $save['lang'][CURRENT_LANGUAGE]['slugurl']=$slug;
             $save['lang'][CURRENT_LANGUAGE]['slug_id']=$route_id;
             $save['lang'][CURRENT_LANGUAGE]['product']=$this->input->post("title");
@@ -470,6 +472,11 @@ class Admin extends Admin_Controller
 		}
 		
 		
+	}
+	function art_status($id,$status){
+			$this->load->model('art_model');
+			$status=intval($status)?1:0;
+			$this->art_model->status($id, $status);
 	}
 
 	
