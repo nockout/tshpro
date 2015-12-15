@@ -149,7 +149,7 @@ class Tplate {
 										$config['new_image'] = $new_file_path;
 										
 										$config['maintain_ratio'] = TRUE;
-										$config['height']	= 485;
+										$config['height']	= MAX_TEMPLATE_HEIGHT;
 										
 										$this->CI->load->library('image_lib' ); 
 										$resizer=new CI_Image_lib();

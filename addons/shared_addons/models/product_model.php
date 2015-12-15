@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-include "base_m.php";
 class Product_model extends Base_m
 {
 	protected $_table = 'tshirt_products';
@@ -104,6 +103,10 @@ class Product_model extends Base_m
 		
 	}
 	
+	public function groupProducts($art_id){
+		return $this->get_products(array('id_art'=>$art_id,'order'=>"total_view",'way'=>'desc'));
+	}
+	
 	public function get_products($params=array(),$offset=0,$limit=12){
 	
 		if(!empty($params['cate_id']) && $params['cate_id']!=1){
@@ -127,6 +130,10 @@ class Product_model extends Base_m
 		if(!empty($params['order'])){
 			$this->db->order_by($params['order'], $params['way']); ;
 		}
+		if(!empty($params['id_art'])){
+			$this->db->where('id_art',trim($params['id_art']));
+		}
+		
 		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
 		
 		$this->db->join($this->_descriptions,$this->_descriptions.'.product_id='.$this->_table.'.product_id');

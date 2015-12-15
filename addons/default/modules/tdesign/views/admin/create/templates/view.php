@@ -14,12 +14,12 @@
 								//$pFront1["price"]=$t->price;?>
 			<?php 
 			// print_r($t->colors_groups);die;
-			 $color =unserialize($t->colors_groups);
-			if(!empty($color)){
+			// $color =unserialize($t->colors_groups);
+			/* if(!empty($color)){
 				//echo "Aaa";die;
 				$pFront['colors']=implode(",", $color);
 				$pBack['colors']=$name;
-			}
+			} */
 			$pFront['options']=array("max_price"=>10000);
 			$jsonFront=json_encode($pFront);
 			$jsonFront1=json_encode($pFront1);

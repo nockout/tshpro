@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-include "base_m.php";
+
 class Template_m extends Base_m
 {
 	protected $_table = 'tshirt_template';	
@@ -87,6 +87,7 @@ class Template_m extends Base_m
 		$this->db->join($this->lang_table,$this->lang_table.'.'.$this->_primary.'='.$this->_table.'.'.$this->_primary);
 		$this->db->where('lang_code',CURRENT_LANGUAGE);
 		$this->db->where('deleted',0);
+		
 		$this->db->offset($page)->limit($limit);
 		$this->db->order_by("group_id");
 		
@@ -172,6 +173,7 @@ class Template_m extends Base_m
 			}
 		}
 	}
+	
 	public function createimage($id_template=0,$type='FRONT'){
 		if(intval($id_template)){
 			$this->db->insert($this->_image_table,array("id_template"=>$id_template,"type"=>$type));

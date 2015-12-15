@@ -59,4 +59,9 @@ class Art_model extends CI_Model
 		} */
 			
 	}
+	function isActive($id){
+		if(empty($id))
+			return false;
+		return $this->db->where('id',$id)->where(array("deleted"=>0,"allowed"=>1))->get($this->table);
+	}
 }

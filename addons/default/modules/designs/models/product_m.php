@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-include "base_m.php";
 class Product_m extends Base_m
 {
 	protected $_table = 'tshirt_products';

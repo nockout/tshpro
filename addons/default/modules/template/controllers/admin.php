@@ -54,11 +54,13 @@ class Admin extends Admin_Controller
 			
 	);
 	
+	var $tplateImageFolder="";
 	
 	
 	public function __construct()
 	{
 	    parent::__construct();
+	    $this->tplateImageFolder=UPLOAD_PATH.'../template/';
 		    $this->lang->load('template');
 		    $this->load->helper(array('currency','tdesign'));
 		    $this->load->model(array("category_model","search_model"));
@@ -120,7 +122,7 @@ class Admin extends Admin_Controller
 
 		
 		$categories=$this->category_model->get_option_categories(1);
-		
+		$this->load->model('template_m');
 		
 	
 		if ($this->input->post('search')) {
@@ -138,9 +140,10 @@ class Admin extends Admin_Controller
 		}
 		$data['term']=$term;
 		
-		$templates=$this->tplate->get_templates($data,$by,$way,$page,6);
+		$templates=$this->template_m->get_templates($data,$by,$way,$page,6);
+	
 		$this->template->set("term",(array)$term);
-	    $pagination=panagition("admin/template/index/$code/$by/$way/",4,$templates['total'],$page,3);
+	    $pagination=panagition("admin/template/index/$code/$by/$way/",4,$templates['total'],$page,6);
 		$this->template->set('categories', $categories);
  		$this->template->set('templates',$templates['objects']);
  		$this->template->set('pagination', $pagination);
@@ -206,11 +209,11 @@ class Admin extends Admin_Controller
 			$data['status']=$tplate->status;
 			$data['color']=$tplate->color;
 			$data['category_id']=$tplate->id_category_default;
-		
+		/* 
 			if($tplate->colors_groups){
-				$data['colors_groups']=unserialize($tplate->colors_groups);
+				//$data['colors_groups']=unserialize($tplate->colors_groups);
 			}
-			
+			 */
 		
 		}
 		//echo "<pre>";
@@ -241,7 +244,7 @@ class Admin extends Admin_Controller
             $save['status']=$this->input->post("status");
             $save['id_category_default']=$this->input->post("category_id");
             $save['color']=$this->input->post("color");
-            $save['colors_groups']=serialize($this->input->post('colors'));
+           // $save['colors_groups']=serialize($this->input->post('colors'));
             if(!$save['id_template'])
             $save['timestamp']=date('Y-m-d H:i:s');
             $save['lang'][CURRENT_LANGUAGE]['name']=$this->input->post("title");
@@ -313,11 +316,145 @@ class Admin extends Admin_Controller
 		die('No product id found');
 	}
 	public function set_default($id_template=null, $id_image=null,$type=null){
-		//$id_template=$this->input->post('id_image');
-	//	$id_default=$this->input->post("id_template");
 		if($id_image&&$id_template&&$type){
 			$this->load->library("tplate");
 			$this->tplate->set_default($id_template,$id_image,$type);
+		}
+	}
+	
+	public function import(){
+		$this->load->library('Excel');
+		$this->template->build('admin/import');
+	}
+	public function doimport($userFile="spreedsheet"){
+		if(empty($_FILES))
+			return;
+		$error=array();
+		ini_set('max_execution_time',0);
+		
+		$config['allowed_types'] = 'zip';
+		$config['upload_path'] =  UPLOAD_PATH.'../import/';;
+		
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload($userFile))
+		{
+			$error = array('error' => $this->upload->display_errors());
+		
+			//$this->load->view('upload_form', $error);
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+			$zip = new ZipArchive;
+			$file = $data['upload_data']['full_path'];
+			chmod($file,0777);
+			if ($zip->open($file) === TRUE) {
+				$zip->extractTo( UPLOAD_PATH.'../import/');
+				$zip->close();
+				//echo 'ok';
+			} else {
+				//echo 'failed';
+			}
+			if(!file_exists(UPLOAD_PATH.'../import/products.xlsx')){
+				$error[]='ERROR: products.xlsx was not found';
+			}
+			if(!is_dir(UPLOAD_PATH.'../import/images')){
+				$error[]='ERROR: images folder was not found';
+			}
+			if(empty($error)){
+				try{
+					$inputFileName=UPLOAD_PATH.'../import/products.xlsx';
+				
+				$this->load->library('excel');
+				 $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+   				 $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+   				 $objPHPExcel = $objReader->load($inputFileName);
+   				 } catch(Exception $e) {
+   				 	$error[]=('ERROR: loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+   				 }
+   				 
+   				 
+   				 $this->load->model('category/category_m');
+   				 $this->load->model('template/template_m');
+   				 //  Get worksheet dimensions
+   				 $sheet = $objPHPExcel->getSheet(0);
+   				 $highestRow = $sheet->getHighestRow();
+   				 $highestColumn = $sheet->getHighestColumn();
+   			
+   				 for ($row = 2; $row <= $highestRow; $row++){
+   				 
+   				 	$rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
+   				 			NULL,
+   				 			TRUE,
+   				 			FALSE);
+   				 	if(empty($rowData))
+   				 		continue;
+   				 	$data=$rowData[0];
+   				 
+   				 	$imgPath=UPLOAD_PATH.'../import'.$data[6];
+   				
+   				 	if(!file_exists($imgPath) || empty($data[6]))
+   				 	{
+   				 		
+   				 		$error[]=sprintf("ERROR: can not find image path of product STT %s-%s-%s",$data[0],$data[2],$data[3]);
+   				 		continue;
+   				 	}
+   				 	
+   				 		// create product teamplate;
+   				 	$category=$data[1];
+   				 	
+   				 	$category=$this->category_m->get_category_by_name($category);
+   				 	$saveProduct['lang'][CURRENT_LANGUAGE]['name']=$data[2]?$data[2]:"empty name";
+   				 	$saveProduct['lang'][CURRENT_LANGUAGE]['description']=$data[9]?$data[9]:"";
+   				 	$saveProduct['code']=$data[5];
+   				 	$saveProduct['color']=$data[7];
+   				 	$saveProduct['price']=intval($data[8]);
+   				 	$saveProduct['price_max']=intval($data[8]);
+   				 	$saveProduct['status']='A';
+   				 	
+   				 	$saveProduct['timestamp']=date('Y-m-d h:i:s');
+   				 	$saveProduct['id_category_default']=$category->category_id;
+   				 	$id=$this->template_m->save("",$saveProduct);
+   				
+   					
+   					if(!$this->importProcessImage($id,$imgPath)){
+   						$error[]=sprintf("ERROR: can not find image path of product STT%s:%s-%s",$data[0],$data[2],$data[3]);
+   					}
+   				 	
+   				 }
+   				 
+   				 
+   				 
+			}
+			
+		}
+		
+		$this->session->set_flashdata('import_errors',json_encode($error));
+		//$this->session->set_flashdata('import_sucess',json_encode($error));
+		//$this->session->set_flashdata('import_warning',json_encode($error));
+		redirect("admin/template/import");
+	}
+	private function importProcessImage($id,$imgPath){
+		$img=$this->template_m->createimage ( $id );
+		//echo $imgPath;die;
+		$returnpath = $this->tplateImageFolder . $id . '_' . $img->id_image . '.png';
+		if (file_exists($imgPath)) {
+		
+			$config ['image_library'] = 'gd2';
+			$config ['source_image'] = $imgPath;
+			$config ['new_image'] = $returnpath;
+			
+			$config ['maintain_ratio'] = TRUE;
+			$config ['height'] = 600;
+			
+			$this->load->library ( 'image_lib' );
+			$resizer = new CI_Image_lib ();
+			$resizer->initialize ( $config );
+			$resizer->resize ();
+			return true;
+		}else{
+			return ;
 		}
 	}
 	

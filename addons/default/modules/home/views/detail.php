@@ -62,15 +62,15 @@
 						?>
 
 				
-					<label for="Style"><?php echo lang("product:style")?></label> 
-					<select
+					<label for="Style"><?php echo lang("product:style")?></label> <select
 					onchange="location = this.options[this.selectedIndex].value;"
 					class="form-control" name="shirtTypes" id="shirtTypes">
 							<?php
 						foreach ( $relprd as $rp ) :
 							?>
+							
 							<option
-						<?php if($rp->product_id==$product->product_id)echo 'selected=""'?>
+						<?php if($rp->product_id==$product->product_id) echo 'selected=""'?>
 						value="<?php echo site_url("home/product/".$rp->product_id)?>"><?php echo $rp->product."-".$rp->price?></option>
 							
 							<?php endforeach;?>
@@ -105,6 +105,8 @@
 				
 				<?php $siszeSelected=$this->session->userdata("sizeSelected")?>
 					<div data-toggle="buttons" class="btn-group">
+
+
 						<label
 							class="picksize <?php if($siszeSelected=="S"): ?> active <?php endif ?> btn btn-default"
 							for="S"> <input type="radio" value="S" autocomplete="off"
@@ -139,8 +141,26 @@
 					</div>
 
 				</div>
-
-
+				<?php
+					
+					if (isset ( $relprd ) && ! empty ( $relprd )) :
+						?>
+						<button
+					style="background: none; border: none; text-align: left; padding: 8px 0px 8px 0px;"
+					class=" text-primary" data-target="#sizeModal" type="button"
+					data-toggle="modal"><?php echo lang("global:color")?></button>
+			<div id="popcolor" data-placement="top" 
+					class="size-select" aria-describedby="">
+					<div class="btn-group">
+					<?php foreach ($relprd as $rs):?>
+				
+							<a href="<?php echo site_url($rs->slugurl)?>" class=" btn btn-default"  style=";background-color: <?php echo $rs->color?>" ">&nbsp;</a>
+						
+					<?php endforeach;?>
+					</div>
+						
+				</div>
+				<?php endif?>
 			</div>
 
 

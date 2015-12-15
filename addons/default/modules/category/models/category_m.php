@@ -1,5 +1,5 @@
 <?php
-include "base_m.php";
+
 Class Category_m extends Base_m
 {
 
@@ -163,5 +163,45 @@ Class Category_m extends Base_m
         //delete references to this category in the product to category table
       //  $this->db->where('category_id', $id);
        // $this->db->delete('category_products');
+    }
+    function get_category_by_name($name,$lang=CURRENT_LANGUAGE){
+    	$this->load->helper(array("MY_string"));
+    	$this->load->model('Routes_model');
+    	$this->db->select('*');
+    	$this->db->join($this->_description,"$this->_table.category_id=$this->_description.category_id");
+    	$this->db->where("lang_code",$lang);    
+    	$this->db->order_by("$this->_table.position", 'ASC');
+    	$category= $this->db->get_where($this->_table, array("category"=>$name))->row();
+    	
+    	if(empty($category)){
+    		//add category
+    		//
+    		
+    		
+    		$slug = $name;
+    		$slug = create_slug($slug);
+    		
+    		$slug = $this->Routes_model->validate_slug($slug);
+    		$route['keyword'] = $slug;
+    		$route['entity']='category';
+    		$route_id = $this->Routes_model->save($route);
+    		
+    		
+			$save['parent_id']=1;
+			$save['status']="1";
+			$save['lang'][CURRENT_LANGUAGE]['slugurl']=$slug;
+			$save['lang'][CURRENT_LANGUAGE]['slug_id']=$route_id;
+			
+			
+			$save['lang'][CURRENT_LANGUAGE]['category']=$name;
+			$save['lang'][CURRENT_LANGUAGE]['description']="";
+    		
+    		
+    		$id=$this->save("", $save);
+    		return $this->get_category($id);
+    	}else{
+    		return $category;
+    	}
+    	
     }
 }

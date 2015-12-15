@@ -54,6 +54,7 @@ class Module_Template extends Module
 		
 		$menu['lang:cp:nav_template'] = array(
 			'lang:cp:nav_template'=> 'admin/template/',
+			'lang:cp:nav_import_template'=> 'admin/template/import/',
 			
 		);
 		//echo "<pre>";

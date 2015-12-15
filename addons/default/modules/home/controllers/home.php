@@ -54,8 +54,16 @@ class Home extends Public_Controller {
 	public function product($id = null) {
 		
 		$this->load->model ( 'product_model' );
+		$this->load->model ( 'art_model' );
 		$id or redirect ( "home" );
+		
+		
 		$product = $this->product_model->get ( $id );
+		
+		
+		if(!$this->art_model->isActive(intval($product->id_art)))
+				show_404("page not found");
+		
 		
 		$this->product_model->updateTotalView($id);
 		$this->load->model ( array('category_model' ,'user/ion_auth_model'));		
@@ -66,11 +74,18 @@ class Home extends Public_Controller {
 		if (empty ( $product ))
 			redirect ( "home" );
 		
-		if (! isset ( $product->id_art ))
-			redirect ( "home" );
+		/* if (! isset ( $product->id_art ))
+			redirect ( "home" ); */
 		
 		if ($product->id_art) {
-			$relatePro = $this->product_model->find_art_by_id ( $product->id_art, $id );
+			$groupProducts = $this->product_model->groupProducts ( $product->id_art );
+			
+			
+			$relatePro=array();
+			if(!empty($groupProducts)){
+				$relatePro=$groupProducts['objects'];
+			}
+			
 			$this->template->set ( 'relprd', $relatePro );
 		}
 		
