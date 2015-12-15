@@ -89,5 +89,6 @@ $lang['cp:order_id']='Order ID';
 $lang['cp:not_approve']='Not Approval';
 $lang['cp:last_order']='Latest Order';
 $lang['cp:total_order']='Total Order';
+$lang['cp:nav_import_template']='Import Template';
 
 /* End of file admin_lang.php */

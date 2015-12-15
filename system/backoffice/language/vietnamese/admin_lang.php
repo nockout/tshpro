@@ -83,4 +83,5 @@ $lang['cp:order_id']=' ID';
 $lang['cp:not_approve']='Chưa phê duyệt';
 $lang['cp:last_order']='Đơn hàng mới nhất';
 $lang['cp:total_order']='Tổng số đơn hàng';
+$lang['cp:nav_import_template']='Import sản phẩm';
 /* End of file admin_lang.php */

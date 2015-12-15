@@ -129,5 +129,5 @@ $lang['global:plain-text']				= 'Plain Text'; #translate
 $lang['design:create']					= 'New Design';
 $lang['design:manage']					= 'Manage Designs';
 
-
+$lang['global:color']='Màu';
 /* End of file global_lang.php */
