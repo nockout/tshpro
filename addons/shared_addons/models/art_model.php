@@ -32,7 +32,7 @@ class Art_model extends CI_Model
 
 		if(empty($ids) || empty($this->current_user->id))
 			return;
-		
+		$this->db->where_in('id_art',$ids)->update('tshirt_products',array('deleted'=>3));
 		return $this->db->where_in('id',$ids)->update($this->table,array('deleted'=>1));
 	}
 	
@@ -41,6 +41,11 @@ class Art_model extends CI_Model
 		if(empty($ids) || empty($this->current_user->id))
 			return;
 		$status=intval($status)?1:0;
+		if($status==1){
+			$this->db->where_in('id_art',$ids)->update('tshirt_products',array('deleted'=>0,'status'=>"A"));
+		}else{
+			$this->db->where_in('id_art',$ids)->update('tshirt_products',array('deleted'=>3,'status'=>"D"));
+		}
 		return $this->db->where_in('id',$ids)->update($this->table,array('allowed'=>$status));
 	
 		/* $checkGroup=array('admin','sale');

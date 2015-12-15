@@ -183,6 +183,8 @@ class Product_m extends Base_m
 		return $this->db->where_in('product_id',$id)->get($this->_images)->result();
 	}
 	public function create_draft($extra=null){
+		$this->load->helper(array("MY_string"));
+		$this->load->model('Routes_model');
 				if(!empty($extra)){
 					$this->_default_fields['extra']=serialize($extra);
 				}
@@ -217,12 +219,31 @@ class Product_m extends Base_m
 						//'color' => $productcode,
 						
 				);
+			
+				
+				
 				
 				$this->db->where('product_id', $insert_id);
 				$this->db->update($this->_table, $data);
 			
 				$lang[CURRENT_LANGUAGE]['product']=isset($extra['name'])?$extra['name']:"";
 				$lang[CURRENT_LANGUAGE]['full_description']=isset($extra['description'])?htmlentities($extra['description']):"";
+				//
+				
+				$slug = $lang[CURRENT_LANGUAGE]['product'];
+				$slug = create_slug($slug);
+				
+				$slug = $this->Routes_model->validate_slug($slug);
+				$route['keyword'] = $slug;
+				$route['entity']='product';
+				$route['query']='home/product/'.$insert_id;
+				$route['oid']=$insert_id;
+				$route_id = $this->Routes_model->save($route);
+				
+				$lang[CURRENT_LANGUAGE]['slugurl']=$slug;
+				$lang[CURRENT_LANGUAGE]['slug_id']=$route_id;
+				
+				// slug url;
 				if($insert_id){
 						$this->save_lang($insert_id,CURRENT_LANGUAGE,$lang[CURRENT_LANGUAGE]);
 				}

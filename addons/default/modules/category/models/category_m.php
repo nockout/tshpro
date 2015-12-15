@@ -184,6 +184,8 @@ Class Category_m extends Base_m
     		$slug = $this->Routes_model->validate_slug($slug);
     		$route['keyword'] = $slug;
     		$route['entity']='category';
+    		$route['query']='home/cate/'.$category->id;
+    		$route['oid']=$category->id;
     		$route_id = $this->Routes_model->save($route);
     		
     		
