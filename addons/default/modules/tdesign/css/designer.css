@@ -51,3 +51,35 @@
 	display: inline;
 	margin-top:10px;
 }
+
+input[type=text].editable
+{
+
+	
+	color:#545454;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-border-radius: 2px;
+	display:none;
+	
+	
+}
+
+
+.edit
+{
+	float:left;
+	background:url(../images/edit.png) no-repeat;
+	width:32px;
+	height:32px;
+	display:block;
+	cursor: pointer;
+	margin-left:10px;
+}
+
+.clear
+{
+	clear:both;
+	height:20px;
+}
+

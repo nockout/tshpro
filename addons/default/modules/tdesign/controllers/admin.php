@@ -393,8 +393,11 @@ class Admin extends Admin_Controller
 	
 			$save['product_id'] = intval($id);
             $save['price'] =$this->input->post("price")?$this->input->post("price"):0;
+           // print_r($this->input->post("status"));die;
             $save['status']=$this->input->post("status");
-            $save['is_gc'] = $this->input->post("is_gc")?0:1;
+        //    echo $save['status'];die;
+     
+            $save['is_gc'] = isset($_POST['is_gc'])?1:0;
             $save['color'] = $this->input->post("color")?$this->input->post("color"):"";
             $save['lang'][CURRENT_LANGUAGE]['slugurl']=$slug;
             $save['lang'][CURRENT_LANGUAGE]['slug_id']=$route_id;

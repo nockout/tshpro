@@ -190,7 +190,8 @@ class Product_m extends Base_m
 				}
 				
 				unset($this->_default_fields['product_id']);
-				$this->_default_fields['status']="D";
+				$this->_default_fields['status']="A";
+				$this->_default_fields['is_gc']="1";
 				$this->_default_fields['avail_since']=Date("Y-m-d H:i:s");
 				$this->_default_fields['cate_id']=1;
 				$this->_default_fields['id_art']=$extra['id_art'];
@@ -269,10 +270,10 @@ class Product_m extends Base_m
 			return false;
 		}
 		$status=$save['status'];
-		if($save['status']=="D"){
+		/* if($save['status']=="D"){
 			//$save['extra']=null;	
-			$save['status']="A";
-		}
+			$save['status']="I";
+		} */
 		$lang=$save['lang'];
 		unset($save['lang']);
 		if(!$id){

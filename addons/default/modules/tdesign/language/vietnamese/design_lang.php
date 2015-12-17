@@ -116,3 +116,4 @@ $lang['design:display_front_end']='Hiển thị Homepage';
 $lang['design:archive_date_format']		= "%B %Y";
 $lang['design:your_design']='Designs';
 $lang['design:arrove']='Duyệt';
+$lang['global:search']="Tìm kiếm";

@@ -28,7 +28,7 @@ jQuery(document)
 									boundingBox : "Base",
 									patternable: true
 								},width: 900, boundingBoxColor:"#18BC9C",
-						    	stageHeight: 500,
+						    	stageHeight: 600,
 								elementParameters: {
 									/*x: 'center', //the x-position
 									y: 'center', //the y-position
@@ -55,8 +55,8 @@ jQuery(document)
 									colors : '#000',
 									minW:1200,
 							        minH:1200,
-							        maxW: 3600,
-							        maxH: 3600,
+							        maxW: 4800,
+							        maxH: 4800,
 							        scale: 0.5,							       
 									autoCenter : true,
 									boundingBox : "Base",
