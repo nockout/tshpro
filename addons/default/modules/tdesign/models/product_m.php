@@ -190,7 +190,7 @@ class Product_m extends Base_m
 				}
 				
 				unset($this->_default_fields['product_id']);
-				$this->_default_fields['status']="A";
+				$this->_default_fields['status']="D";
 				$this->_default_fields['is_gc']="1";
 				$this->_default_fields['avail_since']=Date("Y-m-d H:i:s");
 				$this->_default_fields['cate_id']=1;
@@ -310,6 +310,13 @@ class Product_m extends Base_m
 		}	
 	
 	
+		if(!empty($parrams)){
+				
+			if(!empty($parrams['f_keywords']))
+			{
+				$this->db->like('name',$parrams['f_keywords']);
+			}
+		}
 		$this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
 		
 		$this->db->select("(SELECT username FROM ".(SITE_REF."_".$this->_users)." WHERE id=user_id LIMIT 1) AS user_name", FALSE);
@@ -334,6 +341,7 @@ class Product_m extends Base_m
 		if(empty($data))
 			return;
 		$data['user_id']=$this->current_user->user_id;
+		$data['add_time']=date('Y-m-d H:i:s');
 		$data['add_time']=date('Y-m-d H:i:s');
 		 $this->db->insert("tshirt_arts",$data);
 		 return $this->db->insert_id();
