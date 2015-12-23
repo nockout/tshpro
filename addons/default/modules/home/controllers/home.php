@@ -23,7 +23,7 @@ class Home extends Public_Controller {
 	public function index() {
 	
 		$this->load->model ( 'product_model' );
-		$product = $this->product_model->get_products (array(),0,40);
+		$product = $this->product_model->get_products (array('is_gc'=>1),0,40);
 		$this->template->title ( $this->module_details ['name'] )->set ( "products", $product ['objects'] )->
 		build ( 'home' );
 	}
@@ -60,6 +60,8 @@ class Home extends Public_Controller {
 		
 		$product = $this->product_model->get ( $id );
 		
+		if($product->status=="D")
+			show_404("page not found");
 		
 		if(!$this->art_model->isActive(intval($product->id_art)))
 				show_404("page not found");

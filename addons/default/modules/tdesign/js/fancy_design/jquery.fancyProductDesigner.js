@@ -2511,6 +2511,7 @@ var jsPDF = function() {
             for (b in c) a = c[b], d("/I" + a.i, a.n, "0", "R")
         };
     a.addImage = function(a, d, e, f, g, h) {
+    	
         if ("object" == typeof a && 1 === a.nodeType) {
             d = document.createElement("canvas"), d.width = a.clientWidth, d.height = a.clientHeight;
             var i = d.getContext("2d");
@@ -7416,6 +7417,9 @@ var FancyProductDesigner = function(a, b) {
     }
     $ = jQuery;
     var d = $.extend({}, $.fn.fancyProductDesigner.defaults, b);
+    FFANCYP=d;
+
+    
     d.elementParameters = $.extend({}, $.fn.fancyProductDesigner.defaults.elementParameters, d.elementParameters), d.textParameters = $.extend({}, $.fn.fancyProductDesigner.defaults.textParameters, d.textParameters), d.imageParameters = $.extend({}, $.fn.fancyProductDesigner.defaults.imageParameters, d.imageParameters), d.customTextParameters = $.extend({}, $.fn.fancyProductDesigner.defaults.customTextParameters, d.customTextParameters), d.customImageParameters = $.extend({}, $.fn.fancyProductDesigner.defaults.customImageParameters, d.customImageParameters), d.customAdds = $.extend({}, $.fn.fancyProductDesigner.defaults.customAdds, d.customAdds), d.dimensions = $.extend({}, $.fn.fancyProductDesigner.defaults.dimensions, d.dimensions), d.labels = $.extend({}, $.fn.fancyProductDesigner.defaults.labels, d.labels);
     var e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w = "3.0.31",
         x = this,
@@ -7443,8 +7447,10 @@ var FancyProductDesigner = function(a, b) {
         V = null,
         W = !1,
         X = !0,
-        Y = null;
+        Y = null,
+        printarea=null;
     g = $(a).width(d.width).addClass("fpd-container fpd-clearfix").before('<p class="fpd-initiliazing">' + d.labels.initText + '<br /><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSJibGFjayI+CiAgPGNpcmNsZSB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4IDApIiBjeD0iMCIgY3k9IjE2IiByPSIwIj4KICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9InIiIHZhbHVlcz0iMDsgNDsgMDsgMCIgZHVyPSIxLjJzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgYmVnaW49IjAiCiAgICAgIGtleXRpbWVzPSIwOzAuMjswLjc7MSIga2V5U3BsaW5lcz0iMC4yIDAuMiAwLjQgMC44OzAuMiAwLjYgMC40IDAuODswLjIgMC42IDAuNCAwLjgiIGNhbGNNb2RlPSJzcGxpbmUiIC8+CiAgPC9jaXJjbGU+CiAgPGNpcmNsZSB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNiAwKSIgY3g9IjAiIGN5PSIxNiIgcj0iMCI+CiAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJyIiB2YWx1ZXM9IjA7IDQ7IDA7IDAiIGR1cj0iMS4ycyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIGJlZ2luPSIwLjMiCiAgICAgIGtleXRpbWVzPSIwOzAuMjswLjc7MSIga2V5U3BsaW5lcz0iMC4yIDAuMiAwLjQgMC44OzAuMiAwLjYgMC40IDAuODswLjIgMC42IDAuNCAwLjgiIGNhbGNNb2RlPSJzcGxpbmUiIC8+CiAgPC9jaXJjbGU+CiAgPGNpcmNsZSB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNCAwKSIgY3g9IjAiIGN5PSIxNiIgcj0iMCI+CiAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJyIiB2YWx1ZXM9IjA7IDQ7IDA7IDAiIGR1cj0iMS4ycyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIGJlZ2luPSIwLjYiCiAgICAgIGtleXRpbWVzPSIwOzAuMjswLjc7MSIga2V5U3BsaW5lcz0iMC4yIDAuMiAwLjQgMC44OzAuMiAwLjYgMC40IDAuODswLjIgMC42IDAuNCAwLjgiIGNhbGNNb2RlPSJzcGxpbmUiIC8+CiAgPC9jaXJjbGU+Cjwvc3ZnPg==" /></p>'), h = g.prev(".fpd-initiliazing"), e = g.children(".fpd-category").size() > 0 ? g.children(".fpd-category").remove() : g.children(".fpd-product").remove(), f = g.children(".fpd-design");
+    //console.log($(g));
     var Z = document.createElement("canvas"),
         _ = Boolean(Z.getContext && Z.getContext("2d"));
     if (!_ || c() && Number(c()) <= 9) return $.post(d.templatesDirectory + "canvaserror.php", function(a) {
@@ -7458,7 +7464,13 @@ var FancyProductDesigner = function(a, b) {
     for (var ba, ca = Object.keys(d.hexNames), da = ca.length, ea = {}; da--;) ba = ca[da], ea[ba.toLowerCase()] = d.hexNames[ba];
     d.hexNames = ea, $.post(d.templatesDirectory + "sidebar", d.labels, function(a) {
         g.append($.parseHTML(a)), q = g.children(".fpd-full-loader").hide(), i = g.children(".fpd-main-container"), j = i.children(".fpd-product-stage").height(d.stageHeight), n = j.children(".fpd-element-tooltip").html(d.labels.outOfContainmentAlert), i.children(".fpd-context-dialog").remove().clone().appendTo(z), k = z.children(".fpd-context-dialog").addClass("fpd-hidden"), l = k.find(".fpd-context-loader"), m = k.find(".fpd-color-picker"), g.trigger("templateLoad", [this.url]), setTimeout(fa, 1e3)
+        
+     
+    
     });
+
+   
+    
     var fa = function() {
         if (g.find("[data-context]").on("mouseup touchend", function() {
             var a = $(this);
@@ -8232,6 +8244,7 @@ var FancyProductDesigner = function(a, b) {
                 e = b.append('<div class="fpd-item fpd-tooltip ' + c + '" title="' + a[0].title + '"><picture data-img="' + a[0].thumbnail + '"></picture></div>').children(".fpd-item:last").click(function(a) {
                     var c = $(this),
                         d = b.children(".fpd-item").index(c);
+                    	
                     x.selectProduct(d), a.preventDefault()
                 }).data("views", a);
             d.lazyLoad || Za(e.children("picture"), a[0].thumbnail), (2 == b.children(".fpd-item").length || !b.parents(".fpd-no-categories").size() > 0) && g.find('[data-context="products"]').css("display", "inline-block"), Ma()
@@ -8651,11 +8664,19 @@ var FancyProductDesigner = function(a, b) {
     }, FancyProductDesigner.prototype.addProduct = function(a, b) {
         null === A || A === !1 ? Aa(a) : (b = "undefined" == typeof b ? A.val() : b, void 0 == B[b] && (B[b] = new Array, A.append('<option value="' + b + '">' + b + "</option>")), B[b].push(a), A.val() == b && Aa(a))
     }, FancyProductDesigner.prototype.loadProduct = function(a) {
+    	
+
+        
         function b() {
+        	  x.reloadprintarea();
+
+        
+        	//console.log(r);
             if (G < J.length) x.addView(J[G]);
             else {
                 g.off("viewCreate", b), g.trigger("productCreate", [J]);
                 for (var a = r.getObjects(), c = 0; c < a.length; ++c) {
+                	//console.log( a[c]);
                     var d = a[c];
                     d.viewIndex == I && d.params && d.params.autoSelect && (r.setActiveObject(d), d.setCoords())
                 }
@@ -8685,16 +8706,83 @@ var FancyProductDesigner = function(a, b) {
 		
 		
     }, FancyProductDesigner.prototype.selectProduct = function(a) {
+    	
+    
         if (a == H) return !1;
         H = a, 0 > a ? H = 0 : a > x.getProductsLength() - 1 && (H = x.getProductsLength() - 1);
         var b = k.find(".fpd-content-products .fpd-item").eq(H).data("views");
+        //console.log(b);
+        
+        CURRENT_PRODUCT=b;
+        
         x.loadProduct(b)
+    },FancyProductDesigner.prototype.reloadprintarea=function(){
+    	
+    
+    	
+        var par=CURRENT_PRODUCT[0].options.split(",")
+        var printareaW=parseInt(par[0]);
+        var printareaH=parseInt(par[1]);
+        var printareaX=parseInt(par[2]);
+        var printareaY=parseInt(par[3]);
+        var strokecolor=(par[4]);
+        var stroketype=(par[5]);
+        var strokes;
+       // console.log(par);
+        
+        if(stroketype=='line'){
+        	   strokes=[0,0];
+        }else{
+        	   strokes=[5,10];
+        }
+        
+        var printarea=$('.printarea');
+        var printAreatPaddingTop=0;
+      
+       // console.log(d);
+        FFANCYP.customImageParameters.resizeToH=printareaH;
+        FFANCYP.customImageParameters.resizeToW=printareaW;
+        
+    
+        var l1,l2,l3,l4;
+     
+         l1=new fabric.Line([printareaX,printareaY, (printareaX+printareaW),printareaY], {
+        	 strokeDashArray:strokes,
+            stroke: strokecolor,
+            selectable:false
+        });
+         l2=new fabric.Line([printareaX,printareaY, printareaX, (printareaY+printareaH)], {
+        	 strokeDashArray:strokes,
+             stroke: strokecolor,
+             selectable:false
+         });
+         l3=new fabric.Line([printareaX, (printareaY+printareaH), (printareaX+printareaW), (printareaY+printareaH)], {
+        	 strokeDashArray:strokes,
+             stroke: strokecolor,
+             selectable:false
+         });
+         l4=new fabric.Line([(printareaX+printareaW),printareaY, (printareaX+printareaW), (printareaY+printareaH)], {
+        	 strokeDashArray:strokes,
+             stroke: strokecolor,
+             selectable:false
+         });
+        
+         r.add(l1);
+         r.add(l2);
+         r.add(l3);
+         r.add(l4);
+    	
     }, FancyProductDesigner.prototype.selectView = function(a) {
+    	
+    	
         I = a, 0 > a ? I = 0 : a > o.children().size() - 1 && (I = o.children().size() - 1), x.closeDialog(), o.children("div").removeClass("fpd-view-active").eq(a).addClass("fpd-view-active"), x.deselectElement();
         for (var b = (k.find(".fpd-content-layers .fpd-list").empty(), r.getObjects()), c = 0; c < b.length; ++c) {
             var d = b[c];
             d.visible = d.viewIndex == I, d.viewIndex == I && d.isEditable && Oa(d.id, d.title, d.params.zChangeable, d.params.removable, d.params.uploadZone, !d.evented)
         }
+    
+        x.reloadprintarea();
+        //console.log(r);
         r.renderAll(), Ja(J[I].options)
     }, FancyProductDesigner.prototype.removeProduct = function(a) {
         0 > a ? a = 0 : a > x.getProductsLength() - 1 && (a = x.getProductsLength() - 1), k.find(".fpd-content-products .fpd-grid > .fpd-item").eq(a).remove(), a == H && (x.clear(), H = -1)
@@ -8948,6 +9036,7 @@ var FancyProductDesigner = function(a, b) {
 ! function(a) {
     "use strict";
     jQuery.fn.fancyProductDesigner = function(b) {
+
         return this.each(function() {
             var c = a(this);
             if (!c.data("fancy-product-designer")) {
@@ -8956,6 +9045,7 @@ var FancyProductDesigner = function(a, b) {
             }
         })
     }, a.fn.fancyProductDesigner.defaults = {
+    	printarea:{w:0,h:0},
         width: 900,
         stageHeight: 600,
         imageDownloadable: !0,
@@ -9115,3 +9205,5 @@ var FancyProductDesigner = function(a, b) {
         }
     }
 }(jQuery);
+
+var CURRENT_PRODUCT=FFANCYP=_CANVAS="";

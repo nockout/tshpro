@@ -104,7 +104,7 @@ class Product_model extends Base_m
 	}
 	
 	public function groupProducts($art_id){
-		return $this->get_products(array('id_art'=>$art_id,'order'=>"total_view",'way'=>'desc'));
+		return $this->get_products(array('id_art'=>$art_id,'order'=>"total_view",'way'=>'desc','status'=>"A"));
 	}
 	
 	public function get_products($params=array(),$offset=0,$limit=12){
@@ -125,6 +125,9 @@ class Product_model extends Base_m
 				
 				
 			$this->db->where('user_id',trim($params['user_id']));
+		}
+		if(!empty($params['is_gc'])){
+			$this->db->where('is_gc',intval($params['is_gc']));
 		}
 		
 		if(!empty($params['order'])){

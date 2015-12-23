@@ -42,9 +42,11 @@ class Art_model extends CI_Model
 			return;
 		$status=intval($status)?1:0;
 		if($status==1){
-			$this->db->where_in('id_art',$ids)->update('tshirt_products',array('deleted'=>0,'status'=>"A"));
+			//
+			
+			$this->db->where_in('id_art',$ids)->update('tshirt_products',array('deleted'=>0,'status'=>"A",'is_gc'=>1));
 		}else{
-			$this->db->where_in('id_art',$ids)->update('tshirt_products',array('deleted'=>3,'status'=>"D"));
+			$this->db->where_in('id_art',$ids)->update('tshirt_products',array('deleted'=>3,'status'=>"D",'is_gc'=>0));
 		}
 		return $this->db->where_in('id',$ids)->update($this->table,array('allowed'=>$status));
 	
@@ -68,5 +70,17 @@ class Art_model extends CI_Model
 		if(empty($id))
 			return false;
 		return $this->db->where('id',$id)->where(array("deleted"=>0,"allowed"=>1))->get($this->table);
+	}
+	function change_name($id="",$data){
+		$group=$this->current_user->group;
+		if($group=="artist"){
+			$this->db->where('user_id',$this->current_user->id);
+		}
+		if(empty($id))
+			return;
+		if(!empty($data)){
+			return $this->db->where('id',intval($id))->update($this->table,$data);
+		}
+		return ;
 	}
 }

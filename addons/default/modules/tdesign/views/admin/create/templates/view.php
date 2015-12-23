@@ -3,8 +3,17 @@
 <?php foreach ($templates as $t):?>
 		<?php if(empty($t->images)) 
 			
+			
 			continue;?>
 		
+		
+			<?php $printW=$t->printareaw;
+				$printH=$t->printareah;
+				$printX=$t->printareax;
+				$printY=$t->printareay;
+				$strokecolor=$t->strokecolor;
+				$stroketype=$t->stroketype;
+				?>
 					
 							<?php  $name=$t->id_template;?>
 						
@@ -13,13 +22,7 @@
 							
 								//$pFront1["price"]=$t->price;?>
 			<?php 
-			// print_r($t->colors_groups);die;
-			// $color =unserialize($t->colors_groups);
-			/* if(!empty($color)){
-				//echo "Aaa";die;
-				$pFront['colors']=implode(",", $color);
-				$pBack['colors']=$name;
-			} */
+			
 			$pFront['options']=array("max_price"=>10000);
 			$jsonFront=json_encode($pFront);
 			$jsonFront1=json_encode($pFront1);
@@ -28,7 +31,9 @@
 			$FRONT=array_shift($t->images);
 			$first_layer=array_shift($FRONT);
 			?>
-			<div id="template_<?php echo $t->id_template?>" data='<?php echo json_encode(array("name"=>$name,'max_price'=>$t->price_max,"id_template"=>$t->id_template))?>'  class="fpd-product fpd-shadow-1" title="<?php echo $name?>" data-thumbnail="<?php echo $first_layer?>">
+			<div id="template_<?php echo $t->id_template?>" data='<?php echo json_encode(array("name"=>$name,'max_price'=>$t->price_max,"id_template"=>$t->id_template))?>'  class="fpd-product fpd-shadow-1" 
+			 data-options="<?php echo "$printW,$printH,$printX,$printY,$strokecolor,$stroketype"?>" 
+			 title="<?php echo  $name?>" data-thumbnail="<?php echo $first_layer?>">
 	    			 
 	    			<img src="<?php echo $first_layer?>" title="<?php echo $name?>" data-parameters='<?php echo $jsonFront?>' />
 			  		<?php if(!empty($FRONT)):?>

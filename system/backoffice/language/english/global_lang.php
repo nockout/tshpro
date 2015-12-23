@@ -118,5 +118,5 @@ $lang['global:plain-text']				= 'Plain Text';
 $lang['design:create']					= 'New Design';
 $lang['design:manage']					= 'Manage Designs';
 $lang['global:color']='Colors';
-
+$lang['global:search']="Search";
 /* End of file global_lang.php */

@@ -10,7 +10,7 @@
 						<div class="price">					
 							
 								<strong><?php echo format_price($p->price)?></strong>			
-										 	<?php echo Asset::img("leftpsm.png","",$attr = array( "class"=>"btm-s", "width"=>"3", "height"=>"6"));?>
+										 	<?php // echo Asset::img("leftpsm.png","",$attr = array( "class"=>"btm-s", "width"=>"3", "height"=>"6"));?>
 							
 						</div>
 						<div class="frameit">
@@ -20,8 +20,8 @@
 							  
 							?>
 							<div class="frontThumb">
-								<img style="display: block;" src="images/holder-img.svg" data-original="<?php echo isset($image['image'][0]) ? $image['image'][0]:''?>"
-								 class="img-responsive lazy" alt="<?php echo $p->product?>" title="<?php echo $p->product?>" height="391" width="391">
+								<img class="homeframe" src="<?php echo isset($image['image'][0]) ? $image['image'][0]:''?>" data-original="<?php echo isset($image['image'][0]) ? $image['image'][0]:''?>"
+								 class="img-responsive lazy" alt="<?php echo $p->product?>" title="<?php echo $p->product?>">
 								
 
 							</div>

@@ -84,7 +84,7 @@ $('.carousel').carousel({
 
 	
 ?>
-
+<h4 class="text-primary text-uppercase" style="padding-top: 1em;"><?php echo $slider->title?></h4>
 <div class="container no-padding">
     <div class="col-md-12 no-padding bx-viewport">
     	

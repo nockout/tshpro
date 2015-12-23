@@ -124,3 +124,11 @@ div.col-sm-6.about-acyca ul li{
 .wizard .current:after {
     border-left-color: #007ACC;
 }
+img.homeframe{
+   display: block !important;
+    left: -64%;
+    margin-right: 50%;
+    position: absolute;
+    width: 230%;
+    top:-3%;
+}

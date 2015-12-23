@@ -47,21 +47,25 @@ function deapproveall(){
 </style>
 <section class="item">
 	<div class="content">
-
+<?php echo form_open("admin/tdesign/manage/arts")?>
 		<div class="content" >
 		<fieldset id="filter">
 			<ul class="search">
 				<li><label> 
-			
-				<input type="text" value="" name="f_keywords"></li>
+		
+				<input type="text" value="<?php echo !empty($term['f_keywords'])?$term['f_keywords']:""?>" name="f_keywords"></li>
 				</label>
-				<li><button style="margin:0" class="btn blue" " type="submit" name="submit"><?php echo lang('global:search')?></button></li>
+				<li><button style="margin:0" value="search" class="btn blue" " type="submit" name="search"><?php echo lang('global:search')?></button>
+					<a href="<?php echo site_url("admin/tdesign/manage/arts")?>" style="margin:0" class="btn red"><?php echo lang("buttons:cancel")?></a>
+				</li>
 			</ul>
 		</div>		
+<?php echo form_close()?>	
 </fieldset>
  	<?php echo form_open("admin/tdesign/manage/action")?>
-		<ul class="art_list">
+	
 	<?php if(!empty($arts)):?>
+		<ul class="art_list">
 	<?php foreach ($arts as $art):?>
 	<?php
 			
@@ -83,16 +87,23 @@ function deapproveall(){
 		<?php endforeach;?>
 		</center>
 		
-		<?php echo anchor("admin/tdesign/manage/index/".$art->id,lang("design:mockup"),array("class"=>''))?>
 		
 		
-		<label class="text_label"></label>
+			<center>
+		<?php echo anchor("admin/tdesign/manage/index/".$art->id,!empty($art->name)?$art->name:lang("design:mockup"),array("class"=>'text_label'))?>
+		
 		<div class="edit"></div>
-		<input type="text" value="" class="editable"/>
-		<label id="status-<?php echo $art->id?>">
+		<input type="text" value="" id="<?php echo $art->id?>" class="editable"/>
+		
+				</center>
+				<center>
+				
+				<label id="status-<?php echo $art->id?>">
+				
 		<?php  if($art->allowed) echo lang("buttons:activate") ; else echo lang("buttons:deactivate") ; ?>
 		</label>
 				
+				</center>
 				<center>
 					<h5 id="activity">
 						<span class="success"><?php echo lang("design:views")?>:&nbsp;<span
@@ -102,6 +113,7 @@ function deapproveall(){
 					
 					</h5>
 				</center>
+				
 				<div style="float: right;">
 					<input <?php  if($art->allowed) echo  "checked" ; else echo "" ;?>
 						type="checkbox" class="art_approve" value="<?php echo $art->id?> "
@@ -109,8 +121,13 @@ function deapproveall(){
 				</div>
 			</li>
 	<?php endforeach;?>	
-	<?php endif?>
+	
+	
+	
 	</ul>
+	<?php else:?>
+	<div class="no_data"><?php echo lang("design:currently_no_products")?></div>
+	<?php endif?>
 	</div>
 	<div class="clearfix"></div>
 	<?php if(!empty($arts)):?>
@@ -135,9 +152,13 @@ function deapproveall(){
 	</div>
 	<?php endif?>
 </section>
+	
 <?php echo form_close() ?>
 
 <script>
+var has_key="<?php echo $this->security->get_csrf_token_name() ?>";
+
+var has_value="<?php echo $this->security->get_csrf_hash()?>" ;
 $(document).ready(function(){
 	
 	$('.edit').click(function(){
@@ -148,7 +169,7 @@ $(document).ready(function(){
 	});
 	
 	
-	$('input[type="text"]').blur(function() {  
+	$('input[type="text"].editable').blur(function() {  
          if ($.trim(this.value) == ''){  
 			 this.value = (this.defaultValue ? this.defaultValue : '');  
 		 }
@@ -161,7 +182,8 @@ $(document).ready(function(){
 		 $(this).prev().prev().show();
      });
 	  
-	  $('input[type="text"]').keypress(function(event) {
+	  $('input[type="text"].editable').keypress(function(event) {
+		  
 		  if (event.keyCode == '13') {
 			  if ($.trim(this.value) == ''){  
 				 this.value = (this.defaultValue ? this.defaultValue : '');  
@@ -174,7 +196,19 @@ $(document).ready(function(){
 			 $(this).hide();
 			 $(this).prev().show();
 			 $(this).prev().prev().show();
+			 event.preventDefault();
+			 $.ajaxSetup({
+			        data: {
+			        	has_key: has_value
+			        }
+			    });
+
+			    // now you can use plain old POST requests like always
+			    $.post('admin/tdesign/manage/change_name', { name : this.value,id:$(this).attr("id") });
+			 return true;
 		  }
+		  
+		 //return false;
 	  });
 		  
 });

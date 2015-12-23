@@ -67,7 +67,7 @@ class Widget_Pm_camera extends Widgets {
         Asset::js('pmcamera::camera.js', false, 'camera');
         Asset::js('pmcamera::jquery.mobile.customized.min.js', false, 'camera');
 
-
+      
         return array(
             'options' =>$options,
             'slider'  => $slider,

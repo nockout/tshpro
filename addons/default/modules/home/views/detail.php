@@ -41,10 +41,10 @@
 			<?php endif?>
 			<div class="explain hidden-xs">
 				<p>
-					<strong>Design Description:</strong>
+					<strong><?php echo lang('product:description')?></strong>
 				</p>
 				<p><?php echo $product->full_description?></p>
-				<p>Shirt SKU: <?php echo $product->product_code?></p>
+				<p>SKU: <?php echo $product->product_code?></p>
 			</div>
 
 		</div>

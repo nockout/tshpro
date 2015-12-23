@@ -14,6 +14,7 @@
 
 	</section>
 	<section class="fpd-main-container">
+		<div id="printarea"></div>
 		<div class="fpd-content-products" style="display: block; heigh: 600px">
 			
 		<?php echo form_open("admin/tdesign/save_images","id='save_image'");?>

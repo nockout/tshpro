@@ -61,6 +61,7 @@ input[type=text].editable
 	-webkit-border-radius: 2px;
 	-border-radius: 2px;
 	display:none;
+	clear: right;
 	
 	
 }
@@ -68,18 +69,33 @@ input[type=text].editable
 
 .edit
 {
-	float:left;
+	
 	background:url(../images/edit.png) no-repeat;
-	width:32px;
-	height:32px;
-	display:block;
+	width:16px;
+	height:16px;
+	display:inline-block;
 	cursor: pointer;
-	margin-left:10px;
-}
+	}
 
 .clear
 {
 	clear:both;
 	height:20px;
 }
-
+.printarea{
+	
+	/* z-index:888;
+	position: absolute;
+	left:0;
+	right:0; 
+	
+    margin:0 ;
+    width:240px;
+    height:450px;
+    border:1px dashed;
+    -ms-transform: matrix(1, 0, 0, 1, 310, 0); IE 9
+    -webkit-transform: matrix(1, 0, 0, 1,310, 0); Safari
+    transform: translate( 310px, 0);
+    animation-play-state: running;
+    transform-origin:true;  */
+}

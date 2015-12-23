@@ -12,7 +12,7 @@ jQuery(document)
 			var yourDesigner = $('#clothing-designer')
 					.fancyProductDesigner(
 							{
-								
+								printarea:{w:120,h:450},
 								width: "100%",
 								editorMode : false,
 								fonts : [ 'Arial', 'Fearless',
@@ -39,7 +39,7 @@ jQuery(document)
 									scale: "0.6",
 									autoSelect: true,
 									draggable : true,*/
-									boundingBox:true,
+									boundingBox:"Base",
 						    		x:0,
 						    		y:0,
 						    		autoCenter : true,
@@ -57,7 +57,7 @@ jQuery(document)
 							        minH:1200,
 							        maxW: 4800,
 							        maxH: 4800,
-							        scale: 0.5,							       
+							      /*   scale: 0.5,		 */					       
 									autoCenter : true,
 									boundingBox : "Base",
 									resizable : true,
@@ -143,8 +143,8 @@ jQuery(document)
 							};
 						var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 						var views=yourDesigner.getViewsDataURL();
-						var products=yourDesigner.getProduct(true);
-						
+						var products=yourDesigner.getProduct(false);
+						yourDesigner.reloadprintarea();
 						$.get( "admin/tdesign/templateinfo/"+products[0].title, function( data,status,xhr  ) {
 							console.log(status);
 							console.log(xhr);

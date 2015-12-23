@@ -19,7 +19,9 @@ class Admin_Manage extends Admin_Controller
 	{
 	    parent::__construct();
 	    $this->lang->load('design');
-	    $this->load->model('product_m');
+	    $this->load->model(array('product_m',"art_model",'search_model'));
+	   
+	    
 	 
 	}
 
@@ -31,7 +33,23 @@ class Admin_Manage extends Admin_Controller
 	
 	public function arts($code = 0,  $by = 0, $way = "ASC",$page = 0){
 	
-		$object=$this->product_m->get_arts(array(),$page,10);
+		//print_r($_POST);die;
+		if ($this->input->post('search')) {
+		
+			$object = $this->input->post();
+			
+			$code = $this->search_model->record_term(json_encode($object));
+			// echo $code;die;
+			redirect(site_url(array('admin', 'tdesign',"manage",'arts', $code,$by, $way ,$page)));
+		}
+		$term = array();
+		if ($code) {
+		
+			$term = (array)json_decode($this->search_model->get_term($code));
+		}
+		
+		
+		$object=$this->product_m->get_arts($term,$page,10);
 		$arts="";
 		if(!empty($object)){
 			$arts=$object['objects'];
@@ -41,6 +59,7 @@ class Admin_Manage extends Admin_Controller
 		
 		$this->template->
 		set('arts',$arts)
+		->set('term',($term))
 		->set('pagination',$pagination)
 		->append_css("module::designer.css")
 		->title(lang("design:arts"))
@@ -112,6 +131,14 @@ class Admin_Manage extends Admin_Controller
 			
 			 redirect('admin/tdesign/manage/arts); */
 	}
-	
-	
+	public function change_name()
+	{
+		
+		$idArt=$this->input->post('id');
+		$newName=$this->input->post('name');
+		if(intval($idArt)&&$newName){
+				
+				$this->art_model->change_name($idArt,array('name'=>$newName));
+		}
+	}	
 }

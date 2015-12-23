@@ -123,7 +123,8 @@ $insta_recent_images_button = isset($_POST['instaRecentImagesButton']) ? $_POST[
 
 <!-- MAIN CONTAINER -->
 <section class="fpd-main-container">
-
+	
+	<div class="printarea" class="printarea" style=""></div>
 	<!-- Product Stage -->
 	<div class="fpd-product-stage">
 		<canvas></canvas>

@@ -16,3 +16,4 @@ $lang["all_search"]="Tất cả các kết quả cho \"%s\"";
 $lang["product:size"]="Size";
 $lang["product:quantity"]="Số lượng";
 $lang['product:style']='Style';
+$lang['product:description']='Thông tin miêu tả';
