@@ -11,6 +11,7 @@
 					<li class=""><label for="f_category">File</label> <input
 						type="file" name="spreedsheet" size="20" /></li>
 					<li><input type="submit" value="upload" /></li>
+					<li><a href="<?php echo site_url("files/import.zip")?>">Example Zip</a></li>
 				</ul>
 	
 					

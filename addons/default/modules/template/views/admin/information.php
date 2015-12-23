@@ -2,6 +2,7 @@
 	<?php echo form_open()?>
 	<div class="one_half">
 		<fieldset>
+		<legend></legend>
 			<ul>
 				<li><label for="title"><?php echo lang('global:title') ?> <span>*</span></label>
 					<div class="input"><?php echo form_input('title', set_value('title',$title), 'maxlength="100" id="title"') ?></div>
@@ -42,6 +43,53 @@
 			</ul>
 
 		</fieldset>
+	</div>
+	
+	<div class="one_half">
+	<fieldset>
+	<legend>Print Area Config</legend>
+			<ul>
+			<li>
+			<label for="title">
+			X <span>*</span></label>
+					<div class="input">
+					<?php echo form_input('printareax', set_value('printareax',$printareax), 'maxlength="100" id="printareax"') ?>
+					</div>
+			</li>
+			<li>
+			<label for="title">
+			Y <span>*</span></label>
+					<div class="input"><?php echo form_input('printareay', set_value('printareay',$printareay), 'maxlength="100" id="printareay"') ?>
+					</div>
+			</li>
+			<li>
+			<label for="title">
+			Width <span>*</span></label>
+					<div class="input"><?php echo form_input('printareaw', set_value('printareaw',$printareaw), 'maxlength="100" id="printareaw"') ?>
+					</div>
+			</li>
+			<li>
+			<label for="title">
+			Heigt <span>*</span></label>
+					<div class="input"><?php echo form_input('printareah', set_value('printareah',$printareah), 'maxlength="100" id="printareah"') ?>
+					</div>
+			</li>
+			<li>
+			<label for="title">
+			<?php echo lang('template:strokecolor') ?> <span>*</span></label>
+					<div class="input"><?php echo form_input('strokecolor', set_value('title',$strokecolor), 'maxlength="100" id="strokecolor"') ?>
+					</div>
+			</li>
+			<li>
+			<label for="title">
+			<?php $sttypes=array("line"=>"line","dash"=>"dash")?>
+			Stroke Type <span></span></label>
+					<div class="input">
+					<?php echo form_dropdown('stroketype', array(""=>lang('template:no_category_select_label')) + $sttypes,set_value('stroketype',$stroketype) ) ?>	
+					</div>
+			</li>
+			</ul>
+	</fieldset>
 	</div>
 	<div class="clearfix"></div>
 	<div class="buttons">

@@ -9,6 +9,12 @@ $lang['template:template_title']				="Sản phẩm";
 $lang['template:group']				="Groups";
 $lang['template:template_price']				="Price";
 $lang['template:price_max']				="Max price";
+
+$lang['template:printareax']				="X";
+$lang['template:printareay']				="Y";
+$lang['template:printareaw']				="Width";
+$lang['template:printareah']				="Height";
+$lang['template:strokecolor']				="Stroke Color";
 $lang['cp:nav_template']='Sản phẩm';
 $lang['template:color']				="Color";
 $lang['template:template_position']="Position";

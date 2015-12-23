@@ -43,6 +43,31 @@ class Admin extends Admin_Controller
 					'rules' => 'trim|numeric|integer'
 			),
 			array(
+					'field' => 'printareax',
+					'label' => 'lang:template:printareax',
+					'rules' => 'trim|required|numeric|integer'
+			),
+			array(
+					'field' => 'printareay',
+					'label' => 'lang:template:printareay',
+					'rules' => 'trim|required|numeric|integer'
+			),
+			array(
+					'field' => 'printareaw',
+					'label' => 'lang:template:printareaw',
+					'rules' => 'trim|required|numeric|integer'
+			),
+			array(
+					'field' => 'printareay',
+					'label' => 'lang:template:printareah',
+					'rules' => 'trim|required|numeric|integer'
+			),
+			array(
+					'field' => 'strokecolor',
+					'label' => 'lang:template:strokecolor',
+					'rules' => 'trim|required'
+			),
+			array(
 					'field' => 'price_max',
 					'label' => 'lang:template:template_price',
 					'rules' => 'trim|numeric|integer|callback_check_price'
@@ -167,6 +192,12 @@ class Admin extends Admin_Controller
 		$this->load->library('tplate');
 		$data['categories']=$this->category_model->get_option_categories(1);
 		$data['category_id']="";
+		$data['printareaw']="";
+		$data['printareah']="";
+		$data['printareax']="";
+		$data['printareay']="";
+		$data['strokecolor']="";
+		$data['stroketype']="";
 		$colors=$this->tplate->get_colors();
 
 		$this->template->set('colors',$colors);
@@ -209,15 +240,17 @@ class Admin extends Admin_Controller
 			$data['status']=$tplate->status;
 			$data['color']=$tplate->color;
 			$data['category_id']=$tplate->id_category_default;
-		/* 
-			if($tplate->colors_groups){
-				//$data['colors_groups']=unserialize($tplate->colors_groups);
-			}
-			 */
+			$data['printareaw']=$tplate->printareaw;
+			$data['printareah']=$tplate->printareah;
+			$data['printareax']=$tplate->printareax;
+			$data['printareay']=$tplate->printareay;
+		
+			$data['strokecolor']=$tplate->strokecolor;
+			$data['stroketype']=$tplate->stroketype;
+		
 		
 		}
-		//echo "<pre>";
-		//print_r($_POST);die;
+		
 		$this->form_validation->set_rules($this->validation_rules);
 		
 		if ($this->form_validation->run() == FALSE) {
@@ -244,6 +277,13 @@ class Admin extends Admin_Controller
             $save['status']=$this->input->post("status");
             $save['id_category_default']=$this->input->post("category_id");
             $save['color']=$this->input->post("color");
+            $save['printareaw']=intval($this->input->post("printareaw"));
+            $save['printareah']=intval($this->input->post("printareah"));
+            $save['printareax']=intval($this->input->post("printareax"));
+            $save['printareay']=intval($this->input->post("printareay"));
+          
+			$save['strokecolor']=$this->input->post("strokecolor");
+			$save['stroketype']=$this->input->post("stroketype");
            // $save['colors_groups']=serialize($this->input->post('colors'));
             if(!$save['id_template'])
             $save['timestamp']=date('Y-m-d H:i:s');

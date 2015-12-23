@@ -8,6 +8,13 @@ $lang['template:template_name']					="template Name";
 $lang['template:template_title']				="templates";
 $lang['template:group']				="Groups";
 $lang['template:template_price']				="Price";
+$lang['template:printareax']				="X";
+$lang['template:printareay']				="Y";
+$lang['template:printareaw']				="Width";
+$lang['template:printareah']				="Height";
+$lang['template:strokecolor']				="Stroke Color";
+
+
 $lang['template:price_max']				="Max price";
 $lang['template:color']				="Color";
 $lang['template:template_position']="Position";
