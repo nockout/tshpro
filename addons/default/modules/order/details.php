@@ -46,7 +46,7 @@ class Module_Order extends Module
 					
 		);
 	
-		add_admin_menu_place('lang:cp:nav_order', 2);
+		add_admin_menu_place('lang:cp:nav_order', 3);
 	}
 	
 	public function uninstall()
