@@ -23,7 +23,3 @@
 
 $route['template/admin(/:any)?']		= 'admin$1';
 $route['template/admin/template(/:any)?']		= 'admin$1';
-//$route['tdesign/admin/(/:any)?']		= 'admin_widgets$1';
-//$route['addons/admin/widgets(/:any)?']		= 'admin_widgets$1';
-//$route['addons/admin/plugins?']				= 'admin_plugins';
-//$route['addons/admin/field-types?']			= 'admin_field_types';

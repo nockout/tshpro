@@ -122,9 +122,7 @@ class Cart extends Public_Controller {
 			$html=$this->load->view("cart_items",array("items"=>$this->go_cart->contents()),true);
 			
 			die($this->go_cart->total_items());
-// 			$json=array('t'=>$this->go_cart->total_items());
-// 			die(json_encode($json,JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
-// 			die;
+
 	}
 
 	function jsonpp($json, $istr='  ')

@@ -143,11 +143,12 @@ jQuery(document)
 							};
 						var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 						var views=yourDesigner.getViewsDataURL();
-						var products=yourDesigner.getProduct(false);
+						var products=yourDesigner.getProduct(true);
 						yourDesigner.reloadprintarea();
+						console.log(yourDesigner);
 						$.get( "admin/tdesign/templateinfo/"+products[0].title, function( data,status,xhr  ) {
-							console.log(status);
-							console.log(xhr);
+							//console.log(status);
+							//console.log(xhr);
 							var hmtl=[];
 							var type=$(".fpd-product-categories").val()?$(".fpd-product-categories").val():"shirts";
 							var views=yourDesigner.getViewsDataURL();

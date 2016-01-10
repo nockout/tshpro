@@ -49,7 +49,7 @@ class Events_Order {
 						'to' => $user->email,
 						'name' => $user->first_name . $user->last_name,
 						'order_id' => sprintf ( '#%s', $orderDetail->order_number ),
-						'link' => site_url ( 'admin/order/form/4' ) 
+						//'link' => site_url ( 'admin/order/form/4' ) 
 				), 'array' );
 			}
 		}
@@ -68,7 +68,7 @@ class Events_Order {
 						'to' => $user->email,
 						'name' => $user->first_name . $user->last_name,
 						'order_id' => sprintf ( '#%s', $orderDetail->order_number ),
-						'link' => site_url ( 'admin/order/form/4' ) 
+						//'link' => site_url ( 'admin/order/form/4' ) 
 				), 'array' );
 			}
 		}
