@@ -14,18 +14,39 @@ class Home extends Public_Controller {
 	 */
 	public function __construct() {
 		parent::__construct ();
-		
+	
 		$this->lang->load ( "home" );
-		
+		//print_r($this->input->get());die;
 		$this->load->helper ( "currency" );
 	}
 	
 	public function index() {
 	
-		$this->load->model ( 'product_model' );
-		$product = $this->product_model->get_products (array('is_gc'=>1),0,40);
+		$q=$this->input->get("q");
+		if(empty($q)){
+			$this->load->model ( 'product_model' );
+			$product = $this->product_model->get_products (array('is_gc'=>1),0,40);
+			$this->template->set ( "isQ",false);
+		
+		}else{
+			$args=explode("-", $q);
+		
+			if(!empty($args)){
+			
+				$id=intval($args[count($args)-1]);
+				//redirect('home/product/'.$id);
+				$this->template->set ( "isQ",true);
+				$this->product($id);
+				return;
+			}
+		}
+		
 		$this->template->title ( $this->module_details ['name'] )->set ( "products", $product ['objects'] )->
 		build ( 'home' );
+		
+	
+			
+	
 	}
 	public function cate($cateID = null) {
 		if (! $cateID)
@@ -55,7 +76,7 @@ class Home extends Public_Controller {
 		
 		$this->load->model ( 'product_model' );
 		$this->load->model ( 'art_model' );
-		$id or redirect ( "home" );
+		intval($id) or redirect ( "home" );
 		
 		
 		$product = $this->product_model->get ( $id );
