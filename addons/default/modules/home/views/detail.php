@@ -154,7 +154,7 @@
 					<div class="btn-group">
 					<?php foreach ($relprd as $rs):?>
 				
-							<a href="<?php echo site_url($rs->slugurl)?>" class=" btn btn-default"  style=";background-color: <?php echo $rs->color?>" ">&nbsp;</a>
+							<a href="<?php echo product_url_rewrite($rs->slugurl,$rs->product_id)?>" class=" btn btn-default"  style=";background-color: <?php echo $rs->color?>" ">&nbsp;</a>
 						
 					<?php endforeach;?>
 					</div>
