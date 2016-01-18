@@ -85,6 +85,7 @@
 		</div>
 		
 	</nav>
+	{{ if isQ==false }}
 	 {{ if { url:segments segment="1" } == '' }}
 	 	<div class="shellOff">
 	       
@@ -103,6 +104,8 @@
             
                
 	</div>
+	
+	{{endif}}
 	
 	{{endif}}
 	<!-- End user meta -->
