@@ -69,3 +69,8 @@ function panagition($url, $segment = 3, $total, $offset, $rows = 10) {
 function unique_tracking_id(){
 	return uniqid();
 }
+function product_url_rewrite($slug="",$id=null){
+	
+	return ($slug&&$id)?sprintf("?q=%s-%s",$slug,$id):$slug;
+
+}
