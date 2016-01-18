@@ -16,8 +16,8 @@ class Home extends Public_Controller {
 		parent::__construct ();
 	
 		$this->lang->load ( "home" );
-		//print_r($this->input->get());die;
-		$this->load->helper ( "currency" );
+		$this->config->load("tdesign");
+		$this->load->helper (array("currency","tdesign") );
 	}
 	
 	public function index() {
@@ -25,7 +25,7 @@ class Home extends Public_Controller {
 		$q=$this->input->get("q");
 		if(empty($q)){
 			$this->load->model ( 'product_model' );
-			$product = $this->product_model->get_products (array('is_gc'=>1),0,40);
+			$product = $this->product_model->get_products (array('is_gc'=>1),0,$this->config->item('MAX_PRODUCT_DEFAULT_HOME'));
 			$this->template->set ( "isQ",false);
 		
 		}else{

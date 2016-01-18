@@ -14,7 +14,7 @@
 							
 						</div>
 						<div class="frameit">
-							<a href="<?php echo base_url($p->slugurl)?>" border="0">
+							<a href="<?php echo product_url_rewrite($p->slugurl,$p->product_id)?>" border="0">
 							<?php if($p->extra):
 							    $image= unserialize($p->extra);
 							  
